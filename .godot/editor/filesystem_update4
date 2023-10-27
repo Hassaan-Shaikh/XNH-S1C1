@@ -1,0 +1,6 @@
+res://Scripts/CSharp/Player.cs
+res://Scenes/MainGame.tscn
+res://Scenes/player.tscn
+res://Scenes/cellar.tscn
+res://Scenes/Game.tscn
+res://Scripts/CSharp/Head.cs

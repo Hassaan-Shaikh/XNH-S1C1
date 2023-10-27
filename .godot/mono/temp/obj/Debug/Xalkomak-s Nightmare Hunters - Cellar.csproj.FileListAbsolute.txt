@@ -1,0 +1,17 @@
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\Xalkomak-s Nightmare Hunters - Cellar.deps.json
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\Xalkomak-s Nightmare Hunters - Cellar.runtimeconfig.json
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\Xalkomak-s Nightmare Hunters - Cellar.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\Xalkomak-s Nightmare Hunters - Cellar.pdb
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.csproj.AssemblyReference.cache
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.GeneratedMSBuildEditorConfig.editorconfig
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.AssemblyInfoInputs.cache
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.AssemblyInfo.cs
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.csproj.CoreCompileInputs.cache
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.csproj.CopyComplete
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\refint\Xalkomak-s Nightmare Hunters - Cellar.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.pdb
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.genruntimeconfig.cache
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\ref\Xalkomak-s Nightmare Hunters - Cellar.dll

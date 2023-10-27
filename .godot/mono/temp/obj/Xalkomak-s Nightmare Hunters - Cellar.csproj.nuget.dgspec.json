@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\Xalkomak-s Nightmare Hunters - Cellar.csproj": {}
+    "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj": {}
   },
   "projects": {
-    "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\Xalkomak-s Nightmare Hunters - Cellar.csproj": {
+    "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
+        "projectUniqueName": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
         "projectName": "Xalkomak-s Nightmare Hunters - Cellar",
-        "projectPath": "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
+        "projectPath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
         "packagesPath": "C:\\Users\\phngy\\.nuget\\packages\\",
-        "outputPath": "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

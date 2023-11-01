@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://k63wgx1y6q1p"]
+[gd_scene load_steps=5 format=3 uid="uid://dfgo0qjej7ndi"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
+[ext_resource type="Script" path="res://Scenes/CamControl.cs" id="2_yt2cl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pof2v"]
 radius = 0.25
@@ -10,23 +11,36 @@ height = 1.8
 radius = 0.25
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 92
 script = ExtResource("1_vplpl")
-cam = NodePath("PlayerCam")
 metadata/_edit_group_ = true
 
 [node name="PlayerCol" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_pof2v")
 
-[node name="PlayerCam" type="Camera3D" parent="."]
+[node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+script = ExtResource("2_yt2cl")
+
+[node name="PlayerCam" type="Camera3D" parent="Head"]
 fov = 60.0
 near = 0.001
 
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+[node name="PlayerRay" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1.8)
+collision_mask = 108
+
+[node name="Hand" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.4, -0.4)
+
+[node name="Flashlight" type="SpotLight3D" parent="Head/Hand"]
+light_energy = 4.0
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+spot_range = 15.0
+spot_angle = 30.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_kigf8")

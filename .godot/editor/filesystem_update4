@@ -1,6 +1,9 @@
-res://Scripts/CSharp/Player.cs
-res://Scenes/MainGame.tscn
 res://Scenes/player.tscn
 res://Scenes/cellar.tscn
 res://Scenes/Game.tscn
-res://Scripts/CSharp/Head.cs
+res://Scripts/CSharp/Player.cs
+res://Scenes/CamControl.cs
+res://Scripts/CSharp/CamControl.cs
+res://Scripts/CSharp/Globals.cs
+res://Scripts/CSharp/Character.cs
+res://Resources/Occluders/Game.occ

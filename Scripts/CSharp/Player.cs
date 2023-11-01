@@ -3,56 +3,61 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] public float speed = 5.0f;
+	[Export] public float speed = 3.0f;
 	[Export] public float acceleration = 5f;
-	[Export] public float camSensitivity = 4f;
-	[Export] public bool playerCanControl = true;
-	[Export] public Node3D cam;
-	
+    [Export] public float camSensitivity = 4f;
+    [Export] public bool playerCanControl = true;
 
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+    bool gamePause;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		base._PhysicsProcess(delta);
+    public override void _Ready()
+    {
+        base._Ready();
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+    }
 
-		/*if (!playerCanControl)
+    public override void _PhysicsProcess(double delta)
+    {
+		if(!playerCanControl)
 		{
 			return;
-		}*/
-
-		Vector3 velocity = Velocity;
-
-		// Add the gravity.
-		if (!IsOnFloor())
-			velocity.Y -= gravity * (float)delta;
-
-		Vector2 inputDir = Input.GetVector("left", "right", "forward", "back");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		if (direction != Vector3.Zero)
-		{
-			velocity.X = direction.X * speed;
-			velocity.Z = direction.Z * speed;
 		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, speed);
-		}
+        base._PhysicsProcess(delta);
 
-		Velocity = velocity;
+        if (Input.IsActionJustPressed("pause"))
+        {
+            gamePause = !gamePause;
+            if (gamePause)
+            {
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+            }
+            else if (!gamePause)
+            {
+                Input.MouseMode = Input.MouseModeEnum.Captured;
+            }
+        }
+
+        Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
+        direction = Transform.Basis * direction;
+		Velocity = Velocity.Lerp(direction * speed + Velocity.Y * Vector3.Up, acceleration * (float)delta);
+
+		//LookAt(LookAtPoint(camLookat.GlobalPosition));
+
 		MoveAndSlide();
-	}
+    }
 
     public override void _Input(InputEvent @event)
     {
-        //base._Input(@event);
+        base._Input(@event);
         if (@event is InputEventMouseMotion)
         {
             InputEventMouseMotion mouseMotion = (InputEventMouseMotion)@event;
-            Rotation = new Vector3(0, Rotation.Y - mouseMotion.Relative.X / 1000 * camSensitivity, 0);
-			cam.Rotation = new Vector3(cam.Rotation.X - mouseMotion.Relative.Y / 1000 * camSensitivity, 0, 0);
+            Rotation = new Vector3(0, Rotation.Y - mouseMotion.Relative.X / 1000 * camSensitivity, 0f);         
         }
     }
+
+    private Vector3 LookAtPoint(Vector3 point)
+	{
+		return new Vector3(point.X, GlobalPosition.Y, point.Z);
+	}
 }

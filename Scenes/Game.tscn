@@ -1,12 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="PackedScene" uid="uid://5jgi21umxhya" path="res://Scenes/cellar.tscn" id="1_t1apd"]
-[ext_resource type="PackedScene" uid="uid://k63wgx1y6q1p" path="res://Scenes/player.tscn" id="2_an7nd"]
+[ext_resource type="PackedScene" uid="uid://dfgo0qjej7ndi" path="res://Scenes/player.tscn" id="2_an7nd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://5a5q5m1dffm7" path="res://Resources/Occluders/Game.occ" id="3_g0ikf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+sky_curve = 1.0
 
 [sub_resource type="Sky" id="Sky_ct36p"]
 sky_material = SubResource("ProceduralSkyMaterial_xyocr")
@@ -14,7 +15,9 @@ sky_material = SubResource("ProceduralSkyMaterial_xyocr")
 [sub_resource type="Environment" id="Environment_ofrnj"]
 background_mode = 2
 sky = SubResource("Sky_ct36p")
-tonemap_mode = 2
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.15
@@ -25,20 +28,14 @@ volumetric_fog_density = 0.15
 environment = SubResource("Environment_ofrnj")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
+visible = false
 shadow_enabled = true
 
 [node name="Cellar" parent="." instance=ExtResource("1_t1apd")]
-transform = Transform3D(2, 0, 0, 0, 0.6, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2.2, 0, 0, 0, 0.7, 0, 0, 0, 2.2, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_an7nd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12203, 0)
-movementSpeed = null
-movementAcceleration = null
-camSensitivity = null
-camAcceleration = null
-suspendPlayerControl = null
-canJump = null
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
-visible = false
 occluder = ExtResource("3_g0ikf")

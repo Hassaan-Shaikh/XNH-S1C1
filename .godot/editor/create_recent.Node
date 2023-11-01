@@ -1,6 +1,9 @@
+Node3D
+SpotLight3D
+RayCast3D
+Marker3D
 OccluderInstance3D
 MeshInstance3D
-Node3D
 Camera3D
 CollisionShape3D
 CharacterBody3D

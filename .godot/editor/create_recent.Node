@@ -1,3 +1,10 @@
+VBoxContainer
+Label
+Panel
+PanelContainer
+TextureProgressBar
+Control
+NavigationRegion3D
 Node3D
 SpotLight3D
 RayCast3D

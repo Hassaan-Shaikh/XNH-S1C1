@@ -7,3 +7,4 @@ res://Scripts/CSharp/CamControl.cs
 res://Scripts/CSharp/Globals.cs
 res://Scripts/CSharp/Character.cs
 res://Resources/Occluders/Game.occ
+res://Scripts/CSharp/DebugPanel.cs

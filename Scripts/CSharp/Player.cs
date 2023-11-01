@@ -3,17 +3,26 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] public float speed = 3.0f;
+	[Export] public float speed = 3.2f;
 	[Export] public float acceleration = 5f;
     [Export] public float camSensitivity = 4f;
     [Export] public bool playerCanControl = true;
+    [Export] public TextureProgressBar stamina;
 
     bool gamePause;
+    bool isExhausted = false;
 
     public override void _Ready()
     {
         base._Ready();
         Input.MouseMode = Input.MouseModeEnum.Captured;
+
+        if(stamina == null)
+        {
+            GetNode<TextureProgressBar>("%StaminaBar");
+        }
+
+        stamina.Value = 100f;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -38,10 +47,35 @@ public partial class Player : CharacterBody3D
         }
 
         Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
-        direction = Transform.Basis * direction;
-		Velocity = Velocity.Lerp(direction * speed + Velocity.Y * Vector3.Up, acceleration * (float)delta);
+        direction = Transform.Basis * direction.Normalized();
 
-		//LookAt(LookAtPoint(camLookat.GlobalPosition));
+        //isExhausted = stamina.Value <= stamina.MinValue;
+        
+        if(direction != Vector3.Zero)
+        {
+            if (Input.IsActionPressed("sprint"))
+            {
+                speed = 5.3f;
+                stamina.Value -= 0.2f;
+            }
+            else
+            {
+                speed = 3.2f;
+            }
+        }
+        if(direction != Vector3.Zero || direction == Vector3.Zero)
+        {
+            if (!Input.IsActionPressed("sprint"))
+            {
+                stamina.Value += 0.2f;
+                if(stamina.Value >= 30f)
+                {
+                    isExhausted = false;
+                }
+            }
+        }
+
+		Velocity = Velocity.Lerp(direction * speed + Velocity.Y * Vector3.Up, acceleration * (float)delta);
 
 		MoveAndSlide();
     }
@@ -56,8 +90,8 @@ public partial class Player : CharacterBody3D
         }
     }
 
-    private Vector3 LookAtPoint(Vector3 point)
-	{
-		return new Vector3(point.X, GlobalPosition.Y, point.Z);
-	}
+    public string GetPlayerSpeed()
+    {
+        return speed.ToString();
+    }
 }

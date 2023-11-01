@@ -12,7 +12,7 @@ public partial class CamControl : Node3D
         if(@event is InputEventMouseMotion)
         {
             InputEventMouseMotion mouseMotion = (InputEventMouseMotion) @event;
-            Rotation = new Vector3(Mathf.Clamp(Rotation.X - mouseMotion.Relative.Y / 1000 * camSensitivity, -1, 1), 0, 0);
+            Rotation = new Vector3(Mathf.Clamp(Rotation.X - mouseMotion.Relative.Y / 1000 * camSensitivity, Mathf.DegToRad(-75), Mathf.DegToRad(75)), 0, 0);
         }
     }
 }

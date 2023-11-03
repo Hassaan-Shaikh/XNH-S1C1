@@ -49,13 +49,16 @@ public partial class Player : CharacterBody3D
         Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
         direction = Transform.Basis * direction.Normalized();
 
-        //isExhausted = stamina.Value <= stamina.MinValue;
+        if(stamina.Value <= stamina.MinValue)
+        {
+            isExhausted = true;
+        }
         
         if(direction != Vector3.Zero)
         {
-            if (Input.IsActionPressed("sprint"))
+            if (Input.IsActionPressed("sprint") && !isExhausted)
             {
-                speed = 5.3f;
+                speed = 5.64f;
                 stamina.Value -= 0.2f;
             }
             else
@@ -65,10 +68,10 @@ public partial class Player : CharacterBody3D
         }
         if(direction != Vector3.Zero || direction == Vector3.Zero)
         {
-            if (!Input.IsActionPressed("sprint"))
+            if (!Input.IsActionPressed("sprint") || isExhausted)
             {
-                stamina.Value += 0.2f;
-                if(stamina.Value >= 30f)
+                stamina.Value += 0.1f;
+                if(stamina.Value >= 45f)
                 {
                     isExhausted = false;
                 }
@@ -93,5 +96,10 @@ public partial class Player : CharacterBody3D
     public string GetPlayerSpeed()
     {
         return speed.ToString();
+    }
+
+    public bool GetExhaustedState()
+    {
+        return isExhausted;
     }
 }

@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1698852884
+::res://::1698913243
 icon.svg::CompressedTexture2D::5738706545296050158::1698410061::1698410074::1::::<><>::
 ::res://Models/::1698413079
 Cellar.glb::PackedScene::5100468185987595982::1698413051::1698413078::1::::<><>::uid://0av2w65c777l
@@ -10,22 +10,25 @@ Cellar_Wall_Normal.png::CompressedTexture2D::4829418367572203915::1698413073::16
 ::res://Resources/::1698414295
 ::res://Resources/Occluders/::1698853172
 Game.occ::ArrayOccluder3D::2107516987050133860::1698853172::0::1::::<><>::
-::res://Scenes/::1698854313
+::res://Scenes/::1698913182
 CamControl.cs::CSharpScript::-1::1698850712::0::1::::<><>::
-cellar.tscn::PackedScene::2124624756456373572::1698853003::0::1::::<><>::uid://cewx73rgy5sig::::res://Models/Cellar.glb
-Game.tscn::PackedScene::4640224222761442717::1698853856::0::1::::<><>::uid://dfgo0qjej7ndi::::res://Scenes/player.tscn<>uid://5a5q5m1dffm7::::res://Resources/Occluders/Game.occ<>uid://0av2w65c777l::::res://Models/Cellar_Wall_Albedo.png<>uid://ca2n2yb5mrotf::::res://Models/Cellar_Wall_Normal.png<>uid://blh4abuob5x4c::::res://Models/Cellar_Floor_Albedo.png<>uid://cqr0kx7e252mj::::res://Models/Cellar_Floor_Normal.png
-player.tscn::PackedScene::7523488073012060274::1698854313::0::1::::<><>::res://Scripts/CSharp/Player.cs<>res://Scenes/CamControl.cs
+cellar.tscn::PackedScene::2124624756456373572::1698861190::0::1::::<><>::uid://cewx73rgy5sig
+Game.tscn::PackedScene::4640224222761442717::1698861191::0::1::::<><>::uid://dfgo0qjej7ndi
+player.tscn::PackedScene::7523488073012060274::1698913182::0::1::::<><>::res://Scripts/CSharp/Player.cs<>res://Scenes/CamControl.cs<>uid://jtxxkatn6g3t::::res://Textures/UI Textures/StaminaUnder.png<>uid://clioye8yru3xd::::res://Textures/UI Textures/ProgressOver.png<>uid://gdxttw1mk7pn::::res://Textures/UI Textures/StaminaProgress.png<>res://Scripts/CSharp/DebugPanel.cs
 ::res://Scripts/::1698413083
-::res://Scripts/CSharp/::1698854238
+::res://Scripts/CSharp/::1698861288
 CamControl.cs::CSharpScript::-1::1698853528::0::1::::<><>::
+DebugPanel.cs::CSharpScript::-1::1698860445::0::1::::<><>::
 Globals.cs::CSharpScript::-1::1698852718::0::1::::<><>::
-Player.cs::CSharpScript::-1::1698854238::0::1::::<><>::
-::res://Textures/::1698854358
+Player.cs::CSharpScript::-1::1698861288::0::1::::<><>::
+::res://Textures/::1698913098
 Cellar_Floor_Albedo.png::CompressedTexture2D::2725293017886207569::1698413057::1698413084::1::::<><>::
 Cellar_Floor_Normal.png::CompressedTexture2D::6068121906183842152::1698413055::1698413084::1::::<><>::
 Cellar_Wall_Albedo.png::CompressedTexture2D::906386695631724505::1698413053::1698413084::1::::<><>::
 Cellar_Wall_Normal.png::CompressedTexture2D::6542564978016415980::1698413052::1698413084::1::::<><>::
-::res://Textures/UI Textures/::1698854375
+::res://Textures/Icon/::1698913130
+Icon.jpg::CompressedTexture2D::250902973030173357::1698913060::1698913130::1::::<><>::
+::res://Textures/UI Textures/::1698854376
 ProgressOver.png::CompressedTexture2D::5562326828575417969::1698854375::1698854376::1::::<><>::
 StaminaProgress.png::CompressedTexture2D::428757649135332827::1698854375::1698854376::1::::<><>::
 StaminaUnder.png::CompressedTexture2D::672360860278241675::1698854375::1698854376::1::::<><>::

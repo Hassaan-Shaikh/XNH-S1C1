@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=23 format=3 uid="uid://b7d02ye5x3ksb"]
 
-[ext_resource type="PackedScene" uid="uid://dfgo0qjej7ndi" path="res://Scenes/player.tscn" id="2_an7nd"]
+[ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://5a5q5m1dffm7" path="res://Resources/Occluders/Game.occ" id="3_g0ikf"]
 [ext_resource type="Texture2D" uid="uid://0av2w65c777l" path="res://Models/Cellar_Wall_Albedo.png" id="3_lxemr"]
 [ext_resource type="Texture2D" uid="uid://ca2n2yb5mrotf" path="res://Models/Cellar_Wall_Normal.png" id="4_pbiax"]
 [ext_resource type="Texture2D" uid="uid://blh4abuob5x4c" path="res://Models/Cellar_Floor_Albedo.png" id="5_hgxxa"]
 [ext_resource type="Texture2D" uid="uid://cqr0kx7e252mj" path="res://Models/Cellar_Floor_Normal.png" id="6_mlefx"]
+[ext_resource type="PackedScene" uid="uid://bevks4nk3s4xe" path="res://Scenes/document.tscn" id="7_55qww"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -24,6 +25,7 @@ tonemap_mode = 3
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.08
+volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tpccn"]
 resource_local_to_scene = true
@@ -81,10 +83,10 @@ data = PackedVector3Array(-8.8, 4, 8.9, -8.8, 5, -8, -8.8, 5, 8.9, -8.8, 4, 8.9,
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twmiw"]
 resource_name = "Floor"
 cull_mode = 2
+diffuse_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("5_hgxxa")
-normal_enabled = true
-normal_scale = 2.0
+normal_scale = 0.0
 normal_texture = ExtResource("6_mlefx")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ahwy0"]
@@ -160,6 +162,7 @@ process_mode = 1
 environment = SubResource("Environment_ofrnj")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 shadow_enabled = true
 
@@ -211,3 +214,12 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cellar/SammyNavRegion/Roof/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ae2xq")
+
+[node name="Document" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(0.2, -0.34641, 0, 0.34641, 0.2, 0, 0, 0, 0.4, 0.235606, 0.352646, -14.2678)
+
+[node name="Document2" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(-8.74228e-09, 1.51421e-08, 0.4, 0.34641, 0.2, 0, -0.2, 0.34641, -1.74846e-08, 2.02744, 0.352646, -17.3938)
+
+[node name="Document3" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(2.62268e-08, -4.54262e-08, -0.4, 0.34641, 0.2, -5.2108e-16, 0.2, -0.34641, 5.24537e-08, -3.25303, 0.352646, -15.279)

@@ -25,6 +25,10 @@ window/size/mode=3
 
 project/assembly_name="Xalkomak-s Nightmare Hunters - Cellar"
 
+[editor]
+
+movie_writer/movie_file="C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Footage/Document Test.avi"
+
 [input]
 
 forward={

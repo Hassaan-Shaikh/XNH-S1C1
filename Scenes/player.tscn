@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfgo0qjej7ndi"]
+[gd_scene load_steps=12 format=3 uid="uid://bj8jt7vqp3wyx"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
-[ext_resource type="Script" path="res://Scenes/CamControl.cs" id="2_yt2cl"]
+[ext_resource type="Script" path="res://Scripts/CSharp/CamControl.cs" id="2_20fih"]
 [ext_resource type="Texture2D" uid="uid://jtxxkatn6g3t" path="res://Textures/UI Textures/StaminaUnder.png" id="3_ht80t"]
+[ext_resource type="Script" path="res://Scripts/CSharp/PlayerRay.cs" id="3_oscdi"]
+[ext_resource type="Texture2D" uid="uid://chguouqj08dgb" path="res://Textures/Cookies/FlashlightCookie.png" id="4_4ipsn"]
 [ext_resource type="Texture2D" uid="uid://clioye8yru3xd" path="res://Textures/UI Textures/ProgressOver.png" id="4_13k3c"]
 [ext_resource type="Texture2D" uid="uid://gdxttw1mk7pn" path="res://Textures/UI Textures/StaminaProgress.png" id="5_64fbq"]
 [ext_resource type="Script" path="res://Scripts/CSharp/DebugPanel.cs" id="6_m5sv2"]
+[ext_resource type="Script" path="res://Scripts/CSharp/DocumentCounter.cs" id="9_3uv2b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pof2v"]
 radius = 0.25
@@ -28,15 +31,17 @@ shape = SubResource("CapsuleShape3D_pof2v")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-script = ExtResource("2_yt2cl")
+script = ExtResource("2_20fih")
 
 [node name="PlayerCam" type="Camera3D" parent="Head"]
 fov = 60.0
 near = 0.001
 
-[node name="PlayerRay" type="RayCast3D" parent="Head"]
+[node name="PlayerRay" type="RayCast3D" parent="Head" node_paths=PackedStringArray("promptLabel")]
 target_position = Vector3(0, 0, -1.8)
 collision_mask = 108
+script = ExtResource("3_oscdi")
+promptLabel = NodePath("../../PlayerUI/Prompt")
 
 [node name="Hand" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.4, -0.25)
@@ -44,6 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.4, -0.25)
 [node name="Flashlight" type="SpotLight3D" parent="Head/Hand"]
 light_energy = 4.0
 light_volumetric_fog_energy = 2.0
+light_projector = ExtResource("4_4ipsn")
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 30.0
@@ -86,7 +92,7 @@ tint_under = Color(1, 1, 1, 0.156863)
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 210.0
+offset_right = 410.0
 offset_bottom = 110.0
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_m5sv2")
@@ -117,3 +123,43 @@ text = "Player's Speed: 6
 layout_mode = 2
 text = "Exhausted: false"
 vertical_alignment = 1
+
+[node name="Prompt" type="Label" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -3.0
+offset_right = 101.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Click to Collect Document."
+
+[node name="DocumentCounter" type="Label" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -293.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Documents Collected: 0"
+script = ExtResource("9_3uv2b")

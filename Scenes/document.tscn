@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bevks4nk3s4xe"]
+
+[ext_resource type="PackedScene" uid="uid://b5121f410b7qh" path="res://Models/Document.glb" id="1_jtuiw"]
+[ext_resource type="Script" path="res://Scripts/CSharp/Document.cs" id="2_yo2j5"]
+
+[node name="Document" groups=["Document"] instance=ExtResource("1_jtuiw")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="Document" parent="Document2" index="0" node_paths=PackedStringArray("parent")]
+collision_layer = 32
+collision_mask = 70
+script = ExtResource("2_yo2j5")
+parent = NodePath("../..")

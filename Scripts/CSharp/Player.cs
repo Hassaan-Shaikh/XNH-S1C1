@@ -19,7 +19,7 @@ public partial class Player : CharacterBody3D
 
         if(stamina == null)
         {
-            GetNode<TextureProgressBar>("%StaminaBar");
+            stamina = GetNode<TextureProgressBar>("%StaminaBar");
         }
 
         stamina.Value = 100f;
@@ -27,24 +27,18 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-		if(!playerCanControl)
+        if(Input.IsActionJustPressed("pause"))
+        {
+            GetTree().Quit(); // This line of code must be removed when the game is ready for release
+        }
+
+        playerCanControl = Xalkomak.playerCanControl;
+
+		if(!playerCanControl) //Player cannot control, used for cinematics
 		{
 			return;
 		}
         base._PhysicsProcess(delta);
-
-        if (Input.IsActionJustPressed("pause"))
-        {
-            gamePause = !gamePause;
-            if (gamePause)
-            {
-                Input.MouseMode = Input.MouseModeEnum.Visible;
-            }
-            else if (!gamePause)
-            {
-                Input.MouseMode = Input.MouseModeEnum.Captured;
-            }
-        }
 
         Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
         direction = Transform.Basis * direction.Normalized();
@@ -95,7 +89,7 @@ public partial class Player : CharacterBody3D
 
     public string GetPlayerSpeed()
     {
-        return speed.ToString();
+        return Velocity.ToString();
     }
 
     public bool GetExhaustedState()

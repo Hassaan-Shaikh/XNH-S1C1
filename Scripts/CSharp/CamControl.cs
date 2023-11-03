@@ -3,16 +3,15 @@ using System;
 
 public partial class CamControl : Node3D
 {
-    [Export] public float camSensitivity = 4f;
-    [Export] public float camAcceleration = 2f;
+    [Export] public float sens = 4f;
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
-        base._UnhandledInput(@event);
+        base._Input(@event);
         if(@event is InputEventMouseMotion)
         {
-            InputEventMouseMotion mouseMotion = (InputEventMouseMotion) @event;
-            Rotation = new Vector3(Mathf.Clamp(Rotation.X - mouseMotion.Relative.Y / 1000 * camSensitivity, Mathf.DegToRad(-75), Mathf.DegToRad(75)), 0, 0);
+            InputEventMouseMotion mouseMotion = (InputEventMouseMotion)@event;
+            Rotation = new Vector3(Mathf.Clamp(Rotation.X - mouseMotion.Relative.Y / 1000 * sens, Mathf.DegToRad(-75), Mathf.DegToRad(75)), 0f, 0f);
         }
     }
 }

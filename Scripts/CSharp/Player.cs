@@ -1,16 +1,27 @@
 using Godot;
 using System;
+using System.Reflection;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] public float speed = 3.2f;
-	[Export] public float acceleration = 5f;
+    [ExportGroup("Player Controls")]
+    [ExportSubgroup("Movement")]
+    [Export] public float speed = 3.2f;
+    [Export] public float acceleration = 5f;
+    [Export] public float gravity = 9.8f;
+    [Export] public float jumpForce = 6.3f;
+    [ExportSubgroup("Camera")]
     [Export] public float camSensitivity = 4f;
-    [Export] public bool playerCanControl = true;
+    [ExportSubgroup("Misc.")]
+    [Export] public bool canControl = true;
+    [Export] public bool canJump = false;
+    [Export] public bool allowHeadBob = true;
+
+    [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
 
-    bool gamePause;
     bool isExhausted = false;
+    public Vector3 p_Velocity;
 
     public override void _Ready()
     {
@@ -32,13 +43,17 @@ public partial class Player : CharacterBody3D
             GetTree().Quit(); // This line of code must be removed when the game is ready for release
         }
 
-        playerCanControl = Xalkomak.playerCanControl;
+        canControl = Xalkomak.playerCanControl;
 
-		if(!playerCanControl) //Player cannot control, used for cinematics
+		if(!canControl) //Player cannot control, used for cinematics
 		{
 			return;
 		}
         base._PhysicsProcess(delta);
+
+        allowHeadBob = IsOnFloor();
+
+        p_Velocity = Velocity;
 
         Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
         direction = Transform.Basis * direction.Normalized();
@@ -72,13 +87,30 @@ public partial class Player : CharacterBody3D
             }
         }
 
-		Velocity = Velocity.Lerp(direction * speed + Velocity.Y * Vector3.Up, acceleration * (float)delta);
+		p_Velocity = p_Velocity.Lerp(direction * speed + p_Velocity.Y * Vector3.Up, acceleration * (float)delta);
 
-		MoveAndSlide();
+        if (canJump)
+        {
+            if (IsOnFloor() && Input.IsActionJustPressed("jump"))
+            {
+                p_Velocity.Y = jumpForce;
+            }
+            else
+            {
+                p_Velocity.Y -= gravity * (float)delta;
+            }
+        }
+
+        Velocity = p_Velocity;
+        MoveAndSlide();
     }
 
     public override void _Input(InputEvent @event)
     {
+        if (!canControl)
+        {
+            return;
+        }
         base._Input(@event);
         if (@event is InputEventMouseMotion)
         {
@@ -89,7 +121,7 @@ public partial class Player : CharacterBody3D
 
     public string GetPlayerSpeed()
     {
-        return Velocity.ToString();
+        return Velocity.Length().ToString();
     }
 
     public bool GetExhaustedState()

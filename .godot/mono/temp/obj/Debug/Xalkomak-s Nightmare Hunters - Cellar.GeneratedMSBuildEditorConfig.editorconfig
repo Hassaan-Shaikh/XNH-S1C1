@@ -1,6 +1,6 @@
 is_global = true
 build_property.GodotDisabledSourceGenerators = 
-build_property.GodotProjectDir = C:\GAME DEV\GODOT PROJECTS\XNH\SEASON 1\CHAPTER 1\XNH-S1C1\
+build_property.GodotProjectDir = C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\
 build_property.GodotProjectDirBase64 = 
 build_property.GodotSourceGenerators = 
 build_property.IsGodotToolsProject = 
@@ -13,4 +13,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = XalkomaksNightmareHuntersCellar
-build_property.ProjectDir = C:\GAME DEV\GODOT PROJECTS\XNH\SEASON 1\CHAPTER 1\XNH-S1C1\
+build_property.ProjectDir = C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\

@@ -5,7 +5,9 @@ res://Scenes/document.tscn
 res://Scripts/CSharp/CamControl.cs
 res://Scripts/CSharp/DebugPanel.cs
 res://Scripts/CSharp/Document.cs
+res://Scripts/CSharp/DocumentCounter.cs
 res://Scripts/CSharp/Player.cs
 res://Scripts/CSharp/PlayerRay.cs
 res://Resources/Occluders/Game.occ
-res://Scripts/CSharp/DocumentCounter.cs
+res://Scenes/Game.exr
+res://Scenes/Game.lmbake

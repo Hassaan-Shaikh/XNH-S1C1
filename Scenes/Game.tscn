@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://blh4abuob5x4c" path="res://Models/Cellar_Floor_Albedo.png" id="5_hgxxa"]
 [ext_resource type="Texture2D" uid="uid://cqr0kx7e252mj" path="res://Models/Cellar_Floor_Normal.png" id="6_mlefx"]
 [ext_resource type="PackedScene" uid="uid://bevks4nk3s4xe" path="res://Scenes/document.tscn" id="7_55qww"]
-[ext_resource type="LightmapGIData" uid="uid://d2rgbf8tnmyvl" path="res://Scenes/Game.lmbake" id="8_0dqa5"]
+[ext_resource type="LightmapGIData" uid="uid://d2rgbf8tnmyvl" path="res://Resources/Lightmaps/Game.lmbake" id="8_4iftb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -227,4 +227,4 @@ transform = Transform3D(-8.74228e-09, 1.51421e-08, 0.4, 0.34641, 0.2, 0, -0.2, 0
 transform = Transform3D(2.62268e-08, -4.54262e-08, -0.4, 0.34641, 0.2, -5.2108e-16, 0.2, -0.34641, 5.24537e-08, -3.25303, 0.352646, -15.279)
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
-light_data = ExtResource("8_0dqa5")
+light_data = ExtResource("8_4iftb")

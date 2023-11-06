@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Xalkomak's Nightmare Hunters - Cellar"
+config/tags=PackedStringArray("xalkomak\'s_nightmare_hunters")
 run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://Textures/Icon/Icon.jpg"

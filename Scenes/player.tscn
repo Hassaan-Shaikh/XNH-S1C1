@@ -29,9 +29,10 @@ metadata/_edit_group_ = true
 [node name="PlayerCol" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_pof2v")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." node_paths=PackedStringArray("parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 script = ExtResource("2_20fih")
+parent = NodePath("..")
 
 [node name="PlayerCam" type="Camera3D" parent="Head"]
 fov = 60.0

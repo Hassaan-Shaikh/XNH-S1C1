@@ -19,8 +19,13 @@ public partial class Player : CharacterBody3D
 
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
+    [Export] public AnimationPlayer speedBoostAnim;
+    [Export] public AnimationPlayer stunAnim;
+    [Export] public AnimationPlayer guardianAnim;
+    [Export] public AnimationPlayer vanishAnim;
 
     bool isExhausted = false;
+    bool hasSpeedBoost = false;
     public Vector3 p_Velocity;
 
     public override void _Ready()
@@ -58,31 +63,42 @@ public partial class Player : CharacterBody3D
         Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
         direction = Transform.Basis * direction.Normalized();
 
-        if(stamina.Value <= stamina.MinValue)
+        hasSpeedBoost = Xalkomak.isSpeedBoostCollected;
+
+        if (hasSpeedBoost)
         {
-            isExhausted = true;
+            speed = 8.31f;
+            stamina.Value = stamina.MaxValue;
+            isExhausted = false;
         }
-        
-        if(direction != Vector3.Zero)
+        else
         {
-            if (Input.IsActionPressed("sprint") && !isExhausted)
+            if (stamina.Value <= stamina.MinValue)
             {
-                speed = 5.64f;
-                stamina.Value -= 0.2f;
+                isExhausted = true;
             }
-            else
+
+            if (direction != Vector3.Zero)
             {
-                speed = 3.2f;
-            }
-        }
-        if(direction != Vector3.Zero || direction == Vector3.Zero)
-        {
-            if (!Input.IsActionPressed("sprint") || isExhausted)
-            {
-                stamina.Value += 0.1f;
-                if(stamina.Value >= 45f)
+                if (Input.IsActionPressed("sprint") && !isExhausted)
                 {
-                    isExhausted = false;
+                    speed = 5.64f;
+                    stamina.Value -= 0.2f;
+                }
+                else
+                {
+                    speed = 3.2f;
+                }
+            }
+            if (direction != Vector3.Zero || direction == Vector3.Zero)
+            {
+                if (!Input.IsActionPressed("sprint") || isExhausted)
+                {
+                    stamina.Value += 0.1f;
+                    if (stamina.Value >= 45f)
+                    {
+                        isExhausted = false;
+                    }
                 }
             }
         }
@@ -127,5 +143,41 @@ public partial class Player : CharacterBody3D
     public bool GetExhaustedState()
     {
         return isExhausted;
+    }
+
+    public void SetSpeedBoost(bool setter)
+    {
+        if (setter)
+        {
+            speedBoostAnim.Play("SB_FadeIn");
+        }
+        else
+        {
+            speedBoostAnim.Play("SB_FadeOut");
+        }
+    }
+
+    public void SetGuardian(bool setter)
+    {
+        if (setter)
+        {
+            guardianAnim.Play("G_FadeIn");
+        }
+        else
+        {
+            guardianAnim.Play("G_FadeOut");
+        }
+    }
+
+    public void SetStun(bool setter)
+    {
+        if (setter)
+        {
+            stunAnim.Play("S_FadeIn");
+        }
+        else
+        {
+            stunAnim.Play("S_FadeOut");
+        }
     }
 }

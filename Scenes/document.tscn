@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bevks4nk3s4xe"]
+[gd_scene load_steps=4 format=3 uid="uid://bevks4nk3s4xe"]
 
 [ext_resource type="PackedScene" uid="uid://b5121f410b7qh" path="res://Models/Document.glb" id="1_jtuiw"]
 [ext_resource type="Script" path="res://Scripts/CSharp/Document.cs" id="2_yo2j5"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4803i"]
+size = Vector3(2.00163, 0.112321, 1.38688)
+
 [node name="Document" groups=["Document"] instance=ExtResource("1_jtuiw")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-
-[node name="Document" parent="Document2" index="0" node_paths=PackedStringArray("parent")]
 collision_layer = 32
-collision_mask = 70
+collision_mask = 14
 script = ExtResource("2_yo2j5")
-parent = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_4803i")

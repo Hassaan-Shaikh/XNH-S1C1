@@ -3,19 +3,16 @@ using System;
 
 public partial class Document : Node3D
 {
-	[Export] public Node3D parent;
-	[Export] public int docNumber;
-
-	private string prompt = "Click to collect ";
+	private string prompt = "Click to collect Document.";
 
 	public string GetPrompt()
 	{		
-		return (prompt + Name);
+		return (prompt);
 	}
 	public void DocumentCollected()
 	{
 		Xalkomak.documentsCollected += 1;
 		GD.Print(Xalkomak.documentsCollected);
-		parent.QueueFree();
+		QueueFree();
 	}
 }

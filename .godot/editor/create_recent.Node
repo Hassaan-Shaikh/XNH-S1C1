@@ -1,7 +1,15 @@
+AnimationPlayer
+MeshInstance3D
+PowerRune
+CollisionShape3D
+StaticBody3D
+GPUParticles3D
+ColorRect
+Label
+TextureRect
+Timer
 Area3D
 LightmapGI
-StaticBody3D
-Label
 VBoxContainer
 Panel
 PanelContainer
@@ -13,7 +21,5 @@ SpotLight3D
 RayCast3D
 Marker3D
 OccluderInstance3D
-MeshInstance3D
 Camera3D
-CollisionShape3D
 CharacterBody3D

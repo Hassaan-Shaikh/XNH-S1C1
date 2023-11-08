@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://b47rtij401eep"]
+
+[ext_resource type="Shader" uid="uid://dis6i1gixmk7h" path="res://Resources/Shaders/StunExplosion.tres" id="1_e2xvp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_orr8q"]
+noise_type = 0
+seed = 6
+frequency = 0.0075
+fractal_type = 2
+fractal_lacunarity = 2.5
+fractal_weighted_strength = 0.25
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k51fh"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_orr8q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11qdq"]
+render_priority = 0
+shader = ExtResource("1_e2xvp")
+shader_parameter/ExplosionColor = Color(1, 0.537255, 0, 1)
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_k51fh")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hdnge"]
+material = SubResource("ShaderMaterial_11qdq")
+height = 0.5
+is_hemisphere = true
+
+[sub_resource type="Animation" id="Animation_bhhtq"]
+resource_name = "Expand"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1000, 1000, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_ycbhx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bp37n"]
+_data = {
+"Expand": SubResource("Animation_bhhtq"),
+"RESET": SubResource("Animation_ycbhx")
+}
+
+[node name="StunExplosion" type="MeshInstance3D"]
+editor_description = "The exploding VFX for the SStun rune."
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hdnge")
+
+[node name="ExplodeAnim" type="AnimationPlayer" parent="."]
+autoplay = "Expand"
+libraries = {
+"": SubResource("AnimationLibrary_bp37n")
+}

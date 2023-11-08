@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Document.glb-1001b6d6036957adc9f252f25e7ced91
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="StaticBody3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -28,5 +28,14 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Document2/Document": {
+"import/skip_import": true
+},
+"PATH:Document2/Document/CollisionShape3D": {
+"import/skip_import": true
+}
+}
+}
 gltf/embedded_image_handling=1

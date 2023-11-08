@@ -1,14 +1,14 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1699293223
-icon.svg::CompressedTexture2D::5738706545296050158::1698410061::1698410074::1::::<><>::
+::res://::1699382635
+icon.svg::CompressedTexture2D::5738706545296050158::1698410061::1699378358::1::::<><>::
 README.md::TextFile::-1::1699128915::0::1::::<><>::
-::res://Models/::1699293705
+::res://Models/::1699371678
 Cellar.glb::PackedScene::5100468185987595982::1698413051::1698413078::1::::<><>::uid://0av2w65c777l
 Cellar_Floor_Albedo.png::CompressedTexture2D::3174709484838180600::1698413077::1698413079::1::::<><>::
 Cellar_Floor_Normal.png::CompressedTexture2D::5932494327861775149::1698413076::1698413079::1::::<><>::
 Cellar_Wall_Albedo.png::CompressedTexture2D::1756045569004008811::1698413074::1698413079::1::::<><>::
 Cellar_Wall_Normal.png::CompressedTexture2D::4829418367572203915::1698413073::1698413079::1::::<><>::
-Document.glb::PackedScene::4547445912516733631::1699020686::1699020688::1::::<><>::uid://di0hs86b1p5v6
+Document.glb::PackedScene::4547445912516733631::1699020686::1699371678::1::::<><>::uid://di0hs86b1p5v6
 Document_Folder_Albedo.png::CompressedTexture2D::7772841188515006809::1699020687::1699020689::1::::<><>::
 Guardian.glb::PackedScene::6591379941411684362::1699293080::1699293677::1::::<><>::
 Speed Boost.glb::PackedScene::104571417529871599::1699293028::1699293701::1::::<><>::
@@ -16,32 +16,47 @@ Stun.glb::PackedScene::5165965954088351552::1699293055::1699293705::1::::<><>::
 Vanish.glb::PackedScene::324178219520203454::1699293114::1699293748::1::::<><>::
 ::res://Properties/::1699027116
 launchSettings.json::JSON::-1::1699027527::0::1::::<><>::
-::res://Resources/::1699125992
-::res://Resources/Lightmaps/::1699293223
-Game.lmbake::LightmapGIData::9089821653352139397::1699126397::0::1::::<><>::uid://crf88hsjt5kxa::::res://Scenes/Game.exr
-::res://Resources/Occluders/::1699125844
-Game.occ::ArrayOccluder3D::2107516987050133860::1699125844::0::1::::<><>::
-::res://Scenes/::1699293632
-cellar.tscn::PackedScene::2124624756456373572::1699128693::0::1::::<><>::uid://cewx73rgy5sig
-document.tscn::PackedScene::2711168849050563670::1699128693::0::1::::<><>::uid://b5121f410b7qh
-Game.exr::CompressedTexture2DArray::5978436585868637558::1699126395::1699126396::1::::<><>::
-Game.tscn::PackedScene::4640224222761442717::1699293632::0::1::::<><>::uid://bj8jt7vqp3wyx::::res://Scenes/player.tscn<>uid://5a5q5m1dffm7::::res://Resources/Occluders/Game.occ<>uid://0av2w65c777l::::res://Models/Cellar_Wall_Albedo.png<>uid://ca2n2yb5mrotf::::res://Models/Cellar_Wall_Normal.png<>uid://blh4abuob5x4c::::res://Models/Cellar_Floor_Albedo.png<>uid://cqr0kx7e252mj::::res://Models/Cellar_Floor_Normal.png<>uid://bevks4nk3s4xe::::res://Scenes/document.tscn<>uid://d2rgbf8tnmyvl::::res://Resources/Lightmaps/Game.lmbake
-player.tscn::PackedScene::3086826839274692271::1699293363::0::1::::<><>::res://Scripts/CSharp/Player.cs<>res://Scripts/CSharp/CamControl.cs<>uid://jtxxkatn6g3t::::res://Textures/UI Textures/StaminaUnder.png<>res://Scripts/CSharp/PlayerRay.cs<>uid://chguouqj08dgb::::res://Textures/Cookies/FlashlightCookie.png<>uid://clioye8yru3xd::::res://Textures/UI Textures/ProgressOver.png<>uid://gdxttw1mk7pn::::res://Textures/UI Textures/StaminaProgress.png<>res://Scripts/CSharp/DebugPanel.cs<>res://Scripts/CSharp/DocumentCounter.cs
+::res://Resources/::1699382632
+::res://Resources/EXR Files/::1699382635
+Game.exr::CompressedTexture2DArray::5978436585868637558::1699126395::1699382636::1::::<><>::
+::res://Resources/Lightmaps/::1699382635
+Game.lmbake::LightmapGIData::9089821653352139397::1699382635::0::1::::<><>::uid://crf88hsjt5kxa::::res://Resources/EXR Files/Game.exr
+::res://Resources/Occluders/::1699372666
+Game.occ::ArrayOccluder3D::2107516987050133860::1699372666::0::1::::<><>::
+::res://Resources/Shaders/::1699382607
+SpeedBoost.gdshader::Shader::-1::1699382607::0::1::::<><>::
+SpeedBoost.tres::VisualShader::3650676446492193205::1699368091::0::1::::<><>::
+StunExplosion.tres::VisualShader::7759829488154271423::1699380986::0::1::::<><>::
+::res://Scenes/::1699382635
+cellar.tscn::PackedScene::2124624756456373572::1699380214::0::1::::<><>::uid://cewx73rgy5sig::::res://Models/Cellar.glb
+document.tscn::PackedScene::2711168849050563670::1699380214::0::1::::<><>::uid://b5121f410b7qh::::res://Models/Document.glb<>res://Scripts/CSharp/Document.cs
+Game.tscn::PackedScene::4640224222761442717::1699382607::0::1::::<><>::res://Scripts/CSharp/GameControl.cs<>uid://bj8jt7vqp3wyx::::res://Scenes/player.tscn<>uid://5a5q5m1dffm7::::res://Resources/Occluders/Game.occ<>uid://0av2w65c777l::::res://Models/Cellar_Wall_Albedo.png<>uid://ca2n2yb5mrotf::::res://Models/Cellar_Wall_Normal.png<>uid://blh4abuob5x4c::::res://Models/Cellar_Floor_Albedo.png<>uid://cqr0kx7e252mj::::res://Models/Cellar_Floor_Normal.png<>uid://bevks4nk3s4xe::::res://Scenes/document.tscn<>uid://d2rgbf8tnmyvl::::res://Resources/Lightmaps/Game.lmbake<>uid://eypdd16cpiqh::::res://Scenes/SpeedBoost.tscn<>uid://dh461p2oki1by::::res://Scenes/Stun.tscn<>uid://d38apra642wkw::::res://Scenes/guardian.tscn
+guardian.tscn::PackedScene::9192701820082047306::1699380214::0::1::::<><>::uid://c056cgx6hvy8q::::res://Models/Guardian.glb<>res://Scripts/CSharp/Guardian.cs
+player.tscn::PackedScene::3086826839274692271::1699380214::0::1::::<><>::res://Scripts/CSharp/Player.cs<>res://Scripts/CSharp/CamControl.cs<>uid://jtxxkatn6g3t::::res://Textures/UI Textures/StaminaUnder.png<>res://Scripts/CSharp/PlayerRay.cs<>uid://chguouqj08dgb::::res://Textures/Cookies/FlashlightCookie.png<>uid://clioye8yru3xd::::res://Textures/UI Textures/ProgressOver.png<>uid://gdxttw1mk7pn::::res://Textures/UI Textures/StaminaProgress.png<>res://Scripts/CSharp/DebugPanel.cs<>res://Scripts/CSharp/DocumentCounter.cs<>uid://cwt5egmvcbtnx::::res://Textures/UI Textures/Crosshair.png<>res://Resources/Shaders/SpeedBoost.gdshader<>uid://bsaodwrfxtwwj::::res://Resources/Shaders/SpeedBoost.tres
+SpeedBoost.tscn::PackedScene::331216752069511231::1699380214::0::1::::<><>::uid://bqwjnaw3ilwx::::res://Models/Speed Boost.glb<>res://Scripts/CSharp/SpeedBoost.cs
+Stun.tscn::PackedScene::7712380399040326274::1699380214::0::1::::<><>::uid://cfuox7n60rkr5::::res://Models/Stun.glb<>res://Scripts/CSharp/Stun.cs
+StunExplosion.tscn::PackedScene::4489023791729279207::1699382550::0::1::::<><>::uid://dis6i1gixmk7h::::res://Resources/Shaders/StunExplosion.tres
 ::res://Scripts/::1698413083
-::res://Scripts/CSharp/::1699128691
-CamControl.cs::CSharpScript::-1::1699128691::0::1::::<><>::
+::res://Scripts/CSharp/::1699382584
+CamControl.cs::CSharpScript::-1::1699336807::0::1::::<><>::
 DebugPanel.cs::CSharpScript::-1::1698913739::0::1::::<><>::
-Document.cs::CSharpScript::-1::1699125811::0::1::::<><>::
+Document.cs::CSharpScript::-1::1699372695::0::1::::<><>::
 DocumentCounter.cs::CSharpScript::-1::1699025086::0::1::::<><>::
-Player.cs::CSharpScript::-1::1699128188::0::1::::<><>::
+GameControl.cs::CSharpScript::-1::1699382584::0::1::::<><>::
+Guardian.cs::CSharpScript::-1::1699366055::0::1::::<><>::
+Player.cs::CSharpScript::-1::1699378990::0::1::::<><>::
 PlayerRay.cs::CSharpScript::-1::1699125149::0::1::::<><>::
-Xalkomak.cs::CSharpScript::-1::1699125168::0::1::::<><>::
+PowerRune.cs::CSharpScript::-1::1699378298::0::1::::PowerRune<>Area3D<>res://icon.svg::
+SpeedBoost.cs::CSharpScript::-1::1699371041::0::1::::<><>::
+Stun.cs::CSharpScript::-1::1699378639::0::1::::<><>::
+Xalkomak.cs::CSharpScript::-1::1699337080::0::1::::<><>::
 ::res://Textures/::1699023777
 ::res://Textures/Cookies/::1699025118
 FlashlightCookie.png::CompressedTexture2D::5277789955974286737::1699023991::1699024020::1::::<><>::
 ::res://Textures/Icon/::1698913130
 Icon.jpg::CompressedTexture2D::250902973030173357::1698913060::1698913130::1::::<><>::
-::res://Textures/UI Textures/::1699023753
+::res://Textures/UI Textures/::1699340594
+Crosshair.png::CompressedTexture2D::6358048092343295973::1699340562::1699340594::1::::<><>::
 ProgressOver.png::CompressedTexture2D::5562326828575417969::1698854375::1698854376::1::::<><>::
 StaminaProgress.png::CompressedTexture2D::428757649135332827::1698854375::1698854376::1::::<><>::
 StaminaUnder.png::CompressedTexture2D::672360860278241675::1698854375::1698854376::1::::<><>::

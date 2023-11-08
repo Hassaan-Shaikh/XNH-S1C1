@@ -11,4 +11,16 @@ public static class Xalkomak
     public static bool isSpeedBoostCollected = false;
     public static bool isStunCollected = false;
     public static bool isVanishCollected = false;
+
+    public static bool isGuardianCollectedBySammy = false;
+    public static bool isSpeedBoostCollectedBySammy = false;
+    public static bool isStunCollectedBySammy = false;
+    public static bool isVanishCollectedBySammy = false;
+
+    public enum  Difficulty
+    {
+        Normal,
+        Hard
+    }
+    public static Difficulty difficulty = Difficulty.Normal;
 }

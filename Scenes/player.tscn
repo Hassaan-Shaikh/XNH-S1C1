@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bj8jt7vqp3wyx"]
+[gd_scene load_steps=32 format=3 uid="uid://bj8jt7vqp3wyx"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
 [ext_resource type="Script" path="res://Scripts/CSharp/CamControl.cs" id="2_20fih"]
@@ -36,6 +36,46 @@ shader_parameter/ScreenOffset = Vector2(0, 0)
 shader_parameter/Screen2 = Vector2(0, 0)
 shader_parameter/ScreenScale2 = Vector2(1, 0)
 shader_parameter/ScreenOffset2 = Vector2(-1, 0)
+
+[sub_resource type="Animation" id="Animation_mq253"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/SpeedBoost:material:shader_parameter/multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Speed Boost
+"]
+}
 
 [sub_resource type="Animation" id="Animation_73ax7"]
 resource_name = "SB_FadeIn"
@@ -78,46 +118,6 @@ tracks/2/keys = {
 "]
 }
 
-[sub_resource type="Animation" id="Animation_mq253"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerUI/SpeedBoost:material:shader_parameter/multiplier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Speed Boost
-"]
-}
-
 [sub_resource type="Animation" id="Animation_rl6yd"]
 resource_name = "SB_FadeOut"
 length = 0.3
@@ -139,6 +139,34 @@ _data = {
 "RESET": SubResource("Animation_mq253"),
 "SB_FadeIn": SubResource("Animation_73ax7"),
 "SB_FadeOut": SubResource("Animation_rl6yd")
+}
+
+[sub_resource type="Animation" id="Animation_oec7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/RuneGetText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Enemies Stunned
+"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6uob8"]
@@ -168,34 +196,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 0.862745, 0, 0), Color(1, 0.862745, 0, 1), Color(1, 0.862745, 0, 1), Color(1, 0.862745, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_oec7u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerUI/RuneGetText:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Enemies Stunned
-"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wb37v"]
@@ -267,6 +267,34 @@ tracks/4/keys = {
 "values": [Vector2(-0.5, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_1ri86"]
+resource_name = "G_FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/Guardian:material:shader_parameter/ScreenScale2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.875, 0), Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/Guardian:material:shader_parameter/ScreenScale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bofo0"]
 length = 0.001
 tracks/0/type = "value"
@@ -330,34 +358,6 @@ tracks/4/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_1ri86"]
-resource_name = "G_FadeOut"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerUI/Guardian:material:shader_parameter/ScreenScale2")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.875, 0), Vector2(1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerUI/Guardian:material:shader_parameter/ScreenScale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0), Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_81phi"]
 _data = {
 "G_FadeIn": SubResource("Animation_ako5t"),
@@ -365,15 +365,120 @@ _data = {
 "RESET": SubResource("Animation_bofo0")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "speedBoostAnim", "stunAnim", "guardianAnim") groups=["Player"]]
+[sub_resource type="Animation" id="Animation_1us1q"]
+resource_name = "V_FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/Vanish:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0), Color(0, 0.607843, 0.752941, 0.196078)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0), Color(0, 0.607843, 0.752941, 1), Color(0, 0.607843, 0.752941, 1), Color(0, 0.607843, 0.752941, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["Vanish
+", "Vanish
+"]
+}
+
+[sub_resource type="Animation" id="Animation_b8nb2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/Vanish:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.392157, 0.392157, 0.392157, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Vanish
+"]
+}
+
+[sub_resource type="Animation" id="Animation_4gycv"]
+resource_name = "V_FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/Vanish:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0.196078), Color(0, 0.607843, 0.752941, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_abx5w"]
+_data = {
+"RESET": SubResource("Animation_b8nb2"),
+"V_FadeIn": SubResource("Animation_1us1q"),
+"V_FadeOut": SubResource("Animation_4gycv")
+}
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "playerCam", "speedBoostAnim", "stunAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
 editor_description = "The main player you will be playing as."
 collision_layer = 2
 collision_mask = 220
 script = ExtResource("1_vplpl")
 stamina = NodePath("PlayerUI/StaminaBar")
+playerCam = NodePath("Head/PlayerCam")
 speedBoostAnim = NodePath("SpeedBoostAnim")
 stunAnim = NodePath("StunAnim")
 guardianAnim = NodePath("GuardianAnim")
+vanishAnim = NodePath("VanishAnim")
 metadata/_edit_group_ = true
 
 [node name="PlayerCol" type="CollisionShape3D" parent="."]
@@ -531,7 +636,7 @@ grow_vertical = 2
 texture = ExtResource("10_a5abb")
 
 [node name="RuneGetText" type="Label" parent="PlayerUI"]
-modulate = Color(1, 0, 0, 0)
+modulate = Color(0, 0.607843, 0.752941, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -550,7 +655,8 @@ theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 100
-text = "Guardian"
+text = "Vanish
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -572,6 +678,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Vanish" type="ColorRect" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.392157, 0.392157, 0)
+
 [node name="SpeedBoostAnim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6425s")
@@ -586,4 +701,9 @@ libraries = {
 autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_81phi")
+}
+
+[node name="VanishAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_abx5w")
 }

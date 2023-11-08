@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=33 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://eypdd16cpiqh" path="res://Scenes/SpeedBoost.tscn" id="10_20rc3"]
 [ext_resource type="PackedScene" uid="uid://dh461p2oki1by" path="res://Scenes/Stun.tscn" id="11_74tme"]
 [ext_resource type="PackedScene" uid="uid://d38apra642wkw" path="res://Scenes/guardian.tscn" id="11_jjnv4"]
+[ext_resource type="PackedScene" uid="uid://dpwhajsy2r24w" path="res://Scenes/Vanish.tscn" id="14_hs2st"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -187,11 +188,14 @@ particles_anim_loop = true
 material = SubResource("StandardMaterial3D_smop8")
 size = Vector3(0.2, 0.3, 0.2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostparticles") groups=["Game"]]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "speedBoost", "stun", "guardian", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostparticles") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 player = NodePath("Player")
 stunVFX = ExtResource("2_y0y7d")
+speedBoost = NodePath("SpeedBoost")
+stun = NodePath("Stun")
+guardian = NodePath("Guardian")
 speedBoostTimer = NodePath("SpeedBoostTimer")
 stunTimer = NodePath("StunTimer")
 guardianTimer = NodePath("GuardianTimer")
@@ -280,7 +284,7 @@ wait_time = 75.0
 one_shot = true
 
 [node name="VanishTimer" type="Timer" parent="."]
-wait_time = 26.0
+wait_time = 5.0
 one_shot = true
 
 [node name="SpeedBoost" parent="." node_paths=PackedStringArray("gameRoot") instance=ExtResource("10_20rc3")]
@@ -296,11 +300,14 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.895, 1.5, -16.345)
 [node name="SB_Particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
-amount = 20
 one_shot = true
 visibility_aabb = AABB(-0.977625, -0.969614, -1.42512, 1.95525, 1.93923, 2.85025)
 process_material = SubResource("ParticleProcessMaterial_fxvv2")
 draw_pass_1 = SubResource("BoxMesh_7xp4m")
+
+[node name="Vanish" parent="." instance=ExtResource("14_hs2st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, -13.5)
+monitorable = false
 
 [connection signal="timeout" from="SpeedBoostTimer" to="." method="OnSpeedBoostExpired"]
 [connection signal="timeout" from="StunTimer" to="." method="OnStunExpired"]

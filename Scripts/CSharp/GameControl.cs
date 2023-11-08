@@ -3,10 +3,15 @@ using System;
 
 public partial class GameControl : Node3D
 {
-	[ExportGroup("References")]
-	[ExportSubgroup("Characters")]
+	[ExportCategory("References")]
+	[ExportGroup("Prefabs")]
 	[Export] public Player player;
 	[Export] public PackedScene stunVFX;
+	[ExportGroup("Power Runes")]
+	[Export] public SpeedBoost speedBoost;
+	[Export] public Stun stun;
+	[Export] public Guardian guardian;
+	//[Export] public Vanish vanish;
     [ExportSubgroup("Power Rune Timers")] 
 	[Export] public Timer speedBoostTimer;
 	[Export] public Timer stunTimer;
@@ -33,10 +38,9 @@ public partial class GameControl : Node3D
 
 	public void StartStunTimer()
 	{
-		Stun stunRune = GetNode<Stun>("Stun");
-        Node3D stunVFXInstance = stunVFX.Instantiate() as Node3D;
-		AddChild(stunVFXInstance);
-		stunVFXInstance.GlobalPosition = new Vector3(stunRune.GlobalPosition.X, 0, stunRune.GlobalPosition.Z);
+		StunExplosion stunInstance = stunVFX.Instantiate<StunExplosion>();
+		AddChild(stunInstance);
+		stunInstance.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
 		stunTimer.Start();
 	}
 	
@@ -44,6 +48,11 @@ public partial class GameControl : Node3D
 	{
         guardianTimer.Start();
     }
+
+	public void StartVanishTimer()
+	{
+		vanishTimer.Start();
+	}
 
 	private void OnSpeedBoostExpired()
 	{
@@ -65,5 +74,6 @@ public partial class GameControl : Node3D
 	private void OnVanishExpired()
 	{
 		Xalkomak.isVanishCollected = false;
+		player.SetVanish(false);
 	}
 }

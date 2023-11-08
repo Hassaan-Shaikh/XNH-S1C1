@@ -11,7 +11,7 @@ public partial class Player : CharacterBody3D
     [Export] public float gravity = 9.8f;
     [Export] public float jumpForce = 6.3f;
     [ExportSubgroup("Camera")]
-    [Export] public float camSensitivity = 4f;
+    [Export] public float camSensitivity = 4f;  
     [ExportSubgroup("Misc.")]
     [Export] public bool canControl = true;
     [Export] public bool canJump = false;
@@ -19,6 +19,8 @@ public partial class Player : CharacterBody3D
 
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
+    [Export] public Camera3D playerCam;
+    [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;
     [Export] public AnimationPlayer guardianAnim;
@@ -178,6 +180,18 @@ public partial class Player : CharacterBody3D
         else
         {
             stunAnim.Play("S_FadeOut");
+        }
+    }
+
+    public void SetVanish(bool setter)
+    {
+        if (setter)
+        {
+            vanishAnim.Play("V_FadeIn");
+        }
+        else
+        {
+            vanishAnim.Play("V_FadeOut");
         }
     }
 }

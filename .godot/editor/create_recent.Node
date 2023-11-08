@@ -1,10 +1,10 @@
 AnimationPlayer
+ColorRect
+CollisionShape3D
 MeshInstance3D
 PowerRune
-CollisionShape3D
 StaticBody3D
 GPUParticles3D
-ColorRect
 Label
 TextureRect
 Timer

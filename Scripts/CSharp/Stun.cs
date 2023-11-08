@@ -16,8 +16,12 @@ public partial class Stun : Area3D
         {
             body.Call("SetStun", true);
             Xalkomak.isStunCollected = true;
+            EmitSignal(SignalName.StunEnemy);
             gameRoot.StartStunTimer();
             QueueFree();
         }
     }
+
+    [Signal]
+    public delegate void StunEnemyEventHandler();
 }

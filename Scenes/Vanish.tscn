@@ -46,7 +46,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uk67o")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vpfi3"]
-size = Vector3(1.5, 1, 1.5)
 
 [sub_resource type="Animation" id="Animation_p2rn5"]
 length = 0.001
@@ -116,6 +115,7 @@ collision_mask = 2
 script = ExtResource("2_iy8kq")
 
 [node name="Vanish2" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_77lln")
 

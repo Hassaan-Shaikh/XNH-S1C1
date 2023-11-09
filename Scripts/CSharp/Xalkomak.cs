@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public static class Xalkomak
 {
@@ -17,10 +18,12 @@ public static class Xalkomak
     public static bool isStunCollectedBySammy = false;
     public static bool isVanishCollectedBySammy = false;
 
-    public enum  Difficulty
+    public enum Difficulty
     {
         Normal,
         Hard
     }
     public static Difficulty difficulty = Difficulty.Normal;
+
+    public static bool[] isThisSpotOccupied;
 }

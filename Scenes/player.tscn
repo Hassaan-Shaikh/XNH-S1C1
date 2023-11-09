@@ -365,6 +365,46 @@ _data = {
 "RESET": SubResource("Animation_bofo0")
 }
 
+[sub_resource type="Animation" id="Animation_b8nb2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerUI/Vanish:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.392157, 0.392157, 0.392157, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Vanish
+"]
+}
+
 [sub_resource type="Animation" id="Animation_1us1q"]
 resource_name = "V_FadeIn"
 tracks/0/type = "value"
@@ -406,46 +446,6 @@ tracks/2/keys = {
 "]
 }
 
-[sub_resource type="Animation" id="Animation_b8nb2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerUI/Vanish:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.392157, 0.392157, 0.392157, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerUI/RuneGetText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0.607843, 0.752941, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerUI/RuneGetText:text")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Vanish
-"]
-}
-
 [sub_resource type="Animation" id="Animation_4gycv"]
 resource_name = "V_FadeOut"
 tracks/0/type = "value"
@@ -468,13 +468,12 @@ _data = {
 "V_FadeOut": SubResource("Animation_4gycv")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "playerCam", "speedBoostAnim", "stunAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "speedBoostAnim", "stunAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
 editor_description = "The main player you will be playing as."
 collision_layer = 2
 collision_mask = 220
 script = ExtResource("1_vplpl")
 stamina = NodePath("PlayerUI/StaminaBar")
-playerCam = NodePath("Head/PlayerCam")
 speedBoostAnim = NodePath("SpeedBoostAnim")
 stunAnim = NodePath("StunAnim")
 guardianAnim = NodePath("GuardianAnim")

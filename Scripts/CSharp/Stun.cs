@@ -12,14 +12,42 @@ public partial class Stun : Area3D
 
     private void OnStunPickup(Node3D body)
     {
-        if (body.IsInGroup("Player"))
+        switch (Xalkomak.difficulty)
         {
-            body.Call("SetStun", true);
-            Xalkomak.isStunCollected = true;
-            EmitSignal(SignalName.StunEnemy);
-            gameRoot.StartStunTimer();
-            QueueFree();
+            case Xalkomak.Difficulty.Normal:
+                if (body.IsInGroup("Player"))
+                {
+                    PlayerPicksStun(body);
+                }
+                else if (body.IsInGroup("Monster"))
+                {
+                    return; // Sammy does not use the power rune on Normal mode
+                }
+                break;
+            case Xalkomak.Difficulty.Hard:
+                if (body.IsInGroup("Player"))
+                {
+                    PlayerPicksStun(body);
+                }
+                else if (body.IsInGroup("Monster"))
+                {
+                    body.Call("SetStun", true);
+                    Xalkomak.isStunCollectedBySammy = true;
+                    gameRoot.StartStunTimer();
+                    QueueFree();
+                }
+                break;
+            default:
+                break;
         }
+    }
+
+    void PlayerPicksStun(Node3D body)
+    {
+        body.Call("SetStun", true);
+        Xalkomak.isStunCollected = true;
+        gameRoot.StartStunTimer();
+        QueueFree();
     }
 
     [Signal]

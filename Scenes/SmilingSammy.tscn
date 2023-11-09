@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://dftdwyx4b8j6x"]
+
+[ext_resource type="PackedScene" uid="uid://buhkop20hskr1" path="res://Models/Smiling Sammy.glb" id="1_vao3v"]
+[ext_resource type="Script" path="res://Scripts/CSharp/SmilingSammy.cs" id="2_kl1vx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wxqsf"]
+resource_local_to_scene = true
+radius = 0.2
+height = 2.2
+
+[node name="SmilingSammy" node_paths=PackedStringArray("sammyNav", "head", "sammyTimer", "waypoints") groups=["Monster"] instance=ExtResource("1_vao3v")]
+script = ExtResource("2_kl1vx")
+sammyNav = NodePath("SammyNav")
+head = NodePath("Smiling Sammy2/Skeleton3D/Head")
+sammyTimer = NodePath("SammyTimer")
+waypoints = []
+
+[node name="Skeleton3D" parent="Smiling Sammy2" index="0"]
+bones/0/position = Vector3(0, 0.87201, -0.0552)
+bones/0/rotation = Quaternion(0.0824271, 1.21862e-18, 9.60848e-18, 0.996597)
+bones/1/rotation = Quaternion(-0.0586219, 3.99253e-25, 1.23648e-24, 0.99828)
+bones/2/rotation = Quaternion(-0.0117073, 1.68599e-18, -1.17642e-19, 0.999932)
+bones/3/rotation = Quaternion(0.177337, 1.75951e-18, 4.03309e-19, 0.98415)
+bones/4/rotation = Quaternion(0.0232073, 1.19374e-07, -9.26689e-09, 0.999731)
+bones/5/rotation = Quaternion(-0.0894279, -1.65188e-11, -2.30511e-08, 0.995993)
+bones/6/rotation = Quaternion(-0.0695993, -0.407878, 0.0850518, 0.906398)
+bones/10/rotation = Quaternion(-0.601455, -0.0445786, -0.283211, 0.745692)
+bones/11/rotation = Quaternion(-0.0994008, -0.0116656, -0.211227, 0.9723)
+bones/12/rotation = Quaternion(-1.43597e-08, 0.231441, -1.34299e-08, 0.972849)
+bones/13/rotation = Quaternion(-0.215967, -2.46332e-08, 4.86519e-08, 0.976401)
+bones/14/rotation = Quaternion(-0.0871556, -8.53161e-05, 0.000975237, 0.996194)
+bones/15/rotation = Quaternion(-0.130526, 0.000229024, -0.0017395, 0.991443)
+bones/16/position = Vector3(-0.018, 0.11, -1.07541e-05)
+bones/16/rotation = Quaternion(-0.0871556, -8.53049e-05, 0.000975232, 0.996194)
+bones/17/rotation = Quaternion(-0.130526, 0.000229009, -0.00173949, 0.991443)
+bones/18/rotation = Quaternion(-0.0871556, -8.53049e-05, 0.000975232, 0.996194)
+bones/19/rotation = Quaternion(-0.130526, 0.000229009, -0.00173949, 0.991443)
+bones/20/rotation = Quaternion(-0.0871556, -8.53161e-05, 0.000975237, 0.996194)
+bones/21/rotation = Quaternion(-0.130526, 0.000229024, -0.0017395, 0.991443)
+bones/22/rotation = Quaternion(-0.0327953, 0.0808167, -0.372131, 0.924073)
+bones/23/rotation = Quaternion(-0.34202, 0.000600357, -0.00164932, 0.939691)
+bones/25/rotation = Quaternion(-0.597632, 0.149966, 0.357593, 0.701765)
+bones/26/rotation = Quaternion(-0.131361, -0.0791699, 0.701243, 0.696229)
+bones/27/rotation = Quaternion(5.24952e-08, -0.509547, -7.03545e-08, 0.860443)
+bones/28/rotation = Quaternion(-0.203229, 3.9745e-08, -4.9062e-08, 0.979131)
+bones/29/rotation = Quaternion(-0.181926, 0.000178077, -0.00096264, 0.983312)
+bones/30/rotation = Quaternion(-0.445367, -0.000781397, 0.00157091, 0.895347)
+bones/31/position = Vector3(0.018, 0.11, -1.08659e-05)
+bones/31/rotation = Quaternion(-0.181926, 0.000178087, -0.000962617, 0.983312)
+bones/32/rotation = Quaternion(-0.445366, -0.000781399, 0.00157092, 0.895347)
+bones/33/rotation = Quaternion(-0.181926, 0.000178089, -0.000962624, 0.983312)
+bones/34/rotation = Quaternion(-0.445366, -0.000781399, 0.00157091, 0.895347)
+bones/35/rotation = Quaternion(-0.181926, 0.000178077, -0.00096264, 0.983312)
+bones/36/rotation = Quaternion(-0.445367, -0.000781397, 0.00157091, 0.895347)
+bones/37/rotation = Quaternion(-0.113558, -0.0321756, 0.205992, 0.97141)
+bones/38/rotation = Quaternion(-0.522338, -0.000916875, 0.00149668, 0.852737)
+bones/41/rotation = Quaternion(0.937912, 0.0268825, -0.147848, 0.312633)
+bones/42/rotation = Quaternion(0.525225, -5.72925e-09, 2.84196e-09, 0.850964)
+bones/43/rotation = Quaternion(-0.644276, -0.000155438, 0.0246595, 0.764395)
+bones/44/rotation = Quaternion(-0.00673099, 0.918549, -0.395115, 0.0103428)
+bones/45/rotation = Quaternion(0.937912, -0.0268825, 0.147848, 0.312633)
+bones/46/rotation = Quaternion(0.525225, 6.23868e-09, -4.01057e-09, 0.850964)
+bones/47/rotation = Quaternion(-0.644276, 0.000155433, -0.0246595, 0.764395)
+bones/48/rotation = Quaternion(-0.00673097, -0.918549, 0.395115, 0.0103427)
+
+[node name="Head" type="BoneAttachment3D" parent="Smiling Sammy2/Skeleton3D" index="1"]
+transform = Transform3D(0.652804, -0.0974056, -0.751239, 0.0257626, 0.993979, -0.106492, 0.757089, 0.0501648, 0.651383, 3.6077e-09, 1.64351, 0.103136)
+bone_name = "spine.006"
+bone_idx = 6
+
+[node name="SammyCol" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_wxqsf")
+
+[node name="SammyNav" type="NavigationAgent3D" parent="." index="3"]
+path_desired_distance = 0.2
+path_height_offset = 0.6
+avoidance_enabled = true
+
+[node name="SammyTimer" type="Timer" parent="." index="4"]

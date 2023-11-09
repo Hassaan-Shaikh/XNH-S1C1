@@ -12,12 +12,41 @@ public partial class SpeedBoost : Area3D
 
     private void OnSpeedBoostPickup(Node3D body)
     {
-        if(body.IsInGroup("Player"))
+        switch (Xalkomak.difficulty)
         {
-            body.Call("SetSpeedBoost", true);
-            Xalkomak.isSpeedBoostCollected = true;
-            gameRoot.StartSpeedBoostTimer();
-            QueueFree();
+            case Xalkomak.Difficulty.Normal:
+                if (body.IsInGroup("Player"))
+                {
+                    PlayerPicksSpeedBoost(body);
+                }
+                else if (body.IsInGroup("Monster"))
+                {
+                    return; // Sammy does not use the power rune on Normal mode
+                }
+                break;
+            case Xalkomak.Difficulty.Hard:
+                if (body.IsInGroup("Player"))
+                {
+                    PlayerPicksSpeedBoost(body);
+                }
+                else if (body.IsInGroup("Monster"))
+                {
+                    body.Call("SetSpeedBoost", true);
+                    Xalkomak.isSpeedBoostCollectedBySammy = true;
+                    gameRoot.StartSpeedBoostTimer();
+                    QueueFree();
+                }
+                break;
+            default:
+                break;
         }
+    }
+
+    void PlayerPicksSpeedBoost(Node3D body)
+    {
+        body.Call("SetSpeedBoost", true);
+        Xalkomak.isSpeedBoostCollected = true;
+        gameRoot.StartSpeedBoostTimer();
+        QueueFree();
     }
 }

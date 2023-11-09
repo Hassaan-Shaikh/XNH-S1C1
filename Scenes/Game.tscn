@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=38 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
@@ -16,9 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dpwhajsy2r24w" path="res://Scenes/Vanish.tscn" id="14_hs2st"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
-sky_top_color = Color(0, 0, 0, 1)
+sky_top_color = Color(1, 1, 1, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
-sky_curve = 1.0
 
 [sub_resource type="Sky" id="Sky_ct36p"]
 sky_material = SubResource("ProceduralSkyMaterial_xyocr")
@@ -35,6 +34,8 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.08
 volumetric_fog_albedo = Color(0, 0, 0, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.35
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tpccn"]
 resource_local_to_scene = true
@@ -163,15 +164,6 @@ shadow_mesh = SubResource("ArrayMesh_bb3xr")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ae2xq"]
 data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxvv2"]
-direction = Vector3(0, 0, 0)
-spread = 30.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 8.0
-scale_min = 0.2
-scale_max = 0.7
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smop8"]
 albedo_color = Color(0.905882, 0, 0, 1)
 metallic_specular = 0.25
@@ -188,7 +180,55 @@ particles_anim_loop = true
 material = SubResource("StandardMaterial3D_smop8")
 size = Vector3(0.2, 0.3, 0.2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "speedBoost", "stun", "guardian", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostparticles") groups=["Game"]]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_im47w"]
+albedo_color = Color(1, 0.537255, 0, 1)
+metallic_specular = 0.25
+emission_enabled = true
+emission = Color(1, 0.537255, 0, 1)
+emission_energy_multiplier = 2.5
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_81irj"]
+material = SubResource("StandardMaterial3D_im47w")
+size = Vector3(0.2, 0.3, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hbr3"]
+albedo_color = Color(0.627451, 0, 0.921569, 1)
+metallic_specular = 0.25
+emission_enabled = true
+emission = Color(0.627451, 0, 0.921569, 1)
+emission_energy_multiplier = 2.5
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwdxt"]
+material = SubResource("StandardMaterial3D_5hbr3")
+size = Vector3(0.2, 0.3, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_002c0"]
+albedo_color = Color(0, 0.607843, 0.752941, 1)
+metallic_specular = 0.25
+emission_enabled = true
+emission = Color(0, 0.607843, 0.752941, 1)
+emission_energy_multiplier = 2.5
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_uciej"]
+material = SubResource("StandardMaterial3D_002c0")
+size = Vector3(0.2, 0.3, 0.2)
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 player = NodePath("Player")
@@ -196,11 +236,20 @@ stunVFX = ExtResource("2_y0y7d")
 speedBoost = NodePath("SpeedBoost")
 stun = NodePath("Stun")
 guardian = NodePath("Guardian")
+vanish = NodePath("Vanish")
 speedBoostTimer = NodePath("SpeedBoostTimer")
 stunTimer = NodePath("StunTimer")
 guardianTimer = NodePath("GuardianTimer")
 vanishTimer = NodePath("VanishTimer")
+speedBoostTele = NodePath("SpeedBoostTeleport")
+stunTele = NodePath("StunTeleport")
+guardianTele = NodePath("GuardianTeleport")
+vanishTele = NodePath("VanishTeleport")
 speedBoostparticles = NodePath("SB_Particles")
+stunParticles = NodePath("S_Particles")
+guardianParticles = NodePath("G_Particles")
+vanishParticles = NodePath("V_Particles")
+powerRunePoints = [NodePath("PowerRuneLocations/Location1"), NodePath("PowerRuneLocations/Location2"), NodePath("PowerRuneLocations/Location3"), NodePath("PowerRuneLocations/Location4"), NodePath("PowerRuneLocations/Location5"), NodePath("PowerRuneLocations/Location6"), NodePath("PowerRuneLocations/Location7"), NodePath("PowerRuneLocations/Location8"), NodePath("PowerRuneLocations/Location9"), NodePath("PowerRuneLocations/Location10")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ofrnj")
@@ -284,32 +333,136 @@ wait_time = 75.0
 one_shot = true
 
 [node name="VanishTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 26.0
 one_shot = true
 
 [node name="SpeedBoost" parent="." node_paths=PackedStringArray("gameRoot") instance=ExtResource("10_20rc3")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.388, 1.5, -10.436)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.388, -1.5, -10.436)
 gameRoot = NodePath("..")
 
 [node name="Stun" parent="." instance=ExtResource("11_74tme")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -8.244, 1.5, -16.382)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -8.244, -1.5, -16.382)
 
 [node name="Guardian" parent="." instance=ExtResource("11_jjnv4")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.895, 1.5, -16.345)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.895, -1.5, -16.345)
 
-[node name="SB_Particles" type="GPUParticles3D" parent="."]
+[node name="Vanish" parent="." instance=ExtResource("14_hs2st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, -13.5)
+monitorable = false
+
+[node name="SB_Particles" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
 one_shot = true
-visibility_aabb = AABB(-0.977625, -0.969614, -1.42512, 1.95525, 1.93923, 2.85025)
-process_material = SubResource("ParticleProcessMaterial_fxvv2")
-draw_pass_1 = SubResource("BoxMesh_7xp4m")
+fixed_fps = 30
+mesh = SubResource("BoxMesh_7xp4m")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
 
-[node name="Vanish" parent="." instance=ExtResource("14_hs2st")]
+[node name="S_Particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
+emitting = false
+one_shot = true
+fixed_fps = 30
+mesh = SubResource("BoxMesh_81irj")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+
+[node name="G_Particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
+emitting = false
+one_shot = true
+fixed_fps = 30
+mesh = SubResource("BoxMesh_nwdxt")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+
+[node name="V_Particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
+emitting = false
+one_shot = true
+fixed_fps = 30
+mesh = SubResource("BoxMesh_uciej")
+direction = Vector3(0, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 8.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+
+[node name="PowerRuneLocations" type="Node3D" parent="."]
+
+[node name="Location1" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 0)
+
+[node name="Location2" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6051, 1.5, 13.4997)
+
+[node name="Location3" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.30832, 1.5, 11.058)
+
+[node name="Location4" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8004, 1.5, 0.479221)
+
+[node name="Location5" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1.5, 2)
+
+[node name="Location6" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5474, 1.5, 11.6749)
+
+[node name="Location7" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.158, 1.5, -1.625)
+
+[node name="Location8" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9483, 1.5, -9.87606)
+
+[node name="Location9" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, -13.5)
-monitorable = false
+
+[node name="Location10" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.23, 1.5, 3.26)
+
+[node name="SpeedBoostTeleport" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="StunTeleport" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="GuardianTeleport" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="VanishTeleport" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
 
 [connection signal="timeout" from="SpeedBoostTimer" to="." method="OnSpeedBoostExpired"]
 [connection signal="timeout" from="StunTimer" to="." method="OnStunExpired"]
 [connection signal="timeout" from="GuardianTimer" to="." method="OnGuardianExpired"]
 [connection signal="timeout" from="VanishTimer" to="." method="OnVanishExpired"]
+[connection signal="timeout" from="SpeedBoostTeleport" to="." method="RepositionSB"]
+[connection signal="timeout" from="StunTeleport" to="." method="RepositionS"]
+[connection signal="timeout" from="GuardianTeleport" to="." method="RepositionG"]
+[connection signal="timeout" from="VanishTeleport" to="." method="RepositionV"]

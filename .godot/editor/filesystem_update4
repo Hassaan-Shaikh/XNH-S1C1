@@ -1,15 +1,16 @@
-res://Scenes/Vanish.tscn
+res://Resources/Animations/Smiling Sammy/Default-fail.res
+res://Resources/Animations/Smiling Sammy/Idle.res
+res://Resources/Animations/Smiling Sammy/Jumpscare1.res
+res://Resources/Animations/Smiling Sammy/Jumpscare2.res
+res://Resources/Animations/Smiling Sammy/Run.res
+res://Resources/Animations/Smiling Sammy/WTFail.res
+res://Resources/Animations/Smiling Sammy/Walk.res
 res://Resources/Shaders/SpeedBoost.gdshader
 res://Resources/Shaders/SpeedBoost.tres
 res://Resources/Shaders/StunExplosion.tres
-res://Scenes/player.tscn
-res://Scenes/Game.tscn
-res://Scenes/cellar.tscn
-res://Scenes/document.tscn
-res://Scenes/guardian.tscn
-res://Scenes/SpeedBoost.tscn
-res://Scenes/Stun.tscn
-res://Scenes/StunExplosion.tscn
+res://Resources/Animations/Smiling Sammy/Default.res
+res://Resources/Meshes/Sammy/SmilingSammyMesh.res
+res://Scenes/SmilingSammy.tscn
 res://Scripts/CSharp/CamControl.cs
 res://Scripts/CSharp/DebugPanel.cs
 res://Scripts/CSharp/Document.cs
@@ -19,6 +20,7 @@ res://Scripts/CSharp/Guardian.cs
 res://Scripts/CSharp/Player.cs
 res://Scripts/CSharp/PlayerRay.cs
 res://Scripts/CSharp/PowerRune.cs
+res://Scripts/CSharp/SmilingSammy.cs
 res://Scripts/CSharp/SpeedBoost.cs
 res://Scripts/CSharp/Stun.cs
 res://Scripts/CSharp/StunExplosion.cs

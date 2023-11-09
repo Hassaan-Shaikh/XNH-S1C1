@@ -12,5 +12,9 @@ public partial class DocumentCounter : Label
 	public override void _Process(double delta)
 	{
 		Text = "Documents Colledted: " + Xalkomak.documentsCollected.ToString();
+		if(Xalkomak.documentsCollected == 7)
+		{
+			Text = "Leave";
+		}
 	}
 }

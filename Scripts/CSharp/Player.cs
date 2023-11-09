@@ -19,7 +19,6 @@ public partial class Player : CharacterBody3D
 
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
-    [Export] public Camera3D playerCam;
     [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;

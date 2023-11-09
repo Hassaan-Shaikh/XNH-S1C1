@@ -17,21 +17,19 @@ public partial class Vanish : Area3D
             case Xalkomak.Difficulty.Normal:
                 if (body.IsInGroup("Player"))
                 {
-                    body.Call("SetVanish", true);
-                    Xalkomak.isVanishCollected = true;
-                    gameRoot.StartVanishTimer();
-                    QueueFree();
+                    PlayerPicksVanish(body);
+                }
+                else if(body.IsInGroup("Monster"))
+                {
+                    return; // Sammy does not use the power rune on Normal mode
                 }
                 break;
             case Xalkomak.Difficulty.Hard:
                 if (body.IsInGroup("Player"))
                 {
-                    body.Call("SetVanish", true);
-                    Xalkomak.isVanishCollected = true;
-                    gameRoot.StartVanishTimer();
-                    QueueFree();
+                    PlayerPicksVanish(body);
                 }
-                else if (body.IsInGroup("Sammy"))
+                else if (body.IsInGroup("Monster"))
                 {
                     body.Call("SetVanish", true);
                     Xalkomak.isVanishCollectedBySammy = true;
@@ -42,5 +40,13 @@ public partial class Vanish : Area3D
             default:
                 break;
         }
+    }
+
+    void PlayerPicksVanish(Node3D body)
+    {
+        body.Call("SetVanish", true);
+        Xalkomak.isVanishCollected = true;
+        gameRoot.StartVanishTimer();
+        QueueFree();
     }
 }

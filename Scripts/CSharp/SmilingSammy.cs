@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class SmilingSammy : CharacterBody3D
 {
@@ -7,6 +8,7 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public NavigationAgent3D sammyNav;
     [Export] public BoneAttachment3D head;
     [Export] public Timer sammyTimer;
+    [Export] public AnimationTree sammyAnimTree;
     [Export] public Player player;
     [ExportCategory("Waypoints")]
     [Export] public Marker3D[] waypoints;
@@ -35,76 +37,55 @@ public partial class SmilingSammy : CharacterBody3D
         head = GetNode<BoneAttachment3D>("Smiling Sammy2/Skeleton3D/Head");
         sammyTimer = GetNode<Timer>("SammyTimer");
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
+        sammyTimer.Start();
         if(waypoints == null)
         {
             waypoints = new Marker3D[GetTree().GetNodesInGroup("Waypoints").Count];
-            for(int i = 0; i < waypoints.Length; i++)
+            for (int i = 0; i < waypoints.Length; i++) 
             {
                 waypoints[i] = GetTree().GetNodesInGroup("Waypoints")[i] as Marker3D;
             }
         }
+        currentState = SammyStates.Idle;
+        moveSpeed = walkSpeed;
+        //sammyNav.TargetPosition = waypoints[0].GlobalPosition;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
-        base._Process(delta);
-        if(CheckStunned())
-        {
-            currentState = SammyStates.Stunned;
-        }
-        else
-        {
-            currentState = SammyStates.Idle;
-        }
-    }
-
-    private bool CheckStunned()
-    {
-        return Xalkomak.isStunCollected;
-    }
-
-    private void NavigateAround(SammyStates state)
-    {
-        int waypointIndex = GD.RandRange(0, waypoints.Length - 1);
-        switch(state)
-        {
-            case SammyStates.Idle:
-                sammyNav.TargetPosition = waypoints[waypointIndex].GlobalPosition;
-                break;
-            case SammyStates.Patrolling:
-                if(Xalkomak.difficulty == Xalkomak.Difficulty.Hard)
-                {
-                    moveSpeed = walkSpeedHard;
-                }
-                else
-                {
-                    moveSpeed = walkSpeed;
-                }
-                sammyNav.TargetPosition = waypoints[waypointIndex].GlobalPosition;
-                break;
-            case SammyStates.Chasing:
-                if (Xalkomak.difficulty == Xalkomak.Difficulty.Hard)
-                {
-                    moveSpeed = runSpeedHard;
-                }
-                else
-                {
-                    moveSpeed = runSpeed;
-                }
-                sammyNav.TargetPosition = player.GlobalPosition;
-                break;
-            case SammyStates.Hunting: 
-                break;
-            case SammyStates.Stunned:
-                return;
-        }
+        base._PhysicsProcess(delta);
         if(sammyNav.IsNavigationFinished())
         {
             currentState = SammyStates.Idle;
             return;
         }
-        Vector3 nextPos = sammyNav.GetNextPathPosition();
-        Velocity = (nextPos - GlobalPosition).Normalized() * moveSpeed;
-        LookAt(nextPos);
+
+        switch(currentState)
+        {
+            case SammyStates.Patrolling:
+                moveSpeed = (Xalkomak.difficulty == Xalkomak.Difficulty.Normal) ? walkSpeed : walkSpeedHard;
+                Vector3 nextPos = sammyNav.GetNextPathPosition();
+                Vector3 direction = GlobalTransform.Origin.DirectionTo(nextPos);
+                TurnToDirection(nextPos);
+                Velocity = direction * moveSpeed;
+                break;
+        }
+        
+        MoveAndSlide();
+    }
+
+    private void TurnToDirection(Vector3 direction)
+    {
+        //GlobalRotation.Lerp(new Vector3(direction.X, Position.Y, direction.Z), 3);
+        LookAt(new Vector3(direction.X, GlobalPosition.Y, direction.Z), Vector3.Up);
+    }
+
+    void Repath()
+    {
+        sammyTimer.WaitTime = GD.RandRange(4f, 10f);
+        sammyTimer.Start();
+        currentState = SammyStates.Patrolling;
+        int waypointIndex = GD.RandRange(0, waypoints.Length - 1);
+        sammyNav.TargetPosition = waypoints[waypointIndex].GlobalPosition;
     }
 }

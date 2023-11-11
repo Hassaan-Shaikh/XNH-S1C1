@@ -179,7 +179,7 @@ public partial class GameControl : Node3D
 		if(!vanishUsed)
 		{
             int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex] || powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition) < 5f)
+            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
             {
                 FreeSpots();
                 vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);

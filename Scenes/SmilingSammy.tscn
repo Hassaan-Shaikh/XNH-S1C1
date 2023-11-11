@@ -1,80 +1,317 @@
-[gd_scene load_steps=4 format=3 uid="uid://dftdwyx4b8j6x"]
+[gd_scene load_steps=40 format=3 uid="uid://dftdwyx4b8j6x"]
 
 [ext_resource type="PackedScene" uid="uid://buhkop20hskr1" path="res://Models/Smiling Sammy.glb" id="1_vao3v"]
 [ext_resource type="Script" path="res://Scripts/CSharp/SmilingSammy.cs" id="2_kl1vx"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wxqsf"]
-resource_local_to_scene = true
-radius = 0.2
-height = 2.2
+[sub_resource type="Animation" id="Animation_k6jkp"]
+resource_name = "SwingRay"
+length = 0.5
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.0472, 0), Vector3(0, -1.0472, 0), Vector3(0, 1.0472, 0)]
+}
 
-[node name="SmilingSammy" node_paths=PackedStringArray("sammyNav", "head", "sammyTimer", "waypoints") groups=["Monster"] instance=ExtResource("1_vao3v")]
+[sub_resource type="Animation" id="Animation_uyurx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.96046e-08, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kbh4k"]
+_data = {
+"RESET": SubResource("Animation_uyurx"),
+"SwingRay": SubResource("Animation_k6jkp")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xj1yg"]
+size = Vector3(0.3, 2, 0.3)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_khrga"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3giw"]
+animation = &"Jumpscare1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_co1al"]
+animation = &"Jumpscare2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b2igo"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_etes2"]
+animation = &"Default-fail"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cuxt1"]
+animation = &"Stun"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oyfea"]
+animation = &"StunEnd"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0vfgt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bddou"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a5b2m"]
+advance_mode = 2
+advance_condition = &"stunEnded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_53jma"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p41yc"]
+states/Default-fail/node = SubResource("AnimationNodeAnimation_etes2")
+states/Default-fail/position = Vector2(361, 100)
+states/Stun/node = SubResource("AnimationNodeAnimation_cuxt1")
+states/Stun/position = Vector2(526, 100)
+states/StunEnd/node = SubResource("AnimationNodeAnimation_oyfea")
+states/StunEnd/position = Vector2(702, 100)
+transitions = ["Start", "Default-fail", SubResource("AnimationNodeStateMachineTransition_0vfgt"), "Default-fail", "Stun", SubResource("AnimationNodeStateMachineTransition_bddou"), "Stun", "StunEnd", SubResource("AnimationNodeStateMachineTransition_a5b2m"), "StunEnd", "End", SubResource("AnimationNodeStateMachineTransition_53jma")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8aqb2"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a0m1v"]
+xfade_time = 0.2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s77oy"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"notIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0sp88"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"playerSpotted"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kg15p"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"playerSpotted"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ddp86"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cqo5m"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xbvtb"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"notIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boxv6"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"gotStunned"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7cviy"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"gotStunned"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xs4da"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"gotStunned"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g5xm6"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ltwx2"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"playerCaught1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ovmpo"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"playerCaught2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lylx8"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"playerCaught1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dch4q"]
+advance_mode = 2
+advance_condition = &"playerCaught2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_stgtg"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"playerCaught1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xaebk"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"playerCaught2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yd0gs"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_trua1"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8hr1p"]
+states/Idle/node = SubResource("AnimationNodeAnimation_khrga")
+states/Idle/position = Vector2(357, 100)
+states/Jumpscare1/node = SubResource("AnimationNodeAnimation_d3giw")
+states/Jumpscare1/position = Vector2(679, 36)
+states/Jumpscare2/node = SubResource("AnimationNodeAnimation_co1al")
+states/Jumpscare2/position = Vector2(684, 166)
+states/Run/node = SubResource("AnimationNodeAnimation_b2igo")
+states/Run/position = Vector2(492, 166)
+"states/Stun State/node" = SubResource("AnimationNodeStateMachine_p41yc")
+"states/Stun State/position" = Vector2(684, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_8aqb2")
+states/Walk/position = Vector2(492, 36)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a0m1v"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_s77oy"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_0sp88"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_kg15p"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_ddp86"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_cqo5m"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_xbvtb"), "Walk", "Stun State", SubResource("AnimationNodeStateMachineTransition_boxv6"), "Run", "Stun State", SubResource("AnimationNodeStateMachineTransition_7cviy"), "Idle", "Stun State", SubResource("AnimationNodeStateMachineTransition_xs4da"), "Stun State", "Idle", SubResource("AnimationNodeStateMachineTransition_g5xm6"), "Walk", "Jumpscare1", SubResource("AnimationNodeStateMachineTransition_ltwx2"), "Walk", "Jumpscare2", SubResource("AnimationNodeStateMachineTransition_ovmpo"), "Run", "Jumpscare1", SubResource("AnimationNodeStateMachineTransition_lylx8"), "Run", "Jumpscare2", SubResource("AnimationNodeStateMachineTransition_dch4q"), "Idle", "Jumpscare1", SubResource("AnimationNodeStateMachineTransition_stgtg"), "Idle", "Jumpscare2", SubResource("AnimationNodeStateMachineTransition_xaebk"), "Jumpscare1", "Idle", SubResource("AnimationNodeStateMachineTransition_yd0gs"), "Jumpscare2", "Idle", SubResource("AnimationNodeStateMachineTransition_trua1")]
+graph_offset = Vector2(98, -37)
+
+[node name="SmilingSammy" node_paths=PackedStringArray("sammyNav", "head", "sammyTimer", "sammyAnimTree", "waypoints") groups=["Monster"] instance=ExtResource("1_vao3v")]
+editor_description = "Smiling Sammy, the main antagonist of the game."
+collision_layer = 16
+collision_mask = 206
 script = ExtResource("2_kl1vx")
 sammyNav = NodePath("SammyNav")
 head = NodePath("Smiling Sammy2/Skeleton3D/Head")
 sammyTimer = NodePath("SammyTimer")
+sammyAnimTree = NodePath("SammyTree")
 waypoints = []
+currentState = 1
+moveSpeed = 3.2
+
+[node name="Smiling Sammy2" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Smiling Sammy2" index="0"]
-bones/0/position = Vector3(0, 0.87201, -0.0552)
-bones/0/rotation = Quaternion(0.0824271, 1.21862e-18, 9.60848e-18, 0.996597)
-bones/1/rotation = Quaternion(-0.0586219, 3.99253e-25, 1.23648e-24, 0.99828)
-bones/2/rotation = Quaternion(-0.0117073, 1.68599e-18, -1.17642e-19, 0.999932)
-bones/3/rotation = Quaternion(0.177337, 1.75951e-18, 4.03309e-19, 0.98415)
-bones/4/rotation = Quaternion(0.0232073, 1.19374e-07, -9.26689e-09, 0.999731)
-bones/5/rotation = Quaternion(-0.0894279, -1.65188e-11, -2.30511e-08, 0.995993)
-bones/6/rotation = Quaternion(-0.0695993, -0.407878, 0.0850518, 0.906398)
-bones/10/rotation = Quaternion(-0.601455, -0.0445786, -0.283211, 0.745692)
-bones/11/rotation = Quaternion(-0.0994008, -0.0116656, -0.211227, 0.9723)
-bones/12/rotation = Quaternion(-1.43597e-08, 0.231441, -1.34299e-08, 0.972849)
-bones/13/rotation = Quaternion(-0.215967, -2.46332e-08, 4.86519e-08, 0.976401)
-bones/14/rotation = Quaternion(-0.0871556, -8.53161e-05, 0.000975237, 0.996194)
-bones/15/rotation = Quaternion(-0.130526, 0.000229024, -0.0017395, 0.991443)
-bones/16/position = Vector3(-0.018, 0.11, -1.07541e-05)
-bones/16/rotation = Quaternion(-0.0871556, -8.53049e-05, 0.000975232, 0.996194)
+bones/0/position = Vector3(3.35577e-09, 0.881027, -0.0552)
+bones/0/rotation = Quaternion(0.0824272, 5.14041e-08, 8.81262e-09, 0.996597)
+bones/1/rotation = Quaternion(-0.05913, -2.97656e-08, -4.64449e-09, 0.99825)
+bones/2/rotation = Quaternion(-0.00968027, 4.69025e-08, -1.03576e-08, 0.999953)
+bones/3/rotation = Quaternion(0.179369, 1.24379e-08, 1.99437e-09, 0.983782)
+bones/4/rotation = Quaternion(0.0184263, 4.34349e-08, -7.10127e-09, 0.99983)
+bones/5/rotation = Quaternion(-0.0900078, -6.00811e-09, -2.35929e-08, 0.995941)
+bones/6/rotation = Quaternion(-0.0607827, 0.349404, -0.0538085, 0.933449)
+bones/7/rotation = Quaternion(0.798436, 1.98634e-07, 4.56759e-07, 0.60208)
+bones/10/rotation = Quaternion(-0.604463, -0.0436612, -0.283161, 0.743329)
+bones/11/rotation = Quaternion(-0.099169, -0.0123778, -0.215689, 0.971334)
+bones/12/rotation = Quaternion(-5.81809e-09, 0.231441, -9.85722e-09, 0.972849)
+bones/13/rotation = Quaternion(-0.22165, -2.41573e-08, 3.79488e-08, 0.975126)
+bones/14/rotation = Quaternion(-0.0871554, -8.53085e-05, 0.000975239, 0.996194)
+bones/15/rotation = Quaternion(-0.130526, 0.000228997, -0.0017395, 0.991443)
+bones/16/position = Vector3(-0.0180001, 0.11, -1.0674e-05)
+bones/16/rotation = Quaternion(-0.0871555, -8.52934e-05, 0.00097522, 0.996194)
 bones/17/rotation = Quaternion(-0.130526, 0.000229009, -0.00173949, 0.991443)
-bones/18/rotation = Quaternion(-0.0871556, -8.53049e-05, 0.000975232, 0.996194)
-bones/19/rotation = Quaternion(-0.130526, 0.000229009, -0.00173949, 0.991443)
-bones/20/rotation = Quaternion(-0.0871556, -8.53161e-05, 0.000975237, 0.996194)
-bones/21/rotation = Quaternion(-0.130526, 0.000229024, -0.0017395, 0.991443)
-bones/22/rotation = Quaternion(-0.0327953, 0.0808167, -0.372131, 0.924073)
-bones/23/rotation = Quaternion(-0.34202, 0.000600357, -0.00164932, 0.939691)
-bones/25/rotation = Quaternion(-0.597632, 0.149966, 0.357593, 0.701765)
-bones/26/rotation = Quaternion(-0.131361, -0.0791699, 0.701243, 0.696229)
-bones/27/rotation = Quaternion(5.24952e-08, -0.509547, -7.03545e-08, 0.860443)
-bones/28/rotation = Quaternion(-0.203229, 3.9745e-08, -4.9062e-08, 0.979131)
-bones/29/rotation = Quaternion(-0.181926, 0.000178077, -0.00096264, 0.983312)
-bones/30/rotation = Quaternion(-0.445367, -0.000781397, 0.00157091, 0.895347)
-bones/31/position = Vector3(0.018, 0.11, -1.08659e-05)
-bones/31/rotation = Quaternion(-0.181926, 0.000178087, -0.000962617, 0.983312)
-bones/32/rotation = Quaternion(-0.445366, -0.000781399, 0.00157092, 0.895347)
-bones/33/rotation = Quaternion(-0.181926, 0.000178089, -0.000962624, 0.983312)
-bones/34/rotation = Quaternion(-0.445366, -0.000781399, 0.00157091, 0.895347)
-bones/35/rotation = Quaternion(-0.181926, 0.000178077, -0.00096264, 0.983312)
-bones/36/rotation = Quaternion(-0.445367, -0.000781397, 0.00157091, 0.895347)
-bones/37/rotation = Quaternion(-0.113558, -0.0321756, 0.205992, 0.97141)
-bones/38/rotation = Quaternion(-0.522338, -0.000916875, 0.00149668, 0.852737)
-bones/41/rotation = Quaternion(0.937912, 0.0268825, -0.147848, 0.312633)
-bones/42/rotation = Quaternion(0.525225, -5.72925e-09, 2.84196e-09, 0.850964)
-bones/43/rotation = Quaternion(-0.644276, -0.000155438, 0.0246595, 0.764395)
-bones/44/rotation = Quaternion(-0.00673099, 0.918549, -0.395115, 0.0103428)
-bones/45/rotation = Quaternion(0.937912, -0.0268825, 0.147848, 0.312633)
-bones/46/rotation = Quaternion(0.525225, 6.23868e-09, -4.01057e-09, 0.850964)
-bones/47/rotation = Quaternion(-0.644276, 0.000155433, -0.0246595, 0.764395)
-bones/48/rotation = Quaternion(-0.00673097, -0.918549, 0.395115, 0.0103427)
+bones/18/rotation = Quaternion(-0.0871555, -8.52934e-05, 0.00097522, 0.996194)
+bones/19/rotation = Quaternion(-0.130526, 0.000229019, -0.00173947, 0.991443)
+bones/20/rotation = Quaternion(-0.0871554, -8.53083e-05, 0.000975233, 0.996194)
+bones/21/rotation = Quaternion(-0.130526, 0.000229008, -0.00173949, 0.991443)
+bones/22/rotation = Quaternion(-0.0327953, 0.0808166, -0.372131, 0.924073)
+bones/23/rotation = Quaternion(-0.34202, 0.000600385, -0.0016494, 0.939691)
+bones/25/rotation = Quaternion(-0.598029, 0.144457, 0.353805, 0.704497)
+bones/26/rotation = Quaternion(-0.119605, -0.0673362, 0.702478, 0.698345)
+bones/27/rotation = Quaternion(8.77867e-08, -0.509547, -8.97467e-08, 0.860443)
+bones/28/rotation = Quaternion(-0.210133, 3.22333e-08, -4.01288e-08, 0.977673)
+bones/29/rotation = Quaternion(-0.173012, 0.00016936, -0.000964197, 0.984919)
+bones/30/rotation = Quaternion(-0.417366, -0.000732257, 0.00159439, 0.908737)
+bones/31/position = Vector3(0.0180001, 0.11, -1.08532e-05)
+bones/31/rotation = Quaternion(-0.173013, 0.000169367, -0.000964207, 0.984919)
+bones/32/rotation = Quaternion(-0.417366, -0.000732274, 0.0015944, 0.908737)
+bones/33/rotation = Quaternion(-0.173013, 0.000169367, -0.000964207, 0.984919)
+bones/34/rotation = Quaternion(-0.417366, -0.000732271, 0.0015944, 0.908737)
+bones/35/rotation = Quaternion(-0.173012, 0.000169359, -0.000964197, 0.984919)
+bones/36/rotation = Quaternion(-0.417366, -0.000732257, 0.00159439, 0.908737)
+bones/37/rotation = Quaternion(-0.11379, -0.0313431, 0.2131, 0.969875)
+bones/38/rotation = Quaternion(-0.506101, -0.000888418, 0.00151383, 0.862472)
+bones/41/rotation = Quaternion(0.940333, 0.0256815, -0.148006, 0.305301)
+bones/42/rotation = Quaternion(0.509922, 4.79628e-08, -2.47782e-08, 0.860221)
+bones/43/rotation = Quaternion(-0.638549, -0.000140767, 0.0223294, 0.769258)
+bones/44/rotation = Quaternion(-0.00609374, 0.920039, -0.391668, 0.00936377)
+bones/45/rotation = Quaternion(0.940333, -0.0256816, 0.148006, 0.305301)
+bones/46/rotation = Quaternion(0.509922, 6.32829e-08, -3.1992e-08, 0.860221)
+bones/47/rotation = Quaternion(-0.638549, 0.000140782, -0.0223295, 0.769258)
+bones/48/rotation = Quaternion(0.00609375, 0.920039, -0.391668, -0.00936339)
 
 [node name="Head" type="BoneAttachment3D" parent="Smiling Sammy2/Skeleton3D" index="1"]
-transform = Transform3D(0.652804, -0.0974056, -0.751239, 0.0257626, 0.993979, -0.106492, 0.757089, 0.0501648, 0.651383, 3.6077e-09, 1.64351, 0.103136)
+transform = Transform3D(0.750043, 0.0579796, 0.658843, 0.0177311, 0.994029, -0.107662, -0.661151, 0.0924333, 0.744536, 2.56242e-08, 1.65213, 0.104422)
 bone_name = "spine.006"
 bone_idx = 6
 
+[node name="SammyRay" type="RayCast3D" parent="Smiling Sammy2/Skeleton3D/Head" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, -6.47536e-08, 0.194275, 0.1663)
+target_position = Vector3(0, 0, 5)
+collision_mask = 206
+
+[node name="SammyRayAnim" type="AnimationPlayer" parent="Smiling Sammy2/Skeleton3D/Head/SammyRay" index="0"]
+autoplay = "SwingRay"
+libraries = {
+"": SubResource("AnimationLibrary_kbh4k")
+}
+
 [node name="SammyCol" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_wxqsf")
+shape = SubResource("BoxShape3D_xj1yg")
 
 [node name="SammyNav" type="NavigationAgent3D" parent="." index="3"]
 path_desired_distance = 0.2
+target_desired_distance = 0.5
 path_height_offset = 0.6
 avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="SammyTimer" type="Timer" parent="." index="4"]
+process_callback = 0
+wait_time = 5.0
+one_shot = true
+
+[node name="SammyTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeStateMachine_8hr1p")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/gotStunned = false
+parameters/conditions/idle = false
+parameters/conditions/notIdle = false
+parameters/conditions/playerCaught1 = false
+parameters/conditions/playerCaught2 = false
+parameters/conditions/playerSpotted = false
+"parameters/Stun State/conditions/stunEnded" = false
+
+[connection signal="timeout" from="SammyTimer" to="." method="Repath" flags=18]

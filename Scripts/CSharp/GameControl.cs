@@ -7,6 +7,7 @@ public partial class GameControl : Node3D
 	[ExportCategory("References")]
 	[ExportGroup("Prefabs")]
 	[Export] public Player player;
+	[Export] public SmilingSammy sammy;
 	[Export] public PackedScene stunVFX;
 	[ExportGroup("Power Runes")]
 	[Export] public SpeedBoost speedBoost;
@@ -67,6 +68,7 @@ public partial class GameControl : Node3D
 		StunExplosion stunInstance = stunVFX.Instantiate<StunExplosion>();
 		AddChild(stunInstance);
 		stunInstance.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
+		sammy.GetStunned();
 		stunTimer.Start();
 		stunUsed = true;
         stunParticles.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
@@ -100,6 +102,7 @@ public partial class GameControl : Node3D
 	{
 		Xalkomak.isStunCollected = false;
 		Xalkomak.isStunCollectedBySammy = false;
+		sammy.RecoverFromStun();
 	}
 
     private void OnGuardianExpired()

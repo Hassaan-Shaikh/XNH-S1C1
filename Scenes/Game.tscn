@@ -237,10 +237,11 @@ particles_anim_loop = true
 material = SubResource("StandardMaterial3D_002c0")
 size = Vector3(0.2, 0.3, 0.2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "sammy", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 player = NodePath("Player")
+sammy = NodePath("SmilingSammy")
 stunVFX = ExtResource("2_y0y7d")
 speedBoost = NodePath("SpeedBoost")
 stun = NodePath("Stun")
@@ -320,9 +321,8 @@ light_data = ExtResource("8_4iftb")
 [node name="Player" parent="." instance=ExtResource("2_an7nd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.379773, 1.12203, -19.7361)
 
-[node name="SmilingSammy" parent="." node_paths=PackedStringArray("player", "waypoints") instance=ExtResource("15_gnd3f")]
+[node name="SmilingSammy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_gnd3f")]
 player = NodePath("../Player")
-waypoints = [NodePath("../SammyWaypoints/Waypoint1"), NodePath("../SammyWaypoints/Waypoint2"), NodePath("../SammyWaypoints/Waypoint3"), NodePath("../SammyWaypoints/Waypoint4"), NodePath("../SammyWaypoints/Waypoint5"), NodePath("../SammyWaypoints/Waypoint6")]
 
 [node name="Document" parent="." instance=ExtResource("7_55qww")]
 transform = Transform3D(0.2, -0.34641, 0, 0.34641, 0.2, 0, 0, 0, 0.4, 0.235606, 0.352646, -14.2678)
@@ -457,7 +457,7 @@ one_shot = true
 autostart = true
 
 [node name="StunTeleport" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
@@ -500,6 +500,7 @@ gizmo_extents = 1.0
 [connection signal="timeout" from="StunTimer" to="." method="OnStunExpired"]
 [connection signal="timeout" from="GuardianTimer" to="." method="OnGuardianExpired"]
 [connection signal="timeout" from="VanishTimer" to="." method="OnVanishExpired"]
+[connection signal="StunEnemy" from="Stun" to="SmilingSammy" method="OnGetStunned"]
 [connection signal="timeout" from="SpeedBoostTeleport" to="." method="RepositionSB"]
 [connection signal="timeout" from="StunTeleport" to="." method="RepositionS"]
 [connection signal="timeout" from="GuardianTeleport" to="." method="RepositionG"]

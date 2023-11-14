@@ -1,9 +1,10 @@
+TextureRect
+Timer
 AnimationPlayer
 RayCast3D
 AnimationTree
 Marker3D
 Node3D
-Timer
 SkeletonIK3D
 NavigationAgent3D
 BoneAttachment3D
@@ -15,7 +16,6 @@ PowerRune
 StaticBody3D
 GPUParticles3D
 Label
-TextureRect
 Area3D
 LightmapGI
 VBoxContainer

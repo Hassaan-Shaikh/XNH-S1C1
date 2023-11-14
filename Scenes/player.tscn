@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bj8jt7vqp3wyx"]
+[gd_scene load_steps=39 format=3 uid="uid://bj8jt7vqp3wyx"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
 [ext_resource type="Script" path="res://Scripts/CSharp/CamControl.cs" id="2_20fih"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://cwt5egmvcbtnx" path="res://Textures/UI Textures/Crosshair.png" id="10_a5abb"]
 [ext_resource type="Shader" path="res://Resources/Shaders/SpeedBoost.gdshader" id="11_hu3iy"]
 [ext_resource type="Shader" uid="uid://bsaodwrfxtwwj" path="res://Resources/Shaders/SpeedBoost.tres" id="11_nkfr1"]
+[ext_resource type="Texture2D" uid="uid://ddt58uh3e7j66" path="res://Textures/UI Textures/SpeedBoost.png" id="13_63ut0"]
+[ext_resource type="Texture2D" uid="uid://cbscxf5so8ejd" path="res://Textures/UI Textures/Stun.png" id="14_wtqk1"]
+[ext_resource type="Texture2D" uid="uid://cjjtw4diipr01" path="res://Textures/UI Textures/Guradian.png" id="15_7eb3f"]
+[ext_resource type="Texture2D" uid="uid://c4yo7honim6yv" path="res://Textures/UI Textures/Vanish.png" id="16_87q5o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pof2v"]
 radius = 0.25
@@ -36,6 +40,20 @@ shader_parameter/ScreenOffset = Vector2(0, 0)
 shader_parameter/Screen2 = Vector2(0, 0)
 shader_parameter/ScreenScale2 = Vector2(1, 0)
 shader_parameter/ScreenOffset2 = Vector2(-1, 0)
+
+[sub_resource type="Gradient" id="Gradient_g6vi5"]
+offsets = PackedFloat32Array(0, 0.00671141, 0.33557, 0.892617, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0453474, 0.0453474, 0.0453474, 1, 0.155003, 0.155003, 0.155003, 1, 0.806653, 0.806653, 0.806653, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_41862"]
+seed = -1
+frequency = 0.025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_csey5"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_g6vi5")
+noise = SubResource("FastNoiseLite_41862")
 
 [sub_resource type="Animation" id="Animation_mq253"]
 length = 0.001
@@ -75,6 +93,18 @@ tracks/2/keys = {
 "update": 1,
 "values": ["Speed Boost
 "]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerUI/SpeedBoostTexture:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_73ax7"]
@@ -116,6 +146,18 @@ tracks/2/keys = {
 "values": ["Speed Boost
 ", "Speed Boost
 "]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerUI/SpeedBoostTexture:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_rl6yd"]
@@ -168,6 +210,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/StunTexture:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_6uob8"]
 resource_name = "S_FadeIn"
@@ -196,6 +250,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 0.862745, 0, 0), Color(1, 0.862745, 0, 1), Color(1, 0.862745, 0, 1), Color(1, 0.862745, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerUI/StunTexture:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wb37v"]
@@ -265,6 +331,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-0.5, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerUI/GuardianTexture:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_1ri86"]
@@ -357,6 +435,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerUI/GuardianTexture:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_81phi"]
 _data = {
@@ -404,6 +494,42 @@ tracks/2/keys = {
 "values": ["Vanish
 "]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerUI/VanishTexture:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerUI/VanishT:texture:color_ramp")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Gradient_g6vi5")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerUI/VanishT:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0.196078)]
+}
 
 [sub_resource type="Animation" id="Animation_1us1q"]
 resource_name = "V_FadeIn"
@@ -444,6 +570,42 @@ tracks/2/keys = {
 "values": ["Vanish
 ", "Vanish
 "]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerUI/VanishTexture:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerUI/VanishT:texture:color_ramp")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [SubResource("Gradient_g6vi5"), SubResource("Gradient_g6vi5"), SubResource("Gradient_g6vi5")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerUI/VanishT:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.607843, 0.752941, 0), Color(0, 0.607843, 0.752941, 0.196078)]
 }
 
 [sub_resource type="Animation" id="Animation_4gycv"]
@@ -543,17 +705,21 @@ texture_over = ExtResource("4_13k3c")
 texture_progress = ExtResource("5_64fbq")
 tint_under = Color(1, 1, 1, 0.156863)
 
-[node name="DebugPanel" type="PanelContainer" parent="PlayerUI" node_paths=PackedStringArray("FPS", "playerSpeed", "isPlayerExhausted")]
+[node name="DebugPanel" type="PanelContainer" parent="PlayerUI" node_paths=PackedStringArray("parent", "FPS", "playerSpeed", "isPlayerExhausted", "sammySpeed", "sammyState", "currentDifficulty")]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 410.0
-offset_bottom = 110.0
+offset_right = 360.0
+offset_bottom = 190.0
 scale = Vector2(1.5, 1.5)
 script = ExtResource("6_m5sv2")
+parent = NodePath("../..")
 FPS = NodePath("Panel/VBoxContainer/FPS")
 playerSpeed = NodePath("Panel/VBoxContainer/PlayerSpeed")
 isPlayerExhausted = NodePath("Panel/VBoxContainer/IsPlayerExhausted")
+sammySpeed = NodePath("Panel/VBoxContainer/SammySpeed")
+sammyState = NodePath("Panel/VBoxContainer/SammyState")
+currentDifficulty = NodePath("Panel/VBoxContainer/Difficulty")
 
 [node name="Panel" type="Panel" parent="PlayerUI/DebugPanel"]
 layout_mode = 2
@@ -566,17 +732,32 @@ offset_bottom = 100.0
 
 [node name="FPS" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
 layout_mode = 2
-text = "FPS: 60"
+text = "FPS: How many Frames per Second?"
+vertical_alignment = 1
+
+[node name="Difficulty" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Difficulty: What is it?"
 vertical_alignment = 1
 
 [node name="PlayerSpeed" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Player's Speed: 6
+text = "Player's Speed: Determine Speed
 "
 
 [node name="IsPlayerExhausted" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Exhausted: false"
+text = "Exhausted: Can/Can't sprint"
+vertical_alignment = 1
+
+[node name="SammySpeed" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Sammy's Speed: How fast is Sammy?"
+vertical_alignment = 1
+
+[node name="SammyState" type="Label" parent="PlayerUI/DebugPanel/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Sammy's Current State: his current state"
 vertical_alignment = 1
 
 [node name="Prompt" type="Label" parent="PlayerUI"]
@@ -635,6 +816,7 @@ grow_vertical = 2
 texture = ExtResource("10_a5abb")
 
 [node name="RuneGetText" type="Label" parent="PlayerUI"]
+visible = false
 modulate = Color(0, 0.607843, 0.752941, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -678,6 +860,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Vanish" type="ColorRect" parent="PlayerUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -685,6 +868,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.392157, 0.392157, 0.392157, 0)
+
+[node name="SpeedBoostTexture" type="TextureRect" parent="PlayerUI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -390.0
+offset_right = 960.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(960, 292)
+texture = ExtResource("13_63ut0")
+
+[node name="StunTexture" type="TextureRect" parent="PlayerUI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -360.0
+offset_right = 960.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(960, 258.5)
+texture = ExtResource("14_wtqk1")
+
+[node name="GuardianTexture" type="TextureRect" parent="PlayerUI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -290.0
+offset_right = 960.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(960, 196.5)
+texture = ExtResource("15_7eb3f")
+
+[node name="VanishTexture" type="TextureRect" parent="PlayerUI"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -310.0
+offset_right = 960.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(960, 209.5)
+texture = ExtResource("16_87q5o")
+
+[node name="VanishT" type="TextureRect" parent="PlayerUI"]
+modulate = Color(0, 0.607843, 0.752941, 0.196078)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_csey5")
 
 [node name="SpeedBoostAnim" type="AnimationPlayer" parent="."]
 libraries = {

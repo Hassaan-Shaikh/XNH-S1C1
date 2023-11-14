@@ -237,12 +237,13 @@ particles_anim_loop = true
 material = SubResource("StandardMaterial3D_002c0")
 size = Vector3(0.2, 0.3, 0.2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "sammy", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "sammy", "navigationRegion", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 player = NodePath("Player")
 sammy = NodePath("SmilingSammy")
 stunVFX = ExtResource("2_y0y7d")
+navigationRegion = NodePath("Cellar/SammyNavRegion")
 speedBoost = NodePath("SpeedBoost")
 stun = NodePath("Stun")
 guardian = NodePath("Guardian")
@@ -322,6 +323,7 @@ light_data = ExtResource("8_4iftb")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.379773, 1.12203, -19.7361)
 
 [node name="SmilingSammy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_gnd3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 0, 18)
 player = NodePath("../Player")
 
 [node name="Document" parent="." instance=ExtResource("7_55qww")]
@@ -496,6 +498,7 @@ gizmo_extents = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66527, 2.38419e-07, 18.4305)
 gizmo_extents = 1.0
 
+[connection signal="RandomizeNavigation" from="SmilingSammy" to="." method="RandomizeNavigation"]
 [connection signal="timeout" from="SpeedBoostTimer" to="." method="OnSpeedBoostExpired"]
 [connection signal="timeout" from="StunTimer" to="." method="OnStunExpired"]
 [connection signal="timeout" from="GuardianTimer" to="." method="OnGuardianExpired"]

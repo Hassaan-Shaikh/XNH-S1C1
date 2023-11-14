@@ -9,12 +9,12 @@ seed = 6
 frequency = 0.0075
 fractal_type = 2
 fractal_lacunarity = 2.5
-fractal_weighted_strength = 0.25
+fractal_weighted_strength = 0.5
 domain_warp_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k51fh"]
-width = 1024
-height = 1024
+width = 256
+height = 256
 seamless = true
 noise = SubResource("FastNoiseLite_orr8q")
 
@@ -22,8 +22,8 @@ noise = SubResource("FastNoiseLite_orr8q")
 render_priority = 0
 shader = ExtResource("1_e2xvp")
 shader_parameter/ExplosionColor = Color(1, 0.537255, 0, 1)
-shader_parameter/ScaleX = 1
-shader_parameter/ScaleY = 1
+shader_parameter/ScaleX = 2
+shader_parameter/ScaleY = 2
 shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_k51fh")
 
 [sub_resource type="SphereMesh" id="SphereMesh_hdnge"]

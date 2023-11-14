@@ -9,6 +9,7 @@ public partial class GameControl : Node3D
 	[Export] public Player player;
 	[Export] public SmilingSammy sammy;
 	[Export] public PackedScene stunVFX;
+	[Export] public NavigationRegion3D navigationRegion;
 	[ExportGroup("Power Runes")]
 	[Export] public SpeedBoost speedBoost;
 	[Export] public Stun stun;
@@ -203,4 +204,12 @@ public partial class GameControl : Node3D
 			Xalkomak.isThisSpotOccupied[i] = false;
 		}
 	}
+
+	private void RandomizeNavigation()
+	{
+		navigationRegion.EnterCost = GD.RandRange(0, 100);
+        navigationRegion.TravelCost = GD.RandRange(0, 100);
+		GD.Print("Travel Cost: " + navigationRegion.TravelCost);
+        GD.Print("Enter Cost: " + navigationRegion.EnterCost);
+    }
 }

@@ -7,6 +7,8 @@ public partial class SammyRay : RayCast3D
     public SmilingSammy sammy;
     [Export] public AnimationPlayer rayAnim;
 
+    Vector3 lastPos;
+
     public override void _Ready()
     {
         base._Ready();
@@ -17,23 +19,18 @@ public partial class SammyRay : RayCast3D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if(IsColliding())
+        LookAt(new Vector3(player.GlobalPosition.X, Mathf.Clamp(Rotation.Y, Mathf.DegToRad(-60), Mathf.DegToRad(60)), player.GlobalPosition.Z));
+        if (IsColliding())
         {
-            Vector3 lastKnownPos;
-            GodotObject detected = GetCollider();
+            /*GodotObject detected = GetCollider();
             if(detected is Player)
             { 
-                Player player = (Player)detected;
-                rayAnim.Play("RESET");
-                lastKnownPos = player.GlobalPosition;
-                LookAt(new Vector3(Rotation.X, Mathf.Clamp(Rotation.Y, Mathf.DegToRad(-60), Mathf.DegToRad(60)), Rotation.Z));
-                sammy.ChasePlayer(lastKnownPos);
+                sammy.ChasePlayer();
             }
             else
             {
-                lastKnownPos = GetCollisionPoint();
-                sammy.ChasePlayer(lastKnownPos);
-            }
+                sammy.LostPlayer();
+            }*/
         }
     }
 }

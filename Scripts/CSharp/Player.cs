@@ -16,7 +16,6 @@ public partial class Player : CharacterBody3D
     [Export] public bool canControl = true;
     [Export] public bool canJump = false;
     [Export] public bool allowHeadBob = true;
-
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
     [ExportSubgroup("Power Rune Animators")]
@@ -24,6 +23,14 @@ public partial class Player : CharacterBody3D
     [Export] public AnimationPlayer stunAnim;
     [Export] public AnimationPlayer guardianAnim;
     [Export] public AnimationPlayer vanishAnim;
+
+    const string forwardKey = "forward";
+    const string backKey = "back";
+    const string leftKey = "left";
+    const string rightKey = "right";
+    const string sprintKey = "sprint";
+    const string jumpKey = "jump";
+    const string pauseKey = "pause";
 
     bool isExhausted = false;
     bool hasSpeedBoost = false;
@@ -44,7 +51,7 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if(Input.IsActionJustPressed("pause"))
+        if(Input.IsActionJustPressed(pauseKey))
         {
             GetTree().Quit(); // This line of code must be removed when the game is ready for release
         }
@@ -57,11 +64,16 @@ public partial class Player : CharacterBody3D
 		}
         base._PhysicsProcess(delta);
 
+        if(!IsOnFloor())
+        {
+            p_Velocity.Y -= gravity * (float)delta;
+        }
+
         allowHeadBob = IsOnFloor();
 
         p_Velocity = Velocity;
 
-        Vector3 direction = Input.GetAxis("left", "right") * Vector3.Right + Input.GetAxis("back", "forward") * Vector3.Forward;
+        Vector3 direction = Input.GetAxis(leftKey, rightKey) * Vector3.Right + Input.GetAxis(backKey, forwardKey) * Vector3.Forward;
         direction = Transform.Basis * direction.Normalized();
 
         hasSpeedBoost = Xalkomak.isSpeedBoostCollected;
@@ -81,7 +93,7 @@ public partial class Player : CharacterBody3D
 
             if (direction != Vector3.Zero)
             {
-                if (Input.IsActionPressed("sprint") && !isExhausted)
+                if (Input.IsActionPressed(sprintKey) && !isExhausted)
                 {
                     speed = 5.64f;
                     stamina.Value -= 0.2f;
@@ -93,7 +105,7 @@ public partial class Player : CharacterBody3D
             }
             if (direction != Vector3.Zero || direction == Vector3.Zero)
             {
-                if (!Input.IsActionPressed("sprint") || isExhausted)
+                if (!Input.IsActionPressed(sprintKey) || isExhausted)
                 {
                     stamina.Value += 0.1f;
                     if (stamina.Value >= 45f)
@@ -108,7 +120,7 @@ public partial class Player : CharacterBody3D
 
         if (canJump)
         {
-            if (IsOnFloor() && Input.IsActionJustPressed("jump"))
+            if (IsOnFloor() && Input.IsActionJustPressed(jumpKey))
             {
                 p_Velocity.Y = jumpForce;
             }

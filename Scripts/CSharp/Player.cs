@@ -205,4 +205,12 @@ public partial class Player : CharacterBody3D
             vanishAnim.Play("V_FadeOut");
         }
     }
+
+    private void StartPersisting(string animName)
+    {
+        if(animName == "V_FadeIn")
+        {
+            vanishAnim.Play("V_Persist");
+        }
+    }
 }

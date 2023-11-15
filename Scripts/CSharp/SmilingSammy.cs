@@ -30,12 +30,14 @@ public partial class SmilingSammy : CharacterBody3D
 
     public static float s_Velocity;
     public static SammyStates currentState;
+    public static int waypointIndex;
+    public static int waypointCount;
 
     private Vector3 targetPos;
     private float moveSpeed;
 
     const float walkSpeed = 3.2f;
-    const float runSpeed = 4.93f;
+    const float runSpeed = 4.23f;
     const float walkSpeedHard = 4.3f;
     const float runSpeedHard = 5.72f;
 
@@ -50,7 +52,8 @@ public partial class SmilingSammy : CharacterBody3D
         sammyTimer.Start();
         waypoints = GetTree().GetNodesInGroup("Waypoints").Select(saar => saar as Marker3D).ToList();
         currentState = SammyStates.Idle;
-        int waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+        waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+        waypointCount = waypoints.Count;
         targetPos = waypoints[waypointIndex].GlobalPosition;
         sammyNav.TargetPosition = targetPos;
     }
@@ -75,7 +78,7 @@ public partial class SmilingSammy : CharacterBody3D
                 sammyAnimTree.Set("parameters/conditions/playerSpotted", false);
                 return;
             case SammyStates.Patrolling:
-                if (sammyNav.IsNavigationFinished())
+                if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {
                     sammyTimer.Stop();
                     Repath();
@@ -86,7 +89,7 @@ public partial class SmilingSammy : CharacterBody3D
                 NavigateAround((float)delta);
                 break;
             case SammyStates.Chasing:
-                if (sammyNav.IsNavigationFinished())
+                if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {
                     currentState = SammyStates.Hunting;
                     moveSpeed = 0;
@@ -126,6 +129,7 @@ public partial class SmilingSammy : CharacterBody3D
                 Velocity = direction * moveSpeed;
                 sammyAnimTree.Set("parameters/conditions/notIdle", true);
                 sammyAnimTree.Set("parameters/conditions/idle", false);
+                sammyAnimTree.Set("parameters/conditions/playerSpotted", false);
                 break;
             case SammyStates.Chasing:
                 moveSpeed = (Xalkomak.difficulty == Xalkomak.Difficulty.Normal) ? runSpeed : runSpeedHard;
@@ -134,6 +138,7 @@ public partial class SmilingSammy : CharacterBody3D
                 TurnToDirection(delta);
                 Velocity = direction * moveSpeed;
                 sammyAnimTree.Set("parameters/conditions/playerSpotted", true);
+                sammyAnimTree.Set("parameters/conditions/notIdle", false);
                 sammyAnimTree.Set("parameters/conditions/idle", false);
                 break;
             default:
@@ -152,6 +157,7 @@ public partial class SmilingSammy : CharacterBody3D
         currentState = SammyStates.Chasing;
         targetPos = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
+        sammyTimer.Stop();
     }
 
     public void LostPlayer()
@@ -159,15 +165,16 @@ public partial class SmilingSammy : CharacterBody3D
         currentState = SammyStates.Chasing;
         targetPos = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
+        SetTimer();
     }
 
     void Repath()
     {
+        sammyTimer.Stop();
         EmitSignal(SignalName.RandomizeNavigation);
-        sammyTimer.WaitTime = GD.RandRange(4f, 10f);
-        sammyTimer.Start();
+        SetTimer();
         currentState = SammyStates.Patrolling;
-        int waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+        waypointIndex = GD.RandRange(0, waypoints.Count - 1);
         targetPos = waypoints[waypointIndex].GlobalPosition;
         sammyNav.TargetPosition = targetPos;
     }
@@ -193,7 +200,7 @@ public partial class SmilingSammy : CharacterBody3D
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", true);
         moveSpeed = 0;
         currentState = SammyStates.Idle;
-        sammyTimer.Start();
+        SetTimer();
     }
 
     public static string GetSammySpeed()
@@ -204,5 +211,21 @@ public partial class SmilingSammy : CharacterBody3D
     public static string GetCurrentState()
     {
         return currentState.ToString();
+    }
+
+    public static string GetWaypointIndex()
+    {
+        return waypointIndex.ToString();
+    }
+
+    public static string GetWaypointCount()
+    {
+        return waypointCount.ToString();
+    }
+
+    private void SetTimer()
+    {
+        sammyTimer.WaitTime = GD.RandRange(4f, 10f);
+        sammyTimer.Start();
     }
 }

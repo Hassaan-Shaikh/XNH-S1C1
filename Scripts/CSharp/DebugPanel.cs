@@ -13,6 +13,7 @@ public partial class DebugPanel : PanelContainer
     [Export] public Label currentDifficulty;
     [Export] public Label sammyWaypointIndex;
     [Export] public Label waypointCount;
+    [Export] public Label angleToPlayer;
 
     public override void _Ready()
     {
@@ -38,7 +39,8 @@ public partial class DebugPanel : PanelContainer
         sammySpeed.Text = "Sammy's Speed: " + SmilingSammy.GetSammySpeed();
         sammyState.Text = "Sammy's Current State: " + SmilingSammy.GetCurrentState();
         currentDifficulty.Text = "Difficulty: " + Xalkomak.difficulty.ToString();
-        sammyWaypointIndex.Text = "Sammy's Waypoint Index: " + SmilingSammy.GetWaypointIndex();
+        sammyWaypointIndex.Text = "Lives Remaining: " + Xalkomak.livesRemaining;
         waypointCount.Text = "No. Of Waypoints: " + SmilingSammy.GetWaypointCount();
+        angleToPlayer.Text = "Sammy Ignoring Check: " + SammyRay.ignoreCheck.ToString();
     }
 }

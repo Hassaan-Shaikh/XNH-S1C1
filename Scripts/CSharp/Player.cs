@@ -58,18 +58,13 @@ public partial class Player : CharacterBody3D
 
         canControl = Xalkomak.playerCanControl;
 
-		if(!canControl) //Player cannot control, used for cinematics
+		if(!canControl || Xalkomak.isStunCollectedBySammy) //Player cannot control, used for cinematics
 		{
 			return;
 		}
         base._PhysicsProcess(delta);
 
-        if(!IsOnFloor())
-        {
-            p_Velocity.Y -= gravity * (float)delta;
-        }
-
-        allowHeadBob = IsOnFloor();
+        //allowHeadBob = IsOnFloor();
 
         p_Velocity = Velocity;
 
@@ -118,16 +113,16 @@ public partial class Player : CharacterBody3D
 
 		p_Velocity = p_Velocity.Lerp(direction * speed + p_Velocity.Y * Vector3.Up, acceleration * (float)delta);
 
-        if (canJump)
+        if (IsOnFloor() && Input.IsActionJustPressed(jumpKey))
         {
-            if (IsOnFloor() && Input.IsActionJustPressed(jumpKey))
+            if (canJump)
             {
                 p_Velocity.Y = jumpForce;
             }
-            else
-            {
-                p_Velocity.Y -= gravity * (float)delta;
-            }
+        }
+        else if(!IsOnFloor())
+        {
+            p_Velocity.Y -= gravity * (float)delta;
         }
 
         Velocity = p_Velocity;

@@ -25,7 +25,8 @@ public partial class SmilingSammy : CharacterBody3D
         Patrolling,
         Chasing,
         Hunting,
-        Stunned
+        Stunned,
+        SpeedBoosted
     };
 
     public static float s_Velocity;
@@ -35,11 +36,14 @@ public partial class SmilingSammy : CharacterBody3D
 
     private Vector3 targetPos;
     private float moveSpeed;
+    private int flag = 0;
+    private int jumpscareNum;
 
     const float walkSpeed = 3.2f;
     const float runSpeed = 4.23f;
     const float walkSpeedHard = 4.3f;
     const float runSpeedHard = 5.72f;
+    const string deathScreen = "res://Scenes/DeathScreen.tscn";
 
     public override void _Ready()
     {
@@ -56,6 +60,20 @@ public partial class SmilingSammy : CharacterBody3D
         waypointCount = waypoints.Count;
         targetPos = waypoints[waypointIndex].GlobalPosition;
         sammyNav.TargetPosition = targetPos;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        Visible = !Xalkomak.isVanishCollectedBySammy; 
+        if(Xalkomak.isSpeedBoostCollectedBySammy)
+        {
+            currentState = SammyStates.SpeedBoosted;
+        }
+        else
+        {
+            return;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -80,17 +98,14 @@ public partial class SmilingSammy : CharacterBody3D
             case SammyStates.Patrolling:
                 if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {
-                    sammyTimer.Stop();
                     Repath();
-                    /*currentState = SammyStates.Idle;
-                    moveSpeed = 0;*/
                     return;
                 }
                 NavigateAround((float)delta);
                 break;
             case SammyStates.Chasing:
                 if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
-                {
+                {                    
                     currentState = SammyStates.Hunting;
                     moveSpeed = 0;
                     return;
@@ -98,6 +113,11 @@ public partial class SmilingSammy : CharacterBody3D
                 NavigateAround((float)delta);
                 break;
             case SammyStates.Hunting:
+                if (flag == 0)
+                {
+                    SetTimer();
+                    flag++;
+                }
                 moveSpeed = 0;
                 Velocity = Vector3.Zero;
                 sammyAnimTree.Set("parameters/conditions/idle", true);
@@ -108,6 +128,14 @@ public partial class SmilingSammy : CharacterBody3D
                 moveSpeed = 0;
                 Velocity = Vector3.Zero;
                 return;
+            case SammyStates.SpeedBoosted:
+                if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
+                {
+                    sammyTimer.Stop();
+                    RepathSpeedBoost();
+                    return;
+                }
+                break;
             default:
                 break;
         }
@@ -141,6 +169,16 @@ public partial class SmilingSammy : CharacterBody3D
                 sammyAnimTree.Set("parameters/conditions/notIdle", false);
                 sammyAnimTree.Set("parameters/conditions/idle", false);
                 break;
+            case SammyStates.SpeedBoosted:
+                moveSpeed = 7.64f;
+                nextPos = sammyNav.GetNextPathPosition();
+                direction = GlobalPosition.DirectionTo(nextPos);
+                TurnToDirection(delta);
+                Velocity = direction * moveSpeed;                
+                sammyAnimTree.Set("parameters/conditions/playerSpotted", true);
+                sammyAnimTree.Set("parameters/conditions/notIdle", false);
+                sammyAnimTree.Set("parameters/conditions/idle", false);
+                break;
             default:
                 break;
         }
@@ -165,7 +203,7 @@ public partial class SmilingSammy : CharacterBody3D
         currentState = SammyStates.Chasing;
         targetPos = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
-        SetTimer();
+        //SetTimer();
     }
 
     void Repath()
@@ -179,6 +217,17 @@ public partial class SmilingSammy : CharacterBody3D
         sammyNav.TargetPosition = targetPos;
     }
 
+    void RepathSpeedBoost()
+    {
+        sammyTimer.Stop();
+        EmitSignal(SignalName.RandomizeNavigation);
+        //SetTimer();
+        currentState = SammyStates.SpeedBoosted;
+        waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+        targetPos = waypoints[waypointIndex].GlobalPosition;
+        sammyNav.TargetPosition = targetPos;
+    }
+
     private void OnNavUpdateTimerTimeout()
     {
         sammyNav.TargetPosition = targetPos;
@@ -187,6 +236,10 @@ public partial class SmilingSammy : CharacterBody3D
 
     public void GetStunned()
     {
+        if(Xalkomak.isGuardianCollectedBySammy) // When Sammy is under the influence of the Guardian rune
+        {
+            return; // Just don't react to getting hit by the Stun rune.
+        }
         currentState = SammyStates.Stunned;
         sammyAnimTree.Set("parameters/conditions/gotStunned", Xalkomak.isStunCollected);
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", false);
@@ -199,7 +252,6 @@ public partial class SmilingSammy : CharacterBody3D
         sammyAnimTree.Set("parameters/conditions/gotStunned", false);
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", true);
         moveSpeed = 0;
-        currentState = SammyStates.Idle;
         SetTimer();
     }
 
@@ -227,5 +279,36 @@ public partial class SmilingSammy : CharacterBody3D
     {
         sammyTimer.WaitTime = GD.RandRange(4f, 10f);
         sammyTimer.Start();
+    }
+
+    private void OnJumpscareAreaBodyEntered(Node3D body)
+    {
+        if(body.IsInGroup("Player"))
+        {
+            jumpscareNum = GD.RandRange(1, 2);
+            currentState = SammyStates.Idle;
+            Velocity = Vector3.Zero;
+            Xalkomak.playerCanControl = false;
+            player.GlobalPosition = new Vector3(player.GlobalPosition.X, player.GlobalPosition.Y + 0.1f, player.GlobalPosition.Z);
+            player.LookAt(new Vector3(GlobalPosition.X, player.GlobalPosition.Y, GlobalPosition.Z), Vector3.Up);
+            sammyAnimTree.Set("parameters/conditions/playerCaught" + jumpscareNum, true);
+        }
+    }
+
+    private void OnJumpscareFinished(string animName)
+    {
+        if(animName.Equals("StunEnd"))
+        {
+            currentState = SammyStates.Idle;
+        }
+
+        if(animName.Equals("Jumpscare" + jumpscareNum))
+        {
+            if(Xalkomak.livesRemaining <= 1)
+            {
+                Xalkomak.livesRemaining = 0;
+            }
+            GetTree().ChangeSceneToFile(deathScreen);
+        }
     }
 }

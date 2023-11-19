@@ -1,0 +1,272 @@
+[gd_scene load_steps=12 format=3 uid="uid://oiasbtme6de7"]
+
+[ext_resource type="Script" path="res://Scripts/CSharp/DeathScreen.cs" id="1_08gt8"]
+[ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="1_72me8"]
+[ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="3_1da1d"]
+[ext_resource type="StyleBox" uid="uid://dafyqwhc80gwf" path="res://Resources/StyleBoxes/Button.tres" id="3_dgt64"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8858x"]
+content_margin_bottom = 100.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kcjrb"]
+font = ExtResource("1_72me8")
+font_size = 120
+font_color = Color(0.588235, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0.294118, 0.294118, 0.294118, 0.294118)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tud0"]
+content_margin_top = 40.0
+content_margin_bottom = 40.0
+
+[sub_resource type="Animation" id="Animation_fgg2g"]
+resource_name = "GameOver"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/GameOver:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/RetryButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/QuitButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ReleaseMouse"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0w606"]
+resource_name = "LivesRemaining"
+length = 4.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/LivesRemaining:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"UpdateLifeCounter"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kre7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/LivesRemaining:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/GameOver:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/RetryButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/VBoxContainer/QuitButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p8bb"]
+_data = {
+"GameOver": SubResource("Animation_fgg2g"),
+"LivesRemaining": SubResource("Animation_0w606"),
+"RESET": SubResource("Animation_kre7n")
+}
+
+[node name="DeathScreen" type="Control" node_paths=PackedStringArray("levelLoader", "livesRemaining", "gameOver", "retryButton", "quitButton", "deathAnim")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_08gt8")
+levelLoader = NodePath("LevelLoader")
+livesRemaining = NodePath("MarginContainer/VBoxContainer/LivesRemaining")
+gameOver = NodePath("MarginContainer/VBoxContainer/GameOver")
+retryButton = NodePath("MarginContainer/VBoxContainer/RetryButton")
+quitButton = NodePath("MarginContainer/VBoxContainer/QuitButton")
+deathAnim = NodePath("DeathAnim")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8858x")
+text = "You Are Dead"
+label_settings = SubResource("LabelSettings_kcjrb")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LivesRemaining" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_72me8")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tud0")
+text = "Lives Remaining: 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("1_72me8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_dgt64")
+theme_override_styles/hover = ExtResource("3_dgt64")
+theme_override_styles/pressed = ExtResource("3_dgt64")
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("1_72me8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_dgt64")
+theme_override_styles/hover = ExtResource("3_dgt64")
+theme_override_styles/pressed = ExtResource("3_dgt64")
+text = "Quit"
+
+[node name="DeathAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6p8bb")
+}
+
+[node name="LevelLoader" parent="." instance=ExtResource("3_1da1d")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/RetryButton" to="." method="OnRetryButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="animation_finished" from="DeathAnim" to="." method="OnDeathAnimAnimationFinished"]

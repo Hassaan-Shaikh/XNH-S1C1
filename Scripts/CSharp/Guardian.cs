@@ -31,7 +31,7 @@ public partial class Guardian : Area3D
                 }
                 else if (body.IsInGroup("Monster"))
                 {
-                    body.Call("SetGuardian", true);
+                    //body.Call("SetGuardian", true);
                     Xalkomak.isGuardianCollectedBySammy = true;
                     gameRoot.StartGuardianTimer();
                     QueueFree();

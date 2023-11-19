@@ -3,6 +3,9 @@ using System;
 
 public partial class Stun : Area3D
 {
+    [Signal]
+    public delegate void StunEnemyEventHandler();
+
     [Export] public GameControl gameRoot;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -31,7 +34,7 @@ public partial class Stun : Area3D
                 }
                 else if (body.IsInGroup("Monster"))
                 {
-                    body.Call("SetStun", true);
+                    //body.Call("SetStun", true);
                     Xalkomak.isStunCollectedBySammy = true;
                     gameRoot.StartStunTimer();
                     QueueFree();
@@ -49,7 +52,4 @@ public partial class Stun : Area3D
         gameRoot.StartStunTimer();
         QueueFree();
     }
-
-    [Signal]
-    public delegate void StunEnemyEventHandler();
 }

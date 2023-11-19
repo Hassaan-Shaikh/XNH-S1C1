@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=40 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d38apra642wkw" path="res://Scenes/guardian.tscn" id="11_jjnv4"]
 [ext_resource type="PackedScene" uid="uid://dpwhajsy2r24w" path="res://Scenes/Vanish.tscn" id="14_hs2st"]
 [ext_resource type="PackedScene" uid="uid://dftdwyx4b8j6x" path="res://Scenes/SmilingSammy.tscn" id="15_gnd3f"]
+[ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="16_e0g6k"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tpccn"]
 resource_local_to_scene = true
@@ -260,6 +261,8 @@ guardianParticles = NodePath("G_Particles")
 vanishParticles = NodePath("V_Particles")
 powerRunePoints = [NodePath("PowerRuneLocations/Location1"), NodePath("PowerRuneLocations/Location2"), NodePath("PowerRuneLocations/Location3"), NodePath("PowerRuneLocations/Location4"), NodePath("PowerRuneLocations/Location5"), NodePath("PowerRuneLocations/Location6"), NodePath("PowerRuneLocations/Location7"), NodePath("PowerRuneLocations/Location8"), NodePath("PowerRuneLocations/Location9"), NodePath("PowerRuneLocations/Location10")]
 
+[node name="LevelLoader" parent="." instance=ExtResource("16_e0g6k")]
+
 [node name="Cellar" type="Node3D" parent="."]
 transform = Transform3D(2.3, 0, 0, 0, 0.7, 0, 0, 0, 2.3, 0, 0, 0)
 
@@ -291,6 +294,12 @@ collision_mask = 18
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cellar/SammyNavRegion/Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_upywy")
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Cellar/SammyNavRegion"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -4.2345, 0, 7.39958)
+radius = 0.5
+vertices = PackedVector3Array(-0.738592, 0, -0.684268, -0.702745, 0, 0.431936, 0.798236, 0, 0.347512, 0.927263, 0, -1.02066, -0.708184, 0, -0.812482)
+use_3d_avoidance = true
+
 [node name="Roof" type="MeshInstance3D" parent="Cellar"]
 transform = Transform3D(9.99999, 0, 0, 0, 9.99999, 0, 0, 0, 9.99999, 0, 5, 0)
 mesh = SubResource("ArrayMesh_23bgq")
@@ -307,8 +316,7 @@ shape = SubResource("ConcavePolygonShape3D_ae2xq")
 environment = SubResource("Environment_ofrnj")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, -1.43655, 0)
 shadow_enabled = true
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
@@ -318,20 +326,29 @@ occluder = ExtResource("3_g0ikf")
 light_data = ExtResource("8_4iftb")
 
 [node name="Player" parent="." instance=ExtResource("2_an7nd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.122, -20)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 1.1, -19)
 
 [node name="SmilingSammy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_gnd3f")]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -17.5, 0, 18)
 player = NodePath("../Player")
 
-[node name="Document" parent="." instance=ExtResource("7_55qww")]
+[node name="Document0" parent="." instance=ExtResource("7_55qww")]
 transform = Transform3D(0.2, -0.34641, 0, 0.34641, 0.2, 0, 0, 0, 0.4, 0.235606, 0.352646, -14.2678)
 
-[node name="Document2" parent="." instance=ExtResource("7_55qww")]
+[node name="Document1" parent="." instance=ExtResource("7_55qww")]
 transform = Transform3D(-8.74228e-09, 1.51421e-08, 0.4, 0.34641, 0.2, 0, -0.2, 0.34641, -1.74846e-08, 2.02744, 0.352646, -18.1993)
 
-[node name="Document3" parent="." instance=ExtResource("7_55qww")]
+[node name="Document2" parent="." instance=ExtResource("7_55qww")]
 transform = Transform3D(2.62268e-08, -4.54262e-08, -0.4, 0.34641, 0.2, -5.2108e-16, 0.2, -0.34641, 5.24537e-08, -3.25303, 0.352646, -15.8352)
+
+[node name="Document3" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.253, 0, -17.9442)
+
+[node name="Document4" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.44878, 0, -16.3369)
+
+[node name="Document5" parent="." instance=ExtResource("7_55qww")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -1.56931, 0, -14.0302)
 
 [node name="SpeedBoostTimer" type="Timer" parent="."]
 wait_time = 12.0

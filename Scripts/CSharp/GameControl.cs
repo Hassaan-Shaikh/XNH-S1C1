@@ -43,6 +43,7 @@ public partial class GameControl : Node3D
     public override void _Ready()
     {
         base._Ready();
+		//Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
 		player = GetTree().GetNodesInGroup("Player")[0] as Player;
 		if(powerRunePoints.Length == 0)
 		{

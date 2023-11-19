@@ -5,8 +5,10 @@ public partial class CamControl : Node3D
 {
     [Export] public float sens = 4f;
     [Export] public float bobFreq = 2f;
-    [Export] public float bobAmp = 0.8f;
+    [Export] public float bobAmp = 0.1f;
     [Export] Player parent;
+
+    public Camera3D Camera;
 
     float tBob = 0;
 
@@ -15,6 +17,7 @@ public partial class CamControl : Node3D
         base._Ready();
 
         parent = GetTree().GetNodesInGroup("Player")[0] as Player;
+        Camera = GetViewport().GetCamera3D();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -23,7 +26,7 @@ public partial class CamControl : Node3D
         if (parent.allowHeadBob)
         {
             tBob += (float)delta * parent.p_Velocity.Length();
-            GlobalPosition = HeadBob(tBob);
+            Camera.Position = HeadBob(tBob);
         }
     }
 

@@ -1,0 +1,161 @@
+[gd_scene load_steps=18 format=3 uid="uid://boim2ipsf35f4"]
+
+[ext_resource type="Script" path="res://Scripts/CSharp/GuardianShield.cs" id="1_8loo0"]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_dphre"]
+default_input_values = [0, 1.0, 1, 1.0, 2, 0.0]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_6y68t"]
+parameter_name = "ExplosionColor"
+default_value_enabled = true
+default_value = Color(1, 0.537255, 0, 1)
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_oq31y"]
+parameter_name = "ScaleX"
+default_value_enabled = true
+default_value = 1
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_7b5nr"]
+parameter_name = "ScaleY"
+default_value_enabled = true
+default_value = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_pqc6k"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4p866"]
+parameter_name = "NoiseTexture"
+color_default = 2
+texture_filter = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_udo4v"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5686e"]
+source = 5
+texture = SubResource("NoiseTexture2D_udo4v")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2o4ga"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_nq7oi"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_5mit7"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 ExplosionColor : source_color = vec4(1.000000, 0.537255, 0.000000, 1.000000);
+uniform int ScaleX = 1;
+uniform int ScaleY = 1;
+uniform sampler2D NoiseTexture : hint_default_transparent, filter_nearest;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = ExplosionColor;
+
+
+// Input:5
+	vec2 n_out5p0 = UV;
+
+
+// IntParameter:24
+	int n_out24p0 = ScaleX;
+
+
+// IntParameter:25
+	int n_out25p0 = ScaleY;
+
+
+// VectorCompose:11
+	vec2 n_out11p0 = vec2(float(n_out24p0), float(n_out25p0));
+
+
+// VectorOp:8
+	vec2 n_out8p0 = n_out5p0 * n_out11p0;
+
+
+	vec4 n_out4p0;
+// Texture2D:4
+	n_out4p0 = texture(NoiseTexture, n_out8p0);
+
+
+// VectorOp:26
+	vec4 n_out26p0 = n_out2p0 * n_out4p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out26p0.xyz);
+	ALPHA = n_out26p0.x;
+	EMISSION = vec3(n_out26p0.xyz);
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_6y68t")
+nodes/fragment/2/position = Vector2(-180, 60)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_4p866")
+nodes/fragment/3/position = Vector2(-560, 640)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_5686e")
+nodes/fragment/4/position = Vector2(-160, 460)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_2o4ga")
+nodes/fragment/5/position = Vector2(-640, 300)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_nq7oi")
+nodes/fragment/8/position = Vector2(-340, 320)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorCompose_dphre")
+nodes/fragment/11/position = Vector2(-560, 400)
+nodes/fragment/24/node = SubResource("VisualShaderNodeIntParameter_oq31y")
+nodes/fragment/24/position = Vector2(-960, 300)
+nodes/fragment/25/node = SubResource("VisualShaderNodeIntParameter_7b5nr")
+nodes/fragment/25/position = Vector2(-960, 500)
+nodes/fragment/26/node = SubResource("VisualShaderNodeVectorOp_pqc6k")
+nodes/fragment/26/position = Vector2(100, 260)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 2, 5, 0, 8, 0, 8, 0, 4, 0, 11, 0, 8, 1, 24, 0, 11, 0, 25, 0, 11, 1, 4, 0, 26, 1, 2, 0, 26, 0, 26, 0, 0, 0, 26, 0, 0, 5, 26, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_m7356"]
+offsets = PackedFloat32Array(0.173554, 0.380165)
+colors = PackedColorArray(0.627451, 0, 0.921569, 1, 0.89168, 0.775101, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q2dis"]
+noise_type = 0
+seed = 2
+frequency = 0.005
+fractal_type = 3
+fractal_octaves = 3
+fractal_lacunarity = 1.5
+fractal_gain = 1.5
+fractal_weighted_strength = 0.65
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tm65d"]
+resource_local_to_scene = true
+height = 1024
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_m7356")
+noise = SubResource("FastNoiseLite_q2dis")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3r4cp"]
+render_priority = 0
+shader = SubResource("VisualShader_5mit7")
+shader_parameter/ExplosionColor = Color(0.627451, 0, 0.921569, 1)
+shader_parameter/ScaleX = 1
+shader_parameter/ScaleY = 2
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_tm65d")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h5vw8"]
+material = SubResource("ShaderMaterial_3r4cp")
+flip_faces = true
+height = 6.0
+radial_segments = 32
+cap_top = false
+cap_bottom = false
+
+[node name="GuardianShield" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_h5vw8")
+script = ExtResource("1_8loo0")

@@ -14,6 +14,10 @@ public partial class DebugPanel : PanelContainer
     [Export] public Label sammyWaypointIndex;
     [Export] public Label waypointCount;
     [Export] public Label angleToPlayer;
+    [Export] public Label sammyHasSB;
+    [Export] public Label sammyHasS;
+    [Export] public Label sammyHasG;
+    [Export] public Label sammyHasV;
 
     public override void _Ready()
     {
@@ -42,5 +46,9 @@ public partial class DebugPanel : PanelContainer
         sammyWaypointIndex.Text = "Lives Remaining: " + Xalkomak.livesRemaining;
         waypointCount.Text = "No. Of Waypoints: " + SmilingSammy.GetWaypointCount();
         angleToPlayer.Text = "Sammy Ignoring Check: " + SammyRay.ignoreCheck.ToString();
+        sammyHasSB.Text = "Sammy has Speed Boost: " + Xalkomak.isSpeedBoostCollectedBySammy;
+        sammyHasS.Text = "Sammy has Stun: " + Xalkomak.isStunCollectedBySammy;
+        sammyHasG.Text = "Sammy has Guardian: " + Xalkomak.isGuardianCollectedBySammy;
+        sammyHasV.Text = "Sammy has Vanish: " + Xalkomak.isVanishCollectedBySammy;
     }
 }

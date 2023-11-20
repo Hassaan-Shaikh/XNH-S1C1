@@ -7,6 +7,7 @@ using System.Linq;
 public partial class SmilingSammy : CharacterBody3D
 {
     [Signal] public delegate void RandomizeNavigationEventHandler();
+    [Signal] public delegate void StoppedByGuardianEventHandler();
 
     [ExportCategory("References")]
     [Export] public NavigationAgent3D sammyNav;
@@ -15,6 +16,7 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public AnimationTree sammyAnimTree;
     [Export] public Player player;
     [Export] public Timer sammyNavTimer;
+    [Export] public Area3D jumpscareArea;
 
     private List<Marker3D> waypoints = new List<Marker3D>();
     private Vector3 lastLookingDir;
@@ -38,6 +40,7 @@ public partial class SmilingSammy : CharacterBody3D
     private float moveSpeed;
     private int flag = 0;
     private int jumpscareNum;
+    public bool isStunned = false;
 
     const float walkSpeed = 3.2f;
     const float runSpeed = 4.23f;
@@ -52,6 +55,7 @@ public partial class SmilingSammy : CharacterBody3D
         head = GetNode<BoneAttachment3D>("%Head");
         sammyTimer = GetNode<Timer>("SammyTimer");
         sammyNavTimer = GetNode<Timer>("NavUpdateTimer");
+        jumpscareArea = GetNode<Area3D>("JumpscareArea");
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
         sammyTimer.Start();
         waypoints = GetTree().GetNodesInGroup("Waypoints").Select(saar => saar as Marker3D).ToList();
@@ -241,9 +245,14 @@ public partial class SmilingSammy : CharacterBody3D
             return; // Just don't react to getting hit by the Stun rune.
         }
         currentState = SammyStates.Stunned;
-        sammyAnimTree.Set("parameters/conditions/gotStunned", Xalkomak.isStunCollected);
+        isStunned = true;
+        sammyAnimTree.Set("parameters/conditions/idle", false);
+        sammyAnimTree.Set("parameters/conditions/idle", false);
+        sammyAnimTree.Set("parameters/conditions/notIdle", false);
+        sammyAnimTree.Set("parameters/conditions/gotStunned", true);
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", false);
         moveSpeed = 0f;
+        Velocity = Vector3.Zero;
         sammyTimer.Stop();
     }
 
@@ -285,13 +294,29 @@ public partial class SmilingSammy : CharacterBody3D
     {
         if(body.IsInGroup("Player"))
         {
-            jumpscareNum = GD.RandRange(1, 2);
-            currentState = SammyStates.Idle;
-            Velocity = Vector3.Zero;
-            Xalkomak.playerCanControl = false;
-            player.GlobalPosition = new Vector3(player.GlobalPosition.X, player.GlobalPosition.Y + 0.1f, player.GlobalPosition.Z);
-            player.LookAt(new Vector3(GlobalPosition.X, player.GlobalPosition.Y, GlobalPosition.Z), Vector3.Up);
-            sammyAnimTree.Set("parameters/conditions/playerCaught" + jumpscareNum, true);
+            if (Xalkomak.isGuardianCollected)
+            {
+                EmitSignal(SignalName.StoppedByGuardian);
+                jumpscareArea.SetDeferred("monitoring", false);
+                GetStunned();
+                return;
+            }
+            else
+            {
+                sammyAnimTree.Set("parameters/conditions/idle", false);
+                sammyAnimTree.Set("parameters/conditions/idle", false);
+                sammyAnimTree.Set("parameters/conditions/notIdle", false);
+                sammyAnimTree.Set("parameters/conditions/gotStunned", false);
+                sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", false);
+                jumpscareArea.SetDeferred("monitoring", false);
+                jumpscareNum = GD.RandRange(1, 2);
+                currentState = SammyStates.Idle;
+                Velocity = Vector3.Zero;
+                Xalkomak.playerCanControl = false;
+                player.GlobalPosition = new Vector3(player.GlobalPosition.X, player.GlobalPosition.Y + 0.1f, player.GlobalPosition.Z);
+                player.LookAt(new Vector3(GlobalPosition.X, player.GlobalPosition.Y, GlobalPosition.Z), Vector3.Up);
+                sammyAnimTree.Set("parameters/conditions/playerCaught" + jumpscareNum, true);
+            }
         }
     }
 
@@ -299,6 +324,8 @@ public partial class SmilingSammy : CharacterBody3D
     {
         if(animName.Equals("StunEnd"))
         {
+            isStunned = false;
+            jumpscareArea.SetDeferred("monitoring", true);
             currentState = SammyStates.Idle;
         }
 
@@ -310,5 +337,10 @@ public partial class SmilingSammy : CharacterBody3D
             }
             GetTree().ChangeSceneToFile(deathScreen);
         }
+    }
+
+    public void GoToPowerRune(Vector3 pos)
+    {
+        sammyNav.TargetPosition = pos;
     }
 }

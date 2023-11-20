@@ -16,7 +16,7 @@ public partial class LevelLoader : Control
         crossfadeAnim = GetNode<AnimationPlayer>("CrossfadeAnim");
         loaderDelay = GetNode<Timer>("LoadDelay");
 
-        loaderDelay.WaitTime = GD.RandRange(0.3f, 0.8f);
+        loaderDelay.WaitTime = GD.RandRange(0.3f, 0.5f);
     }
     public void SwitchScene(string scenePath)
     {

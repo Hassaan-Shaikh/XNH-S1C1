@@ -1,8 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=42 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
 [ext_resource type="PackedScene" uid="uid://b47rtij401eep" path="res://Scenes/StunExplosion.tscn" id="2_y0y7d"]
+[ext_resource type="PackedScene" uid="uid://boim2ipsf35f4" path="res://Scenes/GuardianShield.tscn" id="3_b6jqb"]
 [ext_resource type="ArrayOccluder3D" uid="uid://5a5q5m1dffm7" path="res://Resources/Occluders/Game.occ" id="3_g0ikf"]
 [ext_resource type="Texture2D" uid="uid://0av2w65c777l" path="res://Models/Cellar_Wall_Albedo.png" id="3_lxemr"]
 [ext_resource type="Texture2D" uid="uid://ca2n2yb5mrotf" path="res://Models/Cellar_Wall_Normal.png" id="4_pbiax"]
@@ -16,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dpwhajsy2r24w" path="res://Scenes/Vanish.tscn" id="14_hs2st"]
 [ext_resource type="PackedScene" uid="uid://dftdwyx4b8j6x" path="res://Scenes/SmilingSammy.tscn" id="15_gnd3f"]
 [ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="16_e0g6k"]
+[ext_resource type="PackedScene" uid="uid://dadgqkrpv4dw1" path="res://Scenes/PauseMenu.tscn" id="17_s0uch"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tpccn"]
 resource_local_to_scene = true
@@ -142,9 +144,9 @@ shadow_mesh = SubResource("ArrayMesh_bb3xr")
 data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
-sky_top_color = Color(1, 1, 1, 1)
+sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
-sky_curve = 1.0
+sky_curve = 2.0
 
 [sub_resource type="Sky" id="Sky_ct36p"]
 sky_material = SubResource("ProceduralSkyMaterial_xyocr")
@@ -236,13 +238,16 @@ particles_anim_loop = true
 material = SubResource("StandardMaterial3D_002c0")
 size = Vector3(0.2, 0.3, 0.2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "sammy", "navigationRegion", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("player", "sammy", "navigationRegion", "hardModeBlack", "pauseMenu", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 player = NodePath("Player")
 sammy = NodePath("SmilingSammy")
 stunVFX = ExtResource("2_y0y7d")
+guardianVFX = ExtResource("3_b6jqb")
 navigationRegion = NodePath("Cellar/SammyNavRegion")
+hardModeBlack = NodePath("LightmapGI_Hard")
+pauseMenu = NodePath("PauseMenu")
 speedBoost = NodePath("SpeedBoost")
 stun = NodePath("Stun")
 guardian = NodePath("Guardian")
@@ -261,9 +266,8 @@ guardianParticles = NodePath("G_Particles")
 vanishParticles = NodePath("V_Particles")
 powerRunePoints = [NodePath("PowerRuneLocations/Location1"), NodePath("PowerRuneLocations/Location2"), NodePath("PowerRuneLocations/Location3"), NodePath("PowerRuneLocations/Location4"), NodePath("PowerRuneLocations/Location5"), NodePath("PowerRuneLocations/Location6"), NodePath("PowerRuneLocations/Location7"), NodePath("PowerRuneLocations/Location8"), NodePath("PowerRuneLocations/Location9"), NodePath("PowerRuneLocations/Location10")]
 
-[node name="LevelLoader" parent="." instance=ExtResource("16_e0g6k")]
-
 [node name="Cellar" type="Node3D" parent="."]
+process_mode = 1
 transform = Transform3D(2.3, 0, 0, 0, 0.7, 0, 0, 0, 2.3, 0, 0, 0)
 
 [node name="SammyNavRegion" type="NavigationRegion3D" parent="Cellar"]
@@ -313,56 +317,76 @@ collision_mask = 18
 shape = SubResource("ConcavePolygonShape3D_ae2xq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 1
 environment = SubResource("Environment_ofrnj")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, -1.43655, 0)
+visible = false
+light_color = Color(0, 0, 0, 1)
+light_energy = 0.2
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+process_mode = 1
 occluder = ExtResource("3_g0ikf")
 
-[node name="LightmapGI" type="LightmapGI" parent="."]
+[node name="LightmapGI_Hard" type="LightmapGI" parent="."]
+process_mode = 1
 light_data = ExtResource("8_4iftb")
 
 [node name="Player" parent="." instance=ExtResource("2_an7nd")]
+process_mode = 1
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 1.1, -19)
 
 [node name="SmilingSammy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_gnd3f")]
+process_mode = 1
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -17.5, 0, 18)
 player = NodePath("../Player")
 
 [node name="Document0" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(0.2, -0.34641, 0, 0.34641, 0.2, 0, 0, 0, 0.4, 0.235606, 0.352646, -14.2678)
 
 [node name="Document1" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(-8.74228e-09, 1.51421e-08, 0.4, 0.34641, 0.2, 0, -0.2, 0.34641, -1.74846e-08, 2.02744, 0.352646, -18.1993)
 
 [node name="Document2" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(2.62268e-08, -4.54262e-08, -0.4, 0.34641, 0.2, -5.2108e-16, 0.2, -0.34641, 5.24537e-08, -3.25303, 0.352646, -15.8352)
 
 [node name="Document3" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.253, 0, -17.9442)
 
 [node name="Document4" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.44878, 0, -16.3369)
 
 [node name="Document5" parent="." instance=ExtResource("7_55qww")]
+process_mode = 1
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -1.56931, 0, -14.0302)
 
 [node name="SpeedBoostTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 12.0
 one_shot = true
 
 [node name="StunTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 8.5
 one_shot = true
 
 [node name="GuardianTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 75.0
 one_shot = true
 
 [node name="VanishTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 26.0
 one_shot = true
 
@@ -381,6 +405,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, -13.5)
 monitorable = false
 
 [node name="SB_Particles" type="CPUParticles3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
 one_shot = true
@@ -395,6 +420,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.7
 
 [node name="S_Particles" type="CPUParticles3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
 one_shot = true
@@ -409,6 +435,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.7
 
 [node name="G_Particles" type="CPUParticles3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
 one_shot = true
@@ -423,6 +450,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.7
 
 [node name="V_Particles" type="CPUParticles3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66393, 0)
 emitting = false
 one_shot = true
@@ -437,6 +465,7 @@ scale_amount_min = 0.2
 scale_amount_max = 0.7
 
 [node name="PowerRuneLocations" type="Node3D" parent="."]
+process_mode = 1
 
 [node name="Location1" type="Marker3D" parent="PowerRuneLocations" groups=["PowerRuneLocation"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 0)
@@ -469,28 +498,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, -14.0383)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.23, 1.5, 3.39611)
 
 [node name="SpeedBoostTeleport" type="Timer" parent="."]
+process_mode = 1
 wait_time = 30.0
 one_shot = true
 autostart = true
 
 [node name="StunTeleport" type="Timer" parent="."]
-wait_time = 5.0
+process_mode = 1
+wait_time = 45.0
 one_shot = true
 autostart = true
 
 [node name="GuardianTeleport" type="Timer" parent="."]
-wait_time = 30.0
+process_mode = 1
+wait_time = 35.0
 one_shot = true
 autostart = true
 
 [node name="VanishTeleport" type="Timer" parent="."]
-wait_time = 30.0
+process_mode = 1
+wait_time = 40.0
 one_shot = true
 autostart = true
 
 [node name="SammyWaypoints" type="Node3D" parent="."]
+process_mode = 1
 
 [node name="Waypoint1" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
 gizmo_extents = 1.0
 
 [node name="Waypoint2" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
@@ -498,7 +533,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77722, 2.38419e-07, 3.34694
 gizmo_extents = 1.0
 
 [node name="Waypoint3" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1483, 2.38419e-07, 12.7476)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.605, 0, 13.5)
 gizmo_extents = 1.0
 
 [node name="Waypoint4" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
@@ -514,7 +549,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66527, 2.38419e-07, 19.3003
 gizmo_extents = 1.0
 
 [node name="Waypoint7" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4257, 2.38419e-07, 6.21385)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.308, 0, 11.058)
 gizmo_extents = 1.0
 
 [node name="Waypoint8" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
@@ -522,7 +557,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6662, 4.26326e-13, 19.014
 gizmo_extents = 1.0
 
 [node name="Waypoint9" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9859, 4.26326e-13, -10.0879)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.604, 0, 2)
 gizmo_extents = 1.0
 
 [node name="Waypoint10" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
@@ -574,10 +609,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.97342, 0, 0.32177)
 gizmo_extents = 1.0
 
 [node name="Waypoint22" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.496, 0, -0.593087)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.519, 0, -0.301)
 gizmo_extents = 1.0
 
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("gameScene", "levelLoader") instance=ExtResource("17_s0uch")]
+visible = false
+gameScene = NodePath("..")
+levelLoader = NodePath("../LevelLoader")
+
+[node name="LevelLoader" parent="." instance=ExtResource("16_e0g6k")]
+
 [connection signal="RandomizeNavigation" from="SmilingSammy" to="." method="RandomizeNavigation"]
+[connection signal="StoppedByGuardian" from="SmilingSammy" to="." method="OnGuardianStoppedSammy"]
 [connection signal="timeout" from="SpeedBoostTimer" to="." method="OnSpeedBoostExpired"]
 [connection signal="timeout" from="StunTimer" to="." method="OnStunExpired"]
 [connection signal="timeout" from="GuardianTimer" to="." method="OnGuardianExpired"]

@@ -1,0 +1,153 @@
+[gd_scene load_steps=9 format=3 uid="uid://dadgqkrpv4dw1"]
+
+[ext_resource type="Shader" path="res://Resources/Shaders/Blur.gdshader" id="1_i206u"]
+[ext_resource type="Script" path="res://Scripts/CSharp/PauseMenu.cs" id="1_y2pcn"]
+[ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="2_pt12v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1jns"]
+shader = ExtResource("1_i206u")
+shader_parameter/amount = 3.5
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c8bdn"]
+size = Vector2(512, 512)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o41ic"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q52bo"]
+content_margin_left = 50.0
+content_margin_top = 5.0
+content_margin_right = 50.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqspd"]
+content_margin_left = 50.0
+content_margin_top = 5.0
+content_margin_right = 50.0
+content_margin_bottom = 5.0
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_y2pcn")
+
+[node name="BlurEffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_e1jns")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -50.5
+offset_right = 65.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_c8bdn")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_pt12v")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+text = "Resume"
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_pt12v")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+text = "Options"
+
+[node name="QuitToTitle" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_pt12v")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+text = "Quit to Title"
+
+[node name="QuitToDesktop" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_pt12v")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+text = "Quit to Desktop"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -622.0
+offset_right = 300.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 540)
+mouse_filter = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="OnResumePressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="OnOptionsPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitToTitle" to="." method="OnQuitToTitlePressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitToDesktop" to="." method="OnQuitToDesktopPressed"]

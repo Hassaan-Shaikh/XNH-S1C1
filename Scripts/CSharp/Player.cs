@@ -16,8 +16,10 @@ public partial class Player : CharacterBody3D
     [Export] public bool canControl = true;
     [Export] public bool canJump = false;
     [Export] public bool allowHeadBob = true;
+    [Export] public bool ignorePlayer = false;
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
+    [Export] public SpotLight3D flashlight;
     [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;
@@ -46,16 +48,13 @@ public partial class Player : CharacterBody3D
             stamina = GetNode<TextureProgressBar>("%StaminaBar");
         }
 
+        flashlight.SpotRange = Xalkomak.difficulty == Xalkomak.Difficulty.Hard ? 15.0f : 25.0f;
+
         stamina.Value = 100f;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if(Input.IsActionJustPressed(pauseKey))
-        {
-            GetTree().Quit(); // This line of code must be removed when the game is ready for release
-        }
-
         canControl = Xalkomak.playerCanControl;
 
 		if(!canControl || Xalkomak.isStunCollectedBySammy) //Player cannot control, used for cinematics

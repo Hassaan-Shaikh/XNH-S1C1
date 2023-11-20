@@ -1,13 +1,13 @@
+res://Scripts/CSharp
+res://Resources/Shaders
+res://Scenes
+res://Resources/Lightmaps
 res://Resources/StyleBoxes
 res://Textures/Solkoth
-res://Scripts/CSharp
-res://Scenes
 res://Resources/Fonts/requiem/Requiem
 res://Resources/Audio/SFX
 res://Resources/Animations/Smiling Sammy
 res://Resources/Meshes/Sammy
-res://Resources/Shaders
-res://Resources/Lightmaps
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Footage
 res://Textures/Icon
 res://Resources/Occluders

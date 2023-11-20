@@ -18,6 +18,7 @@ public partial class DeathScreen : Control
     public override void _Ready()
     {
         base._Ready();
+        levelLoader.Visible = true;
         Input.MouseMode = Input.MouseModeEnum.Captured;
         livesRemaining.Visible = Xalkomak.livesRemaining > 0;
         gameOver.Visible = Xalkomak.livesRemaining == 0;
@@ -31,6 +32,13 @@ public partial class DeathScreen : Control
         else
         {
             deathAnim.Play("GameOver");
+            Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
+            Xalkomak.playerCanControl = true;
+            Xalkomak.documentsCollected = 0;
+            for (int i = 0; i < Xalkomak.isDocumentCollected.Length; i++)
+            {
+                Xalkomak.isDocumentCollected[i] = false;
+            }
         }
     }
 
@@ -56,14 +64,7 @@ public partial class DeathScreen : Control
     }
 
     public void OnRetryButtonPressed()
-    {
-        Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
-        Xalkomak.playerCanControl = true;
-        Xalkomak.documentsCollected = 0;
-        for(int i = 0; i < Xalkomak.isDocumentCollected.Length; i++)
-        {
-            Xalkomak.isDocumentCollected[i] = false;
-        }
+    {        
         levelLoader.SwitchScene(game);
     }
 

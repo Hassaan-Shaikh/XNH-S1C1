@@ -9,8 +9,13 @@ public partial class GameControl : Node3D
 	[Export] public Player player;
 	[Export] public SmilingSammy sammy;
 	[Export] public PackedScene stunVFX;
+	[Export] public PackedScene guardianVFX;
 	[Export] public NavigationRegion3D navigationRegion;
-	[ExportGroup("Power Runes")]
+	[ExportGroup("Light Maps")]
+	[Export] public LightmapGI hardModeBlack;
+    [ExportGroup("UI Elements")]
+    [Export] public PauseMenu pauseMenu;
+    [ExportGroup("Power Runes")]
 	[Export] public SpeedBoost speedBoost;
 	[Export] public Stun stun;
 	[Export] public Guardian guardian;
@@ -37,14 +42,17 @@ public partial class GameControl : Node3D
 	bool stunUsed = false;
 	bool guardianUsed = false;
 	bool vanishUsed = false;
-
+	bool isGamePaused = false;
 	bool[] isThisSpotFree;
+
+    const string pauseKey = "pause";
 
     public override void _Ready()
     {
         base._Ready();
 		//Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
 		player = GetTree().GetNodesInGroup("Player")[0] as Player;
+		hardModeBlack.Visible = Xalkomak.difficulty == Xalkomak.Difficulty.Hard;
 		if(powerRunePoints.Length == 0)
 		{
             Array<Node> points = GetTree().GetNodesInGroup("PowerRuneLocation");
@@ -55,6 +63,25 @@ public partial class GameControl : Node3D
 		}
 		Xalkomak.isThisSpotOccupied = new bool[powerRunePoints.Length];
 		isThisSpotFree = new bool[powerRunePoints.Length];
+
+		Xalkomak.isSpeedBoostCollected = false;
+        Xalkomak.isStunCollected = false;
+        Xalkomak.isGuardianCollected = false;
+		Xalkomak.isVanishCollected = false;
+        Xalkomak.isSpeedBoostCollectedBySammy = false;
+        Xalkomak.isStunCollectedBySammy = false;
+		Xalkomak.isGuardianCollectedBySammy = false;
+        Xalkomak.isVanishCollectedBySammy = false;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+		if (Input.IsActionJustPressed(pauseKey))
+		{
+			PauseGame();
+		}
     }
 
     public void StartSpeedBoostTimer()
@@ -76,8 +103,16 @@ public partial class GameControl : Node3D
         stunParticles.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
         stunParticles.Emitting = true;
     }
-	
-	public void StartGuardianTimer()
+
+    public void StartStunTimer(string runeName)
+    {        
+		GuardianShield guardianShield = guardianVFX.Instantiate<GuardianShield>();
+		AddChild(guardianShield);
+		guardianShield.GlobalPosition = player.GlobalPosition;
+        stunTimer.Start();
+    }
+
+    public void StartGuardianTimer()
 	{
         guardianTimer.Start();
 		guardianUsed = true;
@@ -212,5 +247,32 @@ public partial class GameControl : Node3D
         navigationRegion.TravelCost = GD.RandRange(1, 200);
 		/*GD.Print("Travel Cost: " + navigationRegion.TravelCost);
         GD.Print("Enter Cost: " + navigationRegion.EnterCost);*/
+    }
+
+	private void OnGuardianStoppedSammy()
+	{
+		GD.Print("Guardian has stopped Sammy.");
+		StartStunTimer("Guardian");
+		guardianTimer.Stop();
+        guardianTele.Stop();
+        OnGuardianExpired();
+	}
+
+	public void PauseGame()
+	{
+		//Tween tween = GetTree().CreateTween(); ;
+		isGamePaused = !isGamePaused;		
+
+		if(isGamePaused)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+		else
+		{
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }	
+
+		pauseMenu.Visible = isGamePaused;
+        GetTree().Paused = isGamePaused;
     }
 }

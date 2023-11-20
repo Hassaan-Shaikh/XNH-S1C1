@@ -6,10 +6,10 @@ public partial class SammyRay : RayCast3D
     public Player player;
     public SmilingSammy sammy;
     public Camera3D camera;
-    [Export] public AnimationPlayer rayAnim;
 
     Vector3 lastPos;
     int flag = 0;
+    int flagTarget;
     bool playerSpotted = false;
     bool canSeePlayer;
     
@@ -19,6 +19,7 @@ public partial class SammyRay : RayCast3D
     public override void _Ready()
     {
         base._Ready();
+        flagTarget = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 30 : 60;
         Enabled = false;
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
         sammy = GetTree().GetNodesInGroup("Monster")[0] as SmilingSammy;
@@ -41,14 +42,14 @@ public partial class SammyRay : RayCast3D
         }
         
         LookTowards(camera.GlobalPosition);
-        canSeePlayer = IsColliding();
+        canSeePlayer = sammy.isStunned;
 
-        if (canSeePlayer)
+        if (IsColliding())
         {
             GodotObject detected = GetCollider();
             if(detected is Player)
             {    
-                if(Xalkomak.isVanishCollected || Xalkomak.isStunCollected || ignoreCheck)
+                if(Xalkomak.isVanishCollected || Xalkomak.isStunCollected || ignoreCheck || canSeePlayer || player.ignorePlayer)
                 {
                     return;
                 }
@@ -57,10 +58,15 @@ public partial class SammyRay : RayCast3D
                 sammy.ChasePlayer();
                 flag = 0;
             }
+            else if(Xalkomak.difficulty == Xalkomak.Difficulty.Hard && (detected is SpeedBoost || detected is Stun || detected is Guardian || detected is Vanish))
+            {
+                Node3D powerRune = (Node3D)detected;
+                sammy.GoToPowerRune(powerRune.GlobalPosition);
+            }
         }
         else
         {
-            if(flag <= 60)
+            if(flag <= flagTarget && !player.ignorePlayer)
             {
                 sammy.LostPlayer();
                 //GD.Print("Player lost.");

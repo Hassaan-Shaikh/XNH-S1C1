@@ -40,11 +40,11 @@ public partial class DebugPanel : PanelContainer
         FPS.Text = "FPS: " + Engine.GetFramesPerSecond().ToString();
         playerSpeed.Text = "Player's Speed: " + parent.GetPlayerSpeed();
         isPlayerExhausted.Text = "Exhausted: " + parent.GetExhaustedState();
-        sammySpeed.Text = "Sammy's Speed: " + SmilingSammy.GetSammySpeed();
-        sammyState.Text = "Sammy's Current State: " + SmilingSammy.GetCurrentState();
+        //sammySpeed.Text = "Sammy's Speed: " + SmilingSammy.GetSammySpeed();
+        //sammyState.Text = "Sammy's Current State: " + SmilingSammy.GetCurrentState();
         currentDifficulty.Text = "Difficulty: " + Xalkomak.difficulty.ToString();
         sammyWaypointIndex.Text = "Lives Remaining: " + Xalkomak.livesRemaining;
-        waypointCount.Text = "No. Of Waypoints: " + SmilingSammy.GetWaypointCount();
+        //waypointCount.Text = "No. Of Waypoints: " + SmilingSammy.GetWaypointCount();
         angleToPlayer.Text = "Sammy Ignoring Check: " + SammyRay.ignoreCheck.ToString();
         sammyHasSB.Text = "Sammy has Speed Boost: " + Xalkomak.isSpeedBoostCollectedBySammy;
         sammyHasS.Text = "Sammy has Stun: " + Xalkomak.isStunCollectedBySammy;

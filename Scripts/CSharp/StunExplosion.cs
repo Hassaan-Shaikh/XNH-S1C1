@@ -15,7 +15,7 @@ public partial class StunExplosion : MeshInstance3D
 		base._Process(delta);
 		timeElapsed += (float)delta;
 		Scale = new Vector3(timeElapsed * 50, timeElapsed * 50, timeElapsed * 50);
-		if (timeElapsed >= 99999999999999999999f)
+		if (timeElapsed >= 999999999999999f)
 		{
 			QueueFree();
 		}

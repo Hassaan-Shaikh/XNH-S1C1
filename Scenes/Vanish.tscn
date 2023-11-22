@@ -111,7 +111,7 @@ _data = {
 
 [node name="Vanish" instance=ExtResource("1_bxxci")]
 collision_layer = 128
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("2_iy8kq")
 
 [node name="Vanish2" parent="." index="0"]

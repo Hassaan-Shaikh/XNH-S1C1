@@ -17,9 +17,9 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public Player player;
     [Export] public Timer sammyNavTimer;
     [Export] public Area3D jumpscareArea;
-
-    private List<Marker3D> waypoints = new List<Marker3D>();
-    private Vector3 lastLookingDir;
+    [Export] public GpuParticles3D speedBoostParticles;
+    [Export] public GpuParticles3D guardianParticles;
+    [Export] public MeshInstance3D sammyMesh;
 
     public enum SammyStates
     {
@@ -32,10 +32,13 @@ public partial class SmilingSammy : CharacterBody3D
     };
 
     public static float s_Velocity;
-    public static SammyStates currentState;
+    public SammyStates currentState;
     public static int waypointIndex;
     public static int waypointCount;
+    public static string currentStateS;
 
+    private List<Marker3D> waypoints = new List<Marker3D>();
+    private Vector3 lastLookingDir;
     private Vector3 targetPos;
     private float moveSpeed;
     private int flag = 0;
@@ -44,8 +47,8 @@ public partial class SmilingSammy : CharacterBody3D
 
     const float walkSpeed = 3.2f;
     const float runSpeed = 4.23f;
-    const float walkSpeedHard = 4.3f;
-    const float runSpeedHard = 5.72f;
+    const float walkSpeedHard = 4f;
+    const float runSpeedHard = 5.29f;
     const string deathScreen = "res://Scenes/DeathScreen.tscn";
 
     public override void _Ready()
@@ -59,6 +62,8 @@ public partial class SmilingSammy : CharacterBody3D
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
         sammyTimer.Start();
         waypoints = GetTree().GetNodesInGroup("Waypoints").Select(saar => saar as Marker3D).ToList();
+        speedBoostParticles = GetNode<GpuParticles3D>("SammyOnSB");
+        guardianParticles = GetNode<GpuParticles3D>("SammyOnG");
         currentState = SammyStates.Idle;
         waypointIndex = GD.RandRange(0, waypoints.Count - 1);
         waypointCount = waypoints.Count;
@@ -69,14 +74,28 @@ public partial class SmilingSammy : CharacterBody3D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        Visible = !Xalkomak.isVanishCollectedBySammy; 
-        if(Xalkomak.isSpeedBoostCollectedBySammy)
+        speedBoostParticles.Emitting = Xalkomak.isSpeedBoostCollectedBySammy;
+        guardianParticles.Emitting = Xalkomak.isGuardianCollectedBySammy;
+        //Visible = !Xalkomak.isVanishCollectedBySammy; 
+        //if (Xalkomak.isSpeedBoostCollectedBySammy)
+        //{
+        //    currentState = SammyStates.SpeedBoosted;
+        //}
+        //else
+        //{
+        //    currentState = SammyStates.Patrolling;
+        //}
+    }
+
+    public void SetSpeedBoost(bool hasSpeedBoost)
+    {
+        if (hasSpeedBoost)
         {
             currentState = SammyStates.SpeedBoosted;
         }
         else
         {
-            return;
+            currentState = SammyStates.Patrolling;
         }
     }
 
@@ -195,10 +214,12 @@ public partial class SmilingSammy : CharacterBody3D
     }
 
     public void ChasePlayer()
+
     {
         currentState = SammyStates.Chasing;
         targetPos = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
+        flag = 0;
         sammyTimer.Stop();
     }
 
@@ -264,25 +285,26 @@ public partial class SmilingSammy : CharacterBody3D
         SetTimer();
     }
 
-    public static string GetSammySpeed()
-    {
-        return s_Velocity.ToString();
-    }
+    //public static string GetSammySpeed()
+    //{
+    //    return s_Velocity.ToString();
+    //}
 
-    public static string GetCurrentState()
-    {
-        return currentState.ToString();
-    }
+    //public static string GetCurrentState()
+    //{
+    //    currentStateS = currentState.ToString();
+    //    return currentStateS;
+    //}
 
-    public static string GetWaypointIndex()
-    {
-        return waypointIndex.ToString();
-    }
+    //public static string GetWaypointIndex()
+    //{
+    //    return waypointIndex.ToString();
+    //}
 
-    public static string GetWaypointCount()
-    {
-        return waypointCount.ToString();
-    }
+    //public static string GetWaypointCount()
+    //{
+    //    return waypointCount.ToString();
+    //}
 
     private void SetTimer()
     {
@@ -339,8 +361,16 @@ public partial class SmilingSammy : CharacterBody3D
         }
     }
 
-    public void GoToPowerRune(Vector3 pos)
+    public void GoInvisible(bool invisible)
     {
-        sammyNav.TargetPosition = pos;
+        Tween tween = CreateTween().BindNode(sammyMesh);
+        if (invisible)
+        {
+            tween.TweenProperty(sammyMesh, "transparency", 1.0f, 0.5f);
+        }
+        else
+        {
+            tween.TweenProperty(sammyMesh, "transparency", 0.0f, 0.5f);
+        }
     }
 }

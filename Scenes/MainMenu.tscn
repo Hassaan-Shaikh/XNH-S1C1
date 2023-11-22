@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7iab4dy841ua"]
+
+[ext_resource type="Script" path="res://Scripts/CSharp/MainMenu.cs" id="1_3hf0h"]
+[ext_resource type="Texture2D" uid="uid://jbyfjo3yrw53" path="res://Textures/UI Textures/TitleScreen.png" id="1_66kyp"]
+[ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="2_h11ro"]
+[ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="3_pvg4k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_177ou"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q2gjj"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_raqw5"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3hf0h")
+
+[node name="Screen" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("1_66kyp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -228.0
+offset_right = 274.0
+offset_bottom = 228.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_pvg4k")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
+text = "Play"
+flat = true
+alignment = 0
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_pvg4k")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
+text = "Options
+"
+flat = true
+alignment = 0
+
+[node name="ExtrasButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_pvg4k")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
+text = "Extras"
+flat = true
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_pvg4k")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
+text = "Credits"
+flat = true
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_pvg4k")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
+text = "Quit"
+flat = true
+alignment = 0
+
+[node name="LevelLoader" parent="." instance=ExtResource("2_h11ro")]
+layout_mode = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsButton" to="." method="OnOptionsButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExtrasButton" to="." method="OnExtrasButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="OnCreditsButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]

@@ -613,7 +613,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.519, 0, -0.301)
 gizmo_extents = 1.0
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("gameScene", "levelLoader") instance=ExtResource("17_s0uch")]
-visible = false
 gameScene = NodePath("..")
 levelLoader = NodePath("../LevelLoader")
 

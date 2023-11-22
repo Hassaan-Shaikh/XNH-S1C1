@@ -90,6 +90,7 @@ public partial class GameControl : Node3D
 		speedBoostUsed = true;
 		speedBoostparticles.GlobalPosition = GetNode<SpeedBoost>("SpeedBoost").GlobalPosition;
 		speedBoostparticles.Emitting = true;
+		sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
 	}
 
 	public void StartStunTimer()
@@ -130,14 +131,22 @@ public partial class GameControl : Node3D
 
 	private void OnSpeedBoostExpired()
 	{
+		if(Xalkomak.isSpeedBoostCollected)
+		{
+            player.SetSpeedBoost(false);
+        }
 		Xalkomak.isSpeedBoostCollected = false;
 		Xalkomak.isSpeedBoostCollectedBySammy = false;
-		player.SetSpeedBoost(false);
-	}
+        sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
+    }
 
 	private void OnStunExpired()
 	{
-		Xalkomak.isStunCollected = false;
+        if (Xalkomak.isStunCollected)
+        {
+            player.SetStun(false);
+        }
+        Xalkomak.isStunCollected = false;
 		Xalkomak.isStunCollectedBySammy = false;
 		sammy.RecoverFromStun();
 	}
@@ -161,9 +170,12 @@ public partial class GameControl : Node3D
 		if (!speedBoostUsed) //Indicates that Speed Boost has not been used
 		{
 			int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-			if (Xalkomak.isThisSpotOccupied[newPosIndex])
+			if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
 			{
-                FreeSpots();
+				if (Xalkomak.isThisSpotOccupied[newPosIndex])
+				{
+					FreeSpots();
+				}
                 speedBoostTele.WaitTime = GD.RandRange(30.0f, 45.0f);
                 speedBoostTele.Start();
                 return;
@@ -180,9 +192,12 @@ public partial class GameControl : Node3D
 		if(!stunUsed)
 		{
             int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex])
+            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
             {
-                FreeSpots();
+                if (Xalkomak.isThisSpotOccupied[newPosIndex])
+                {
+                    FreeSpots();
+                }
                 stunTele.WaitTime = GD.RandRange(30.0f, 45.0f);
                 stunTele.Start();
                 return;
@@ -200,9 +215,12 @@ public partial class GameControl : Node3D
 		{
 
             int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex])
+            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
             {
-                FreeSpots();
+                if (Xalkomak.isThisSpotOccupied[newPosIndex])
+                {
+                    FreeSpots();
+                }
                 guardianTele.WaitTime = GD.RandRange(30.0f, 45.0f);
                 guardianTele.Start();
                 return;
@@ -221,7 +239,10 @@ public partial class GameControl : Node3D
             int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
             if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
             {
-                FreeSpots();
+                if (Xalkomak.isThisSpotOccupied[newPosIndex])
+                {
+                    FreeSpots();
+                }
                 vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);
                 vanishTele.Start();
                 return;
@@ -260,19 +281,22 @@ public partial class GameControl : Node3D
 
 	public void PauseGame()
 	{
-		//Tween tween = GetTree().CreateTween(); ;
+		//Tween tween = GetTree().CreateTween();
 		isGamePaused = !isGamePaused;		
 
 		if(isGamePaused)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+			//tween.TweenProperty(pauseMenu, "modulate", new Color(1, 1, 1, 1), 1.0);
         }
 		else
 		{
             Input.MouseMode = Input.MouseModeEnum.Captured;
-        }	
+            //tween.TweenProperty(pauseMenu, "modulate", new Color(1, 1, 1, 0), 1.0);
+        }
 
-		pauseMenu.Visible = isGamePaused;
-        GetTree().Paused = isGamePaused;
+		pauseMenu.FadePauseMenu(isGamePaused);		
+		//pauseMenu.Visible = isGamePaused;
+		//GetTree().Paused = isGamePaused;
     }
 }

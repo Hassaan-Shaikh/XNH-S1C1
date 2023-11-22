@@ -25,8 +25,12 @@ public static class Xalkomak
         Normal,
         Hard
     }
-    public static Difficulty difficulty = Difficulty.Hard;
+    public static Difficulty difficulty = Difficulty.Normal;
 
     public static bool[] isThisSpotOccupied;
     public static bool[] isDocumentCollected = new bool[8];
+
+    public static string gamePath = "res://Scenes/Game.tscn";
+    public static string deathScreenPath = "res://Scenes/DeathScreen.tscn";
+    public static string mainMenuPath = "res://Scenes/MainMenu.tscn";
 }

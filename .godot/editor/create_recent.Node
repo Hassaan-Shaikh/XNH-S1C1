@@ -1,14 +1,15 @@
-Label
-TextureRect
-ColorRect
 Button
 VBoxContainer
 MarginContainer
+TextureRect
+GPUParticles3D
+ColorRect
+AnimationPlayer
+Label
 HBoxContainer
 LightmapGI
 MeshInstance3D
 Timer
-AnimationPlayer
 TextureButton
 RichTextLabel
 CenterContainer
@@ -26,7 +27,6 @@ BoneAttachment3D
 CharacterBody3D
 PowerRune
 StaticBody3D
-GPUParticles3D
 Panel
 PanelContainer
 TextureProgressBar

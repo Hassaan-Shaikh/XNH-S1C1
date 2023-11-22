@@ -113,8 +113,7 @@ _data = {
 [node name="Guardian" instance=ExtResource("1_5ja6w")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 128
-collision_mask = 2
-monitorable = false
+collision_mask = 18
 script = ExtResource("2_s85uk")
 
 [node name="Guardian2" parent="." index="0"]

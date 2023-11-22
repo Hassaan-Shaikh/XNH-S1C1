@@ -114,7 +114,7 @@ _data = {
 [node name="Stun" instance=ExtResource("1_5568f")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 128
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("2_8peuv")
 
 [node name="Stun2" parent="." index="0"]

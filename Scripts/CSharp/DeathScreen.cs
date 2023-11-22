@@ -12,8 +12,8 @@ public partial class DeathScreen : Control
 
     int counter = 0;
 
-    const string game = "res://Scenes/Game.tscn";
-    const string mainMenu = "res://Scenes/MainMenu.tscn";
+    const string gamePath = "res://Scenes/Game.tscn";
+    const string mainMenuPath = "res://Scenes/MainMenu.tscn";
 
     public override void _Ready()
     {
@@ -59,19 +59,19 @@ public partial class DeathScreen : Control
     {
         if(animName == "LivesRemaining")
         {
-            levelLoader.SwitchScene(game);
+            levelLoader.SwitchScene(gamePath);
         }
     }
 
     public void OnRetryButtonPressed()
     {        
-        levelLoader.SwitchScene(game);
+        levelLoader.SwitchScene(gamePath);
     }
 
     public void OnQuitButtonPressed()
     {
-        GetTree().Quit();
-        //levelLoader.SwitchScene(mainMenu);
+        //GetTree().Quit();
+        levelLoader.SwitchScene(mainMenuPath);
     }
 
     public void ReleaseMouse()

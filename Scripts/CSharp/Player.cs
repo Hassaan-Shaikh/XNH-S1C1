@@ -17,12 +17,14 @@ public partial class Player : CharacterBody3D
     [Export] public bool canJump = false;
     [Export] public bool allowHeadBob = true;
     [Export] public bool ignorePlayer = false;
+    [Export] public bool isStunned = false;
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
     [Export] public SpotLight3D flashlight;
     [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;
+    [Export] public AnimationPlayer playedStunnedAnim;
     [Export] public AnimationPlayer guardianAnim;
     [Export] public AnimationPlayer vanishAnim;
 
@@ -198,6 +200,13 @@ public partial class Player : CharacterBody3D
         {
             vanishAnim.Play("V_FadeOut");
         }
+    }
+
+    public void SetStunned(bool playerStunned)
+    {
+        isStunned = playerStunned;
+        playedStunnedAnim.CurrentAnimation = playerStunned ? "P_Stunned" : "P_Unstun";
+        playedStunnedAnim.Play();
     }
 
     private void StartPersisting(string animName)

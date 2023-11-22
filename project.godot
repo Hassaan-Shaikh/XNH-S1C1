@@ -15,11 +15,12 @@ config/description="Xalkomak's Nightmare Hunters is a short horror series, takin
 This is the first chapter of the series, where the you find yourself in a cellar. Your objective is to collect eight documents scattered all over the cellar, and leave ASAP.
 But you are not alone. There is a monster in this cellar, and he is looking for you. Stay out of his sight."
 config/tags=PackedStringArray("xalkomak\'s_nightmare_hunters")
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Textures/Solkoth/SKS_logo.png"
-config/icon="res://Textures/Icon/Icon.jpg"
+config/icon="res://Textures/Icon/Icon_PNG.png"
+config/windows_native_icon="res://Textures/Icon/Icon_ICO.ico"
 
 [audio]
 

@@ -1,6 +1,11 @@
-res://Scripts/CSharp
-res://Resources/Shaders
+C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports/Windows
+res://Textures/Icon
+C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports
+C:/Important
 res://Scenes
+res://Scripts/CSharp
+res://Resources/Materials
+res://Resources/Shaders
 res://Resources/Lightmaps
 res://Resources/StyleBoxes
 res://Textures/Solkoth
@@ -9,5 +14,4 @@ res://Resources/Audio/SFX
 res://Resources/Animations/Smiling Sammy
 res://Resources/Meshes/Sammy
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Footage
-res://Textures/Icon
 res://Resources/Occluders

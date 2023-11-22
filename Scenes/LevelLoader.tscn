@@ -56,7 +56,7 @@ _data = {
 "RESET": SubResource("Animation_gxtx2")
 }
 
-[node name="LevelLoader" type="Control"]
+[node name="LevelLoader" type="Control" groups=["LevelLoader"]]
 process_mode = 3
 editor_description = "The level loader for adding some sort of seamless animations."
 layout_mode = 3

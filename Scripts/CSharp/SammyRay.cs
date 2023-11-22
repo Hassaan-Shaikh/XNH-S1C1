@@ -58,11 +58,11 @@ public partial class SammyRay : RayCast3D
                 sammy.ChasePlayer();
                 flag = 0;
             }
-            else if(Xalkomak.difficulty == Xalkomak.Difficulty.Hard && (detected is SpeedBoost || detected is Stun || detected is Guardian || detected is Vanish))
+            /*else if(Xalkomak.difficulty == Xalkomak.Difficulty.Hard && (detected is SpeedBoost || detected is Stun || detected is Guardian || detected is Vanish))
             {
                 Node3D powerRune = (Node3D)detected;
                 sammy.GoToPowerRune(powerRune.GlobalPosition);
-            }
+            }*/
         }
         else
         {

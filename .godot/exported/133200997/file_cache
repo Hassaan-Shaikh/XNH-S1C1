@@ -1,0 +1,22 @@
+res://Resources/Audio/Audio Buses/SFX_Bus.tres::19ba4c84ad99497b8314d4179ae55f85::1700302290::res://.godot/exported/133200997/export-93ade08f626756e6f9edcfb313c962ee-SFX_Bus.res
+res://Resources/Materials/Particle.tres::dff93cb369e2361130c1996d184e88f0::1700542363::res://.godot/exported/133200997/export-dde20f55898d6df3eeb6fdc7af2361f2-Particle.res
+res://Resources/Materials/ParticleProcess.tres::ff0fc3ad755ac8526fa499550dbf9e87::1700569199::res://.godot/exported/133200997/export-76f73de6ce75f221d43bd6d5153fefb8-ParticleProcess.res
+res://Resources/Shaders/Blur.tres::54a608d4cf7bb992a216b7ffe22cd706::1700494541::res://.godot/exported/133200997/export-663df44ff1e6488f2b73ccf65e69871e-Blur.res
+res://Resources/Shaders/SpeedBoost.tres::e12c0da2bbc831220734e661ad52dd4c::1700562404::res://.godot/exported/133200997/export-a2ae101f46f0b1bc0af4a1569be99884-SpeedBoost.res
+res://Resources/Shaders/StunExplosion.tres::6c8d1b6996271c3df20a8f18f601fd96::1700562404::res://.godot/exported/133200997/export-c34430c7ee941280d107a6385755beb4-StunExplosion.res
+res://Resources/StyleBoxes/Button.tres::74706d54e385f961a5d6d77ec934b2ec::1700562404::res://.godot/exported/133200997/export-1e388fde861e0fd1a8d803910a3401f5-Button.res
+res://Scenes/cellar.tscn::de8f5e55e4afb1b25cbe33ed47c9b088::1700488317::res://.godot/exported/133200997/export-a8810e0304b5f7e8a6306b392f4b3f3f-cellar.scn
+res://Scenes/DeathScreen.tscn::0f63c293ed7c36cd6ec6a7f228aecffa::1700585753::res://.godot/exported/133200997/export-6d198f97f03cab94dd5ae0cd9c711e9f-DeathScreen.scn
+res://Scenes/document.tscn::7a1d645a02a38f7a0f87fea5f3034bb1::1700585752::res://.godot/exported/133200997/export-6b32060e05362e6184aba70199a468b6-document.scn
+res://Scenes/Game.tscn::f79e77fb06abb0ccf131977edf52ca07::1700585752::res://.godot/exported/133200997/export-8ec1ce4394550eef6b399142f35b815f-Game.scn
+res://Scenes/guardian.tscn::035c23deff8afcac0effa660afb39239::1700585752::res://.godot/exported/133200997/export-ec247791ce9d97b67d7ba7f99d0e2bb8-guardian.scn
+res://Scenes/GuardianShield.tscn::de41ba91af386aea8c2fe286595f28ff::1700585753::res://.godot/exported/133200997/export-cef91da6eeada31d6c0cd16d85799735-GuardianShield.scn
+res://Scenes/LevelLoader.tscn::4755e1ac9aad2cca27c7069d85031613::1700585753::res://.godot/exported/133200997/export-18875eea8e884e45499066fbc1495542-LevelLoader.scn
+res://Scenes/PauseMenu.tscn::6653647574f56b1725a7764bbc90c093::1700585753::res://.godot/exported/133200997/export-c4630e6c5ead5b7c398ed91dd21962ee-PauseMenu.scn
+res://Scenes/player.tscn::1de6d487b37b8b81747bbb2105701540::1700585752::res://.godot/exported/133200997/export-1753c997600d68ab5d20ae99fddb15c6-player.scn
+res://Scenes/MainMenu.tscn::f210e6a3d95e3f1f18bf1ea11479312e::1700585754::res://.godot/exported/133200997/export-5d46f2c25b5b7595677274e5845c73b8-MainMenu.scn
+res://Scenes/SmilingSammy.tscn::f12becf57c77c73a2beff5417bae70e7::1700585753::res://.godot/exported/133200997/export-7c7f6c0dbc2065200ef196b3fcf2bae1-SmilingSammy.scn
+res://Scenes/SpeedBoost.tscn::ea89d8c9854ca1d6ec836a67058e16b0::1700585752::res://.godot/exported/133200997/export-c505a1705cb459d53c879d9cec233542-SpeedBoost.scn
+res://Scenes/Stun.tscn::ea2fb4ea8538707d53992bcea2ef3054::1700585752::res://.godot/exported/133200997/export-ae20718d955aaa4de42ad6f3a37177c5-Stun.scn
+res://Scenes/StunExplosion.tscn::30c8e5a555c64f95726b0758b799748c::1700585752::res://.godot/exported/133200997/export-2c5d90e30264182f9cd6859777a7e10b-StunExplosion.scn
+res://Scenes/Vanish.tscn::7c0c40ead7e9244f664a9dfb6eedfb87::1700585753::res://.godot/exported/133200997/export-b0ec27940c064e9f28bac02b053d9424-Vanish.scn

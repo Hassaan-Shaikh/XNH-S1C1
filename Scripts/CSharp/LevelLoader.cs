@@ -23,8 +23,11 @@ public partial class LevelLoader : Control
         crossfadeAnim.Play("FadeOut");
         crossfadeAnim.AnimationFinished += (StringName animName) => 
         {
-            if(animName.Equals("FadeOut"))
+            if (animName.Equals("FadeOut"))
+            {
                 GetTree().ChangeSceneToFile(scenePath);
+                GetTree().Paused = false;
+            }
         };
     }
 

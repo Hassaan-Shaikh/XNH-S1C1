@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dadgqkrpv4dw1"]
+[gd_scene load_steps=13 format=3 uid="uid://dadgqkrpv4dw1"]
 
 [ext_resource type="Shader" path="res://Resources/Shaders/Blur.gdshader" id="1_i206u"]
 [ext_resource type="Script" path="res://Scripts/CSharp/PauseMenu.cs" id="1_y2pcn"]
@@ -29,8 +29,77 @@ content_margin_top = 5.0
 content_margin_right = 50.0
 content_margin_bottom = 5.0
 
+[sub_resource type="Animation" id="Animation_blnmx"]
+resource_name = "PauseFadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ImmediatePause"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2pdas"]
+resource_name = "PauseFadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_go8hc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t43t1"]
+_data = {
+"PauseFadeIn": SubResource("Animation_blnmx"),
+"PauseFadeOut": SubResource("Animation_2pdas"),
+"RESET": SubResource("Animation_go8hc")
+}
+
 [node name="PauseMenu" type="Control"]
 process_mode = 2
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,6 +215,13 @@ grow_vertical = 2
 pivot_offset = Vector2(300, 540)
 mouse_filter = 2
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="PauseFade" type="AnimationPlayer" parent="."]
+process_mode = 3
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_t43t1")
+}
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="OnResumePressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="OnOptionsPressed"]

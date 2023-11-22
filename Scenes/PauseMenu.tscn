@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dadgqkrpv4dw1"]
+[gd_scene load_steps=14 format=3 uid="uid://dadgqkrpv4dw1"]
 
 [ext_resource type="Shader" path="res://Resources/Shaders/Blur.gdshader" id="1_i206u"]
 [ext_resource type="Script" path="res://Scripts/CSharp/PauseMenu.cs" id="1_y2pcn"]
@@ -28,6 +28,12 @@ content_margin_left = 50.0
 content_margin_top = 5.0
 content_margin_right = 50.0
 content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gjav"]
+content_margin_left = 50.0
+content_margin_top = 25.0
+content_margin_right = 50.0
+content_margin_bottom = 25.0
 
 [sub_resource type="Animation" id="Animation_blnmx"]
 resource_name = "PauseFadeIn"
@@ -157,6 +163,8 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5gjav")
+shortcut_feedback = false
 text = "Resume"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -170,6 +178,8 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5gjav")
+shortcut_feedback = false
 text = "Options"
 
 [node name="QuitToTitle" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -183,6 +193,8 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5gjav")
+shortcut_feedback = false
 text = "Quit to Title"
 
 [node name="QuitToDesktop" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -196,6 +208,8 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_o41ic")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q52bo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqspd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5gjav")
+shortcut_feedback = false
 text = "Quit to Desktop"
 
 [node name="ColorRect" type="ColorRect" parent="."]

@@ -90,7 +90,11 @@ public partial class GameControl : Node3D
 		speedBoostUsed = true;
 		speedBoostparticles.GlobalPosition = GetNode<SpeedBoost>("SpeedBoost").GlobalPosition;
 		speedBoostparticles.Emitting = true;
-		sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
+		if (Xalkomak.isSpeedBoostCollectedBySammy)
+		{
+			sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
+			sammy.RepathSpeedBoost();
+		}
 	}
 
 	public void StartStunTimer()
@@ -98,7 +102,14 @@ public partial class GameControl : Node3D
 		StunExplosion stunInstance = stunVFX.Instantiate<StunExplosion>();
 		AddChild(stunInstance);
 		stunInstance.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
-		sammy.GetStunned();
+		if (Xalkomak.isStunCollected)
+		{
+			sammy.GetStunned();
+		}
+		if(Xalkomak.isStunCollectedBySammy)
+		{
+			player.SetStunned(Xalkomak.isStunCollectedBySammy);
+		}
 		stunTimer.Start();
 		stunUsed = true;
         stunParticles.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
@@ -123,6 +134,10 @@ public partial class GameControl : Node3D
 
 	public void StartVanishTimer()
 	{
+		if(Xalkomak.isVanishCollectedBySammy)
+		{
+			sammy.GoInvisible(Xalkomak.isVanishCollected);
+		}
 		vanishTimer.Start();
 		vanishUsed = true;
         vanishParticles.GlobalPosition = GetNode<Vanish>("Vanish").GlobalPosition;
@@ -135,9 +150,12 @@ public partial class GameControl : Node3D
 		{
             player.SetSpeedBoost(false);
         }
-		Xalkomak.isSpeedBoostCollected = false;
-		Xalkomak.isSpeedBoostCollectedBySammy = false;
-        sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
+        if (Xalkomak.isSpeedBoostCollectedBySammy)
+        {
+            sammy.SetSpeedBoost(false);
+        }
+        Xalkomak.isSpeedBoostCollected = false;
+		Xalkomak.isSpeedBoostCollectedBySammy = false;		
     }
 
 	private void OnStunExpired()
@@ -145,6 +163,10 @@ public partial class GameControl : Node3D
         if (Xalkomak.isStunCollected)
         {
             player.SetStun(false);
+        }
+        if (Xalkomak.isStunCollectedBySammy)
+        {
+            player.SetStunned(false);
         }
         Xalkomak.isStunCollected = false;
 		Xalkomak.isStunCollectedBySammy = false;
@@ -163,7 +185,11 @@ public partial class GameControl : Node3D
 		Xalkomak.isVanishCollected = false;
 		Xalkomak.isVanishCollectedBySammy = false;
 		player.SetVanish(false);
-	}
+        if (Xalkomak.isSpeedBoostCollected)
+        {
+            player.SetSpeedBoost(false);
+        }
+    }
 
 	private void RepositionSB()
 	{

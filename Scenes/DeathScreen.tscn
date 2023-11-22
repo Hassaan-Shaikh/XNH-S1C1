@@ -237,6 +237,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("3_dgt64")
 theme_override_styles/hover = ExtResource("3_dgt64")
 theme_override_styles/pressed = ExtResource("3_dgt64")
+theme_override_styles/focus = ExtResource("3_dgt64")
 text = "Retry"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -252,6 +253,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("3_dgt64")
 theme_override_styles/hover = ExtResource("3_dgt64")
 theme_override_styles/pressed = ExtResource("3_dgt64")
+theme_override_styles/focus = ExtResource("3_dgt64")
 text = "Quit"
 
 [node name="DeathAnim" type="AnimationPlayer" parent="."]

@@ -1,3 +1,5 @@
+CSGBox3D
+AudioStreamPlayer3D
 Button
 VBoxContainer
 MarginContainer
@@ -29,4 +31,3 @@ PowerRune
 StaticBody3D
 Panel
 PanelContainer
-TextureProgressBar

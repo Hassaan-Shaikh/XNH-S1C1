@@ -577,9 +577,10 @@ stream_3/weight = 1.0
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "flashlight", "speedBoostAnim", "stunAnim", "playedStunnedAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
 editor_description = "The main player you will be playing as."
 collision_layer = 2
-collision_mask = 220
+collision_mask = 732
 script = ExtResource("1_vplpl")
 allowHeadBob = false
+ignorePlayer = true
 stamina = NodePath("PlayerUI/StaminaBar")
 flashlight = NodePath("Head/Hand/Flashlight")
 speedBoostAnim = NodePath("SpeedBoostAnim")
@@ -657,7 +658,6 @@ texture_progress = ExtResource("5_64fbq")
 tint_under = Color(1, 1, 1, 0.156863)
 
 [node name="DebugPanel" type="PanelContainer" parent="PlayerUI" node_paths=PackedStringArray("parent", "FPS", "playerSpeed", "isPlayerExhausted", "sammySpeed", "sammyState", "currentDifficulty", "sammyWaypointIndex", "waypointCount", "angleToPlayer", "sammyHasSB", "sammyHasS", "sammyHasG", "sammyHasV")]
-process_mode = 4
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -877,8 +877,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
 offset_top = 540.0
-offset_right = 41280.0
-offset_bottom = 23220.0
+offset_right = 52800.0
+offset_bottom = 29700.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -993,7 +993,7 @@ libraries = {
 
 [node name="Footstep" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("footstepTarget", "footstepCheck")]
 stream = SubResource("AudioStreamRandomizer_auyyc")
-volume_db = -0.3
+volume_db = -5.0
 bus = &"SFX"
 script = ExtResource("21_huesv")
 footstepTarget = NodePath("../FootstepTarget")

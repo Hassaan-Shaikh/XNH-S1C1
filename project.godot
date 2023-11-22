@@ -25,6 +25,7 @@ config/windows_native_icon="res://Textures/Icon/Icon_ICO.ico"
 [audio]
 
 buses/default_bus_layout="res://Resources/Audio/Audio Buses/SFX_Bus.tres"
+driver/enable_input=true
 
 [display]
 

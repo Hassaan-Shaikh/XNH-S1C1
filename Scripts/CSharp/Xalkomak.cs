@@ -25,7 +25,7 @@ public static class Xalkomak
         Normal,
         Hard
     }
-    public static Difficulty difficulty = Difficulty.Normal;
+    public static Difficulty difficulty = Difficulty.Hard;
 
     public static bool[] isThisSpotOccupied;
     public static bool[] isDocumentCollected = new bool[8];

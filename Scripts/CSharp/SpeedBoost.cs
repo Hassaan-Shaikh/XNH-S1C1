@@ -31,7 +31,7 @@ public partial class SpeedBoost : Area3D
                 }
                 else if (body.IsInGroup("Monster"))
                 {
-                    //body.Call("SetSpeedBoost", true);
+                    body.Call("SetSpeedBoost", true);
                     Xalkomak.isSpeedBoostCollectedBySammy = true;
                     gameRoot.StartSpeedBoostTimer();
                     QueueFree();

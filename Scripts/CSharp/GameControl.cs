@@ -4,6 +4,8 @@ using System;
 
 public partial class GameControl : Node3D
 {
+	[Signal] public delegate void SammySpeedBoostedEventHandler(bool sammyHasSpeedBoost);
+
 	[ExportCategory("References")]
 	[ExportGroup("Prefabs")]
 	[Export] public Player player;
@@ -90,10 +92,12 @@ public partial class GameControl : Node3D
 		speedBoostUsed = true;
 		speedBoostparticles.GlobalPosition = GetNode<SpeedBoost>("SpeedBoost").GlobalPosition;
 		speedBoostparticles.Emitting = true;
+		GD.Print(Xalkomak.isSpeedBoostCollectedBySammy);
 		if (Xalkomak.isSpeedBoostCollectedBySammy)
 		{
-			sammy.SetSpeedBoost(Xalkomak.isSpeedBoostCollectedBySammy);
-			sammy.RepathSpeedBoost();
+
+			EmitSignal(SignalName.SammySpeedBoosted, true);
+			//sammy.RepathSpeedBoost();
 		}
 	}
 
@@ -134,10 +138,10 @@ public partial class GameControl : Node3D
 
 	public void StartVanishTimer()
 	{
-		if(Xalkomak.isVanishCollectedBySammy)
-		{
-			sammy.GoInvisible(Xalkomak.isVanishCollected);
-		}
+		//if(Xalkomak.isVanishCollectedBySammy)
+		//{
+		//	sammy.GoInvisible(true);
+		//}
 		vanishTimer.Start();
 		vanishUsed = true;
         vanishParticles.GlobalPosition = GetNode<Vanish>("Vanish").GlobalPosition;
@@ -150,9 +154,10 @@ public partial class GameControl : Node3D
 		{
             player.SetSpeedBoost(false);
         }
+		//GD.Print(Xalkomak.isSpeedBoostCollectedBySammy);
         if (Xalkomak.isSpeedBoostCollectedBySammy)
         {
-            sammy.SetSpeedBoost(false);
+            EmitSignal(SignalName.SammySpeedBoosted, false);
         }
         Xalkomak.isSpeedBoostCollected = false;
 		Xalkomak.isSpeedBoostCollectedBySammy = false;		
@@ -175,20 +180,26 @@ public partial class GameControl : Node3D
 
     private void OnGuardianExpired()
 	{
-		Xalkomak.isGuardianCollected = false;
-		Xalkomak.isGuardianCollectedBySammy = false;
-		player.SetGuardian(false);
+        if (Xalkomak.isGuardianCollected)
+        {
+            player.SetGuardian(false);
+        }
+        Xalkomak.isGuardianCollected = false;
+		Xalkomak.isGuardianCollectedBySammy = false;				
 	}
 
 	private void OnVanishExpired()
 	{
-		Xalkomak.isVanishCollected = false;
-		Xalkomak.isVanishCollectedBySammy = false;
-		player.SetVanish(false);
-        if (Xalkomak.isSpeedBoostCollected)
+        if (Xalkomak.isVanishCollectedBySammy)
         {
-            player.SetSpeedBoost(false);
+            sammy.GoInvisible(false);
         }
+		if(Xalkomak.isVanishCollected)
+		{
+            player.SetVanish(false);
+        }
+        Xalkomak.isVanishCollected = false;
+		Xalkomak.isVanishCollectedBySammy = false;		
     }
 
 	private void RepositionSB()

@@ -184,10 +184,10 @@ public partial class Player : CharacterBody3D
         {
             stunAnim.Play("S_FadeIn");
         }
-        else
-        {
-            stunAnim.Play("S_FadeOut");
-        }
+        //else
+        //{
+        //    stunAnim.Play("S_FadeOut");
+        //}
     }
 
     public void SetVanish(bool setter)

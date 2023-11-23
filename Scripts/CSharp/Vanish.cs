@@ -31,7 +31,7 @@ public partial class Vanish : Area3D
                 }
                 else if (body.IsInGroup("Monster"))
                 {
-                    //body.Call("SetVanish", true);
+                    body.Call("GoInvisible", true);
                     Xalkomak.isVanishCollectedBySammy = true;
                     gameRoot.StartVanishTimer();
                     QueueFree();

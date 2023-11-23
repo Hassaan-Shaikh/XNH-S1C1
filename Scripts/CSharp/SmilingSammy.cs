@@ -20,6 +20,7 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public GpuParticles3D speedBoostParticles;
     [Export] public GpuParticles3D guardianParticles;
     [Export] public MeshInstance3D sammyMesh;
+    [Export] public AnimationPlayer sammyMeshAnim;
     [ExportCategory("Movement Handling")]
     [Export] public float rotationAcceleration = 10.0f;
 
@@ -37,6 +38,7 @@ public partial class SmilingSammy : CharacterBody3D
     public static int waypointIndex;
     public static int waypointCount;
     public static string currentStateS;
+    public int limitFlag = 0;
 
     public SammyStates currentState;
     public bool isStunned = false;
@@ -89,14 +91,38 @@ public partial class SmilingSammy : CharacterBody3D
         currentStateS = currentState.ToString();
         s_Velocity = Velocity.Length();
         //Visible = !Xalkomak.isVanishCollectedBySammy; 
-        //if (Xalkomak.isSpeedBoostCollectedBySammy)
+        //if (Xalkomak.isSpeedBoostCollectedBySammy && limitFlag == 0)
         //{
         //    currentState = SammyStates.SpeedBoosted;
+        //    limitFlag += 1;
         //}
-        //else
+        //else if (!Xalkomak.isSpeedBoostCollectedBySammy && limitFlag == 0)
         //{
         //    currentState = SammyStates.Patrolling;
+        //    limitFlag += 1;
         //}
+    }
+
+    private void GetSpeedBoost(bool sammyHasSpeedBoost)
+    {
+        GD.Print("Signal received from Game scene. ", sammyHasSpeedBoost);
+        if (sammyHasSpeedBoost)
+        {
+            sammyTimer.Stop();
+            currentState = SammyStates.SpeedBoosted;
+            //waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+            //targetPos = waypoints[waypointIndex].GlobalPosition;
+            //sammyNav.TargetPosition = targetPos;
+            animSpeed = animSpeedSpeedBoost;
+            sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
+            sammyAnimTree.Set("parameters/conditions/run", true);
+            sammyAnimTree.Set("parameters/conditions/walk", false);
+            sammyAnimTree.Set("parameters/conditions/idle", false);
+        }
+        else
+        {
+            currentState = SammyStates.Patrolling;
+        }
     }
 
     public void SetSpeedBoost(bool hasSpeedBoost)
@@ -104,9 +130,14 @@ public partial class SmilingSammy : CharacterBody3D
         if (hasSpeedBoost)
         {
             currentState = SammyStates.SpeedBoosted;
-            waypointIndex = GD.RandRange(0, waypoints.Count - 1);
-            targetPos = waypoints[waypointIndex].GlobalPosition;
-            sammyNav.TargetPosition = targetPos;
+            //waypointIndex = GD.RandRange(0, waypoints.Count - 1);
+            //targetPos = waypoints[waypointIndex].GlobalPosition;
+            //sammyNav.TargetPosition = targetPos;
+            animSpeed = animSpeedSpeedBoost;
+            sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
+            sammyAnimTree.Set("parameters/conditions/run", true);
+            sammyAnimTree.Set("parameters/conditions/walk", false);
+            sammyAnimTree.Set("parameters/conditions/idle", false);
         }
         else
         {
@@ -173,6 +204,7 @@ public partial class SmilingSammy : CharacterBody3D
                     RepathSpeedBoost();
                     return;
                 }
+                NavigateAround((float)delta);
                 break;
             default:
                 break;
@@ -235,19 +267,24 @@ public partial class SmilingSammy : CharacterBody3D
     }
 
     public void ChasePlayer()
-
     {
-        currentState = SammyStates.Chasing;
+        if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
+        {
+            currentState = SammyStates.Chasing;
+        }
         targetPos = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
         flag = 0;
         sammyTimer.Stop();
     }
 
-    public void LostPlayer()
+    public void LostPlayer(Vector3 pos)
     {
-        currentState = SammyStates.Chasing;
-        targetPos = player.GlobalPosition;
+        if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
+        {
+            currentState = SammyStates.Chasing;
+        }
+        targetPos = pos;//player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
         //SetTimer();
     }
@@ -295,6 +332,7 @@ public partial class SmilingSammy : CharacterBody3D
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", false);
         moveSpeed = 0f;
         Velocity = Vector3.Zero;
+        jumpscareArea.SetDeferred("monitoring", false);
         sammyTimer.Stop();
     }
 
@@ -303,6 +341,7 @@ public partial class SmilingSammy : CharacterBody3D
         sammyAnimTree.Set("parameters/conditions/gotStunned", false);
         sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", true);
         moveSpeed = 0;
+        jumpscareArea.SetDeferred("monitoring", true);
         SetTimer();
     }
 
@@ -354,6 +393,8 @@ public partial class SmilingSammy : CharacterBody3D
                 jumpscareArea.SetDeferred("monitoring", false);
                 jumpscareNum = GD.RandRange(1, 2);
                 currentState = SammyStates.Idle;
+                moveSpeed = 0;
+                sammyNav.TargetPosition = GlobalPosition;
                 Velocity = Vector3.Zero;
                 Xalkomak.playerCanControl = false;
                 player.GlobalPosition = new Vector3(player.GlobalPosition.X, player.GlobalPosition.Y + 0.1f, player.GlobalPosition.Z);
@@ -377,6 +418,7 @@ public partial class SmilingSammy : CharacterBody3D
             if(Xalkomak.livesRemaining <= 1)
             {
                 Xalkomak.livesRemaining = 0;
+                Xalkomak.livesLost++;
             }
             GetTree().ChangeSceneToFile(deathScreen);
         }
@@ -384,14 +426,15 @@ public partial class SmilingSammy : CharacterBody3D
 
     public void GoInvisible(bool invisible)
     {
-        Tween tween = GetTree().CreateTween().BindNode(sammyMesh);
-        if (invisible)
+        if(invisible)
         {
-            tween.TweenProperty(sammyMesh, "transparency", 1.0f, 0.5f);
+            sammyMesh.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
         }
         else
         {
-            tween.TweenProperty(sammyMesh, "transparency", 0.0f, 0.5f);
+            sammyMesh.CastShadow = GeometryInstance3D.ShadowCastingSetting.On;
         }
+        sammyMeshAnim.CurrentAnimation = invisible ? "Invisible" : "Visible";
+        sammyMeshAnim.Play();
     }
 }

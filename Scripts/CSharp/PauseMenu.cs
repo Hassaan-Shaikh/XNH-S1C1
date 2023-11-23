@@ -27,7 +27,7 @@ public partial class PauseMenu : Control
     }
 
     private void OnQuitToTitlePressed()
-    {        
+    {    
         levelLoader.SwitchScene(mainMenuPath);
     }
 

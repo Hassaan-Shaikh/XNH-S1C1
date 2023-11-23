@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7iab4dy841ua"]
+[gd_scene load_steps=12 format=3 uid="uid://c7iab4dy841ua"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/MainMenu.cs" id="1_3hf0h"]
 [ext_resource type="Texture2D" uid="uid://jbyfjo3yrw53" path="res://Textures/UI Textures/TitleScreen.png" id="1_66kyp"]
 [ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="2_h11ro"]
+[ext_resource type="PackedScene" uid="uid://i2anv4nk6ela" path="res://Scenes/DifficultySelectionMenu.tscn" id="2_uovu1"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="3_pvg4k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yy3xx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tsi7w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_177ou"]
 content_margin_left = 15.0
@@ -39,6 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_3hf0h")
+difficultyMenu = ExtResource("2_uovu1")
 
 [node name="Screen" type="TextureRect" parent="."]
 layout_mode = 0
@@ -47,15 +53,71 @@ offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("1_66kyp")
 
+[node name="MadeByXalkomak" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -90.0
+offset_right = 360.0
+offset_bottom = -6.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_pvg4k")
+theme_override_fonts/bold_font = ExtResource("3_pvg4k")
+theme_override_fonts/italics_font = ExtResource("3_pvg4k")
+theme_override_fonts/bold_italics_font = ExtResource("3_pvg4k")
+theme_override_fonts/mono_font = ExtResource("3_pvg4k")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yy3xx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tsi7w")
+bbcode_enabled = true
+text = "A game by Xalkomak
+
+Version 1 . 0 . 0"
+fit_content = true
+scroll_active = false
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 489.0
+offset_bottom = 290.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_pvg4k")
+theme_override_fonts/bold_font = ExtResource("3_pvg4k")
+theme_override_fonts/italics_font = ExtResource("3_pvg4k")
+theme_override_fonts/bold_italics_font = ExtResource("3_pvg4k")
+theme_override_fonts/mono_font = ExtResource("3_pvg4k")
+theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/bold_font_size = 80
+theme_override_font_sizes/italics_font_size = 80
+theme_override_font_sizes/bold_italics_font_size = 80
+theme_override_font_sizes/mono_font_size = 80
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yy3xx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tsi7w")
+bbcode_enabled = true
+text = "xalkomak's
+Nightmare
+Hunters"
+fit_content = true
+scroll_active = false
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = -228.0
-offset_right = 274.0
-offset_bottom = 228.0
+offset_left = 65.0
+offset_top = -175.0
+offset_right = 329.0
+offset_bottom = 175.0
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -70,7 +132,7 @@ theme_override_colors/font_focus_color = Color(0.980392, 0.980392, 0.980392, 0.5
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
@@ -88,7 +150,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
@@ -107,7 +169,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
@@ -125,7 +187,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
@@ -143,7 +205,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
@@ -154,6 +216,7 @@ flat = true
 alignment = 0
 
 [node name="LevelLoader" parent="." instance=ExtResource("2_h11ro")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]

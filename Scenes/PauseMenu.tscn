@@ -12,28 +12,28 @@ shader_parameter/amount = 3.5
 size = Vector2(512, 512)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o41ic"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
+content_margin_left = 30.0
+content_margin_top = 10.0
+content_margin_right = 30.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q52bo"]
-content_margin_left = 50.0
-content_margin_top = 5.0
-content_margin_right = 50.0
-content_margin_bottom = 5.0
+content_margin_left = 30.0
+content_margin_top = 10.0
+content_margin_right = 30.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqspd"]
-content_margin_left = 50.0
-content_margin_top = 5.0
-content_margin_right = 50.0
-content_margin_bottom = 5.0
+content_margin_left = 30.0
+content_margin_top = 10.0
+content_margin_right = 30.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gjav"]
-content_margin_left = 50.0
-content_margin_top = 25.0
-content_margin_right = 50.0
-content_margin_bottom = 25.0
+content_margin_left = 30.0
+content_margin_top = 10.0
+content_margin_right = 30.0
+content_margin_bottom = 10.0
 
 [sub_resource type="Animation" id="Animation_blnmx"]
 resource_name = "PauseFadeIn"

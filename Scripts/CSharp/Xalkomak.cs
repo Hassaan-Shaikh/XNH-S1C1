@@ -5,7 +5,17 @@ using System.Collections.Generic;
 public static class Xalkomak
 {
     public static int livesRemaining = 3;
-    
+    public static int livesLost = 0; //
+
+    public static bool gameCompletedOnNormalMode = false; //
+    public static bool gameCompletedOnHardMode = false; //
+    public static bool unlockExtras = false;
+
+    public static int gamesWonOnNormalMode = 0; //
+    public static int gamesWonOnHardMode = 0; //
+    public static int totalGamesWon = 1; //
+    public static int totalGamesLost = 0; //
+
     public static int documentsCollected = 0;
 
     public static bool playerCanControl = true;

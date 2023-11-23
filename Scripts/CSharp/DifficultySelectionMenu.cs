@@ -29,5 +29,6 @@ public partial class DifficultySelectionMenu : Control
     private void OnBackButtonPressed()
     {
         popUpAnim.Play("PopOut");
+        EmitSignal(SignalName.DifficultySelected, "None");
     }
 }

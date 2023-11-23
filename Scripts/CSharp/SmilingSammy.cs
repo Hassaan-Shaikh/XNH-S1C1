@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using static Godot.WebSocketPeer;
 
 public partial class SmilingSammy : CharacterBody3D
 {
@@ -13,6 +14,7 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public NavigationAgent3D sammyNav;
     [Export] public BoneAttachment3D head;
     [Export] public Timer sammyTimer;
+    [Export] public Timer huntCountdown;
     [Export] public AnimationTree sammyAnimTree;
     [Export] public Player player;
     [Export] public Timer sammyNavTimer;
@@ -21,6 +23,7 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public GpuParticles3D guardianParticles;
     [Export] public MeshInstance3D sammyMesh;
     [Export] public AnimationPlayer sammyMeshAnim;
+    [Export] public Marker3D playerTracker;
     [ExportCategory("Movement Handling")]
     [Export] public float rotationAcceleration = 10.0f;
 
@@ -68,7 +71,9 @@ public partial class SmilingSammy : CharacterBody3D
         sammyTimer = GetNode<Timer>("SammyTimer");
         sammyNavTimer = GetNode<Timer>("NavUpdateTimer");
         jumpscareArea = GetNode<Area3D>("JumpscareArea");
+        playerTracker = GetNode<Marker3D>("PlayerTracker");
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
+        huntCountdown = GetNode<Timer>("HuntCountdown");
         sammyTimer.Start();
         waypoints = GetTree().GetNodesInGroup("Waypoints").Select(saar => saar as Marker3D).ToList();
         speedBoostParticles = GetNode<GpuParticles3D>("SammyOnSB");
@@ -237,6 +242,7 @@ public partial class SmilingSammy : CharacterBody3D
                 direction = GlobalPosition.DirectionTo(nextPos);
                 TurnToDirection(delta);
                 Velocity = direction * moveSpeed;
+                sammyNav.TargetPosition = player.GlobalPosition;
                 animSpeed = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? animSpeedNormal : animSpeedHard;
                 sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
                 sammyAnimTree.Set("parameters/conditions/run", true);
@@ -273,19 +279,23 @@ public partial class SmilingSammy : CharacterBody3D
             currentState = SammyStates.Chasing;
         }
         targetPos = player.GlobalPosition;
+        playerTracker.GlobalPosition = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
         flag = 0;
         sammyTimer.Stop();
+        huntCountdown.Stop();
     }
 
-    public void LostPlayer(Vector3 pos)
+    public void LostPlayer()
     {
         if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
         {
             currentState = SammyStates.Chasing;
         }
-        targetPos = pos;//player.GlobalPosition;
-        sammyNav.TargetPosition = targetPos;
+        huntCountdown.WaitTime = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3.5f : 4.7f;
+        huntCountdown.Start();
+        //targetPos = pos;//player.GlobalPosition;
+        //sammyNav.TargetPosition = targetPos;
         //SetTimer();
     }
 
@@ -345,26 +355,10 @@ public partial class SmilingSammy : CharacterBody3D
         SetTimer();
     }
 
-    //public static string GetSammySpeed()
-    //{
-    //    return s_Velocity.ToString();
-    //}
-
-    //public static string GetCurrentState()
-    //{
-    //    currentStateS = currentState.ToString();
-    //    return currentStateS;
-    //}
-
-    //public static string GetWaypointIndex()
-    //{
-    //    return waypointIndex.ToString();
-    //}
-
-    //public static string GetWaypointCount()
-    //{
-    //    return waypointCount.ToString();
-    //}
+    private void OnHuntCountdownTimeout()
+    {
+        currentState = SammyStates.Hunting;
+    }
 
     private void SetTimer()
     {

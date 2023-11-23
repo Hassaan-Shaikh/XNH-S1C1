@@ -7,6 +7,8 @@ public partial class MainMenu : Control
     [Export] public LevelLoader levelLoader;
     [Export] public PackedScene difficultyMenu;
 
+    private string selectedDifficulty;
+
     public const string userGameDataPath = "user://save.dat";
     const string gamePath = "res://Scenes/Game.tscn";
 
@@ -83,7 +85,7 @@ public partial class MainMenu : Control
             menu.DifficultySelected += GetDifficulty;
             menu.popUpAnim.AnimationFinished += (StringName animName) =>
             {
-                if (animName.Equals("PopOut"))
+                if (animName.Equals("PopOut") && (selectedDifficulty.Equals("Normal") || selectedDifficulty.Equals("Hard")))
                 {
                     Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Hard ? 1 : 3;
                     Xalkomak.playerCanControl = true;
@@ -132,7 +134,8 @@ public partial class MainMenu : Control
 
     private void GetDifficulty(StringName difficulty)
     {
-        switch(difficulty)
+        selectedDifficulty = difficulty;
+        switch(selectedDifficulty)
         {
             case "Normal":
                 Xalkomak.difficulty = Xalkomak.Difficulty.Normal;
@@ -142,7 +145,8 @@ public partial class MainMenu : Control
                 Xalkomak.difficulty = Xalkomak.Difficulty.Hard;
                 GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
                 break;
-            default: 
+            default:
+                GD.Print("No difficulty selected/Backed out.");
                 break;
         }
     }

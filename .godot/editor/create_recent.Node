@@ -1,3 +1,5 @@
+Timer
+Marker3D
 AnimationPlayer
 Button
 Panel
@@ -15,12 +17,10 @@ ColorRect
 Label
 LightmapGI
 MeshInstance3D
-Timer
 CenterContainer
 CollisionShape3D
 Area3D
 NavigationObstacle3D
-Marker3D
 AudioStreamPlayer
 RayCast3D
 AnimationTree

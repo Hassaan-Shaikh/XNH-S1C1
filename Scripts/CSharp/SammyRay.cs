@@ -25,6 +25,7 @@ public partial class SammyRay : RayCast3D
         Enabled = false;
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
         sammy = GetTree().GetNodesInGroup("Monster")[0] as SmilingSammy;
+        flag = flagTarget;
         camera = GetViewport().GetCamera3D();
         Timer starter = new Timer();
         AddChild(starter);
@@ -43,17 +44,23 @@ public partial class SammyRay : RayCast3D
             return;
         }
 
-        TargetPosition = ToLocal(camera.GlobalPosition);
+        //TargetPosition = ToLocal(camera.GlobalPosition);
 
-        GodotObject detected = GetCollider();
+        /*GodotObject detected = GetCollider();
         canSeePlayer = IsColliding() && detected is Player;
 
-        if (canSeePlayer)
+        if (canSeePlayer && (!Xalkomak.isVanishCollected || !Xalkomak.isStunCollected || !player.ignorePlayer || !ignoreCheck))
         {
             sammy.ChasePlayer();
+            flag = 0;
         }
+        else if(flag <= flagTarget)
+        {
+            sammy.playerTracker.GlobalPosition = GlobalPosition + new Vector3((float)GD.RandRange(-2.0f, 2.0f), GlobalPosition.Y, (float)GD.RandRange(-2.0f, 2.0f));
+            sammy.LostPlayer(sammy.playerTracker.GlobalPosition);
+        }*/
         //GD.Print(canSeePlayer + ", " + detected);
-        /*LookTowards(camera.GlobalPosition);
+        LookTowards(camera.GlobalPosition);
 
         if (IsColliding())
         {
@@ -67,28 +74,28 @@ public partial class SammyRay : RayCast3D
                 canSeePlayer = IsColliding() && detected is Player;
                 playerSpotted = true;
                 //GD.Print("Player spotted.");
-                lastPos = camera.GlobalPosition;
+                lastPos = player.GlobalPosition;
                 sammy.ChasePlayer();
                 flag = 0;
             }
-            else if (flag <= flagTarget)
+            //else
+            //{
+            //    sammy.LostPlayer();
+            //    //GD.Print("Player lost.");
+            //    flag += 1;
+            //    playerSpotted = false;
+            //}
+        }
+        else
+        {
+            if (flag == 0)
             {
-                sammy.LostPlayer(lastPos);
+                sammy.LostPlayer();
                 //GD.Print("Player lost.");
                 flag += 1;
                 playerSpotted = false;
             }
-        }*/
-        //else
-        //{
-        //    if(flag <= flagTarget)
-        //    {
-        //        sammy.LostPlayer();
-        //        //GD.Print("Player lost.");
-        //        flag += 1;
-        //        playerSpotted = false;
-        //    }
-        //}
+        }
     }
 
     private void LookTowards(Vector3 target)

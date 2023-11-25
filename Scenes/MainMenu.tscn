@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7iab4dy841ua"]
+[gd_scene load_steps=13 format=3 uid="uid://c7iab4dy841ua"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/MainMenu.cs" id="1_3hf0h"]
 [ext_resource type="Texture2D" uid="uid://jbyfjo3yrw53" path="res://Textures/UI Textures/TitleScreen.png" id="1_66kyp"]
 [ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="2_h11ro"]
 [ext_resource type="PackedScene" uid="uid://i2anv4nk6ela" path="res://Scenes/DifficultySelectionMenu.tscn" id="2_uovu1"]
+[ext_resource type="PackedScene" uid="uid://c4vdcv0hmsi7c" path="res://Scenes/ConfirmQuit.tscn" id="3_cm6ln"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="3_pvg4k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yy3xx"]
@@ -34,7 +35,7 @@ content_margin_top = 10.0
 content_margin_right = 15.0
 content_margin_bottom = 10.0
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("levelLoader")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -44,7 +45,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_3hf0h")
+levelLoader = NodePath("LevelLoader")
 difficultyMenu = ExtResource("2_uovu1")
+confirmQuit = ExtResource("3_cm6ln")
 
 [node name="Screen" type="TextureRect" parent="."]
 layout_mode = 0

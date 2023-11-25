@@ -6,12 +6,20 @@ public partial class DeathScreen : Control
 {
     [Export] LevelLoader levelLoader;
     [Export] Label livesRemaining;
+    [Export] Label deathScreenTip;
     [Export] Label gameOver;
     [Export] Button retryButton;
     [Export] Button quitButton;
     [Export] AnimationPlayer deathAnim;
 
     int counter = 0;
+    string[] deathTips = 
+    { 
+        "Sammy is persistent. Take sharp turns to lose him.",
+        "Use power runes to gain an advantage against Sammy.",
+        "Close the doors behind yourself to delay Sammy's movement.",
+        "Your stamina is limited. Use it wisely."
+    };
 
     public const string userGameDataPath = "user://save.dat";
     const string gamePath = "res://Scenes/Game.tscn";
@@ -20,13 +28,16 @@ public partial class DeathScreen : Control
     public override void _Ready()
     {
         base._Ready();
-        //LoadGameData();
+        //LoadGameData();        
         levelLoader.Visible = true;
         Input.MouseMode = Input.MouseModeEnum.Captured;
         livesRemaining.Visible = Xalkomak.livesRemaining > 0;
+        deathScreenTip.Visible = Xalkomak.livesRemaining > 0;
         gameOver.Visible = Xalkomak.livesRemaining == 0;
         retryButton.Visible = Xalkomak.livesRemaining == 0;
         quitButton.Visible = Xalkomak.livesRemaining == 0;
+
+        deathScreenTip.Text = GetDeathScreenTip();
 
         if (Xalkomak.livesRemaining > 0)
         {
@@ -51,7 +62,7 @@ public partial class DeathScreen : Control
     {
         base._Process(delta);
 
-        livesRemaining.Text = "Lives Remaining: " + Xalkomak.livesRemaining;
+        livesRemaining.Text = "Lives Remaining - " + Xalkomak.livesRemaining;
     }
 
     public void UpdateLifeCounter()
@@ -128,5 +139,11 @@ public partial class DeathScreen : Control
             GD.Print(Xalkomak.gameCompletedOnNormalMode);
             GD.Print(loadedData);
         }
+    }
+
+    private string GetDeathScreenTip()
+    {
+        int i = GD.RandRange(0, deathTips.Length - 1);
+        return deathTips[i];
     }
 }

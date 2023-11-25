@@ -1,7 +1,8 @@
+VBoxContainer
+Button
+AnimationPlayer
 Timer
 Marker3D
-AnimationPlayer
-Button
 Panel
 PanelContainer
 RichTextLabel
@@ -10,7 +11,6 @@ TextureButton
 MarginContainer
 CSGBox3D
 AudioStreamPlayer3D
-VBoxContainer
 TextureRect
 GPUParticles3D
 ColorRect

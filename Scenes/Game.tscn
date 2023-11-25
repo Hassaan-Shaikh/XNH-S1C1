@@ -158,10 +158,8 @@ ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 3
 ssao_enabled = true
-ssil_radius = 2.0
-ssil_intensity = 5.0
-ssil_sharpness = 0.32
 sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 sdfgi_bounce_feedback = 0.22
 sdfgi_cascades = 2
 sdfgi_max_distance = 51.2
@@ -499,7 +497,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.23, 1.5, 3.39611)
 
 [node name="SpeedBoostTeleport" type="Timer" parent="."]
 process_mode = 1
-wait_time = 5.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 

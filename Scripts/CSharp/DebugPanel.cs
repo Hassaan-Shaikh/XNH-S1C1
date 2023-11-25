@@ -18,6 +18,7 @@ public partial class DebugPanel : PanelContainer
     [Export] public Label sammyHasS;
     [Export] public Label sammyHasG;
     [Export] public Label sammyHasV;
+    [Export] public Label trackerPos;
 
     public override void _Ready()
     {
@@ -50,5 +51,6 @@ public partial class DebugPanel : PanelContainer
         sammyHasS.Text = "Sammy has Stun: " + Xalkomak.isStunCollectedBySammy;
         sammyHasG.Text = "Sammy has Guardian: " + Xalkomak.isGuardianCollectedBySammy;
         sammyHasV.Text = "Sammy has Vanish: " + Xalkomak.isVanishCollectedBySammy;
+        trackerPos.Text = "Tracker's position: " + SmilingSammy.trackerPos;
     }
 }

@@ -6,8 +6,10 @@ public partial class MainMenu : Control
 {
     [Export] public LevelLoader levelLoader;
     [Export] public PackedScene difficultyMenu;
+    [Export] public PackedScene confirmQuit;
 
     private string selectedDifficulty;
+    private bool confirmingQuit;
 
     public const string userGameDataPath = "user://save.dat";
     const string gamePath = "res://Scenes/Game.tscn";
@@ -83,8 +85,13 @@ public partial class MainMenu : Control
             DifficultySelectionMenu menu = difficultyMenu.Instantiate() as DifficultySelectionMenu;
             AddChild(menu);
             menu.DifficultySelected += GetDifficulty;
+            ProcessMode = ProcessModeEnum.Disabled;
             menu.popUpAnim.AnimationFinished += (StringName animName) =>
             {
+                if(animName.Equals("PopIn"))
+                {
+                    ProcessMode = ProcessModeEnum.Always;
+                }
                 if (animName.Equals("PopOut") && (selectedDifficulty.Equals("Normal") || selectedDifficulty.Equals("Hard")))
                 {
                     Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Hard ? 1 : 3;
@@ -129,7 +136,26 @@ public partial class MainMenu : Control
 
     private void OnQuitButtonPressed()
     {
-        GetTree().Quit();
+        ConfirmQuit quitBox = confirmQuit.Instantiate() as ConfirmQuit;
+        AddChild(quitBox);
+        quitBox.quitMessage.Text = "";
+        quitBox.QuitConfirmed += (bool confirmedQuit) =>
+        {
+            confirmingQuit = confirmedQuit;
+        };
+        ProcessMode = ProcessModeEnum.Disabled;
+        quitBox.popAnim.AnimationFinished += (StringName animName) =>
+        {
+            if (animName.Equals("PopIn"))
+            {
+                ProcessMode = ProcessModeEnum.Always;
+            }
+            if (animName.Equals("PopOut") && confirmingQuit)
+            {                
+                quitBox.QueueFree();
+                GetTree().Quit();
+            }
+        };
     }
 
     private void GetDifficulty(StringName difficulty)

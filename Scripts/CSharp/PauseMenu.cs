@@ -6,6 +6,10 @@ public partial class PauseMenu : Control
     [Export] public GameControl gameScene;
     [Export] public LevelLoader levelLoader;
     [Export] public AnimationPlayer fadeAnim;
+    [Export] public PackedScene confirmQuit;
+
+    private bool confirmingQuit;
+    private byte source;
 
     const string mainMenuPath = "res://Scenes/MainMenu.tscn";
 
@@ -27,13 +31,13 @@ public partial class PauseMenu : Control
     }
 
     private void OnQuitToTitlePressed()
-    {    
-        levelLoader.SwitchScene(mainMenuPath);
+    {
+        PromptConfirmQuit(0);
     }
 
     private void OnQuitToDesktopPressed()
     {
-        GetTree().Quit();
+        PromptConfirmQuit(1);
     }
 
     public void ImmediatePause()
@@ -49,6 +53,40 @@ public partial class PauseMenu : Control
         {
             if(animName == "PauseFadeOut")
                 GetTree().Paused = resumed;
+        };
+    }
+
+    private void PromptConfirmQuit(byte sourceButton)
+    {
+        ConfirmQuit quitBox = confirmQuit.Instantiate() as ConfirmQuit;
+        AddChild(quitBox);
+        quitBox.QuitConfirmed += (bool confirmedQuit) =>
+        {
+            confirmingQuit = confirmedQuit;
+        };
+        ProcessMode = ProcessModeEnum.Disabled;
+        quitBox.popAnim.AnimationFinished += (StringName animName) =>
+        {
+            if (animName.Equals("PopIn"))
+            {
+                ProcessMode = ProcessModeEnum.WhenPaused;
+            }
+            if (animName.Equals("PopOut") && confirmingQuit)
+            {
+                switch(sourceButton)
+                {
+                    case 0:
+                        quitBox.QueueFree();
+                        levelLoader.SwitchScene(mainMenuPath);
+                        break;
+                    case 1:
+                        quitBox.QueueFree();
+                        GetTree().Quit();
+                        break;
+                    default:
+                        break;
+                }              
+            }
         };
     }
 }

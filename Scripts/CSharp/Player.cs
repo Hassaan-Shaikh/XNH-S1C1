@@ -5,7 +5,7 @@ using System.Reflection;
 public partial class Player : CharacterBody3D
 {
     [ExportGroup("Player Controls")]
-    [ExportSubgroup("Movement")]
+    [ExportSubgroup("Movement")]    
     [Export] public float speed = 3.2f;
     [Export] public float acceleration = 5f;
     [Export] public float gravity = 9.8f;
@@ -21,6 +21,7 @@ public partial class Player : CharacterBody3D
     [ExportGroup("References")]
     [Export] public TextureProgressBar stamina;
     [Export] public SpotLight3D flashlight;
+    [Export] public AnimationPlayer staminaAnim;
     [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;
@@ -85,6 +86,7 @@ public partial class Player : CharacterBody3D
             if (stamina.Value <= stamina.MinValue)
             {
                 isExhausted = true;
+                //staminaAnim.Play("CannotSprint");
             }
 
             if (direction != Vector3.Zero)
@@ -93,6 +95,10 @@ public partial class Player : CharacterBody3D
                 {
                     speed = 5.64f;
                     stamina.Value -= 0.2f;
+                    if(stamina.Value != stamina.MaxValue)
+                    {
+                        //staminaAnim.Play("FadeIn");
+                    }
                 }
                 else
                 {
@@ -104,6 +110,10 @@ public partial class Player : CharacterBody3D
                 if (!Input.IsActionPressed(sprintKey) || isExhausted)
                 {
                     stamina.Value += 0.1f;
+                    if (stamina.Value == stamina.MaxValue)
+                    {
+                        //staminaAnim.Play("FadeOut");
+                    }
                     if (stamina.Value >= 45f)
                     {
                         isExhausted = false;
@@ -111,6 +121,7 @@ public partial class Player : CharacterBody3D
                 }
             }
         }
+        //HandleStaminaAnim();
 
 		p_Velocity = p_Velocity.Lerp(direction * speed + p_Velocity.Y * Vector3.Up, acceleration * (float)delta);
 
@@ -215,5 +226,30 @@ public partial class Player : CharacterBody3D
         {
             vanishAnim.Play("V_Persist");
         }
+    }
+
+    private void HandleStaminaAnim()
+    {
+        if(stamina.Value <= stamina.MaxValue)
+        {
+            staminaAnim.Play("FadeIn");
+        }
+        else if(stamina.Value >= stamina.MaxValue)
+        {
+            staminaAnim.Play("FadeOut");
+        }
+        else if (isExhausted)
+        {
+            staminaAnim.Play("CannotSprint");
+        }
+        //else if(!isExhausted && stamina.Value != stamina.MaxValue)
+        //{
+        //    staminaAnim.Play("RESET");
+        //}
+    }
+
+    private void OnStaminaBarValueChanged(float value)
+    {
+        
     }
 }

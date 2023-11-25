@@ -14,7 +14,6 @@ public partial class SmilingSammy : CharacterBody3D
     [Export] public NavigationAgent3D sammyNav;
     [Export] public BoneAttachment3D head;
     [Export] public Timer sammyTimer;
-    [Export] public Timer huntCountdown;
     [Export] public AnimationTree sammyAnimTree;
     [Export] public Player player;
     [Export] public Timer sammyNavTimer;
@@ -41,6 +40,7 @@ public partial class SmilingSammy : CharacterBody3D
     public static int waypointIndex;
     public static int waypointCount;
     public static string currentStateS;
+    public static Vector3 trackerPos;
     public int limitFlag = 0;
 
     public SammyStates currentState;
@@ -73,7 +73,6 @@ public partial class SmilingSammy : CharacterBody3D
         jumpscareArea = GetNode<Area3D>("JumpscareArea");
         playerTracker = GetNode<Marker3D>("PlayerTracker");
         player = GetTree().GetNodesInGroup("Player")[0] as Player;
-        huntCountdown = GetNode<Timer>("HuntCountdown");
         sammyTimer.Start();
         waypoints = GetTree().GetNodesInGroup("Waypoints").Select(saar => saar as Marker3D).ToList();
         speedBoostParticles = GetNode<GpuParticles3D>("SammyOnSB");
@@ -95,29 +94,16 @@ public partial class SmilingSammy : CharacterBody3D
         guardianParticles.Emitting = Xalkomak.isGuardianCollectedBySammy;
         currentStateS = currentState.ToString();
         s_Velocity = Velocity.Length();
-        //Visible = !Xalkomak.isVanishCollectedBySammy; 
-        //if (Xalkomak.isSpeedBoostCollectedBySammy && limitFlag == 0)
-        //{
-        //    currentState = SammyStates.SpeedBoosted;
-        //    limitFlag += 1;
-        //}
-        //else if (!Xalkomak.isSpeedBoostCollectedBySammy && limitFlag == 0)
-        //{
-        //    currentState = SammyStates.Patrolling;
-        //    limitFlag += 1;
-        //}
+        trackerPos = playerTracker.GlobalPosition;
     }
 
     private void GetSpeedBoost(bool sammyHasSpeedBoost)
     {
-        GD.Print("Signal received from Game scene. ", sammyHasSpeedBoost);
+        //GD.Print("Signal received from Game scene. ", sammyHasSpeedBoost);
         if (sammyHasSpeedBoost)
         {
             sammyTimer.Stop();
             currentState = SammyStates.SpeedBoosted;
-            //waypointIndex = GD.RandRange(0, waypoints.Count - 1);
-            //targetPos = waypoints[waypointIndex].GlobalPosition;
-            //sammyNav.TargetPosition = targetPos;
             animSpeed = animSpeedSpeedBoost;
             sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
             sammyAnimTree.Set("parameters/conditions/run", true);
@@ -135,9 +121,6 @@ public partial class SmilingSammy : CharacterBody3D
         if (hasSpeedBoost)
         {
             currentState = SammyStates.SpeedBoosted;
-            //waypointIndex = GD.RandRange(0, waypoints.Count - 1);
-            //targetPos = waypoints[waypointIndex].GlobalPosition;
-            //sammyNav.TargetPosition = targetPos;
             animSpeed = animSpeedSpeedBoost;
             sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
             sammyAnimTree.Set("parameters/conditions/run", true);
@@ -153,13 +136,8 @@ public partial class SmilingSammy : CharacterBody3D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        /*if (sammyNav.IsNavigationFinished())
-        {
-            currentState = SammyStates.Idle;
-            moveSpeed = 0;
-            return;
-        }*/
         s_Velocity = Velocity.Length();
+
         switch (currentState)
         {
             case SammyStates.Idle:
@@ -180,24 +158,26 @@ public partial class SmilingSammy : CharacterBody3D
             case SammyStates.Chasing:
                 if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {                    
-                    currentState = SammyStates.Hunting;
+                    currentState = SammyStates.Idle;
                     moveSpeed = 0;
                     return;
                 }
                 NavigateAround((float)delta);
                 break;
-            case SammyStates.Hunting:
-                if (flag == 0)
+            case SammyStates.Hunting:                
+                if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {
-                    SetTimer();
-                    flag++;
+                    if (flag == 0)
+                    {
+                        SetTimer();
+                        flag++;
+                    }
+                    currentState = SammyStates.Idle;
+                    moveSpeed = 0;
+                    return;
                 }
-                moveSpeed = 0;
-                Velocity = Vector3.Zero;
-                sammyAnimTree.Set("parameters/conditions/idle", true);
-                sammyAnimTree.Set("parameters/conditions/walk", false);
-                sammyAnimTree.Set("parameters/conditions/run", false);
-                return;
+                NavigateAround((float)delta);
+                break;
             case SammyStates.Stunned:
                 moveSpeed = 0;
                 Velocity = Vector3.Zero;
@@ -205,7 +185,6 @@ public partial class SmilingSammy : CharacterBody3D
             case SammyStates.SpeedBoosted:
                 if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
                 {
-                    sammyTimer.Stop();
                     RepathSpeedBoost();
                     return;
                 }
@@ -222,6 +201,7 @@ public partial class SmilingSammy : CharacterBody3D
     {
         Vector3 nextPos;
         Vector3 direction;
+
         switch(currentState)
         {
             case SammyStates.Patrolling:
@@ -242,8 +222,47 @@ public partial class SmilingSammy : CharacterBody3D
                 direction = GlobalPosition.DirectionTo(nextPos);
                 TurnToDirection(delta);
                 Velocity = direction * moveSpeed;
-                sammyNav.TargetPosition = player.GlobalPosition;
                 animSpeed = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? animSpeedNormal : animSpeedHard;
+                sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
+                sammyAnimTree.Set("parameters/conditions/run", true);
+                sammyAnimTree.Set("parameters/conditions/walk", false);
+                sammyAnimTree.Set("parameters/conditions/idle", false);
+                break;
+            case SammyStates.Hunting:
+                if (Xalkomak.difficulty == Xalkomak.Difficulty.Normal)
+                {
+                    moveSpeed = runSpeed;
+                }
+                else
+                {
+                    if (Xalkomak.isSpeedBoostCollectedBySammy)
+                    {
+                        moveSpeed = 7.64f;
+                    }
+                    else
+                    {
+                        moveSpeed = runSpeedHard;
+                    }
+                }                                
+                nextPos = sammyNav.GetNextPathPosition();
+                direction = GlobalPosition.DirectionTo(nextPos);
+                TurnToDirection(delta);
+                Velocity = direction * moveSpeed;
+                if (Xalkomak.difficulty == Xalkomak.Difficulty.Normal)
+                {
+                    animSpeed = animSpeedNormal;
+                }
+                else
+                {
+                    if (Xalkomak.isSpeedBoostCollectedBySammy)
+                    {
+                        animSpeed = animSpeedSpeedBoost;
+                    }
+                    else
+                    {
+                        animSpeed = animSpeedHard;
+                    }
+                }
                 sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
                 sammyAnimTree.Set("parameters/conditions/run", true);
                 sammyAnimTree.Set("parameters/conditions/walk", false);
@@ -272,31 +291,26 @@ public partial class SmilingSammy : CharacterBody3D
         //LookAt(new Vector3(direction.X, GlobalPosition.Y, direction.Z), Vector3.Up);
     }
 
-    public void ChasePlayer()
+    public void ChasePlayer(Vector3 goTo)
     {
         if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
         {
             currentState = SammyStates.Chasing;
         }
         targetPos = player.GlobalPosition;
-        playerTracker.GlobalPosition = player.GlobalPosition;
         sammyNav.TargetPosition = targetPos;
         flag = 0;
         sammyTimer.Stop();
-        huntCountdown.Stop();
     }
 
     public void LostPlayer()
     {
-        if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
+        if (currentState != SammyStates.Hunting && currentState != SammyStates.SpeedBoosted)
         {
-            currentState = SammyStates.Chasing;
+            currentState = SammyStates.Hunting;
         }
-        huntCountdown.WaitTime = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3.5f : 4.7f;
-        huntCountdown.Start();
-        //targetPos = pos;//player.GlobalPosition;
-        //sammyNav.TargetPosition = targetPos;
-        //SetTimer();
+        targetPos = playerTracker.GlobalPosition;
+        sammyNav.TargetPosition = targetPos;
     }
 
     void Repath()
@@ -431,4 +445,16 @@ public partial class SmilingSammy : CharacterBody3D
         sammyMeshAnim.CurrentAnimation = invisible ? "Invisible" : "Visible";
         sammyMeshAnim.Play();
     }
+
+    //public void OnPlayerSpotted(bool canSeePlayer)
+    //{
+    //    if(canSeePlayer)
+    //    {
+    //        ChasePlayer();
+    //    }
+    //    else
+    //    {
+    //        LostPlayer();
+    //    }
+    //}
 }

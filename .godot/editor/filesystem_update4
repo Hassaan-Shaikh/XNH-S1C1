@@ -41,3 +41,5 @@ res://Scripts/CSharp/SpeedBoost.cs
 res://Scripts/CSharp/Stun.cs
 res://Scripts/CSharp/StunExplosion.cs
 res://Scripts/CSharp/Vanish.cs
+res://Scenes/ConfirmQuit.tscn
+res://Scripts/CSharp/ConfirmQuit.cs

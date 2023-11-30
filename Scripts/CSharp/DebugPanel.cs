@@ -44,7 +44,7 @@ public partial class DebugPanel : PanelContainer
         sammySpeed.Text = "Sammy's Speed: " + SmilingSammy.s_Velocity;
         sammyState.Text = "Sammy's Current State: " + SmilingSammy.currentStateS;
         currentDifficulty.Text = "Difficulty: " + Xalkomak.difficulty.ToString();
-        sammyWaypointIndex.Text = "Lives Remaining: " + Xalkomak.livesRemaining;
+        sammyWaypointIndex.Text = "Sammy's Previous State: " + SmilingSammy.prevStateS;
         waypointCount.Text = "Sammy's Waypoint Index: " + SmilingSammy.waypointIndex;
         angleToPlayer.Text = "Sammy Ignoring Check: " + SammyRay.ignoreCheck.ToString();
         sammyHasSB.Text = "Sammy has Speed Boost: " + Xalkomak.isSpeedBoostCollectedBySammy;

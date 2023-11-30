@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bj8jt7vqp3wyx"]
+[gd_scene load_steps=55 format=3 uid="uid://bj8jt7vqp3wyx"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
 [ext_resource type="Script" path="res://Scripts/CSharp/CamControl.cs" id="2_20fih"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chguouqj08dgb" path="res://Textures/Cookies/FlashlightCookie.png" id="4_4ipsn"]
 [ext_resource type="Texture2D" uid="uid://clioye8yru3xd" path="res://Textures/UI Textures/ProgressOver.png" id="4_13k3c"]
 [ext_resource type="Texture2D" uid="uid://gdxttw1mk7pn" path="res://Textures/UI Textures/StaminaProgress.png" id="5_64fbq"]
+[ext_resource type="Texture2D" uid="uid://d3256ss8742dn" path="res://Textures/UI Textures/Hand.png" id="5_dky87"]
 [ext_resource type="Script" path="res://Scripts/CSharp/DebugPanel.cs" id="6_m5sv2"]
 [ext_resource type="Script" path="res://Scripts/CSharp/DocumentCounter.cs" id="9_3uv2b"]
 [ext_resource type="Texture2D" uid="uid://cwt5egmvcbtnx" path="res://Textures/UI Textures/Crosshair.png" id="10_a5abb"]
@@ -664,6 +665,7 @@ collision_layer = 2
 collision_mask = 732
 script = ExtResource("1_vplpl")
 allowHeadBob = false
+ignorePlayer = true
 stamina = NodePath("PlayerUI/StaminaBar")
 flashlight = NodePath("Head/Hand/Flashlight")
 staminaAnim = NodePath("PlayerUI/StaminaBar/StaminaAnim")
@@ -686,12 +688,15 @@ parent = NodePath("..")
 fov = 60.0
 near = 0.001
 
-[node name="PlayerRay" type="RayCast3D" parent="Head" node_paths=PackedStringArray("promptLabel")]
+[node name="PlayerRay" type="RayCast3D" parent="Head" node_paths=PackedStringArray("promptLabel", "crosshair")]
 visible = false
 target_position = Vector3(0, 0, -2)
 collision_mask = 108
 script = ExtResource("3_oscdi")
 promptLabel = NodePath("../../PlayerUI/Prompt")
+crosshair = NodePath("../../PlayerUI/Crosshair")
+crosshairNormal = ExtResource("10_a5abb")
+crosshairHand = ExtResource("5_dky87")
 
 [node name="Hand" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.4, -0.25)
@@ -870,6 +875,8 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 25
 text = "Click to Collect Document."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StunWarning" type="Label" parent="PlayerUI"]
 modulate = Color(1, 1, 1, 0)
@@ -972,8 +979,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
 offset_top = 540.0
-offset_right = 72000.0
-offset_bottom = 40500.0
+offset_right = 83520.0
+offset_bottom = 46980.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)

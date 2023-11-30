@@ -40,10 +40,12 @@ public partial class SmilingSammy : CharacterBody3D
     public static int waypointIndex;
     public static int waypointCount;
     public static string currentStateS;
+    public static string prevStateS;
     public static Vector3 trackerPos;
     public int limitFlag = 0;
 
     public SammyStates currentState;
+    public SammyStates previousState;
     public bool isStunned = false;
 
     private List<Marker3D> waypoints = new List<Marker3D>();
@@ -93,6 +95,7 @@ public partial class SmilingSammy : CharacterBody3D
         speedBoostParticles.Emitting = Xalkomak.isSpeedBoostCollectedBySammy;
         guardianParticles.Emitting = Xalkomak.isGuardianCollectedBySammy;
         currentStateS = currentState.ToString();
+        prevStateS = previousState.ToString();
         s_Velocity = Velocity.Length();
         trackerPos = playerTracker.GlobalPosition;
     }
@@ -103,6 +106,7 @@ public partial class SmilingSammy : CharacterBody3D
         if (sammyHasSpeedBoost)
         {
             sammyTimer.Stop();
+            UpdateState();
             currentState = SammyStates.SpeedBoosted;
             animSpeed = animSpeedSpeedBoost;
             sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
@@ -112,6 +116,7 @@ public partial class SmilingSammy : CharacterBody3D
         }
         else
         {
+            UpdateState();
             currentState = SammyStates.Patrolling;
         }
     }
@@ -120,6 +125,7 @@ public partial class SmilingSammy : CharacterBody3D
     {
         if (hasSpeedBoost)
         {
+            UpdateState();
             currentState = SammyStates.SpeedBoosted;
             animSpeed = animSpeedSpeedBoost;
             sammyAnimTree.Set("parameters/Running Blend/Speed/scale", animSpeed);
@@ -129,6 +135,7 @@ public partial class SmilingSammy : CharacterBody3D
         }
         else
         {
+            UpdateState();
             currentState = SammyStates.Patrolling;
         }
     }
@@ -157,7 +164,8 @@ public partial class SmilingSammy : CharacterBody3D
                 break;
             case SammyStates.Chasing:
                 if (sammyNav.IsNavigationFinished() || !sammyNav.IsTargetReachable())
-                {                    
+                {
+                    UpdateState();
                     currentState = SammyStates.Idle;
                     moveSpeed = 0;
                     return;
@@ -172,6 +180,7 @@ public partial class SmilingSammy : CharacterBody3D
                         SetTimer();
                         flag++;
                     }
+                    UpdateState();
                     currentState = SammyStates.Idle;
                     moveSpeed = 0;
                     return;
@@ -295,6 +304,7 @@ public partial class SmilingSammy : CharacterBody3D
     {
         if (currentState != SammyStates.Chasing && currentState != SammyStates.SpeedBoosted)
         {
+            UpdateState();
             currentState = SammyStates.Chasing;
         }
         targetPos = player.GlobalPosition;
@@ -307,6 +317,7 @@ public partial class SmilingSammy : CharacterBody3D
     {
         if (currentState != SammyStates.Hunting && currentState != SammyStates.SpeedBoosted)
         {
+            UpdateState();
             currentState = SammyStates.Hunting;
         }
         targetPos = playerTracker.GlobalPosition;
@@ -318,6 +329,7 @@ public partial class SmilingSammy : CharacterBody3D
         sammyTimer.Stop();
         EmitSignal(SignalName.RandomizeNavigation);
         SetTimer();
+        UpdateState();
         currentState = SammyStates.Patrolling;
         waypointIndex = GD.RandRange(0, waypoints.Count - 1);
         targetPos = waypoints[waypointIndex].GlobalPosition;
@@ -328,7 +340,7 @@ public partial class SmilingSammy : CharacterBody3D
     {
         sammyTimer.Stop();
         EmitSignal(SignalName.RandomizeNavigation);
-        //SetTimer();
+        UpdateState();
         currentState = SammyStates.SpeedBoosted;
         waypointIndex = GD.RandRange(0, waypoints.Count - 1);
         targetPos = waypoints[waypointIndex].GlobalPosition;
@@ -338,7 +350,6 @@ public partial class SmilingSammy : CharacterBody3D
     private void OnNavUpdateTimerTimeout()
     {
         sammyNav.TargetPosition = targetPos;
-
     }
 
     public void GetStunned()
@@ -347,6 +358,7 @@ public partial class SmilingSammy : CharacterBody3D
         {
             return; // Just don't react to getting hit by the Stun rune.
         }
+        UpdateState();
         currentState = SammyStates.Stunned;
         isStunned = true;
         sammyAnimTree.Set("parameters/conditions/idle", false);
@@ -371,6 +383,7 @@ public partial class SmilingSammy : CharacterBody3D
 
     private void OnHuntCountdownTimeout()
     {
+        UpdateState();
         currentState = SammyStates.Hunting;
     }
 
@@ -400,6 +413,7 @@ public partial class SmilingSammy : CharacterBody3D
                 sammyAnimTree.Set("parameters/Stun State/conditions/stunEnded", false);
                 jumpscareArea.SetDeferred("monitoring", false);
                 jumpscareNum = GD.RandRange(1, 2);
+                UpdateState();
                 currentState = SammyStates.Idle;
                 moveSpeed = 0;
                 sammyNav.TargetPosition = GlobalPosition;
@@ -418,6 +432,7 @@ public partial class SmilingSammy : CharacterBody3D
         {
             isStunned = false;
             jumpscareArea.SetDeferred("monitoring", true);
+            UpdateState();
             currentState = SammyStates.Idle;
         }
 
@@ -446,15 +461,15 @@ public partial class SmilingSammy : CharacterBody3D
         sammyMeshAnim.Play();
     }
 
-    //public void OnPlayerSpotted(bool canSeePlayer)
-    //{
-    //    if(canSeePlayer)
-    //    {
-    //        ChasePlayer();
-    //    }
-    //    else
-    //    {
-    //        LostPlayer();
-    //    }
-    //}
+    private void UpdateState()
+    {
+        previousState = currentState;
+    }
+
+    public void HoldInPlace()
+    {
+        UpdateState();
+        currentState = SammyStates.Idle;
+        sammyNav.TargetPosition = GlobalPosition;
+    }
 }

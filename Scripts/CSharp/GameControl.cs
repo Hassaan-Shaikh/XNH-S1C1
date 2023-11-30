@@ -301,8 +301,8 @@ public partial class GameControl : Node3D
 
 	private void RandomizeNavigation()
 	{
-		navigationRegion.EnterCost = GD.RandRange(1, 200);
-        navigationRegion.TravelCost = GD.RandRange(1, 200);
+		navigationRegion.EnterCost = 100;//GD.RandRange(1, 200);
+		navigationRegion.TravelCost = 100;//GD.RandRange(1, 200);
 		/*GD.Print("Travel Cost: " + navigationRegion.TravelCost);
         GD.Print("Enter Cost: " + navigationRegion.EnterCost);*/
     }

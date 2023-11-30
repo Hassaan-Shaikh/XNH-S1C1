@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=43 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dftdwyx4b8j6x" path="res://Scenes/SmilingSammy.tscn" id="15_gnd3f"]
 [ext_resource type="PackedScene" uid="uid://dcuhoagswckav" path="res://Scenes/LevelLoader.tscn" id="16_e0g6k"]
 [ext_resource type="PackedScene" uid="uid://dadgqkrpv4dw1" path="res://Scenes/PauseMenu.tscn" id="17_s0uch"]
+[ext_resource type="PackedScene" uid="uid://bect37ahqkhkt" path="res://Scenes/Door.tscn" id="19_7frja"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tpccn"]
 resource_local_to_scene = true
@@ -268,7 +269,7 @@ powerRunePoints = [NodePath("PowerRuneLocations/Location1"), NodePath("PowerRune
 process_mode = 1
 transform = Transform3D(2.3, 0, 0, 0, 0.7, 0, 0, 0, 2.3, 0, 0, 0)
 
-[node name="SammyNavRegion" type="NavigationRegion3D" parent="Cellar"]
+[node name="SammyNavRegion" type="NavigationRegion3D" parent="Cellar" groups=["NavRegion"]]
 transform = Transform3D(0.454545, 0, 0, 0, 1.42857, 0, 0, 0, 0.454545, 0, 0, 0)
 navigation_mesh = SubResource("NavigationMesh_tpccn")
 
@@ -300,7 +301,24 @@ shape = SubResource("ConcavePolygonShape3D_upywy")
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -4.2345, 0, 7.39958)
 radius = 0.5
 vertices = PackedVector3Array(-0.738592, 0, -0.684268, -0.702745, 0, 0.431936, 0.798236, 0, 0.347512, 0.927263, 0, -1.02066, -0.708184, 0, -0.812482)
-use_3d_avoidance = true
+
+[node name="Door0" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(-1.31904, 0, -1.9917e-07, 0, 1.3, 0, 1.9917e-07, 0, -1.31904, 10.3486, 0, -12.1966)
+
+[node name="Door1" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(-1.31904, 0, -1.9917e-07, 0, 1.3, 0, 1.9917e-07, 0, -1.31904, 7.31289, 0, -12.1966)
+
+[node name="Door2" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(1.31904, 0, 0, 0, 1.3, 0, 0, 0, 1.31904, -13.3005, 1.19209e-07, -5.61409)
+
+[node name="Door3" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(-5.76573e-08, 0, 1.31904, 0, 1.3, 0, -1.31904, 0, -5.76573e-08, -8.56663, 1.19209e-07, -11.1258)
+
+[node name="Door4" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(-4.18109e-08, 0, -0.956523, 0, 1.3, 0, 0.956523, 0, -4.18109e-08, -6.8985, 1.19209e-07, -9.00138)
+
+[node name="Door5" parent="Cellar/SammyNavRegion" instance=ExtResource("19_7frja")]
+transform = Transform3D(1.31904, 0, 0, 0, 1.3, 0, 0, 0, 1.31904, -14.2486, 1.19209e-07, 2.13477)
 
 [node name="Roof" type="MeshInstance3D" parent="Cellar"]
 transform = Transform3D(9.99999, 0, 0, 0, 9.99999, 0, 0, 0, 9.99999, 0, 5, 0)
@@ -333,6 +351,7 @@ occluder = ExtResource("3_g0ikf")
 
 [node name="LightmapGI_Hard" type="LightmapGI" parent="."]
 process_mode = 1
+visible = false
 light_data = ExtResource("8_4iftb")
 
 [node name="Player" parent="." instance=ExtResource("2_an7nd")]
@@ -612,6 +631,10 @@ gizmo_extents = 1.0
 
 [node name="Waypoint23" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -16.5)
+gizmo_extents = 1.0
+
+[node name="Waypoint24" type="Marker3D" parent="SammyWaypoints" groups=["Waypoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77537, 0, -10.6656)
 gizmo_extents = 1.0
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("gameScene", "levelLoader") instance=ExtResource("17_s0uch")]

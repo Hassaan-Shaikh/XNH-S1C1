@@ -18,7 +18,8 @@ public partial class DeathScreen : Control
         "Sammy is persistent. Take sharp turns to lose him.",
         "Use power runes to gain an advantage against Sammy.",
         "Close the doors behind yourself to delay Sammy's movement.",
-        "Your stamina is limited. Use it wisely."
+        "Your stamina is limited. Use it wisely.",
+        "Sammy can still catch you even if you're invisible."
     };
 
     public const string userGameDataPath = "user://save.dat";

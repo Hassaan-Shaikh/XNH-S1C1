@@ -1,10 +1,12 @@
+CollisionShape3D
+Area3D
+NavigationLink3D
 NavigationObstacle3D
 Timer
 RayCast3D
 AnimationPlayer
 Node3D
 AnimatableBody3D
-CollisionShape3D
 VBoxContainer
 Button
 Marker3D
@@ -23,10 +25,8 @@ Label
 LightmapGI
 MeshInstance3D
 CenterContainer
-Area3D
 AudioStreamPlayer
 AnimationTree
 SkeletonIK3D
 NavigationAgent3D
 BoneAttachment3D
-CharacterBody3D

@@ -1,0 +1,30 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cmkdponegvye8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xyocr"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+sky_curve = 2.0
+
+[sub_resource type="Sky" id="Sky_ct36p"]
+sky_material = SubResource("ProceduralSkyMaterial_xyocr")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_ct36p")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.1
+ssao_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 0.22
+sdfgi_cascades = 2
+sdfgi_max_distance = 51.2
+sdfgi_y_scale = 0
+sdfgi_energy = 0.865
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.08
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.35

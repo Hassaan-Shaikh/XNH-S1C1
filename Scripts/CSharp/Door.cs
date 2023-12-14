@@ -4,8 +4,8 @@ using System;
 public partial class Door : AnimatableBody3D
 {
 	[ExportCategory("References")]
+	[Export] public Node3D rootNode;
 	[Export] public AnimationPlayer doorAnim;
-	[Export] public NavigationObstacle3D doorObstacle;
 	
 	public NavigationRegion3D navRegion;
 
@@ -31,17 +31,24 @@ public partial class Door : AnimatableBody3D
 
 	public void ToggleDoor()
 	{
-		isOpen = !isOpen;
-		doorObstacle.AvoidanceEnabled = isOpen;
-		switch(isOpen)
+		if(!IsExitDoor())
 		{
-			case true:
-				doorAnim.Play("SwingDoor");
-				break;
-			case false:
-				doorAnim.PlayBackwards("SwingDoor");
-				break;
-		}
+            isOpen = !isOpen;
+            switch (isOpen)
+            {
+                case true:
+                    doorAnim.Play("SwingDoor");
+                    break;
+                case false:
+                    doorAnim.PlayBackwards("SwingDoor");
+                    break;
+            }
+        }
+	}
+
+	public bool IsExitDoor()
+	{
+		return rootNode.Name.Equals("Door6");
 	}
 
 	private void TimeIt()

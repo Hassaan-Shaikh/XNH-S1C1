@@ -28,8 +28,17 @@ public partial class PlayerRay : RayCast3D
             }
 			else if(detected is Door)
 			{
-                crosshair.Texture = crosshairHand;
-                promptLabel.Text = (string)detected.Call("GetPrompt");
+                bool isExitDoor = (bool)detected.Call("IsExitDoor");
+                if (isExitDoor)
+                {
+                    crosshair.Texture = crosshairNormal;
+                    promptLabel.Text = "Collect all documents before you can leave.";
+                }
+                else
+                {
+                    crosshair.Texture = crosshairHand;
+                    promptLabel.Text = (string)detected.Call("GetPrompt");
+                }
             }
         }
 		else 

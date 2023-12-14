@@ -6,6 +6,7 @@ public partial class GameControl : Node3D
 {
 	[Signal] public delegate void SammySpeedBoostedEventHandler(bool sammyHasSpeedBoost);
 
+	[Export] public Area3D exitTrigger;
 	[ExportCategory("References")]
 	[ExportGroup("Prefabs")]
 	[Export] public Player player;
@@ -40,6 +41,8 @@ public partial class GameControl : Node3D
 	[ExportSubgroup("Power Rune Locations")]
 	[Export] public Node3D[] powerRunePoints;
 
+	public LevelLoader levelLoader;
+
 	bool speedBoostUsed = false;
 	bool stunUsed = false;
 	bool guardianUsed = false;
@@ -48,10 +51,12 @@ public partial class GameControl : Node3D
 	bool[] isThisSpotFree;
 
     const string pauseKey = "pause";
+	const string endGamePath = "res://Scenes/EndGame.tscn";
 
     public override void _Ready()
     {
         base._Ready();
+		levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
 		//Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
 		player = GetTree().GetNodesInGroup("Player")[0] as Player;
 		hardModeBlack.Visible = Xalkomak.difficulty == Xalkomak.Difficulty.Hard;
@@ -336,4 +341,12 @@ public partial class GameControl : Node3D
 		//pauseMenu.Visible = isGamePaused;
 		//GetTree().Paused = isGamePaused;
     }
+
+	private void OnExitAreaBodyEntered(Node3D body)
+	{
+		if (body.IsInGroup("Player") && Xalkomak.documentsCollected >= 7)
+		{
+			levelLoader.SwitchScene(endGamePath);
+		}
+	}
 }

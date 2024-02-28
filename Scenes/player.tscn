@@ -659,7 +659,7 @@ stream_2/weight = 1.0
 stream_3/stream = ExtResource("20_xckmc")
 stream_3/weight = 1.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "flashlight", "staminaAnim", "speedBoostAnim", "stunAnim", "playedStunnedAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "flashlight", "staminaAnim", "playerCamera", "speedBoostAnim", "stunAnim", "playedStunnedAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
 editor_description = "The main player you will be playing as."
 collision_layer = 2
 collision_mask = 732
@@ -668,6 +668,7 @@ allowHeadBob = false
 stamina = NodePath("PlayerUI/StaminaBar")
 flashlight = NodePath("Head/Hand/Flashlight")
 staminaAnim = NodePath("PlayerUI/StaminaBar/StaminaAnim")
+playerCamera = NodePath("Head/PlayerCam")
 speedBoostAnim = NodePath("SpeedBoostAnim")
 stunAnim = NodePath("StunAnim")
 playedStunnedAnim = NodePath("PlayerStunned")
@@ -684,8 +685,10 @@ script = ExtResource("2_20fih")
 parent = NodePath("..")
 
 [node name="PlayerCam" type="Camera3D" parent="Head"]
+current = true
 fov = 60.0
 near = 0.001
+far = 200.0
 
 [node name="PlayerRay" type="RayCast3D" parent="Head" node_paths=PackedStringArray("promptLabel", "crosshair")]
 visible = false
@@ -709,6 +712,7 @@ spot_range = 15.0
 spot_angle = 30.0
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="."]
+visible = false
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_kigf8")
 
@@ -978,8 +982,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
 offset_top = 540.0
-offset_right = 89280.0
-offset_bottom = 50220.0
+offset_right = 98880.0
+offset_bottom = 55620.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)

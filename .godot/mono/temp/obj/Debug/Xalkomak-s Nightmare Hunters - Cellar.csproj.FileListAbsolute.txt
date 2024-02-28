@@ -15,3 +15,4 @@ C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.pdb
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.genruntimeconfig.cache
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\ref\Xalkomak-s Nightmare Hunters - Cellar.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\Debug\Xalkomak-s Nightmare Hunters - Cellar.sourcelink.json

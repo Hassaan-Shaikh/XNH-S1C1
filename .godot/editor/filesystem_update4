@@ -1,21 +1,3 @@
-res://Scenes/player.tscn
-res://Resources/Shaders/SpeedBoost.gdshader
-res://Resources/Shaders/SpeedBoost.tres
-res://Resources/Shaders/StunExplosion.tres
-res://Resources/Environment/GameEnvironment.tres
-res://Resources/Materials/ParticleProcess.tres
-res://Resources/Shaders/Blur.gdshader
-res://Scripts/CSharp/Door.cs
-res://Resources/StyleBoxes/Button.tres
-res://Scenes/Game.tscn
-res://Scenes/document.tscn
-res://Scenes/SmilingSammy.tscn
-res://Scenes/DeathScreen.tscn
-res://Scenes/PauseMenu.tscn
-res://Scenes/MainMenu.tscn
-res://Scenes/DifficultySelectionMenu.tscn
-res://Scenes/ConfirmQuit.tscn
-res://Scenes/Door.tscn
 res://Scripts/CSharp/CamControl.cs
 res://Scripts/CSharp/ConfirmQuit.cs
 res://Scripts/CSharp/DeathScreen.cs
@@ -23,6 +5,7 @@ res://Scripts/CSharp/DebugPanel.cs
 res://Scripts/CSharp/DifficultySelectionMenu.cs
 res://Scripts/CSharp/Document.cs
 res://Scripts/CSharp/DocumentCounter.cs
+res://Scripts/CSharp/Door.cs
 res://Scripts/CSharp/DoorChecker.cs
 res://Scripts/CSharp/Footstep.cs
 res://Scripts/CSharp/GameControl.cs
@@ -40,4 +23,23 @@ res://Scripts/CSharp/SpeedBoost.cs
 res://Scripts/CSharp/Stun.cs
 res://Scripts/CSharp/StunExplosion.cs
 res://Scripts/CSharp/Vanish.cs
+res://Scenes/player.tscn
+res://Resources/Shaders/SpeedBoost.gdshader
+res://Resources/Shaders/SpeedBoost.tres
+res://Resources/Shaders/StunExplosion.tres
+res://Resources/Environment/GameEnvironment.tres
+res://Resources/Materials/ParticleProcess.tres
+res://Resources/Shaders/Blur.gdshader
+res://Resources/StyleBoxes/Button.tres
+res://Scenes/Game.tscn
+res://Scenes/document.tscn
+res://Scenes/SmilingSammy.tscn
+res://Scenes/DeathScreen.tscn
+res://Scenes/PauseMenu.tscn
+res://Scenes/MainMenu.tscn
+res://Scenes/DifficultySelectionMenu.tscn
+res://Scenes/ConfirmQuit.tscn
+res://Scenes/Door.tscn
 res://Scenes/OptionsMenu.tscn
+res://Resources/Animations/Smiling Sammy/Jumpscare1.res
+res://Resources/Animations/Smiling Sammy/Jumpscare2.res

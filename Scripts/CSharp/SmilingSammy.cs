@@ -11,6 +11,8 @@ public partial class SmilingSammy : CharacterBody3D
     [Signal] public delegate void StoppedByGuardianEventHandler();
 
     [ExportCategory("References")]
+    [Export] public Camera3D playerCam;
+    [Export] public Camera3D jumpscareCam;
     [Export] public NavigationAgent3D sammyNav;
     [Export] public BoneAttachment3D head;
     [Export] public Timer sammyTimer;
@@ -68,7 +70,9 @@ public partial class SmilingSammy : CharacterBody3D
     public override void _Ready()
     {
         base._Ready();
+        playerCam = GetViewport().GetCamera3D();
         sammyNav = GetNode<NavigationAgent3D>("SammyNav");
+        jumpscareCam = GetNode<Camera3D>("JumpscareCam");
         head = GetNode<BoneAttachment3D>("%Head");
         sammyTimer = GetNode<Timer>("SammyTimer");
         sammyNavTimer = GetNode<Timer>("NavUpdateTimer");

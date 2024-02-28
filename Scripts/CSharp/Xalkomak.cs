@@ -13,7 +13,7 @@ public static class Xalkomak
 
     public static int gamesWonOnNormalMode = 0; //
     public static int gamesWonOnHardMode = 0; //
-    public static int totalGamesWon = 1; //
+    public static int totalGamesWon = 0; //
     public static int totalGamesLost = 0; //
 
     public static int documentsCollected = 0;

@@ -11,12 +11,22 @@ public partial class MainMenu : Control
     private string selectedDifficulty;
     private bool confirmingQuit;
 
-    public const string userGameDataPath = "user://save.dat";
+    public const string userGameDataPath = "user://XNH_Cellar_save.dat";
     const string gamePath = "res://Scenes/Game.tscn";
 
     public override void _Ready()
     {
         base._Ready();
+        if (FileAccess.FileExists(userGameDataPath))
+        {
+            GD.Print("It exists!");
+            LoadGameData();
+        }
+        else
+        {
+            GD.Print("File does not exist.");
+            SaveGameData();
+        }
         //LoadGameData();
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         levelLoader.Visible = true;

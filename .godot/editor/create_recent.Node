@@ -1,3 +1,5 @@
+MeshInstance3D
+Camera3D
 CollisionShape3D
 Area3D
 NavigationLink3D
@@ -23,10 +25,8 @@ GPUParticles3D
 ColorRect
 Label
 LightmapGI
-MeshInstance3D
 CenterContainer
 AudioStreamPlayer
 AnimationTree
 SkeletonIK3D
 NavigationAgent3D
-BoneAttachment3D

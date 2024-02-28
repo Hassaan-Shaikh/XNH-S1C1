@@ -16,6 +16,8 @@ This is the first chapter of the series, where the you find yourself in a cellar
 But you are not alone. There is a monster in this cellar, and he is looking for you. Stay out of his sight."
 config/tags=PackedStringArray("xalkomak\'s_nightmare_hunters")
 run/main_scene="res://Scenes/MainMenu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="XNH"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Textures/Solkoth/SKS_logo.png"

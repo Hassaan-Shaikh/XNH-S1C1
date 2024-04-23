@@ -117,6 +117,7 @@ collision_mask = 18
 script = ExtResource("2_s85uk")
 
 [node name="Guardian2" parent="." index="0"]
+layers = 16
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_4ol53")
 

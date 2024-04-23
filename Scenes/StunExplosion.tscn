@@ -10,11 +10,11 @@ frequency = 0.0075
 fractal_type = 2
 fractal_lacunarity = 2.5
 fractal_weighted_strength = 0.5
-domain_warp_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k51fh"]
 width = 256
 height = 256
+in_3d_space = true
 seamless = true
 noise = SubResource("FastNoiseLite_orr8q")
 
@@ -34,6 +34,7 @@ rings = 16
 
 [node name="StunExplosion" type="MeshInstance3D"]
 editor_description = "The exploding VFX for the SStun rune."
+layers = 32
 cast_shadow = 0
 mesh = SubResource("SphereMesh_hdnge")
 script = ExtResource("2_lp81m")

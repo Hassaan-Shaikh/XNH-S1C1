@@ -148,7 +148,7 @@ public partial class MainMenu : Control
     {
         ConfirmQuit quitBox = confirmQuit.Instantiate() as ConfirmQuit;
         AddChild(quitBox);
-        quitBox.quitMessage.Text = "";
+        quitBox.SetQuitMessage("[center]Confirm to exit the game[/center]");
         quitBox.QuitConfirmed += (bool confirmedQuit) =>
         {
             confirmingQuit = confirmedQuit;

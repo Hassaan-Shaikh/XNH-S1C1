@@ -1,3 +1,4 @@
+OmniLight3D
 SpringArm3D
 MeshInstance3D
 Camera3D
@@ -30,4 +31,3 @@ CenterContainer
 AudioStreamPlayer
 AnimationTree
 SkeletonIK3D
-NavigationAgent3D

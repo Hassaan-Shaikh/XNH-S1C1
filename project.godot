@@ -17,7 +17,7 @@ But you are not alone. There is a monster in this cellar, and he is looking for 
 config/tags=PackedStringArray("xalkomak\'s_nightmare_hunters")
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="XNH"
+config/custom_user_dir_name="XNH/Season1/Chapter1"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Textures/Solkoth/SKS_logo.png"
@@ -105,9 +105,24 @@ attemptSave={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+anyMovement={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+3d_render/layer_1="Environment"
+3d_render/layer_2="Player"
+3d_render/layer_3="Monster"
+3d_render/layer_4="Document"
+3d_render/layer_5="Power Rune"
+3d_render/layer_6="VFX"
+3d_render/layer_7="Door"
 3d_physics/layer_1="All"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Environment"

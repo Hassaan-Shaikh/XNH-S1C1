@@ -26,7 +26,7 @@ public partial class Player : CharacterBody3D
     [ExportSubgroup("Power Rune Animators")]
     [Export] public AnimationPlayer speedBoostAnim;
     [Export] public AnimationPlayer stunAnim;
-    [Export] public AnimationPlayer playedStunnedAnim;
+    [Export] public AnimationPlayer playerStunnedAnim;
     [Export] public AnimationPlayer guardianAnim;
     [Export] public AnimationPlayer vanishAnim;
 
@@ -36,6 +36,7 @@ public partial class Player : CharacterBody3D
     const string rightKey = "right";
     const string sprintKey = "sprint";
     const string jumpKey = "jump";
+    const string anyMovement = "anyMovement";
     const string pauseKey = "pause";
 
     bool isExhausted = false;
@@ -87,7 +88,7 @@ public partial class Player : CharacterBody3D
             if (stamina.Value <= stamina.MinValue)
             {
                 isExhausted = true;
-                //staminaAnim.Play("CannotSprint");
+                staminaAnim.Play("CannotSprint");
             }
 
             if (direction != Vector3.Zero)
@@ -98,7 +99,8 @@ public partial class Player : CharacterBody3D
                     stamina.Value -= 0.2f;
                     if(stamina.Value != stamina.MaxValue)
                     {
-                        //staminaAnim.Play("FadeIn");
+                        //if (!staminaAnim.CurrentAnimation.Equals("FadeIn"))
+                        //    staminaAnim.Play("FadeIn");
                     }
                 }
                 else
@@ -108,16 +110,18 @@ public partial class Player : CharacterBody3D
             }
             if (direction != Vector3.Zero || direction == Vector3.Zero)
             {
-                if (!Input.IsActionPressed(sprintKey) || isExhausted)
+                if (!Input.IsActionPressed(sprintKey) || isExhausted || !Input.IsActionPressed(anyMovement))
                 {
                     stamina.Value += 0.1f;
                     if (stamina.Value == stamina.MaxValue)
                     {
-                        //staminaAnim.Play("FadeOut");
+                        //if (!staminaAnim.CurrentAnimation.Equals("FadeOut"))
+                        //    staminaAnim.Play("FadeOut");
                     }
                     if (stamina.Value >= 45f)
                     {
                         isExhausted = false;
+                        staminaAnim.Play("RESET");
                     }
                 }
             }
@@ -217,8 +221,8 @@ public partial class Player : CharacterBody3D
     public void SetStunned(bool playerStunned)
     {
         isStunned = playerStunned;
-        playedStunnedAnim.CurrentAnimation = playerStunned ? "P_Stunned" : "P_Unstun";
-        playedStunnedAnim.Play();
+        playerStunnedAnim.CurrentAnimation = playerStunned ? "P_Stunned" : "P_Unstun";
+        playerStunnedAnim.Play();
     }
 
     private void StartPersisting(string animName)
@@ -231,26 +235,22 @@ public partial class Player : CharacterBody3D
 
     private void HandleStaminaAnim()
     {
-        if(stamina.Value <= stamina.MaxValue)
+        if (isExhausted)
         {
-            staminaAnim.Play("FadeIn");
+            if (staminaAnim.CurrentAnimation != "CannotSprint")
+                staminaAnim.Play("CannotSprint");
         }
-        else if(stamina.Value >= stamina.MaxValue)
-        {
-            staminaAnim.Play("FadeOut");
-        }
-        else if (isExhausted)
-        {
-            staminaAnim.Play("CannotSprint");
-        }
-        //else if(!isExhausted && stamina.Value != stamina.MaxValue)
+        //else
         //{
-        //    staminaAnim.Play("RESET");
+        //    if (staminaAnim.CurrentAnimation != "RESET")
+        //        staminaAnim.Play("RESET");
         //}
     }
 
     private void OnStaminaBarValueChanged(float value)
     {
-        
+        string fadeAnim = value == stamina.MaxValue ? "FadeOut" : "FadeIn";
+        //if (staminaAnim.CurrentAnimation != fadeAnim)
+        //    staminaAnim.Play(fadeAnim);
     }
 }

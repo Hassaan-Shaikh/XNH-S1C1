@@ -220,16 +220,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
 shape = SubResource("BoxShape3D_v5pdl")
 
 [node name="DoorMain" type="MeshInstance3D" parent="Door Frame/DoorCol"]
+layers = 64
 mesh = SubResource("ArrayMesh_dkdjd")
 skeleton = NodePath("")
 
 [node name="Door Handle In" type="MeshInstance3D" parent="Door Frame/DoorCol/DoorMain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.1, 0.071)
+layers = 64
 mesh = SubResource("ArrayMesh_eysgi")
 skeleton = NodePath("")
 
 [node name="Door Handle Out" type="MeshInstance3D" parent="Door Frame/DoorCol/DoorMain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.1, -0.027)
+layers = 64
 mesh = SubResource("ArrayMesh_wruau")
 skeleton = NodePath("")
 

@@ -118,6 +118,7 @@ collision_mask = 18
 script = ExtResource("2_8peuv")
 
 [node name="Stun2" parent="." index="0"]
+layers = 16
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_ahqsj")
 

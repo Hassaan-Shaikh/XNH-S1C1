@@ -330,6 +330,7 @@ shadow_enabled = true
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
 process_mode = 1
 occluder = ExtResource("3_g0ikf")
+bake_mask = 4294967169
 
 [node name="LightmapGI_Hard" type="LightmapGI" parent="."]
 process_mode = 1

@@ -15,6 +15,11 @@ public partial class ConfirmQuit : Control
         popAnim = GetNode<AnimationPlayer>("PopupAnim");
     }
 
+    public void SetQuitMessage(string message)
+    {
+        quitMessage.Text = message;
+    }
+
     private void OnConfirmButtonPressed()
     {
         GD.Print("Conifrm button pressed.");

@@ -157,5 +157,6 @@ cap_top = false
 cap_bottom = false
 
 [node name="GuardianShield" type="MeshInstance3D"]
+layers = 32
 mesh = SubResource("CylinderMesh_h5vw8")
 script = ExtResource("1_8loo0")

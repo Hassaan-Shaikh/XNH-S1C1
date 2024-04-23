@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bj8jt7vqp3wyx"]
+[gd_scene load_steps=56 format=3 uid="uid://bj8jt7vqp3wyx"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/Player.cs" id="1_vplpl"]
 [ext_resource type="Script" path="res://Scripts/CSharp/CamControl.cs" id="2_20fih"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/CSharp/DebugPanel.cs" id="6_m5sv2"]
 [ext_resource type="Script" path="res://Scripts/CSharp/DocumentCounter.cs" id="9_3uv2b"]
 [ext_resource type="Texture2D" uid="uid://cwt5egmvcbtnx" path="res://Textures/UI Textures/Crosshair.png" id="10_a5abb"]
+[ext_resource type="Script" path="res://Scripts/CSharp/StaminaAnim.cs" id="10_le50s"]
 [ext_resource type="Shader" path="res://Resources/Shaders/SpeedBoost.gdshader" id="11_hu3iy"]
 [ext_resource type="Shader" uid="uid://bsaodwrfxtwwj" path="res://Resources/Shaders/SpeedBoost.tres" id="11_nkfr1"]
 [ext_resource type="Texture2D" uid="uid://ddt58uh3e7j66" path="res://Textures/UI Textures/SpeedBoost.png" id="13_63ut0"]
@@ -34,7 +35,7 @@ height = 1.8
 [sub_resource type="Animation" id="Animation_e1o7o"]
 resource_name = "CannotSprint"
 length = 0.6
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,6 +47,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_nrgp5"]
@@ -63,6 +76,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:tint_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_vcx4j"]
 resource_name = "FadeOut"
@@ -78,6 +103,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:tint_progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_dantk"]
@@ -659,7 +696,7 @@ stream_2/weight = 1.0
 stream_3/stream = ExtResource("20_xckmc")
 stream_3/weight = 1.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "flashlight", "staminaAnim", "playerCamera", "speedBoostAnim", "stunAnim", "playedStunnedAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stamina", "flashlight", "staminaAnim", "playerCamera", "speedBoostAnim", "stunAnim", "playerStunnedAnim", "guardianAnim", "vanishAnim") groups=["Player"]]
 editor_description = "The main player you will be playing as."
 collision_layer = 2
 collision_mask = 732
@@ -671,7 +708,7 @@ staminaAnim = NodePath("PlayerUI/StaminaBar/StaminaAnim")
 playerCamera = NodePath("Head/PlayerCam")
 speedBoostAnim = NodePath("SpeedBoostAnim")
 stunAnim = NodePath("StunAnim")
-playedStunnedAnim = NodePath("PlayerStunned")
+playerStunnedAnim = NodePath("PlayerStunned")
 guardianAnim = NodePath("GuardianAnim")
 vanishAnim = NodePath("VanishAnim")
 metadata/_edit_group_ = true
@@ -713,6 +750,7 @@ spot_angle = 30.0
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="."]
 visible = false
+layers = 2
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_kigf8")
 
@@ -753,6 +791,7 @@ tint_under = Color(1, 1, 1, 0)
 libraries = {
 "": SubResource("AnimationLibrary_i7dc1")
 }
+script = ExtResource("10_le50s")
 
 [node name="DebugPanel" type="PanelContainer" parent="PlayerUI" node_paths=PackedStringArray("parent", "FPS", "playerSpeed", "isPlayerExhausted", "sammySpeed", "sammyState", "currentDifficulty", "sammyWaypointIndex", "waypointCount", "angleToPlayer", "sammyHasSB", "sammyHasS", "sammyHasG", "sammyHasV", "trackerPos")]
 layout_mode = 0
@@ -982,8 +1021,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
 offset_top = 540.0
-offset_right = 100800.0
-offset_bottom = 56700.0
+offset_right = 112320.0
+offset_bottom = 63180.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)

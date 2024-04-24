@@ -32,7 +32,7 @@ public partial class PlayerRay : RayCast3D
                 if (isExitDoor)
                 {
                     crosshair.Texture = crosshairNormal;
-                    promptLabel.Text = "Collect all documents before you can leave.";
+                    promptLabel.Text = Xalkomak.documentsCollected == 7 ? "" : "Collect all documents before you can leave.";
                 }
                 else
                 {

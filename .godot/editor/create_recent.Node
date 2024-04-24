@@ -1,3 +1,9 @@
+AudioStreamPlayer
+RichTextLabel
+Label
+HBoxContainer
+VBoxContainer
+HSlider
 OmniLight3D
 SpringArm3D
 MeshInstance3D
@@ -11,13 +17,10 @@ RayCast3D
 AnimationPlayer
 Node3D
 AnimatableBody3D
-VBoxContainer
 Button
 Marker3D
 Panel
 PanelContainer
-RichTextLabel
-HBoxContainer
 TextureButton
 MarginContainer
 CSGBox3D
@@ -25,9 +28,5 @@ AudioStreamPlayer3D
 TextureRect
 GPUParticles3D
 ColorRect
-Label
 LightmapGI
 CenterContainer
-AudioStreamPlayer
-AnimationTree
-SkeletonIK3D

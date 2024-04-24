@@ -1,5 +1,7 @@
-res://Scripts/CSharp
+res://Resources/Themes
 res://Scenes
+res://Scripts/CSharp
+res://Resources/Audio/Audio Buses
 res://Resources/Environment
 res://Textures/UI Textures
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports/macOS
@@ -19,4 +21,3 @@ res://Resources/Audio/SFX
 res://Resources/Animations/Smiling Sammy
 res://Resources/Meshes/Sammy
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Footage
-res://Resources/Occluders

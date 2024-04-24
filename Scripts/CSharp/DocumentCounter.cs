@@ -11,10 +11,11 @@ public partial class DocumentCounter : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
 		Text = "Documents Collected: " + Xalkomak.documentsCollected.ToString();
 		if(Xalkomak.documentsCollected == 7)
 		{
-			Text = "Leave";
+			Text = "Objective: Leave";
 		}
 	}
 }

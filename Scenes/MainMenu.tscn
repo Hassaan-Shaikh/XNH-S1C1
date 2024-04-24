@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7iab4dy841ua"]
+[gd_scene load_steps=15 format=3 uid="uid://c7iab4dy841ua"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/MainMenu.cs" id="1_3hf0h"]
 [ext_resource type="Texture2D" uid="uid://jbyfjo3yrw53" path="res://Textures/UI Textures/TitleScreen.png" id="1_66kyp"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://i2anv4nk6ela" path="res://Scenes/DifficultySelectionMenu.tscn" id="2_uovu1"]
 [ext_resource type="PackedScene" uid="uid://c4vdcv0hmsi7c" path="res://Scenes/ConfirmQuit.tscn" id="3_cm6ln"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="3_pvg4k"]
+[ext_resource type="PackedScene" uid="uid://cev8bbcnx4eah" path="res://Scenes/OptionsMenu.tscn" id="4_d1pm3"]
+[ext_resource type="AudioStream" uid="uid://b4xur0d5wuvn7" path="res://Resources/Audio/BGM/Corridors.mp3" id="7_sm5bw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yy3xx"]
 
@@ -48,6 +50,7 @@ script = ExtResource("1_3hf0h")
 levelLoader = NodePath("LevelLoader")
 difficultyMenu = ExtResource("2_uovu1")
 confirmQuit = ExtResource("3_cm6ln")
+optionsMenu = ExtResource("4_d1pm3")
 
 [node name="Screen" type="TextureRect" parent="."]
 layout_mode = 0
@@ -221,6 +224,12 @@ alignment = 0
 [node name="LevelLoader" parent="." instance=ExtResource("2_h11ro")]
 visible = false
 layout_mode = 1
+
+[node name="BGMusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_sm5bw")
+autoplay = true
+bus = &"BGM"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsButton" to="." method="OnOptionsButtonPressed"]

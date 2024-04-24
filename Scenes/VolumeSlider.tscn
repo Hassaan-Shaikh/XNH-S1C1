@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://jxt6unyaw0qx"]
+
+[ext_resource type="Script" path="res://Scripts/CSharp/VolumeSlider.cs" id="1_e88yb"]
+[ext_resource type="Theme" uid="uid://bq3kh15a0tjvx" path="res://Resources/Themes/Slider.tres" id="1_kakhr"]
+
+[node name="VolumeSlider" type="HSlider"]
+custom_minimum_size = Vector2(800, 58)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -29.0
+offset_right = 400.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 29)
+theme = ExtResource("1_kakhr")
+max_value = 1.0
+step = 0.001
+value = 0.135
+scrollable = false
+script = ExtResource("1_e88yb")

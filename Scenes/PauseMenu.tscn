@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dadgqkrpv4dw1"]
+[gd_scene load_steps=16 format=3 uid="uid://dadgqkrpv4dw1"]
 
 [ext_resource type="Shader" path="res://Resources/Shaders/Blur.gdshader" id="1_i206u"]
 [ext_resource type="Script" path="res://Scripts/CSharp/PauseMenu.cs" id="1_y2pcn"]
 [ext_resource type="PackedScene" uid="uid://c4vdcv0hmsi7c" path="res://Scenes/ConfirmQuit.tscn" id="2_pdhvw"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="2_pt12v"]
+[ext_resource type="PackedScene" uid="uid://cev8bbcnx4eah" path="res://Scenes/OptionsMenu.tscn" id="3_ne6u5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1jns"]
 shader = ExtResource("1_i206u")
@@ -117,6 +118,7 @@ mouse_filter = 1
 script = ExtResource("1_y2pcn")
 fadeAnim = NodePath("PauseFade")
 confirmQuit = ExtResource("2_pdhvw")
+optionsMenu = ExtResource("3_ne6u5")
 
 [node name="BlurEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_e1jns")

@@ -788,6 +788,7 @@ texture_progress = ExtResource("5_64fbq")
 tint_under = Color(1, 1, 1, 0)
 
 [node name="StaminaAnim" type="AnimationPlayer" parent="PlayerUI/StaminaBar"]
+playback_default_blend_time = 0.1
 libraries = {
 "": SubResource("AnimationLibrary_i7dc1")
 }
@@ -962,6 +963,8 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 25
 text = "Documents Collected: 0"
+horizontal_alignment = 2
+vertical_alignment = 1
 script = ExtResource("9_3uv2b")
 
 [node name="Crosshair" type="TextureRect" parent="PlayerUI"]
@@ -1021,8 +1024,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
 offset_top = 540.0
-offset_right = 112320.0
-offset_bottom = 63180.0
+offset_right = 116160.0
+offset_bottom = 65340.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)

@@ -7,6 +7,7 @@ public partial class MainMenu : Control
     [Export] public LevelLoader levelLoader;
     [Export] public PackedScene difficultyMenu;
     [Export] public PackedScene confirmQuit;
+    [Export] public PackedScene optionsMenu;
 
     private string selectedDifficulty;
     private bool confirmingQuit;
@@ -17,17 +18,17 @@ public partial class MainMenu : Control
     public override void _Ready()
     {
         base._Ready();
+        selectedDifficulty = "";
         if (FileAccess.FileExists(userGameDataPath))
         {
             GD.Print("It exists!");
-            LoadGameData();
+            //LoadGameData();
         }
         else
         {
             GD.Print("File does not exist.");
             SaveGameData();
         }
-        //LoadGameData();
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         levelLoader.Visible = true;
         GetTree().Paused = false;
@@ -82,10 +83,10 @@ public partial class MainMenu : Control
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if (Input.IsActionJustPressed("attemptSave"))
-        {
-            SaveGameData();
-        }
+        //if (Input.IsActionJustPressed("attemptSave"))
+        //{
+        //    SaveGameData();
+        //}
     }
 
     private void OnPlayButtonPressed()
@@ -94,7 +95,25 @@ public partial class MainMenu : Control
         {
             DifficultySelectionMenu menu = difficultyMenu.Instantiate() as DifficultySelectionMenu;
             AddChild(menu);
-            menu.DifficultySelected += GetDifficulty;
+            menu.DifficultySelected += (StringName difficulty) =>
+            {
+                selectedDifficulty = difficulty;
+                switch (selectedDifficulty)
+                {
+                    case "Normal":
+                        Xalkomak.difficulty = Xalkomak.Difficulty.Normal;
+                        GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
+                        break;
+                    case "Hard":
+                        Xalkomak.difficulty = Xalkomak.Difficulty.Hard;
+                        GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
+                        break;
+                    default:
+                        selectedDifficulty = "";
+                        GD.Print("No difficulty selected/Backed out.");
+                        break;
+                }
+            };
             ProcessMode = ProcessModeEnum.Disabled;
             menu.popUpAnim.AnimationFinished += (StringName animName) =>
             {
@@ -102,17 +121,20 @@ public partial class MainMenu : Control
                 {
                     ProcessMode = ProcessModeEnum.Always;
                 }
-                if (animName.Equals("PopOut") && (selectedDifficulty.Equals("Normal") || selectedDifficulty.Equals("Hard")))
+                if (animName.Equals("PopOut"))
                 {
-                    Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Hard ? 1 : 3;
-                    Xalkomak.playerCanControl = true;
-                    Xalkomak.documentsCollected = 0;
-                    for (int i = 0; i < Xalkomak.isDocumentCollected.Length; i++)
+                    if (!selectedDifficulty.Equals(""))
                     {
-                        Xalkomak.isDocumentCollected[i] = false;
+                        Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Hard ? 1 : 3;
+                        Xalkomak.playerCanControl = true;
+                        Xalkomak.documentsCollected = 0;
+                        for (int i = 0; i < Xalkomak.isDocumentCollected.Length; i++)
+                        {
+                            Xalkomak.isDocumentCollected[i] = false;
+                        }
+                        levelLoader.SwitchScene(gamePath);
                     }
                     menu.QueueFree();
-                    levelLoader.SwitchScene(gamePath);
                 }
             };
         }
@@ -131,7 +153,24 @@ public partial class MainMenu : Control
 
     private void OnOptionsButtonPressed()
     {
-
+        Node opMenu = optionsMenu.Instantiate();
+        AddChild(opMenu);
+        ProcessMode = ProcessModeEnum.Disabled;
+        AnimationPlayer opMenuPopAnim = opMenu.GetNode<AnimationPlayer>("PopupAnim");
+        opMenuPopAnim.AnimationFinished += (StringName animName) => 
+        {
+            if (animName.Equals("PopIn"))
+            {
+                ProcessMode = ProcessModeEnum.Always;
+                GD.Print("Animation finished.");
+            }
+            if (animName.Equals("PopOut"))
+                opMenu.QueueFree();
+        };
+        opMenu.GetNode<Button>("PanelContainer/BackButton").Pressed += () =>
+        {
+            opMenuPopAnim.Play("PopOut");
+        };
     }
 
     private void OnExtrasButtonPressed()
@@ -160,10 +199,11 @@ public partial class MainMenu : Control
             {
                 ProcessMode = ProcessModeEnum.Always;
             }
-            if (animName.Equals("PopOut") && confirmingQuit)
-            {                
+            if (animName.Equals("PopOut"))
+            {      
+                if (confirmingQuit)
+                    GetTree().Quit();
                 quitBox.QueueFree();
-                GetTree().Quit();
             }
         };
     }

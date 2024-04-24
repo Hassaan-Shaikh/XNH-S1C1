@@ -7,6 +7,7 @@ public partial class PauseMenu : Control
     [Export] public LevelLoader levelLoader;
     [Export] public AnimationPlayer fadeAnim;
     [Export] public PackedScene confirmQuit;
+    [Export] public PackedScene optionsMenu;
 
     private bool confirmingQuit;
     private byte source;
@@ -27,7 +28,22 @@ public partial class PauseMenu : Control
 
     private void OnOptionsPressed()
     {
-
+        Node opMenu = optionsMenu.Instantiate();
+        AddChild(opMenu);
+        ProcessMode = ProcessModeEnum.Disabled;
+        AnimationPlayer opMenuPopAnim = opMenu.GetNode<AnimationPlayer>("PopupAnim");
+        opMenuPopAnim.AnimationFinished += (StringName animName) =>
+        {
+            if (animName.Equals("PopIn"))
+            {
+                ProcessMode = ProcessModeEnum.Always;
+                GD.Print("Animation finished.");
+            }
+        };
+        opMenu.GetNode<Button>("PanelContainer/BackButton").Pressed += () =>
+        {
+            opMenuPopAnim.Play("PopOut");
+        };
     }
 
     private void OnQuitToTitlePressed()

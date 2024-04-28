@@ -1,7 +1,12 @@
+Button
+Control
+OptionButton
+HBoxContainer
+TabBar
+TabContainer
 AudioStreamPlayer
 RichTextLabel
 Label
-HBoxContainer
 VBoxContainer
 HSlider
 OmniLight3D
@@ -17,7 +22,6 @@ RayCast3D
 AnimationPlayer
 Node3D
 AnimatableBody3D
-Button
 Marker3D
 Panel
 PanelContainer
@@ -26,7 +30,3 @@ MarginContainer
 CSGBox3D
 AudioStreamPlayer3D
 TextureRect
-GPUParticles3D
-ColorRect
-LightmapGI
-CenterContainer

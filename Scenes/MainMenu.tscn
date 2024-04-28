@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7iab4dy841ua"]
+[gd_scene load_steps=13 format=3 uid="uid://c7iab4dy841ua"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/MainMenu.cs" id="1_3hf0h"]
 [ext_resource type="Texture2D" uid="uid://jbyfjo3yrw53" path="res://Textures/UI Textures/TitleScreen.png" id="1_66kyp"]
@@ -13,12 +13,6 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tsi7w"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_177ou"]
-content_margin_left = 15.0
-content_margin_top = 10.0
-content_margin_right = 15.0
-content_margin_bottom = 10.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q2gjj"]
 content_margin_left = 15.0
 content_margin_top = 10.0
@@ -26,12 +20,6 @@ content_margin_right = 15.0
 content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_raqw5"]
-content_margin_left = 15.0
-content_margin_top = 10.0
-content_margin_right = 15.0
-content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tuhy"]
 content_margin_left = 15.0
 content_margin_top = 10.0
 content_margin_right = 15.0
@@ -139,10 +127,10 @@ theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4tuhy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raqw5")
 shortcut_feedback = false
 text = "Play"
 flat = true
@@ -157,10 +145,10 @@ theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4tuhy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raqw5")
 shortcut_feedback = false
 text = "Options
 "
@@ -172,14 +160,17 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.882353)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_disabled_color = Color(0.156863, 0.156863, 0.156863, 1)
 theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4tuhy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_raqw5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raqw5")
+disabled = true
 shortcut_feedback = false
 text = "Extras"
 flat = true
@@ -194,10 +185,10 @@ theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4tuhy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raqw5")
 shortcut_feedback = false
 text = "Credits"
 flat = true
@@ -212,10 +203,10 @@ theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0
 theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("3_pvg4k")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_177ou")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q2gjj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_raqw5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4tuhy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_raqw5")
 shortcut_feedback = false
 text = "Quit"
 flat = true

@@ -1691,7 +1691,7 @@ libraries = {
 
 [node name="Head" type="BoneAttachment3D" parent="ArmatureAndMesh/Skeleton3D"]
 unique_name_in_owner = true
-transform = Transform3D(0.999009, 0.00410638, 0.0443094, -4.33503e-05, 0.995822, -0.0913106, -0.0444993, 0.0912182, 0.994836, 2.43955e-08, 1.72874, 0.116067)
+transform = Transform3D(0.999009, 0.0041064, 0.0443093, -4.34145e-05, 0.995823, -0.0913096, -0.0444992, 0.0912173, 0.994836, 2.43954e-08, 1.72874, 0.116066)
 bone_name = "spine.006"
 bone_idx = 6
 

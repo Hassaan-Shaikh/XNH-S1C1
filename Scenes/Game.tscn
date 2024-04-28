@@ -638,7 +638,6 @@ monitorable = false
 [node name="ExitCol" type="CollisionShape3D" parent="ExitArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.2)
 shape = SubResource("BoxShape3D_c68fn")
-disabled = true
 
 [connection signal="SammySpeedBoosted" from="." to="SmilingSammy" method="GetSpeedBoost"]
 [connection signal="RandomizeNavigation" from="SmilingSammy" to="." method="RandomizeNavigation"]

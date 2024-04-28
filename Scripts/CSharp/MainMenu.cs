@@ -9,6 +9,10 @@ public partial class MainMenu : Control
     [Export] public PackedScene confirmQuit;
     [Export] public PackedScene optionsMenu;
 
+    UserPrefs userPrefs;
+
+    private Button extrasButton;
+
     private string selectedDifficulty;
     private bool confirmingQuit;
 
@@ -22,16 +26,47 @@ public partial class MainMenu : Control
         if (FileAccess.FileExists(userGameDataPath))
         {
             GD.Print("It exists!");
-            //LoadGameData();
+            LoadGameData();
         }
         else
         {
             GD.Print("File does not exist.");
             SaveGameData();
         }
+        userPrefs = UserPrefs.LoadOrCreate();
+        Xalkomak.currentResIndex = userPrefs.resolutionIndex;
+        Xalkomak.currentScreenIndex = userPrefs.screenSizeIndex;
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         levelLoader.Visible = true;
         GetTree().Paused = false;
+        extrasButton = GetNode<Button>("MarginContainer/VBoxContainer/ExtrasButton");
+        extrasButton.Disabled = Xalkomak.totalGamesWon == 0;
+        switch (Xalkomak.currentScreenIndex)
+        {
+            case 0: // Fulscreen
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+            case 1: // Windowed
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+            case 2: // Borderless Windowed
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
+                break;
+            case 3: // Borderless Fullscreen
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
+                break;
+            case 4: // Exclusive Fullscreen
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+        }
+        DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
     }
 
     public void SaveGameData()
@@ -153,23 +188,51 @@ public partial class MainMenu : Control
 
     private void OnOptionsButtonPressed()
     {
-        Node opMenu = optionsMenu.Instantiate();
+        OptionsMenu opMenu = optionsMenu.Instantiate<OptionsMenu>();
         AddChild(opMenu);
         ProcessMode = ProcessModeEnum.Disabled;
-        AnimationPlayer opMenuPopAnim = opMenu.GetNode<AnimationPlayer>("PopupAnim");
-        opMenuPopAnim.AnimationFinished += (StringName animName) => 
+        opMenu.SettingsValueChanged += (string settingName, Variant settingValue) =>
+        {
+            switch (settingName)
+            {
+                case "BGMSlider":
+                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                    userPrefs.musicAudioLevel = (float)settingValue;
+                    userPrefs.SavePrefs();
+                    break;
+                case "SFXSlider":
+                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                    userPrefs.soundAudioLevel = (float)settingValue;
+                    userPrefs.SavePrefs();
+                    break;
+                case "ResOption":
+                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                    userPrefs.resolutionIndex = (int)settingValue;
+                    userPrefs.SavePrefs();
+                    break;
+                case "SizeOption":
+                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                    userPrefs.screenSizeIndex = (int)settingValue;
+                    userPrefs.SavePrefs();
+                    break;
+                default:
+                    GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
+                    break;
+            }
+        };
+        opMenu.animPlayer.AnimationFinished += (StringName animName) => 
         {
             if (animName.Equals("PopIn"))
             {
                 ProcessMode = ProcessModeEnum.Always;
-                GD.Print("Animation finished.");
+                //GD.Print("Animation finished.");
             }
             if (animName.Equals("PopOut"))
                 opMenu.QueueFree();
         };
-        opMenu.GetNode<Button>("PanelContainer/BackButton").Pressed += () =>
+        opMenu.backButton.Pressed += () =>
         {
-            opMenuPopAnim.Play("PopOut");
+            opMenu.animPlayer.Play("PopOut");
         };
     }
 

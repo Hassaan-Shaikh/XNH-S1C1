@@ -43,4 +43,8 @@ public static class Xalkomak
     public static string gamePath = "res://Scenes/Game.tscn";
     public static string deathScreenPath = "res://Scenes/DeathScreen.tscn";
     public static string mainMenuPath = "res://Scenes/MainMenu.tscn";
+
+    public static int currentTabIndex = 0;
+    public static int currentResIndex = 4;
+    public static int currentScreenIndex = 0;
 }

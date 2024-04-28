@@ -1,6 +1,7 @@
+res://Resources/Custom Resources
+res://Scripts/CSharp
 res://Resources/Themes
 res://Scenes
-res://Scripts/CSharp
 res://Resources/Audio/Audio Buses
 res://Resources/Environment
 res://Textures/UI Textures
@@ -19,5 +20,4 @@ res://Textures/Solkoth
 res://Resources/Fonts/requiem/Requiem
 res://Resources/Audio/SFX
 res://Resources/Animations/Smiling Sammy
-res://Resources/Meshes/Sammy
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Footage

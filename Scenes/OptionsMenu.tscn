@@ -1,8 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cev8bbcnx4eah"]
+[gd_scene load_steps=28 format=3 uid="uid://cev8bbcnx4eah"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/OptionsMenu.cs" id="1_1cn2c"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="1_m1k44"]
 [ext_resource type="PackedScene" uid="uid://jxt6unyaw0qx" path="res://Scenes/VolumeSlider.tscn" id="2_31h1n"]
+[ext_resource type="PackedScene" uid="uid://c4vdcv0hmsi7c" path="res://Scenes/ConfirmQuit.tscn" id="2_vdkg3"]
+[ext_resource type="Texture2D" uid="uid://dwix5tbho5dyu" path="res://Resources/UI Graphics/Custom Checkbox White Checked.png" id="4_fwfny"]
+[ext_resource type="Texture2D" uid="uid://bbyq6b0tupkgr" path="res://Resources/UI Graphics/Custom Checkbox Checked Disabled.png" id="5_0v5hc"]
+[ext_resource type="Texture2D" uid="uid://cpdmmnn0q1g6a" path="res://Resources/UI Graphics/Custom Checkbox White.png" id="5_rjaqn"]
+[ext_resource type="Texture2D" uid="uid://dfnjsfc4i85y8" path="res://Resources/UI Graphics/Custom Checkbox Disabled.png" id="7_548ld"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3sjt"]
 
@@ -22,6 +27,46 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bagmd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4v3y8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_if8tg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibo6x"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvylb"]
+content_margin_left = 5.0
+bg_color = Color(0.235294, 0.235294, 0.235294, 0.784314)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0941176, 0.0941176, 0.0941176, 0.6)
+shadow_size = 5
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4dhg2"]
+
+[sub_resource type="Theme" id="Theme_xntuv"]
+OptionButton/fonts/font = ExtResource("1_m1k44")
+OptionButton/styles/focus = SubResource("StyleBoxEmpty_if8tg")
+PopupMenu/fonts/font = ExtResource("1_m1k44")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_ibo6x")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_pvylb")
+PopupPanel/styles/panel = SubResource("StyleBoxEmpty_4dhg2")
+
+[sub_resource type="Theme" id="Theme_21mcf"]
+CheckBox/icons/checked = ExtResource("4_fwfny")
+CheckBox/icons/checked_disabled = ExtResource("5_0v5hc")
+CheckBox/icons/unchecked = ExtResource("5_rjaqn")
+CheckBox/icons/unchecked_disabled = ExtResource("7_548ld")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcw3i"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_87wqy"]
 content_margin_left = 15.0
@@ -141,6 +186,7 @@ grow_vertical = 2
 scale = Vector2(0.01, 0.01)
 pivot_offset = Vector2(960, 540)
 script = ExtResource("1_1cn2c")
+confirmQuitScene = ExtResource("2_vdkg3")
 bgmSlider = NodePath("PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/BGMVolume/BGMSlider")
 sfxSlider = NodePath("PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/SFXVolume/SFXSlider")
 
@@ -185,7 +231,222 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bagmd")
 tab_alignment = 1
 
+[node name="Video" type="TabBar" parent="PanelContainer/Panel/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel/TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="Resolution" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_font = ExtResource("1_m1k44")
+theme_override_fonts/italics_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
+theme_override_fonts/mono_font = ExtResource("1_m1k44")
+theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/bold_font_size = 70
+theme_override_font_sizes/italics_font_size = 70
+theme_override_font_sizes/bold_italics_font_size = 70
+theme_override_font_sizes/mono_font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
+bbcode_enabled = true
+text = "[center]Resolution[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ResOption" type="OptionButton" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xntuv")
+theme_override_constants/arrow_margin = 15
+theme_override_fonts/font = ExtResource("1_m1k44")
+theme_override_font_sizes/font_size = 30
+alignment = 1
+
+[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ScreenSize" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_font = ExtResource("1_m1k44")
+theme_override_fonts/italics_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
+theme_override_fonts/mono_font = ExtResource("1_m1k44")
+theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/bold_font_size = 70
+theme_override_font_sizes/italics_font_size = 70
+theme_override_font_sizes/bold_italics_font_size = 70
+theme_override_font_sizes/mono_font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
+bbcode_enabled = true
+text = "[center]Display Mode[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="SizeOption" type="OptionButton" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xntuv")
+theme_override_constants/arrow_margin = 15
+theme_override_fonts/font = ExtResource("1_m1k44")
+theme_override_font_sizes/font_size = 30
+alignment = 1
+
+[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VSync" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/VSync"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_font = ExtResource("1_m1k44")
+theme_override_fonts/italics_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
+theme_override_fonts/mono_font = ExtResource("1_m1k44")
+theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/bold_font_size = 70
+theme_override_font_sizes/italics_font_size = 70
+theme_override_font_sizes/bold_italics_font_size = 70
+theme_override_font_sizes/mono_font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
+bbcode_enabled = true
+text = "[center]VSync[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="VSyncEnabled" type="CheckBox" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/VSync"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_21mcf")
+theme_override_fonts/font = ExtResource("1_m1k44")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rcw3i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rcw3i")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rcw3i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rcw3i")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_rcw3i")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rcw3i")
+button_pressed = true
+text = "Enabled"
+
+[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/VSync"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="FPS" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/FPS"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_font = ExtResource("1_m1k44")
+theme_override_fonts/italics_font = ExtResource("1_m1k44")
+theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
+theme_override_fonts/mono_font = ExtResource("1_m1k44")
+theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/bold_font_size = 70
+theme_override_font_sizes/italics_font_size = 70
+theme_override_font_sizes/bold_italics_font_size = 70
+theme_override_font_sizes/mono_font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
+bbcode_enabled = true
+text = "[center]Frame Rate[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="FPSOption" type="OptionButton" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/FPS"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xntuv")
+theme_override_constants/arrow_margin = 15
+theme_override_fonts/font = ExtResource("1_m1k44")
+theme_override_font_sizes/font_size = 30
+alignment = 1
+
+[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/FPS"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ApplyVideoSettings" type="Button" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0.588235)
+theme_override_colors/font_disabled_color = Color(0.156863, 0.156863, 0.156863, 1)
+theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
+theme_override_fonts/font = ExtResource("1_m1k44")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_87wqy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_87wqy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_87wqy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_87wqy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_87wqy")
+text = "Apply"
+
 [node name="Audio" type="TabBar" parent="PanelContainer/Panel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/TabContainer/Audio"]
@@ -281,121 +542,6 @@ layout_mode = 2
 value = 0.36
 audioBusName = "SFX"
 
-[node name="Video" type="TabBar" parent="PanelContainer/Panel/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel/TabContainer/Video"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 30
-
-[node name="Resolution" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_constants/shadow_outline_size = 3
-theme_override_constants/outline_size = 5
-theme_override_fonts/normal_font = ExtResource("1_m1k44")
-theme_override_fonts/bold_font = ExtResource("1_m1k44")
-theme_override_fonts/italics_font = ExtResource("1_m1k44")
-theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
-theme_override_fonts/mono_font = ExtResource("1_m1k44")
-theme_override_font_sizes/normal_font_size = 50
-theme_override_font_sizes/bold_font_size = 50
-theme_override_font_sizes/italics_font_size = 50
-theme_override_font_sizes/bold_italics_font_size = 50
-theme_override_font_sizes/mono_font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
-bbcode_enabled = true
-text = "[center]Resolution[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="ResOption" type="OptionButton" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="ScreenSize" type="HBoxContainer" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_constants/shadow_outline_size = 3
-theme_override_constants/outline_size = 5
-theme_override_fonts/normal_font = ExtResource("1_m1k44")
-theme_override_fonts/bold_font = ExtResource("1_m1k44")
-theme_override_fonts/italics_font = ExtResource("1_m1k44")
-theme_override_fonts/bold_italics_font = ExtResource("1_m1k44")
-theme_override_fonts/mono_font = ExtResource("1_m1k44")
-theme_override_font_sizes/normal_font_size = 50
-theme_override_font_sizes/bold_font_size = 50
-theme_override_font_sizes/italics_font_size = 50
-theme_override_font_sizes/bold_italics_font_size = 50
-theme_override_font_sizes/mono_font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
-bbcode_enabled = true
-text = "[center]Display Mode[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="SizeOption" type="OptionButton" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="ApplyVideoSettings" type="Button" parent="PanelContainer/Panel/TabContainer/Video/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 1, 1, 0.588235)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.588235)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 0.784314)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 0.588235)
-theme_override_colors/font_disabled_color = Color(0.156863, 0.156863, 0.156863, 1)
-theme_override_colors/font_outline_color = Color(0.588235, 0.588235, 0.588235, 0.862745)
-theme_override_fonts/font = ExtResource("1_m1k44")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_87wqy")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_87wqy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_87wqy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_87wqy")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_87wqy")
-text = "Apply"
-
 [node name="BackButton" type="Button" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -443,8 +589,11 @@ libraries = {
 }
 
 [connection signal="tab_changed" from="PanelContainer/Panel/TabContainer" to="." method="OnTabContainerTabChanged"]
-[connection signal="value_changed" from="PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/BGMVolume/BGMSlider" to="." method="OnBgmSliderValueChanged"]
-[connection signal="value_changed" from="PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/SFXVolume/SFXSlider" to="." method="OnSfxSliderValueChanged"]
 [connection signal="item_selected" from="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution/ResOption" to="." method="OnResOptionItemSelected"]
 [connection signal="item_selected" from="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize/SizeOption" to="." method="OnSizeOptionItemSelected"]
+[connection signal="toggled" from="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/VSync/VSyncEnabled" to="." method="OnVSyncEnabledToggled"]
+[connection signal="item_selected" from="PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/FPS/FPSOption" to="." method="OnFpsOptionItemSelected"]
 [connection signal="pressed" from="PanelContainer/Panel/TabContainer/Video/MarginContainer/ApplyVideoSettings" to="." method="OnApplyVideoSettingsPressed"]
+[connection signal="value_changed" from="PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/BGMVolume/BGMSlider" to="." method="OnBgmSliderValueChanged"]
+[connection signal="value_changed" from="PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer/VBoxContainer/SFXVolume/SFXSlider" to="." method="OnSfxSliderValueChanged"]
+[connection signal="pressed" from="PanelContainer/BackButton" to="." method="OnBackButtonPressed"]

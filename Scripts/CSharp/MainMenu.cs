@@ -36,6 +36,9 @@ public partial class MainMenu : Control
         userPrefs = UserPrefs.LoadOrCreate();
         Xalkomak.currentResIndex = userPrefs.resolutionIndex;
         Xalkomak.currentScreenIndex = userPrefs.screenSizeIndex;
+        Xalkomak.vSyncEnabled = userPrefs.vSyncEnabled;
+        Xalkomak.gameFrameRate = userPrefs.gameFps;
+        Xalkomak.fpsIndex = userPrefs.fpsIndex;
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         levelLoader.Visible = true;
         GetTree().Paused = false;
@@ -55,18 +58,16 @@ public partial class MainMenu : Control
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
                 DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
                 break;
-            case 3: // Borderless Fullscreen
-                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
-                break;
-            case 4: // Exclusive Fullscreen
+            case 3: // Exclusive Fullscreen
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
                 DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
                 break;
         }
         DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
+        DisplayServer.WindowSetVsyncMode(userPrefs.vSyncEnabled ? DisplayServer.VSyncMode.Enabled : DisplayServer.VSyncMode.Disabled);
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
+        Engine.MaxFps = Xalkomak.gameFrameRate;
     }
 
     public void SaveGameData()
@@ -130,24 +131,10 @@ public partial class MainMenu : Control
         {
             DifficultySelectionMenu menu = difficultyMenu.Instantiate() as DifficultySelectionMenu;
             AddChild(menu);
-            menu.DifficultySelected += (StringName difficulty) =>
+            menu.DifficultySelected += GetDifficulty;
+            menu.TreeExiting += () => 
             {
-                selectedDifficulty = difficulty;
-                switch (selectedDifficulty)
-                {
-                    case "Normal":
-                        Xalkomak.difficulty = Xalkomak.Difficulty.Normal;
-                        GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
-                        break;
-                    case "Hard":
-                        Xalkomak.difficulty = Xalkomak.Difficulty.Hard;
-                        GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
-                        break;
-                    default:
-                        selectedDifficulty = "";
-                        GD.Print("No difficulty selected/Backed out.");
-                        break;
-                }
+                menu.DifficultySelected -= GetDifficulty;
             };
             ProcessMode = ProcessModeEnum.Disabled;
             menu.popUpAnim.AnimationFinished += (StringName animName) =>
@@ -191,48 +178,20 @@ public partial class MainMenu : Control
         OptionsMenu opMenu = optionsMenu.Instantiate<OptionsMenu>();
         AddChild(opMenu);
         ProcessMode = ProcessModeEnum.Disabled;
-        opMenu.SettingsValueChanged += (string settingName, Variant settingValue) =>
+        opMenu.TreeExiting += () => 
         {
-            switch (settingName)
-            {
-                case "BGMSlider":
-                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                    userPrefs.musicAudioLevel = (float)settingValue;
-                    userPrefs.SavePrefs();
-                    break;
-                case "SFXSlider":
-                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                    userPrefs.soundAudioLevel = (float)settingValue;
-                    userPrefs.SavePrefs();
-                    break;
-                case "ResOption":
-                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                    userPrefs.resolutionIndex = (int)settingValue;
-                    userPrefs.SavePrefs();
-                    break;
-                case "SizeOption":
-                    //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                    userPrefs.screenSizeIndex = (int)settingValue;
-                    userPrefs.SavePrefs();
-                    break;
-                default:
-                    GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
-                    break;
-            }
+            opMenu.SettingsValueChanged -= OnOptionMenuSettingChanged;
+            //GD.Print(opMenu.IsConnected(OptionsMenu.SignalName.SettingsValueChanged, Ma));
         };
+        opMenu.SettingsValueChanged += OnOptionMenuSettingChanged;
         opMenu.animPlayer.AnimationFinished += (StringName animName) => 
         {
             if (animName.Equals("PopIn"))
             {
                 ProcessMode = ProcessModeEnum.Always;
-                //GD.Print("Animation finished.");
             }
             if (animName.Equals("PopOut"))
                 opMenu.QueueFree();
-        };
-        opMenu.backButton.Pressed += () =>
-        {
-            opMenu.animPlayer.Play("PopOut");
         };
     }
 
@@ -274,7 +233,7 @@ public partial class MainMenu : Control
     private void GetDifficulty(StringName difficulty)
     {
         selectedDifficulty = difficulty;
-        switch(selectedDifficulty)
+        switch (selectedDifficulty)
         {
             case "Normal":
                 Xalkomak.difficulty = Xalkomak.Difficulty.Normal;
@@ -285,7 +244,52 @@ public partial class MainMenu : Control
                 GD.Print("Started a game on " + Xalkomak.difficulty + " difficulty.");
                 break;
             default:
+                selectedDifficulty = "";
                 GD.Print("No difficulty selected/Backed out.");
+                break;
+        }
+    }
+
+    private void OnOptionMenuSettingChanged(string settingName, Variant settingValue)
+    {
+        switch (settingName)
+        {
+            case "BGMSlider":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.musicAudioLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "SFXSlider":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.soundAudioLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "ResOption":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.resolutionIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "SizeOption":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.screenSizeIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "VSyncEnabled":
+                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.vSyncEnabled = (bool)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "FPSOption":
+                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.gameFps = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "FPS Index":
+                userPrefs.fpsIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            default:
+                GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
                 break;
         }
     }

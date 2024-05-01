@@ -6,6 +6,7 @@ public partial class Door : AnimatableBody3D
 	[ExportCategory("References")]
 	[Export] public Node3D rootNode;
 	[Export] public AnimationPlayer doorAnim;
+	[Export] public CollisionShape3D doorColShape;
 	
 	public NavigationRegion3D navRegion;
 
@@ -16,6 +17,10 @@ public partial class Door : AnimatableBody3D
     {
         base._Ready();
 		navRegion = GetTree().GetNodesInGroup("NavRegion")[0] as NavigationRegion3D;
+		doorAnim.AnimationFinished += (StringName animName) => 
+		{
+			doorColShape.Disabled = false;
+		};
     }
 
     public string GetPrompt()
@@ -38,9 +43,11 @@ public partial class Door : AnimatableBody3D
             {
                 case true:
                     doorAnim.Play("SwingDoor");
+                    doorColShape.Disabled = true;
                     break;
                 case false:
                     doorAnim.PlayBackwards("SwingDoor");
+					doorColShape.Disabled = true;
                     break;
             }
         }

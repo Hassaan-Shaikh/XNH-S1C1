@@ -178,10 +178,35 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door Frame/DoorCol/DoorMain/Door Handle In:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Door Frame/DoorCol/DoorMain/Door Handle Out:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_j7ofj"]
 resource_name = "SwingDoor"
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -193,6 +218,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -1.48353, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door Frame/DoorCol/DoorMain/Door Handle In:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.349066), Vector3(0, 0, -0.349066), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Door Frame/DoorCol/DoorMain/Door Handle Out:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.349066), Vector3(0, 0, -0.349066), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_77bs5"]
@@ -207,13 +256,14 @@ _data = {
 mesh = SubResource("ArrayMesh_wnxwc")
 skeleton = NodePath("")
 
-[node name="DoorCol" type="AnimatableBody3D" parent="Door Frame" node_paths=PackedStringArray("rootNode", "doorAnim")]
+[node name="DoorCol" type="AnimatableBody3D" parent="Door Frame" node_paths=PackedStringArray("rootNode", "doorAnim", "doorColShape")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_bp7uo")
 rootNode = NodePath("../..")
 doorAnim = NodePath("../../DoorAnim")
+doorColShape = NodePath("DColShape")
 
 [node name="DColShape" type="CollisionShape3D" parent="Door Frame/DoorCol"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)

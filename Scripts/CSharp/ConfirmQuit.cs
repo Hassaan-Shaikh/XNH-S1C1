@@ -5,7 +5,9 @@ public partial class ConfirmQuit : Control
 {
     [Signal] public delegate void QuitConfirmedEventHandler(bool confirmed);
 
+    [Export] public RichTextLabel title;
     [Export] public RichTextLabel quitMessage;
+    [Export] public Button confirm, cancel;
     
     public AnimationPlayer popAnim;
 

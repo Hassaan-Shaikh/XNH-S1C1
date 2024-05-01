@@ -116,7 +116,7 @@ _data = {
 "RESET": SubResource("Animation_wdop0")
 }
 
-[node name="ConfirmQuit" type="Control" node_paths=PackedStringArray("quitMessage")]
+[node name="ConfirmQuit" type="Control" node_paths=PackedStringArray("title", "quitMessage", "confirm", "cancel")]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
@@ -128,7 +128,10 @@ grow_vertical = 2
 scale = Vector2(0.01, 0.01)
 pivot_offset = Vector2(960, 540)
 script = ExtResource("1_uisi7")
+title = NodePath("PanelContainer/VBoxContainer/Title")
 quitMessage = NodePath("PanelContainer/VBoxContainer/Message")
+confirm = NodePath("PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/ConfirmButton")
+cancel = NodePath("PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -172,7 +175,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ip5el")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_njupy")
 bbcode_enabled = true
 text = "
-[center]Confirm Quit[/center]"
+[center][u]Confirm Quit[/u][/center]"
 fit_content = true
 scroll_active = false
 
@@ -188,11 +191,11 @@ theme_override_fonts/bold_font = ExtResource("1_ij8sb")
 theme_override_fonts/italics_font = ExtResource("1_ij8sb")
 theme_override_fonts/bold_italics_font = ExtResource("1_ij8sb")
 theme_override_fonts/mono_font = ExtResource("1_ij8sb")
-theme_override_font_sizes/normal_font_size = 65
-theme_override_font_sizes/bold_font_size = 65
-theme_override_font_sizes/italics_font_size = 65
-theme_override_font_sizes/bold_italics_font_size = 65
-theme_override_font_sizes/mono_font_size = 65
+theme_override_font_sizes/normal_font_size = 45
+theme_override_font_sizes/bold_font_size = 45
+theme_override_font_sizes/italics_font_size = 45
+theme_override_font_sizes/bold_italics_font_size = 45
+theme_override_font_sizes/mono_font_size = 45
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ip5el")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_njupy")
 bbcode_enabled = true

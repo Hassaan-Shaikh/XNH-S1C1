@@ -9,6 +9,8 @@ public partial class PauseMenu : Control
     [Export] public PackedScene confirmQuit;
     [Export] public PackedScene optionsMenu;
 
+    public UserPrefs userPrefs;
+
     private bool confirmingQuit;
     private byte source;
 
@@ -16,9 +18,36 @@ public partial class PauseMenu : Control
 
     public override void _Ready()
     {
+        base._Ready();
+        userPrefs = UserPrefs.LoadOrCreate();
         gameScene = GetTree().GetNodesInGroup("Game")[0] as GameControl;
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         fadeAnim = GetNode<AnimationPlayer>("PauseFade");
+
+        switch (Xalkomak.currentScreenIndex)
+        {
+            case 0: // Fulscreen
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+            case 1: // Windowed
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+            case 2: // Borderless Windowed
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
+                break;
+            case 3: // Exclusive Fullscreen
+                DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
+                DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
+                break;
+        }
+        DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
+        DisplayServer.WindowSetVsyncMode(userPrefs.vSyncEnabled ? DisplayServer.VSyncMode.Enabled : DisplayServer.VSyncMode.Disabled);
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
+        Engine.MaxFps = Xalkomak.gameFrameRate;
     }
 
     private void OnResumePressed()
@@ -28,21 +57,22 @@ public partial class PauseMenu : Control
 
     private void OnOptionsPressed()
     {
-        Node opMenu = optionsMenu.Instantiate();
+        OptionsMenu opMenu = optionsMenu.Instantiate<OptionsMenu>();
         AddChild(opMenu);
         ProcessMode = ProcessModeEnum.Disabled;
-        AnimationPlayer opMenuPopAnim = opMenu.GetNode<AnimationPlayer>("PopupAnim");
-        opMenuPopAnim.AnimationFinished += (StringName animName) =>
+        opMenu.TreeExiting += () =>
+        {
+            opMenu.SettingsValueChanged -= OnOptionMenuSettingChanged;
+        };
+        opMenu.SettingsValueChanged += OnOptionMenuSettingChanged;
+        opMenu.animPlayer.AnimationFinished += (StringName animName) =>
         {
             if (animName.Equals("PopIn"))
             {
                 ProcessMode = ProcessModeEnum.Always;
-                GD.Print("Animation finished.");
             }
-        };
-        opMenu.GetNode<Button>("PanelContainer/BackButton").Pressed += () =>
-        {
-            opMenuPopAnim.Play("PopOut");
+            if (animName.Equals("PopOut"))
+                opMenu.QueueFree();
         };
     }
 
@@ -104,5 +134,49 @@ public partial class PauseMenu : Control
                 }              
             }
         };
+    }
+
+    private void OnOptionMenuSettingChanged(string settingName, Variant settingValue)
+    {
+        switch (settingName)
+        {
+            case "BGMSlider":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.musicAudioLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "SFXSlider":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.soundAudioLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "ResOption":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.resolutionIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "SizeOption":
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.screenSizeIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "VSyncEnabled":
+                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.vSyncEnabled = (bool)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "FPSOption":
+                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                userPrefs.gameFps = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            case "FPS Index":
+                userPrefs.fpsIndex = (int)settingValue;
+                userPrefs.SavePrefs();
+                break;
+            default:
+                GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
+                break;
+        }
     }
 }

@@ -47,4 +47,7 @@ public static class Xalkomak
     public static int currentTabIndex = 0;
     public static int currentResIndex = 4;
     public static int currentScreenIndex = 0;
+    public static bool vSyncEnabled = true;
+    public static int gameFrameRate = 60;
+    public static int fpsIndex = 1;
 }

@@ -24,8 +24,7 @@ public partial class OptionsMenu : Control
         { "1366 x 768", new Vector2I(1366, 768) },
         { "1440 x 810", new Vector2I(1440, 810) },
         { "1600 x 900", new Vector2I(1600, 900) },
-        { "1920 x 1080", new Vector2I(1920, 1080) },
-        { "3840 x 2160", new Vector2I(3840, 2160) }
+        { "1920 x 1080", new Vector2I(1920, 1080) }
     };
     public static int[] frameRates = 
     {

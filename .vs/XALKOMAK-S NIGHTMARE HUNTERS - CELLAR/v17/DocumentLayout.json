@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\pausemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\pausemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -130,7 +130,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
@@ -143,8 +143,7 @@
               "ViewState": "AQIAACEAAAAAAAAAAAAUwDMAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-11-03T14:20:26.856Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -173,8 +172,7 @@
               "RelativeToolTip": "Scripts\\CSharp\\ConfirmQuit.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAAwAkAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-28T05:41:01.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-11-28T05:41:01.009Z"
             },
             {
               "$type": "Document",
@@ -186,25 +184,24 @@
               "RelativeToolTip": "Scripts\\CSharp\\UserPrefs.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T11:25:02.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T11:25:02.218Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "OptionsMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\OptionsMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\OptionsMenu.cs",
               "ToolTip": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\OptionsMenu.cs",
               "RelativeToolTip": "Scripts\\CSharp\\OptionsMenu.cs",
-              "ViewState": "AQIAAHkAAAAAAAAAAADwv0oAAAAuAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwBoAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T11:23:36.503Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\MainMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\MainMenu.cs",
@@ -212,12 +209,11 @@
               "RelativeToolTip": "Scripts\\CSharp\\MainMenu.cs",
               "ViewState": "AQIAADEAAAAAAAAAAAAAADsAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-22T12:03:06.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-11-22T12:03:06.063Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PauseMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\PauseMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\PauseMenu.cs",
@@ -250,8 +246,7 @@
               "RelativeToolTip": "Scripts\\CSharp\\Door.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAAkwEcAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-28T05:41:08.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-11-28T05:41:08.037Z"
             },
             {
               "$type": "Document",
@@ -263,8 +258,7 @@
               "RelativeToolTip": "Scripts\\CSharp\\Player.cs",
               "ViewState": "AQIAACkAAAAAAAAAAAAAwC4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-01T13:46:17.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-11-01T13:46:17.708Z"
             },
             {
               "$type": "Document",

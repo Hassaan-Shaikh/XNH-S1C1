@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "isX+Zge2xqt8qyodnbgGhl1pAalIlp7dubLppue03uNw4eFWez0G6J5+aiMg8ZIqO7w2VIyxt5cKIKWxUFfEDg==",
+  "dgSpecHash": "EH/RYWDHHE57n33TPWNhwutk0A3TbSgdyXvjelp8YeN2t1WXLVL78RWvh+yEDWiLRNDbP5kyGADUPsdy2+Jl0Q==",
   "success": true,
-  "projectFilePath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
+  "projectFilePath": "C:\\GAME DEV\\GODOT PROJECTS\\XNH\\SEASON 1\\CHAPTER 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phngy\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
     "C:\\Users\\phngy\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",

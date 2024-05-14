@@ -6,17 +6,17 @@ public partial class OptionsMenu : Control
     [Signal] public delegate void SettingsValueChangedEventHandler(string optionName, Variant value);
 
     [Export] public PackedScene confirmQuitScene;
+    [ExportGroup("References")]
     [Export] public VolumeSlider bgmSlider;
     [Export] public VolumeSlider sfxSlider;
+    [Export] public Button backButton;
+    [Export] public OptionButton resolutionButton;
+    [Export] public OptionButton screenSizeButton;
+    [Export] public OptionButton fpsButton;
+    [Export] public Button applyButton;
 
     public AnimationPlayer animPlayer;
     public TabContainer tabContainer;
-    public Button backButton;
-    public OptionButton resolutionButton;
-    public OptionButton screenSizeButton;
-    public CheckBox vSyncCheckBox;
-    public OptionButton fpsButton;
-    public Button applyButton;
 
     public static Godot.Collections.Dictionary<string, Vector2I> screenResolutions = new Godot.Collections.Dictionary<string, Vector2I>
     {
@@ -48,12 +48,6 @@ public partial class OptionsMenu : Control
         tabContainer = GetNode<TabContainer>("PanelContainer/Panel/TabContainer");
         tabContainer.CurrentTab = Xalkomak.currentTabIndex;
         animPlayer = GetNode<AnimationPlayer>("PopupAnim");
-        applyButton = GetNode<Button>("PanelContainer/Panel/TabContainer/Video/MarginContainer/ApplyVideoSettings");
-        backButton = GetNode<Button>("PanelContainer/BackButton");
-        resolutionButton = GetNode<OptionButton>("PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/Resolution/ResOption");
-        screenSizeButton = GetNode<OptionButton>("PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/ScreenSize/SizeOption");
-        vSyncCheckBox = GetNode<CheckBox>("PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/VSync/VSyncEnabled");
-        fpsButton = GetNode<OptionButton>("PanelContainer/Panel/TabContainer/Video/MarginContainer/VBoxContainer/FPS/FPSOption");
         foreach (var item in screenResolutions)
         {
             resolutionButton.AddItem(item.Key);
@@ -64,15 +58,20 @@ public partial class OptionsMenu : Control
         }
         foreach (int item in frameRates)
         {
-            fpsButton.AddItem(item == 0 ? "Unlimited" : item.ToString());
+            fpsButton.AddItem(item == 0 ? "Unlimited" : item.ToString() + " FPS");
         }
         previousResolutionIndex = Xalkomak.currentResIndex;
         previousScreenSizeIndex = Xalkomak.currentScreenIndex;
         resolutionButton.Selected = previousResolutionIndex;
         screenSizeButton.Selected = previousScreenSizeIndex;
-        vSyncCheckBox.SetPressedNoSignal(Xalkomak.vSyncEnabled);
         fpsButton.Selected = Xalkomak.fpsIndex;
-        applyButton.Disabled = true;
+        //applyButton.Disabled = true;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        applyButton.Disabled = (Xalkomak.currentResIndex == previousResolutionIndex && Xalkomak.currentScreenIndex == previousScreenSizeIndex);
     }
 
     private void OnTabContainerTabChanged(int tab)
@@ -94,7 +93,7 @@ public partial class OptionsMenu : Control
     {
         //DisplayServer.WindowSetSize(GetValues()[index]);
         //GD.Print(GetValues()[index]);
-        applyButton.Disabled = false;
+        //applyButton.Disabled = false;
         Xalkomak.currentResIndex = index;
         //EmitSignal(SignalName.SettingsValueChanged, resolutionButton.Name, index);
     }
@@ -112,7 +111,7 @@ public partial class OptionsMenu : Control
     private void OnSizeOptionItemSelected(int index)
     {
         Xalkomak.currentScreenIndex = index;
-        applyButton.Disabled = false;
+        //applyButton.Disabled = false;
     }
 
     private void OnApplyVideoSettingsPressed()
@@ -139,7 +138,9 @@ public partial class OptionsMenu : Control
         DisplayServer.WindowSetSize(GetValues()[Xalkomak.currentResIndex]);
         EmitSignal(SignalName.SettingsValueChanged, resolutionButton.Name, Xalkomak.currentResIndex);
         EmitSignal(SignalName.SettingsValueChanged, screenSizeButton.Name, Xalkomak.currentScreenIndex);
-        applyButton.Disabled = true;
+        previousResolutionIndex = Xalkomak.currentResIndex;
+        previousScreenSizeIndex = Xalkomak.currentScreenIndex;
+        //applyButton.Disabled = true;
     }
 
     private void OnBackButtonPressed()
@@ -180,17 +181,9 @@ public partial class OptionsMenu : Control
         };
     }
 
-    private void OnVSyncEnabledToggled(bool buttonPressed)
-    {
-        Xalkomak.vSyncEnabled = buttonPressed;
-        DisplayServer.WindowSetVsyncMode(buttonPressed ? DisplayServer.VSyncMode.Enabled : DisplayServer.VSyncMode.Disabled);
-        GD.Print(DisplayServer.WindowGetVsyncMode());
-        EmitSignal(SignalName.SettingsValueChanged, vSyncCheckBox.Name, buttonPressed);
-    }
-
     private void OnFpsOptionItemSelected(int index)
     {
-        Xalkomak.gameFrameRate = fpsButton.GetItemText(index).Equals("Unlimited") ? 0 : int.Parse(fpsButton.GetItemText(index));
+        Xalkomak.gameFrameRate = fpsButton.GetItemText(index).Equals("Unlimited") ? 0 : int.Parse(fpsButton.GetItemText(index).TrimSuffix(" FPS"));
         GD.Print(Xalkomak.gameFrameRate);
         Xalkomak.fpsIndex = index;
         Engine.MaxFps = Xalkomak.gameFrameRate;

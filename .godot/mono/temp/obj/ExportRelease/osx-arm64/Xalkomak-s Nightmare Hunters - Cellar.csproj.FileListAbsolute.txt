@@ -187,9 +187,10 @@ C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.AssemblyInfoInputs.cache
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.AssemblyInfo.cs
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.csproj.CoreCompileInputs.cache
-C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.csproj.CopyComplete
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.dll
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\refint\Xalkomak-s Nightmare Hunters - Cellar.dll
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.pdb
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.genruntimeconfig.cache
 C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\ref\Xalkomak-s Nightmare Hunters - Cellar.dll
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak-s Nightmare Hunters - Cellar.sourcelink.json
+C:\Game Dev\Godot Projects\XNH\Season 1\Chapter 1\XNH-S1C1\.godot\mono\temp\obj\ExportRelease\osx-arm64\Xalkomak.513DA2AB.Up2Date

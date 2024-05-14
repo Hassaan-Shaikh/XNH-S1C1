@@ -97,8 +97,7 @@ theme_override_font_sizes/mono_font_size = 80
 theme_override_styles/focus = SubResource("StyleBoxEmpty_yy3xx")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tsi7w")
 bbcode_enabled = true
-text = "xalkomak's
-Nightmare
+text = "Cursed
 Hunters"
 fit_content = true
 scroll_active = false

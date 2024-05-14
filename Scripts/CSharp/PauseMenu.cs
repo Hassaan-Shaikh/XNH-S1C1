@@ -44,7 +44,6 @@ public partial class PauseMenu : Control
                 break;
         }
         DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
-        DisplayServer.WindowSetVsyncMode(userPrefs.vSyncEnabled ? DisplayServer.VSyncMode.Enabled : DisplayServer.VSyncMode.Disabled);
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
         Engine.MaxFps = Xalkomak.gameFrameRate;
@@ -158,11 +157,6 @@ public partial class PauseMenu : Control
             case "SizeOption":
                 //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
                 userPrefs.screenSizeIndex = (int)settingValue;
-                userPrefs.SavePrefs();
-                break;
-            case "VSyncEnabled":
-                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                userPrefs.vSyncEnabled = (bool)settingValue;
                 userPrefs.SavePrefs();
                 break;
             case "FPSOption":

@@ -16,14 +16,13 @@ public partial class MainMenu : Control
     private string selectedDifficulty;
     private bool confirmingQuit;
 
-    public const string userGameDataPath = "user://XNH_Cellar_save.dat";
     const string gamePath = "res://Scenes/Game.tscn";
 
     public override void _Ready()
     {
         base._Ready();
         selectedDifficulty = "";
-        if (FileAccess.FileExists(userGameDataPath))
+        if (FileAccess.FileExists(Xalkomak.userGameDataPath))
         {
             GD.Print("It exists!");
             LoadGameData();
@@ -34,9 +33,9 @@ public partial class MainMenu : Control
             SaveGameData();
         }
         userPrefs = UserPrefs.LoadOrCreate();
+        userPrefs.SavePrefs();
         Xalkomak.currentResIndex = userPrefs.resolutionIndex;
         Xalkomak.currentScreenIndex = userPrefs.screenSizeIndex;
-        Xalkomak.vSyncEnabled = userPrefs.vSyncEnabled;
         Xalkomak.gameFrameRate = userPrefs.gameFps;
         Xalkomak.fpsIndex = userPrefs.fpsIndex;
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
@@ -64,7 +63,6 @@ public partial class MainMenu : Control
                 break;
         }
         DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
-        DisplayServer.WindowSetVsyncMode(userPrefs.vSyncEnabled ? DisplayServer.VSyncMode.Enabled : DisplayServer.VSyncMode.Disabled);
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
         Engine.MaxFps = Xalkomak.gameFrameRate;
@@ -72,7 +70,7 @@ public partial class MainMenu : Control
 
     public void SaveGameData()
     {
-        var file = FileAccess.OpenEncryptedWithPass(userGameDataPath, FileAccess.ModeFlags.Write, "xalkomak");
+        var file = FileAccess.OpenEncryptedWithPass(Xalkomak.userGameDataPath, FileAccess.ModeFlags.Write, "xalkomak");
         Dictionary<string, string> userData = PlayerData();
         file.StoreVar(userData);
     }
@@ -93,7 +91,7 @@ public partial class MainMenu : Control
 
     public void LoadGameData()
     {
-        var file = FileAccess.OpenEncryptedWithPass(userGameDataPath, FileAccess.ModeFlags.Read, "xalkomak");
+        var file = FileAccess.OpenEncryptedWithPass(Xalkomak.userGameDataPath, FileAccess.ModeFlags.Read, "xalkomak");
         if (file != null)
         {
             Dictionary<string, string> loadedData = file.GetVar().AsGodotDictionary<string, string>();
@@ -272,11 +270,6 @@ public partial class MainMenu : Control
             case "SizeOption":
                 //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
                 userPrefs.screenSizeIndex = (int)settingValue;
-                userPrefs.SavePrefs();
-                break;
-            case "VSyncEnabled":
-                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
-                userPrefs.vSyncEnabled = (bool)settingValue;
                 userPrefs.SavePrefs();
                 break;
             case "FPSOption":

@@ -8,7 +8,6 @@ public partial class UserPrefs : Resource
     [Export(PropertyHint.Range, "0, 1")] public float soundAudioLevel = 1.0f;
     [Export] public int resolutionIndex = 4;
     [Export] public int screenSizeIndex = 0;
-    [Export] public bool vSyncEnabled = true;
     [Export] public int gameFps = 60;
     [Export] public int fpsIndex = 1;
 

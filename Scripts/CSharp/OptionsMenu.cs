@@ -7,13 +7,9 @@ public partial class OptionsMenu : Control
 
     [Export] public PackedScene confirmQuitScene;
     [ExportGroup("References")]
-    [Export] public VolumeSlider bgmSlider;
-    [Export] public VolumeSlider sfxSlider;
-    [Export] public Button backButton;
-    [Export] public OptionButton resolutionButton;
-    [Export] public OptionButton screenSizeButton;
-    [Export] public OptionButton fpsButton;
-    [Export] public Button applyButton;
+    [Export] public HSlider bgmSlider, sfxSlider, sensitivitySlider;
+    [Export] public Button backButton, applyButton;
+    [Export] public OptionButton resolutionButton, screenSizeButton, fpsButton;
 
     public AnimationPlayer animPlayer;
     public TabContainer tabContainer;
@@ -39,14 +35,20 @@ public partial class OptionsMenu : Control
         "Borderless Windowed",
         "Exclusive Fullscreen"
     };
+    Godot.Collections.Dictionary<string, Variant> audioSettings;
+    Godot.Collections.Dictionary<string, Variant> videoSettings;
+    Godot.Collections.Dictionary<string, Variant> controlSettings;
     int previousResolutionIndex;
     int previousScreenSizeIndex;
 
     public override void _Ready()
     {
         base._Ready();
-        tabContainer = GetNode<TabContainer>("PanelContainer/Panel/TabContainer");
-        tabContainer.CurrentTab = Xalkomak.currentTabIndex;
+        audioSettings = UserConfig.GetAudioSettings();
+        videoSettings = UserConfig.GetVideoSettings();
+        controlSettings = UserConfig.GetControlSettings();
+        //tabContainer = GetNode<TabContainer>("PanelContainer/Panel/TabContainer");
+        //tabContainer.CurrentTab = Xalkomak.currentTabIndex;
         animPlayer = GetNode<AnimationPlayer>("PopupAnim");
         foreach (var item in screenResolutions)
         {
@@ -60,33 +62,33 @@ public partial class OptionsMenu : Control
         {
             fpsButton.AddItem(item == 0 ? "Unlimited" : item.ToString() + " FPS");
         }
-        previousResolutionIndex = Xalkomak.currentResIndex;
-        previousScreenSizeIndex = Xalkomak.currentScreenIndex;
+        previousResolutionIndex = (int)videoSettings["resolution_index"]; //Xalkomak.currentResIndex;
+        previousScreenSizeIndex = (int)videoSettings["screen_index"]; //Xalkomak.currentScreenIndex;
         resolutionButton.Selected = previousResolutionIndex;
         screenSizeButton.Selected = previousScreenSizeIndex;
-        fpsButton.Selected = Xalkomak.fpsIndex;
+        fpsButton.Selected = (int)videoSettings["fps_index"]; //Xalkomak.fpsIndex;
+        sensitivitySlider.Value = (float)controlSettings["mouse_sensitivity"]; //Xalkomak.camSens;
+        bgmSlider.Value = (float)audioSettings["music_volume"];
+        sfxSlider.Value = (float)audioSettings["sound_volume"];
         //applyButton.Disabled = true;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        applyButton.Disabled = (Xalkomak.currentResIndex == previousResolutionIndex && Xalkomak.currentScreenIndex == previousScreenSizeIndex);
-    }
-
-    private void OnTabContainerTabChanged(int tab)
-    {
-        Xalkomak.currentTabIndex = tab;
+        applyButton.Disabled = (int)videoSettings["resolution_index"] == previousResolutionIndex && (int)videoSettings["screen_index"] == previousScreenSizeIndex;
     }
 
     private void OnBgmSliderValueChanged(float value)
     {
-        EmitSignal(SignalName.SettingsValueChanged, bgmSlider.Name, value);
+        //EmitSignal(SignalName.SettingsValueChanged, bgmSlider.Name, value);
+        UserConfig.SaveAudioSettings("music_volume", value);
     }
 
     private void OnSfxSliderValueChanged(float value)
     {
-        EmitSignal(SignalName.SettingsValueChanged, sfxSlider.Name, value);
+        //EmitSignal(SignalName.SettingsValueChanged, sfxSlider.Name, value);
+        UserConfig.SaveAudioSettings("sound_volume", value);
     }
 
     private void OnResOptionItemSelected(int index)
@@ -94,7 +96,7 @@ public partial class OptionsMenu : Control
         //DisplayServer.WindowSetSize(GetValues()[index]);
         //GD.Print(GetValues()[index]);
         //applyButton.Disabled = false;
-        Xalkomak.currentResIndex = index;
+        videoSettings["resolution_index"] = index;
         //EmitSignal(SignalName.SettingsValueChanged, resolutionButton.Name, index);
     }
 
@@ -110,13 +112,13 @@ public partial class OptionsMenu : Control
 
     private void OnSizeOptionItemSelected(int index)
     {
-        Xalkomak.currentScreenIndex = index;
+        videoSettings["screen_index"] = index;
         //applyButton.Disabled = false;
     }
 
     private void OnApplyVideoSettingsPressed()
     {
-        switch (Xalkomak.currentScreenIndex)
+        switch ((int)videoSettings["screen_index"])
         {
             case 0: // Fulscreen
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
@@ -135,11 +137,13 @@ public partial class OptionsMenu : Control
                 DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
                 break;
         }
-        DisplayServer.WindowSetSize(GetValues()[Xalkomak.currentResIndex]);
-        EmitSignal(SignalName.SettingsValueChanged, resolutionButton.Name, Xalkomak.currentResIndex);
-        EmitSignal(SignalName.SettingsValueChanged, screenSizeButton.Name, Xalkomak.currentScreenIndex);
-        previousResolutionIndex = Xalkomak.currentResIndex;
-        previousScreenSizeIndex = Xalkomak.currentScreenIndex;
+        DisplayServer.WindowSetSize(GetValues()[(int)videoSettings["resolution_index"]]);
+        UserConfig.SaveVideoSettings("resolution_index", (int)videoSettings["resolution_index"]);
+        UserConfig.SaveVideoSettings("screen_index", (int)videoSettings["screen_index"]);
+        //EmitSignal(SignalName.SettingsValueChanged, resolutionButton.Name, Xalkomak.currentResIndex);
+        //EmitSignal(SignalName.SettingsValueChanged, screenSizeButton.Name, Xalkomak.currentScreenIndex);
+        previousResolutionIndex = (int)videoSettings["resolution_index"];
+        previousScreenSizeIndex = (int)videoSettings["screen_index"];
         //applyButton.Disabled = true;
     }
 
@@ -183,11 +187,21 @@ public partial class OptionsMenu : Control
 
     private void OnFpsOptionItemSelected(int index)
     {
-        Xalkomak.gameFrameRate = fpsButton.GetItemText(index).Equals("Unlimited") ? 0 : int.Parse(fpsButton.GetItemText(index).TrimSuffix(" FPS"));
-        GD.Print(Xalkomak.gameFrameRate);
-        Xalkomak.fpsIndex = index;
-        Engine.MaxFps = Xalkomak.gameFrameRate;
-        EmitSignal(SignalName.SettingsValueChanged, fpsButton.Name, Xalkomak.gameFrameRate);
-        EmitSignal(SignalName.SettingsValueChanged, "FPS Index", Xalkomak.fpsIndex);
+        videoSettings["frames_per_second"] = fpsButton.GetItemText(index).Equals("Unlimited") ? 0 : int.Parse(fpsButton.GetItemText(index).TrimSuffix(" FPS"));
+        //GD.Print(Xalkomak.gameFrameRate);
+        videoSettings["fps_index"] = index;
+        Engine.MaxFps = (int)videoSettings["frames_per_second"];
+        UserConfig.SaveVideoSettings("fps_index", index);
+        UserConfig.SaveVideoSettings("frames_per_second", (int)videoSettings["frames_per_second"]);
+        //EmitSignal(SignalName.SettingsValueChanged, fpsButton.Name, Xalkomak.gameFrameRate);
+        //EmitSignal(SignalName.SettingsValueChanged, "FPS Index", Xalkomak.fpsIndex);
+    }
+
+    private void OnSenSliderValueChanged(float value)
+    {
+        controlSettings["mouse_sensitivity"] = value;
+        Xalkomak.camSens = value;
+        UserConfig.SaveControlSettings("mouse_sensitivity", value);
+        //EmitSignal(SignalName.SettingsValueChanged, sensitivitySlider.Name, Xalkomak.camSens);
     }
 }

@@ -6,12 +6,15 @@ public partial class UserPrefs : Resource
 {
     [Export(PropertyHint.Range, "0, 1")] public float musicAudioLevel = 0.75f;
     [Export(PropertyHint.Range, "0, 1")] public float soundAudioLevel = 1.0f;
+    [Export(PropertyHint.Range, "0.25, 10")] public float sensitivityLevel = 4.0f;
     [Export] public int resolutionIndex = 4;
     [Export] public int screenSizeIndex = 0;
     [Export] public int gameFps = 60;
     [Export] public int fpsIndex = 1;
 
-    const string userPrefsSavePath = "user://UserPrefs.tres";
+    ConfigFile config = new ConfigFile();
+
+    const string userPrefsSavePath = "user://UserSettings.cfg"; //"user://UserPrefs.tres";
     
     public void SavePrefs()
     {

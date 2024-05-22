@@ -13,8 +13,8 @@ public partial class VolumeSlider : HSlider
     {
         base._Ready();
         audioBusIndex = AudioServer.GetBusIndex(audioBusName);
-        prefs = UserPrefs.LoadOrCreate();
-        switch (audioBusIndex)
+        //prefs = UserPrefs.LoadOrCreate();
+        /*switch (audioBusIndex)
         {
             case 2:
                 Value = prefs.musicAudioLevel;
@@ -26,12 +26,12 @@ public partial class VolumeSlider : HSlider
                 //AudioServer.SetBusVolumeDb(audioBusIndex, Mathf.DbToLinear((float)Value));
                 GD.Print(audioBusIndex, " ", audioBusName, " Sound volume: ", prefs.soundAudioLevel);
                 break;
-        }
+        }*/
         //Value = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(audioBusIndex));
         ValueChanged += (double value) =>
         {
             AudioServer.SetBusVolumeDb(audioBusIndex, Mathf.LinearToDb((float)value));
-            prefs.SavePrefs();
+            //prefs.SavePrefs();
         };
     }
 }

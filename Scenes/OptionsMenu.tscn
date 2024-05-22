@@ -1,13 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://cev8bbcnx4eah"]
+[gd_scene load_steps=22 format=3 uid="uid://cev8bbcnx4eah"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/OptionsMenu.cs" id="1_1cn2c"]
 [ext_resource type="FontFile" uid="uid://bq6dkp0c7vvbu" path="res://Resources/Fonts/requiem/Requiem/Requiem.ttf" id="1_m1k44"]
 [ext_resource type="PackedScene" uid="uid://jxt6unyaw0qx" path="res://Scenes/VolumeSlider.tscn" id="2_31h1n"]
 [ext_resource type="PackedScene" uid="uid://c4vdcv0hmsi7c" path="res://Scenes/ConfirmQuit.tscn" id="2_vdkg3"]
-[ext_resource type="Texture2D" uid="uid://dwix5tbho5dyu" path="res://Resources/UI Graphics/Custom Checkbox White Checked.png" id="4_fwfny"]
-[ext_resource type="Texture2D" uid="uid://bbyq6b0tupkgr" path="res://Resources/UI Graphics/Custom Checkbox Checked Disabled.png" id="5_0v5hc"]
-[ext_resource type="Texture2D" uid="uid://cpdmmnn0q1g6a" path="res://Resources/UI Graphics/Custom Checkbox White.png" id="5_rjaqn"]
-[ext_resource type="Texture2D" uid="uid://dfnjsfc4i85y8" path="res://Resources/UI Graphics/Custom Checkbox Disabled.png" id="7_548ld"]
+[ext_resource type="Theme" uid="uid://bq3kh15a0tjvx" path="res://Resources/Themes/Slider.tres" id="5_ftrwp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3sjt"]
 
@@ -23,8 +20,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bagmd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4v3y8"]
 
@@ -55,18 +50,6 @@ PopupMenu/fonts/font = ExtResource("1_m1k44")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_ibo6x")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_pvylb")
 PopupPanel/styles/panel = SubResource("StyleBoxEmpty_4dhg2")
-
-[sub_resource type="Theme" id="Theme_21mcf"]
-CheckBox/icons/checked = ExtResource("4_fwfny")
-CheckBox/icons/checked_disabled = ExtResource("5_0v5hc")
-CheckBox/icons/unchecked = ExtResource("5_rjaqn")
-CheckBox/icons/unchecked_disabled = ExtResource("7_548ld")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcw3i"]
-content_margin_left = 15.0
-content_margin_top = 5.0
-content_margin_right = 15.0
-content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_87wqy"]
 content_margin_left = 15.0
@@ -174,7 +157,7 @@ _data = {
 "RESET": SubResource("Animation_wdop0")
 }
 
-[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("bgmSlider", "sfxSlider", "backButton", "resolutionButton", "screenSizeButton", "fpsButton", "applyButton")]
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("bgmSlider", "sfxSlider", "sensitivitySlider", "backButton", "applyButton", "resolutionButton", "screenSizeButton", "fpsButton")]
 process_mode = 3
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
@@ -189,11 +172,12 @@ script = ExtResource("1_1cn2c")
 confirmQuitScene = ExtResource("2_vdkg3")
 bgmSlider = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/BGMVolume/BGMSlider")
 sfxSlider = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/SFXVolume/SFXSlider")
+sensitivitySlider = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/Sensitivity/SenSlider")
 backButton = NodePath("PanelContainer/BackButton")
+applyButton = NodePath("PanelContainer/Panel/MarginContainer/ApplyVideoSettings")
 resolutionButton = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/Resolution/ResOption")
 screenSizeButton = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/ScreenSize/SizeOption")
 fpsButton = NodePath("PanelContainer/Panel/MarginContainer/VBoxContainer/FPS/FPSOption")
-applyButton = NodePath("PanelContainer/Panel/MarginContainer/ApplyVideoSettings")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -216,56 +200,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_a3sjt")
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_isqjf")
-
-[node name="TabContainer" type="TabContainer" parent="PanelContainer/Panel"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -860.0
-offset_top = -355.0
-offset_right = 854.0
-offset_bottom = 395.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(880, 375)
-theme_override_fonts/font = ExtResource("1_m1k44")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/panel = SubResource("StyleBoxEmpty_bagmd")
-tab_alignment = 1
-
-[node name="Video" type="TabBar" parent="PanelContainer/Panel/TabContainer"]
-layout_mode = 2
-
-[node name="Audio" type="TabBar" parent="PanelContainer/Panel/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/TabContainer/Audio"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 100
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel/TabContainer/Audio/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Panel/TabContainer/Audio/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/separation = 25
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Panel"]
 layout_mode = 1
@@ -327,11 +261,6 @@ layout_mode = 2
 value = 0.36
 audioBusName = "BGM"
 
-[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/BGMVolume"]
-visible = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
 [node name="SFXVolume" type="HBoxContainer" parent="PanelContainer/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -366,11 +295,6 @@ scroll_active = false
 layout_mode = 2
 value = 0.36
 audioBusName = "SFX"
-
-[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/SFXVolume"]
-visible = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
 
 [node name="FPS" type="HBoxContainer" parent="PanelContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -498,11 +422,11 @@ alignment = 1
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 
-[node name="VSync" type="HBoxContainer" parent="PanelContainer/Panel/MarginContainer/VBoxContainer"]
-visible = false
+[node name="Sensitivity" type="HBoxContainer" parent="PanelContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/VSync"]
+[node name="Label" type="RichTextLabel" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/Sensitivity"]
 custom_minimum_size = Vector2(685, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -524,28 +448,19 @@ theme_override_font_sizes/mono_font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4v3y8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4v3y8")
 bbcode_enabled = true
-text = "[center]VSync[/center]"
+text = "[center]Mouse Sensitivity[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="VSyncEnabled" type="CheckBox" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/VSync"]
+[node name="SenSlider" type="HSlider" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/Sensitivity"]
+custom_minimum_size = Vector2(800, 58)
 layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_21mcf")
-theme_override_fonts/font = ExtResource("1_m1k44")
-theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = SubResource("StyleBoxEmpty_rcw3i")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_rcw3i")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_rcw3i")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_rcw3i")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_rcw3i")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rcw3i")
-button_pressed = true
-text = "Enabled"
-
-[node name="BlankSpace" type="Control" parent="PanelContainer/Panel/MarginContainer/VBoxContainer/VSync"]
-custom_minimum_size = Vector2(115, 0)
-layout_mode = 2
+theme = ExtResource("5_ftrwp")
+min_value = 0.25
+max_value = 10.0
+step = 0.001
+value = 4.0
+scrollable = false
 
 [node name="ApplyVideoSettings" type="Button" parent="PanelContainer/Panel/MarginContainer"]
 layout_mode = 2
@@ -612,12 +527,11 @@ libraries = {
 "": SubResource("AnimationLibrary_ece6s")
 }
 
-[connection signal="tab_changed" from="PanelContainer/Panel/TabContainer" to="." method="OnTabContainerTabChanged"]
 [connection signal="value_changed" from="PanelContainer/Panel/MarginContainer/VBoxContainer/BGMVolume/BGMSlider" to="." method="OnBgmSliderValueChanged"]
 [connection signal="value_changed" from="PanelContainer/Panel/MarginContainer/VBoxContainer/SFXVolume/SFXSlider" to="." method="OnSfxSliderValueChanged"]
 [connection signal="item_selected" from="PanelContainer/Panel/MarginContainer/VBoxContainer/FPS/FPSOption" to="." method="OnFpsOptionItemSelected"]
 [connection signal="item_selected" from="PanelContainer/Panel/MarginContainer/VBoxContainer/Resolution/ResOption" to="." method="OnResOptionItemSelected"]
 [connection signal="item_selected" from="PanelContainer/Panel/MarginContainer/VBoxContainer/ScreenSize/SizeOption" to="." method="OnSizeOptionItemSelected"]
-[connection signal="toggled" from="PanelContainer/Panel/MarginContainer/VBoxContainer/VSync/VSyncEnabled" to="." method="OnVSyncEnabledToggled"]
+[connection signal="value_changed" from="PanelContainer/Panel/MarginContainer/VBoxContainer/Sensitivity/SenSlider" to="." method="OnSenSliderValueChanged"]
 [connection signal="pressed" from="PanelContainer/Panel/MarginContainer/ApplyVideoSettings" to="." method="OnApplyVideoSettingsPressed"]
 [connection signal="pressed" from="PanelContainer/BackButton" to="." method="OnBackButtonPressed"]

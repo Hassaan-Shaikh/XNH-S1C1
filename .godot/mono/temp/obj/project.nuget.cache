@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "UoFoqXlggOWBMMpHkhLiHd42UoXl5e/o5qMKCgrxtZIkYH64CU5yLVNC8KRrNj1wctZ4ex03SExSDjGj/5abDQ==",
+  "dgSpecHash": "isX+Zge2xqt8qyodnbgGhl1pAalIlp7dubLppue03uNw4eFWez0G6J5+aiMg8ZIqO7w2VIyxt5cKIKWxUFfEDg==",
   "success": true,
   "projectFilePath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Xalkomak-s Nightmare Hunters - Cellar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phngy\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
     "C:\\Users\\phngy\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",
-    "C:\\Users\\phngy\\.nuget\\packages\\microsoft.netcore.app.runtime.osx-arm64\\6.0.28\\microsoft.netcore.app.runtime.osx-arm64.6.0.28.nupkg.sha512",
-    "C:\\Users\\phngy\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.osx-arm64\\6.0.28\\microsoft.aspnetcore.app.runtime.osx-arm64.6.0.28.nupkg.sha512"
+    "C:\\Users\\phngy\\.nuget\\packages\\godotsharpeditor\\4.1.1\\godotsharpeditor.4.1.1.nupkg.sha512"
   ],
   "logs": []
 }

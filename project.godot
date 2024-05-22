@@ -29,6 +29,10 @@ config/windows_native_icon="res://Textures/Icon/Icon_ICO.ico"
 buses/default_bus_layout="res://Resources/Audio/Audio Buses/SFX_Bus.tres"
 driver/enable_input=true
 
+[autoload]
+
+UserConfig="*res://Scripts/CSharp/UserConfig.cs"
+
 [display]
 
 window/size/viewport_width=1920

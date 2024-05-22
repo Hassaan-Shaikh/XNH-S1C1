@@ -47,6 +47,7 @@ public partial class PauseMenu : Control
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
         Engine.MaxFps = Xalkomak.gameFrameRate;
+        Xalkomak.camSens = userPrefs.sensitivityLevel;
     }
 
     private void OnResumePressed()
@@ -160,7 +161,7 @@ public partial class PauseMenu : Control
                 userPrefs.SavePrefs();
                 break;
             case "FPSOption":
-                GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
+                //GD.Print("Incoming setting change from\nName: ", settingName, "\nNew Value: ", settingValue, "\n");
                 userPrefs.gameFps = (int)settingValue;
                 userPrefs.SavePrefs();
                 break;
@@ -168,8 +169,12 @@ public partial class PauseMenu : Control
                 userPrefs.fpsIndex = (int)settingValue;
                 userPrefs.SavePrefs();
                 break;
+            case "SenSlider":
+                userPrefs.sensitivityLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
             default:
-                GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
+                GD.PrintErr("Setting node ", settingName, " is unavailable or not defined.");
                 break;
         }
     }

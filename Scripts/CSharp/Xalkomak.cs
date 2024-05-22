@@ -50,4 +50,5 @@ public static class Xalkomak
     public static int currentScreenIndex = 0;
     public static int gameFrameRate = 60;
     public static int fpsIndex = 1;
+    public static float camSens = 4.0f;
 }

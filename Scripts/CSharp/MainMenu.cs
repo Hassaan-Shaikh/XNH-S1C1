@@ -5,9 +5,7 @@ using Godot.Collections;
 public partial class MainMenu : Control
 {
     [Export] public LevelLoader levelLoader;
-    [Export] public PackedScene difficultyMenu;
-    [Export] public PackedScene confirmQuit;
-    [Export] public PackedScene optionsMenu;
+    [Export] public PackedScene difficultyMenu, confirmQuit, optionsMenu;
 
     UserPrefs userPrefs;
 
@@ -21,29 +19,33 @@ public partial class MainMenu : Control
     public override void _Ready()
     {
         base._Ready();
+
+        Dictionary<string, Variant> audioSettings = UserConfig.GetAudioSettings();
+        Dictionary<string, Variant> videoSettings = UserConfig.GetVideoSettings();
+        Dictionary<string, Variant> controlSettings = UserConfig.GetControlSettings();
+
         selectedDifficulty = "";
         if (FileAccess.FileExists(Xalkomak.userGameDataPath))
         {
-            GD.Print("It exists!");
             LoadGameData();
         }
         else
         {
-            GD.Print("File does not exist.");
             SaveGameData();
         }
-        userPrefs = UserPrefs.LoadOrCreate();
+        /*userPrefs = UserPrefs.LoadOrCreate();
         userPrefs.SavePrefs();
         Xalkomak.currentResIndex = userPrefs.resolutionIndex;
         Xalkomak.currentScreenIndex = userPrefs.screenSizeIndex;
         Xalkomak.gameFrameRate = userPrefs.gameFps;
         Xalkomak.fpsIndex = userPrefs.fpsIndex;
+        Xalkomak.camSens = userPrefs.sensitivityLevel;*/
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         levelLoader.Visible = true;
         GetTree().Paused = false;
         extrasButton = GetNode<Button>("MarginContainer/VBoxContainer/ExtrasButton");
         extrasButton.Disabled = Xalkomak.totalGamesWon == 0;
-        switch (Xalkomak.currentScreenIndex)
+        switch ((int)videoSettings["screen_index"])
         {
             case 0: // Fulscreen
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
@@ -62,10 +64,11 @@ public partial class MainMenu : Control
                 DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, false);
                 break;
         }
-        DisplayServer.WindowSetSize(OptionsMenu.GetValues()[Xalkomak.currentResIndex]);
-        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
-        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
-        Engine.MaxFps = Xalkomak.gameFrameRate;
+        DisplayServer.WindowSetSize(OptionsMenu.GetValues()[(int)videoSettings["resolution_index"]]);
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb((float)audioSettings["sound_volume"]));
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb((float)audioSettings["music_volume"]));
+        Engine.MaxFps = (int)videoSettings["frames_per_second"];
+        Xalkomak.camSens = (float)controlSettings["mouse_sensitivity"];
     }
 
     public void SaveGameData()
@@ -281,8 +284,12 @@ public partial class MainMenu : Control
                 userPrefs.fpsIndex = (int)settingValue;
                 userPrefs.SavePrefs();
                 break;
+            case "SenSlider":
+                userPrefs.sensitivityLevel = (float)settingValue;
+                userPrefs.SavePrefs();
+                break;
             default:
-                GD.PrintErr("Setting node", settingName, " is unavailable or not defined.");
+                GD.PrintErr("Setting node ", settingName, " is unavailable or not defined.");
                 break;
         }
     }

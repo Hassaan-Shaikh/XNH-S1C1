@@ -58,6 +58,12 @@ public partial class Player : CharacterBody3D
         stamina.Value = 100f;
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        camSensitivity = Xalkomak.camSens;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         canControl = Xalkomak.playerCanControl;

@@ -20,6 +20,12 @@ public partial class CamControl : Node3D
         Camera = GetViewport().GetCamera3D();
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        sens = Xalkomak.camSens;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);

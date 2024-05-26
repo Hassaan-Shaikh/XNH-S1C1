@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=45 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bevks4nk3s4xe" path="res://Scenes/document.tscn" id="7_55qww"]
 [ext_resource type="LightmapGIData" uid="uid://d2rgbf8tnmyvl" path="res://Resources/Lightmaps/Game.lmbake" id="8_4iftb"]
 [ext_resource type="Environment" uid="uid://cmkdponegvye8" path="res://Resources/Environment/GameEnvironment.tres" id="9_gp0vd"]
+[ext_resource type="PackedScene" uid="uid://ca7n3hrirnjr1" path="res://Scenes/ChainPath.tscn" id="9_u8ts4"]
 [ext_resource type="PackedScene" uid="uid://eypdd16cpiqh" path="res://Scenes/SpeedBoost.tscn" id="10_20rc3"]
 [ext_resource type="PackedScene" uid="uid://dh461p2oki1by" path="res://Scenes/Stun.tscn" id="11_74tme"]
 [ext_resource type="PackedScene" uid="uid://d38apra642wkw" path="res://Scenes/guardian.tscn" id="11_jjnv4"]
@@ -147,6 +148,20 @@ shadow_mesh = SubResource("ArrayMesh_bb3xr")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ae2xq"]
 data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="Curve3D" id="Curve3D_olb8c"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.16026, -0.392393, -0.886738, 0, 0, 0, 0, 0, 0, -0.567177, 2.5135, 0.7314),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_6rb5h"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.13477, -0.344769, -0.878029, 0, 0, 0, 0, 0, 0, -0.179403, 3.36035, 1.03025),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smop8"]
 albedo_color = Color(0.905882, 0, 0, 1)
@@ -313,6 +328,14 @@ transform = Transform3D(0.599563, 0, 0, 0, 1.85714, 0, 0, 0, 0.599563, -6.47663,
 
 [node name="Door6" parent="Cellar" instance=ExtResource("19_7frja")]
 transform = Transform3D(0.6, 0, 0, 0, 2.25, 0, 0, 0, 0.6, -0.240622, 0, -9.53129)
+
+[node name="ChainPath" parent="Cellar" instance=ExtResource("9_u8ts4")]
+transform = Transform3D(-0.0699589, -0.00059486, -0.115459, 0, 0.442999, -0.000211959, 0.115459, -0.000360438, -0.0699588, 6.15372, 2.37745, 5.1894)
+curve = SubResource("Curve3D_olb8c")
+
+[node name="ChainPath2" parent="Cellar" instance=ExtResource("9_u8ts4")]
+transform = Transform3D(-0.0699589, -0.00059486, -0.115459, 0, 0.443, -0.000211959, 0.115459, -0.000360438, -0.0699588, 5.80049, 3.59571, 5.36415)
+curve = SubResource("Curve3D_6rb5h")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 1

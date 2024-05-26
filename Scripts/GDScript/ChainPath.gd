@@ -34,8 +34,6 @@ func spawn_link() -> void:
 		bas.y = up
 		bas.z = -forward
 		bas.x = forward.cross(up).normalized()
-		
-		var trans := Transform3D(bas, pos)
 		link.basis = bas
 
 func _on_curve_changed() -> void:

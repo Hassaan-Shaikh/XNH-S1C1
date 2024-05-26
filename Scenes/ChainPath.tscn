@@ -1,19 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca7n3hrirnjr1"]
 
-[ext_resource type="Script" path="res://Scripts/GDScript/ChainPath.gd" id="1_022v1"]
-[ext_resource type="PackedScene" uid="uid://ohp124oqhwav" path="res://Models/Chain Link.glb" id="2_8xoqv"]
+[ext_resource type="Script" path="res://Scripts/GDScript/ChainPath.gd" id="1_eh70y"]
+[ext_resource type="PackedScene" uid="uid://ohp124oqhwav" path="res://Models/Chain Link.glb" id="2_y2nww"]
 
 [sub_resource type="Curve3D" id="Curve3D_7yty6"]
-_data = {
-"points": PackedVector3Array(2.57958, -0.786816, 1.22069, -2.57958, 0.786816, -1.22069, 3.48144, 2.62696, -1.80374, 0.171071, 2.83174, -1.5026, -0.171071, -2.83174, 1.5026, -4.51797, -0.45313, -2.14854),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
 
 [node name="ChainPath" type="Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0311383, -0.0149131, 0.0129302)
 curve = SubResource("Curve3D_7yty6")
-script = ExtResource("1_022v1")
-chain_link = ExtResource("2_8xoqv")
+script = ExtResource("1_eh70y")
+chain_link = ExtResource("2_y2nww")
 
 [connection signal="curve_changed" from="." to="." method="_on_curve_changed"]

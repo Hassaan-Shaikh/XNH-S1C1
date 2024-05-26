@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpnyrabv2fiog"]
+
+[ext_resource type="PackedScene" uid="uid://ohp124oqhwav" path="res://Models/Chain Link.glb" id="1_pyjwg"]
+
+[node name="Chain Link" instance=ExtResource("1_pyjwg")]

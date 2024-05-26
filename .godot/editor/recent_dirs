@@ -1,9 +1,11 @@
+res://Scenes
+res://Scripts/GDScript
 res://Scripts/CSharp
+res://Resources/Meshes
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports/macOS
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports/Linux
 C:/Game Dev/Godot Projects/XNH/Season 1/Chapter 1/Exports/Windows
 res://Resources/Themes
-res://Scenes
 res://Resources/Audio/Audio Buses
 res://Resources/Environment
 res://Textures/UI Textures
@@ -18,4 +20,3 @@ res://Resources/StyleBoxes
 res://Textures/Solkoth
 res://Resources/Fonts/requiem/Requiem
 res://Resources/Audio/SFX
-res://Resources/Animations/Smiling Sammy

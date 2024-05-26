@@ -1,3 +1,9 @@
+MultiMeshInstance3D
+Node
+Node3D
+PathFollow3D
+CSGMesh3D
+Path3D
 CheckBox
 Button
 Control
@@ -21,13 +27,6 @@ NavigationObstacle3D
 Timer
 RayCast3D
 AnimationPlayer
-Node3D
 AnimatableBody3D
 Marker3D
 Panel
-PanelContainer
-TextureButton
-MarginContainer
-CSGBox3D
-AudioStreamPlayer3D
-TextureRect

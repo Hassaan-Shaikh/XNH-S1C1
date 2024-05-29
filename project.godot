@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Cursed Hunters - Cellar"
+config/name="Xalkomak's Nightmare Hunters - Cellar"
 config/description="Xalkomak's Nightmare Hunters is a short horror series, taking inspiration from Slender: The Eight Pages and Dark Deception.
 This is the first chapter of the series, where the you find yourself in a cellar. Your objective is to collect eight documents scattered all over the cellar, and leave ASAP.
 But you are not alone. There is a monster in this cellar, and he is looking for you. Stay out of his sight."
-config/tags=PackedStringArray("cursed_hunters")
+config/tags=PackedStringArray("xalkomak\'s_nightmare_hunters")
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="XNH/Season1/Chapter1"

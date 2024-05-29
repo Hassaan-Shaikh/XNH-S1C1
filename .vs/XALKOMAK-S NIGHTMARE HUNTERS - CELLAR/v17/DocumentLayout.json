@@ -3,10 +3,13 @@
   "WorkspaceRootPath": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\chainpath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\chainpath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+=======
+>>>>>>> parent of e9ca9ff (Procedural Chains)
       "AbsoluteMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|c:\\game dev\\godot projects\\xnh\\season 1\\chapter 1\\xnh-s1c1\\scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4CD74214-E97D-4FE7-A955-57960ADA7968}|Xalkomak-s Nightmare Hunters - Cellar.csproj|solutionrelative:scripts\\csharp\\optionsmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -138,11 +141,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 4,
+=======
+          "SelectedChildIndex": 5,
+>>>>>>> parent of e9ca9ff (Procedural Chains)
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "Xalkomak.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Xalkomak.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Xalkomak.cs",
@@ -155,7 +162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "DebugPanel.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\DebugPanel.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\DebugPanel.cs",
@@ -168,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "UserConfig.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\UserConfig.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\UserConfig.cs",
@@ -177,6 +184,7 @@
               "ViewState": "AQIAAAkAAAAAAAAAAIA2wBIAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-22T15:53:32.785Z",
+<<<<<<< HEAD
               "IsPinned": true
             },
             {
@@ -194,11 +202,14 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-25T12:14:31.137Z",
+=======
+              "IsPinned": true,
+>>>>>>> parent of e9ca9ff (Procedural Chains)
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "UserPrefs.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\UserPrefs.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\UserPrefs.cs",
@@ -206,23 +217,24 @@
               "RelativeToolTip": "Scripts\\CSharp\\UserPrefs.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAAwAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T11:25:02.218Z"
+              "WhenOpened": "2024-04-27T11:25:02.218Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "OptionsMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\OptionsMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\OptionsMenu.cs",
               "ToolTip": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\OptionsMenu.cs",
               "RelativeToolTip": "Scripts\\CSharp\\OptionsMenu.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAMsAAAAmAAAA",
+              "ViewState": "AQIAADQAAAAAAAAAAAAQwMsAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T11:23:36.503Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MainMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\MainMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\MainMenu.cs",
@@ -230,11 +242,12 @@
               "RelativeToolTip": "Scripts\\CSharp\\MainMenu.cs",
               "ViewState": "AQIAADgAAAAAAAAAAAAQwEYAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-22T12:03:06.063Z"
+              "WhenOpened": "2023-11-22T12:03:06.063Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "LevelLoader.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\LevelLoader.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\LevelLoader.cs",
@@ -246,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Player.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Player.cs",
@@ -254,11 +267,12 @@
               "RelativeToolTip": "Scripts\\CSharp\\Player.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAAwD8AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-01T13:46:17.708Z"
+              "WhenOpened": "2023-11-01T13:46:17.708Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "VolumeSlider.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\VolumeSlider.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\VolumeSlider.cs",
@@ -266,11 +280,12 @@
               "RelativeToolTip": "Scripts\\CSharp\\VolumeSlider.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwCEAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T11:53:11.264Z"
+              "WhenOpened": "2024-04-24T11:53:11.264Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "PauseMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\PauseMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\PauseMenu.cs",
@@ -282,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "CamControl.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\CamControl.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\CamControl.cs",
@@ -290,11 +305,12 @@
               "RelativeToolTip": "Scripts\\CSharp\\CamControl.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAwBMAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-04T19:11:22.968Z"
+              "WhenOpened": "2023-11-04T19:11:22.968Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "Door.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Door.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Door.cs",
@@ -306,7 +322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "GameControl.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\GameControl.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\GameControl.cs",
@@ -318,7 +334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "ConfirmQuit.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\ConfirmQuit.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\ConfirmQuit.cs",
@@ -330,7 +346,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "PlayerRay.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\PlayerRay.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\PlayerRay.cs",
@@ -342,7 +358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "DifficultySelectionMenu.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\DifficultySelectionMenu.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\DifficultySelectionMenu.cs",
@@ -354,7 +370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "SmilingSammy.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\SmilingSammy.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\SmilingSammy.cs",
@@ -366,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "DeathScreen.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\DeathScreen.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\DeathScreen.cs",
@@ -378,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "Document.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Document.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Document.cs",
@@ -390,7 +406,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "DoorChecker.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\DoorChecker.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\DoorChecker.cs",
@@ -402,7 +418,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "StaminaAnim.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\StaminaAnim.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\StaminaAnim.cs",
@@ -414,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "SammyRay.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\SammyRay.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\SammyRay.cs",
@@ -426,7 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "SpeedBoost.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\SpeedBoost.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\SpeedBoost.cs",
@@ -438,7 +454,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "Guardian.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Guardian.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Guardian.cs",
@@ -450,7 +466,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "Vanish.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Vanish.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Vanish.cs",
@@ -462,7 +478,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "Stun.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Stun.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Stun.cs",
@@ -474,7 +490,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "StunExplosion.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\StunExplosion.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\StunExplosion.cs",
@@ -486,7 +502,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "GuardianShield.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\GuardianShield.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\GuardianShield.cs",
@@ -498,7 +514,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "Footstep.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\Footstep.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\Footstep.cs",
@@ -510,7 +526,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "DocumentCounter.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\DocumentCounter.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\DocumentCounter.cs",
@@ -522,7 +538,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "PowerRune.cs",
               "DocumentMoniker": "C:\\Game Dev\\Godot Projects\\XNH\\Season 1\\Chapter 1\\XNH-S1C1\\Scripts\\CSharp\\PowerRune.cs",
               "RelativeDocumentMoniker": "Scripts\\CSharp\\PowerRune.cs",

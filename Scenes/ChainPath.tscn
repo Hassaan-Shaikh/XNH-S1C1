@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca7n3hrirnjr1"]
 
 [ext_resource type="Script" path="res://Scripts/GDScript/ChainPath.gd" id="1_eh70y"]
-[ext_resource type="PackedScene" uid="uid://ohp124oqhwav" path="res://Models/Chain Link.glb" id="2_y2nww"]
+[ext_resource type="PackedScene" uid="uid://mrywgthvq3ho" path="res://Models/Chain Link.glb" id="2_y2nww"]
 
 [sub_resource type="Curve3D" id="Curve3D_7yty6"]
 

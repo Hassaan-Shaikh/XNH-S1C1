@@ -52,15 +52,15 @@
           "dependencies": {
             "Godot.SourceGenerators": {
               "target": "Package",
-              "version": "[4.1.1, )"
+              "version": "[4.1.4, )"
             },
             "GodotSharp": {
               "target": "Package",
-              "version": "[4.1.1, )"
+              "version": "[4.1.4, )"
             },
             "GodotSharpEditor": {
               "target": "Package",
-              "version": "[4.1.1, )"
+              "version": "[4.1.4, )"
             }
           },
           "imports": [
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

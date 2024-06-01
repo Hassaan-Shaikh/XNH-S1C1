@@ -11,17 +11,13 @@ public partial class SmilingSammy : CharacterBody3D
     [Signal] public delegate void StoppedByGuardianEventHandler();
 
     [ExportCategory("References")]
-    [Export] public Camera3D playerCam;
-    [Export] public Camera3D jumpscareCam;
-    [Export] public NavigationAgent3D sammyNav;
-    [Export] public BoneAttachment3D head;
-    [Export] public Timer sammyTimer;
-    [Export] public AnimationTree sammyAnimTree;
     [Export] public Player player;
-    [Export] public Timer sammyNavTimer;
+    [Export] public Camera3D playerCam, jumpscareCam;
+    [Export] public NavigationAgent3D sammyNav;
+    [Export] public Timer sammyTimer, sammyNavTimer;
+    [Export] public AnimationTree sammyAnimTree;
     [Export] public Area3D jumpscareArea;
-    [Export] public GpuParticles3D speedBoostParticles;
-    [Export] public GpuParticles3D guardianParticles;
+    [Export] public GpuParticles3D speedBoostParticles, guardianParticles;
     [Export] public MeshInstance3D sammyMesh;
     [Export] public AnimationPlayer sammyMeshAnim;
     [Export] public Marker3D playerTracker;
@@ -35,28 +31,21 @@ public partial class SmilingSammy : CharacterBody3D
         Chasing,
         Hunting,
         Stunned,
-        SpeedBoosted
+        SpeedBoosted,
     };
 
     public static float s_Velocity;
-    public static int waypointIndex;
-    public static int waypointCount;
-    public static string currentStateS;
-    public static string prevStateS;
+    public static int waypointIndex, waypointCount, limitFlag = 0;
+    public static string currentStateS, prevStateS;
     public static Vector3 trackerPos;
-    public int limitFlag = 0;
 
-    public SammyStates currentState;
-    public SammyStates previousState;
+    public SammyStates currentState, previousState;
     public bool isStunned = false;
 
     private List<Marker3D> waypoints = new List<Marker3D>();
-    private Vector3 lastLookingDir;
-    private Vector3 targetPos;
-    private float moveSpeed;
-    private int flag = 0;
-    private int jumpscareNum;
-    private float animSpeed;
+    private Vector3 lastLookingDir, targetPos;
+    private float moveSpeed, animSpeed;
+    private int flag = 0, jumpscareNum;
 
     const float walkSpeed = 3.2f;
     const float runSpeed = 4.4f;
@@ -73,7 +62,6 @@ public partial class SmilingSammy : CharacterBody3D
         playerCam = GetViewport().GetCamera3D();
         sammyNav = GetNode<NavigationAgent3D>("SammyNav");
         jumpscareCam = GetNode<Camera3D>("JumpscareCam");
-        head = GetNode<BoneAttachment3D>("%Head");
         sammyTimer = GetNode<Timer>("SammyTimer");
         sammyNavTimer = GetNode<Timer>("NavUpdateTimer");
         jumpscareArea = GetNode<Area3D>("JumpscareArea");

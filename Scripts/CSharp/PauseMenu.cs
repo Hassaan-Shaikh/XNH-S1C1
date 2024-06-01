@@ -19,12 +19,12 @@ public partial class PauseMenu : Control
     public override void _Ready()
     {
         base._Ready();
-        userPrefs = UserPrefs.LoadOrCreate();
+        //userPrefs = UserPrefs.LoadOrCreate();
         gameScene = GetTree().GetNodesInGroup("Game")[0] as GameControl;
         levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
         fadeAnim = GetNode<AnimationPlayer>("PauseFade");
 
-        switch (Xalkomak.currentScreenIndex)
+        /*switch (Xalkomak.currentScreenIndex)
         {
             case 0: // Fulscreen
                 DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
@@ -47,7 +47,7 @@ public partial class PauseMenu : Control
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("SFX"), Mathf.LinearToDb(userPrefs.soundAudioLevel));
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("BGM"), Mathf.LinearToDb(userPrefs.musicAudioLevel));
         Engine.MaxFps = Xalkomak.gameFrameRate;
-        Xalkomak.camSens = userPrefs.sensitivityLevel;
+        Xalkomak.camSens = userPrefs.sensitivityLevel;*/
     }
 
     private void OnResumePressed()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=45 format=3 uid="uid://b7d02ye5x3ksb"]
+[gd_scene load_steps=46 format=3 uid="uid://b7d02ye5x3ksb"]
 
 [ext_resource type="Script" path="res://Scripts/CSharp/GameControl.cs" id="1_wrea6"]
 [ext_resource type="PackedScene" uid="uid://bj8jt7vqp3wyx" path="res://Scenes/player.tscn" id="2_an7nd"]
 [ext_resource type="PackedScene" uid="uid://b47rtij401eep" path="res://Scenes/StunExplosion.tscn" id="2_y0y7d"]
 [ext_resource type="PackedScene" uid="uid://boim2ipsf35f4" path="res://Scenes/GuardianShield.tscn" id="3_b6jqb"]
+[ext_resource type="Environment" uid="uid://nwrvkffs3nxa" path="res://Resources/Environment/TestEnvironment.tres" id="3_d3wnu"]
 [ext_resource type="ArrayOccluder3D" uid="uid://5a5q5m1dffm7" path="res://Resources/Occluders/Game.occ" id="3_g0ikf"]
 [ext_resource type="Texture2D" uid="uid://0av2w65c777l" path="res://Models/Cellar_Wall_Albedo.png" id="3_lxemr"]
 [ext_resource type="Texture2D" uid="uid://ca2n2yb5mrotf" path="res://Models/Cellar_Wall_Normal.png" id="4_pbiax"]
@@ -230,10 +231,14 @@ size = Vector3(0.2, 0.3, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_c68fn"]
 size = Vector3(2, 3, 2)
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("exitTrigger", "player", "sammy", "navigationRegion", "hardModeBlack", "pauseMenu", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("exitTrigger", "environment", "player", "sammy", "navigationRegion", "hardModeBlack", "pauseMenu", "speedBoost", "stun", "guardian", "vanish", "speedBoostTimer", "stunTimer", "guardianTimer", "vanishTimer", "speedBoostTele", "stunTele", "guardianTele", "vanishTele", "speedBoostparticles", "stunParticles", "guardianParticles", "vanishParticles", "powerRunePoints") groups=["Game"]]
 process_mode = 1
 script = ExtResource("1_wrea6")
 exitTrigger = NodePath("ExitArea")
+environment = NodePath("WorldEnvironment")
+gameEnvironment = ExtResource("9_gp0vd")
+testEnvironment = ExtResource("3_d3wnu")
+useTestEnvironment = true
 player = NodePath("Player")
 sammy = NodePath("SmilingSammy")
 stunVFX = ExtResource("2_y0y7d")
@@ -339,7 +344,7 @@ curve = SubResource("Curve3D_6rb5h")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 1
-environment = ExtResource("9_gp0vd")
+environment = ExtResource("3_d3wnu")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 process_mode = 1

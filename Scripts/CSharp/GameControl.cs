@@ -7,7 +7,12 @@ public partial class GameControl : Node3D
 	[Signal] public delegate void SammySpeedBoostedEventHandler(bool sammyHasSpeedBoost);
 
 	[Export] public Area3D exitTrigger;
-	[ExportCategory("References")]
+	[ExportGroup("Environment")]
+	[Export] public WorldEnvironment environment;
+	[Export(PropertyHint.File)] public Godot.Environment gameEnvironment;
+    [Export(PropertyHint.File)] public Godot.Environment testEnvironment;
+	[Export] bool useTestEnvironment;
+    [ExportCategory("References")]
 	[ExportGroup("Prefabs")]
 	[Export] public Player player;
 	[Export] public SmilingSammy sammy;
@@ -16,28 +21,28 @@ public partial class GameControl : Node3D
 	[Export] public NavigationRegion3D navigationRegion;
 	[ExportGroup("Light Maps")]
 	[Export] public LightmapGI hardModeBlack;
-    [ExportGroup("UI Elements")]
-    [Export] public PauseMenu pauseMenu;
-    [ExportGroup("Power Runes")]
+	[ExportGroup("UI Elements")]
+	[Export] public PauseMenu pauseMenu;
+	[ExportGroup("Power Runes")]
 	[Export] public SpeedBoost speedBoost;
 	[Export] public Stun stun;
 	[Export] public Guardian guardian;
 	[Export] public Vanish vanish;
-    [ExportSubgroup("Power Rune Timers")] 
+	[ExportSubgroup("Power Rune Timers")] 
 	[Export] public Timer speedBoostTimer;
 	[Export] public Timer stunTimer;
 	[Export] public Timer guardianTimer;
 	[Export] public Timer vanishTimer;
-    [ExportSubgroup("Power Rune Telport Timers")]
-    [Export] public Timer speedBoostTele;
-    [Export] public Timer stunTele;
-    [Export] public Timer guardianTele;
-    [Export] public Timer vanishTele;
-    [ExportSubgroup("Power Rune Paricles")]
+	[ExportSubgroup("Power Rune Telport Timers")]
+	[Export] public Timer speedBoostTele;
+	[Export] public Timer stunTele;
+	[Export] public Timer guardianTele;
+	[Export] public Timer vanishTele;
+	[ExportSubgroup("Power Rune Paricles")]
 	[Export] public CpuParticles3D speedBoostparticles;
-    [Export] public CpuParticles3D stunParticles;
-    [Export] public CpuParticles3D guardianParticles;
-    [Export] public CpuParticles3D vanishParticles;
+	[Export] public CpuParticles3D stunParticles;
+	[Export] public CpuParticles3D guardianParticles;
+	[Export] public CpuParticles3D vanishParticles;
 	[ExportSubgroup("Power Rune Locations")]
 	[Export] public Node3D[] powerRunePoints;
 
@@ -50,19 +55,23 @@ public partial class GameControl : Node3D
 	bool isGamePaused = false;
 	bool[] isThisSpotFree;
 
-    const string pauseKey = "pause";
+	const string pauseKey = "pause";
 	const string endGamePath = "res://Scenes/EndGame.tscn";
 
-    public override void _Ready()
-    {
-        base._Ready();
+	public override void _Ready()
+	{
+		base._Ready();
+		if (useTestEnvironment && OS.IsDebugBuild())
+			environment.Environment = testEnvironment;
+		else
+			environment.Environment = gameEnvironment;
 		levelLoader = GetTree().GetNodesInGroup("LevelLoader")[0] as LevelLoader;
 		//Xalkomak.livesRemaining = Xalkomak.difficulty == Xalkomak.Difficulty.Normal ? 3 : 1;
 		player = GetTree().GetNodesInGroup("Player")[0] as Player;
 		hardModeBlack.Visible = Xalkomak.difficulty == Xalkomak.Difficulty.Hard;
 		if(powerRunePoints.Length == 0)
 		{
-            Array<Node> points = GetTree().GetNodesInGroup("PowerRuneLocation");
+			Array<Node> points = GetTree().GetNodesInGroup("PowerRuneLocation");
 			for(int i = 0; i < points.Count; i++)
 			{
 				powerRunePoints[i] = (Node3D)points[i];
@@ -72,26 +81,26 @@ public partial class GameControl : Node3D
 		isThisSpotFree = new bool[powerRunePoints.Length];
 
 		Xalkomak.isSpeedBoostCollected = false;
-        Xalkomak.isStunCollected = false;
-        Xalkomak.isGuardianCollected = false;
+		Xalkomak.isStunCollected = false;
+		Xalkomak.isGuardianCollected = false;
 		Xalkomak.isVanishCollected = false;
-        Xalkomak.isSpeedBoostCollectedBySammy = false;
-        Xalkomak.isStunCollectedBySammy = false;
+		Xalkomak.isSpeedBoostCollectedBySammy = false;
+		Xalkomak.isStunCollectedBySammy = false;
 		Xalkomak.isGuardianCollectedBySammy = false;
-        Xalkomak.isVanishCollectedBySammy = false;
-    }
+		Xalkomak.isVanishCollectedBySammy = false;
+	}
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 
 		if (Input.IsActionJustPressed(pauseKey))
 		{
 			PauseGame();
 		}
-    }
+	}
 
-    public void StartSpeedBoostTimer()
+	public void StartSpeedBoostTimer()
 	{
 		speedBoostTimer.Start();
 		speedBoostUsed = true;
@@ -121,25 +130,25 @@ public partial class GameControl : Node3D
 		}
 		stunTimer.Start();
 		stunUsed = true;
-        stunParticles.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
-        stunParticles.Emitting = true;
-    }
+		stunParticles.GlobalPosition = GetNode<Stun>("Stun").GlobalPosition;
+		stunParticles.Emitting = true;
+	}
 
-    public void StartStunTimer(string runeName)
-    {        
+	public void StartStunTimer(string runeName)
+	{        
 		GuardianShield guardianShield = guardianVFX.Instantiate<GuardianShield>();
 		AddChild(guardianShield);
 		guardianShield.GlobalPosition = player.GlobalPosition;
-        stunTimer.Start();
-    }
+		stunTimer.Start();
+	}
 
-    public void StartGuardianTimer()
+	public void StartGuardianTimer()
 	{
-        guardianTimer.Start();
+		guardianTimer.Start();
 		guardianUsed = true;
-        guardianParticles.GlobalPosition = GetNode<Guardian>("Guardian").GlobalPosition;
-        guardianParticles.Emitting = true;
-    }
+		guardianParticles.GlobalPosition = GetNode<Guardian>("Guardian").GlobalPosition;
+		guardianParticles.Emitting = true;
+	}
 
 	public void StartVanishTimer()
 	{
@@ -149,63 +158,63 @@ public partial class GameControl : Node3D
 		//}
 		vanishTimer.Start();
 		vanishUsed = true;
-        vanishParticles.GlobalPosition = GetNode<Vanish>("Vanish").GlobalPosition;
-        vanishParticles.Emitting = true;
-    }
+		vanishParticles.GlobalPosition = GetNode<Vanish>("Vanish").GlobalPosition;
+		vanishParticles.Emitting = true;
+	}
 
 	private void OnSpeedBoostExpired()
 	{
 		if(Xalkomak.isSpeedBoostCollected)
 		{
-            player.SetSpeedBoost(false);
-        }
+			player.SetSpeedBoost(false);
+		}
 		//GD.Print(Xalkomak.isSpeedBoostCollectedBySammy);
-        if (Xalkomak.isSpeedBoostCollectedBySammy)
-        {
-            EmitSignal(SignalName.SammySpeedBoosted, false);
-        }
-        Xalkomak.isSpeedBoostCollected = false;
+		if (Xalkomak.isSpeedBoostCollectedBySammy)
+		{
+			EmitSignal(SignalName.SammySpeedBoosted, false);
+		}
+		Xalkomak.isSpeedBoostCollected = false;
 		Xalkomak.isSpeedBoostCollectedBySammy = false;		
-    }
+	}
 
 	private void OnStunExpired()
 	{
-        if (Xalkomak.isStunCollected)
-        {
-            player.SetStun(false);
-        }
-        if (Xalkomak.isStunCollectedBySammy)
-        {
-            player.SetStunned(false);
-        }
-        Xalkomak.isStunCollected = false;
+		if (Xalkomak.isStunCollected)
+		{
+			player.SetStun(false);
+		}
+		if (Xalkomak.isStunCollectedBySammy)
+		{
+			player.SetStunned(false);
+		}
+		Xalkomak.isStunCollected = false;
 		Xalkomak.isStunCollectedBySammy = false;
 		sammy.RecoverFromStun();
 	}
 
-    private void OnGuardianExpired()
+	private void OnGuardianExpired()
 	{
-        if (Xalkomak.isGuardianCollected)
-        {
-            player.SetGuardian(false);
-        }
-        Xalkomak.isGuardianCollected = false;
+		if (Xalkomak.isGuardianCollected)
+		{
+			player.SetGuardian(false);
+		}
+		Xalkomak.isGuardianCollected = false;
 		Xalkomak.isGuardianCollectedBySammy = false;				
 	}
 
 	private void OnVanishExpired()
 	{
-        if (Xalkomak.isVanishCollectedBySammy)
-        {
-            sammy.GoInvisible(false);
-        }
+		if (Xalkomak.isVanishCollectedBySammy)
+		{
+			sammy.GoInvisible(false);
+		}
 		if(Xalkomak.isVanishCollected)
 		{
-            player.SetVanish(false);
-        }
-        Xalkomak.isVanishCollected = false;
+			player.SetVanish(false);
+		}
+		Xalkomak.isVanishCollected = false;
 		Xalkomak.isVanishCollectedBySammy = false;		
-    }
+	}
 
 	private void RepositionSB()
 	{
@@ -218,9 +227,9 @@ public partial class GameControl : Node3D
 				{
 					FreeSpots();
 				}
-                speedBoostTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-                speedBoostTele.Start();
-                return;
+				speedBoostTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+				speedBoostTele.Start();
+				return;
 			}
 			speedBoost.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
 			Xalkomak.isThisSpotOccupied[newPosIndex] = true;
@@ -229,72 +238,72 @@ public partial class GameControl : Node3D
 		}
 	}
 
-    private void RepositionS()
-    {
+	private void RepositionS()
+	{
 		if(!stunUsed)
 		{
-            int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
-            {
-                if (Xalkomak.isThisSpotOccupied[newPosIndex])
-                {
-                    FreeSpots();
-                }
-                stunTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-                stunTele.Start();
-                return;
-            }
-            stun.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
-            Xalkomak.isThisSpotOccupied[newPosIndex] = true;
-            stunTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-            stunTele.Start();
-        }
-    }
+			int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
+			if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
+			{
+				if (Xalkomak.isThisSpotOccupied[newPosIndex])
+				{
+					FreeSpots();
+				}
+				stunTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+				stunTele.Start();
+				return;
+			}
+			stun.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
+			Xalkomak.isThisSpotOccupied[newPosIndex] = true;
+			stunTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+			stunTele.Start();
+		}
+	}
 
-    private void RepositionG()
-    {
+	private void RepositionG()
+	{
 		if(!guardianUsed)
 		{
 
-            int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
-            {
-                if (Xalkomak.isThisSpotOccupied[newPosIndex])
-                {
-                    FreeSpots();
-                }
-                guardianTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-                guardianTele.Start();
-                return;
-            }
-            guardian.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
-            Xalkomak.isThisSpotOccupied[newPosIndex] = true;
-            guardianTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-            guardianTele.Start();
-        }
-    }
+			int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
+			if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
+			{
+				if (Xalkomak.isThisSpotOccupied[newPosIndex])
+				{
+					FreeSpots();
+				}
+				guardianTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+				guardianTele.Start();
+				return;
+			}
+			guardian.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
+			Xalkomak.isThisSpotOccupied[newPosIndex] = true;
+			guardianTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+			guardianTele.Start();
+		}
+	}
 
-    private void RepositionV()
-    {
+	private void RepositionV()
+	{
 		if(!vanishUsed)
 		{
-            int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
-            if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
-            {
-                if (Xalkomak.isThisSpotOccupied[newPosIndex])
-                {
-                    FreeSpots();
-                }
-                vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-                vanishTele.Start();
-                return;
-            }
-            vanish.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
-            Xalkomak.isThisSpotOccupied[newPosIndex] = true;
-            vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);
-            vanishTele.Start();
-        }
-    }
+			int newPosIndex = GD.RandRange((int)0, (int)powerRunePoints.Length - 1);
+			if (Xalkomak.isThisSpotOccupied[newPosIndex] || Mathf.Abs(powerRunePoints[newPosIndex].GlobalPosition.DistanceTo(player.GlobalPosition)) < 5f)
+			{
+				if (Xalkomak.isThisSpotOccupied[newPosIndex])
+				{
+					FreeSpots();
+				}
+				vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+				vanishTele.Start();
+				return;
+			}
+			vanish.GlobalPosition = powerRunePoints[newPosIndex].GlobalPosition;
+			Xalkomak.isThisSpotOccupied[newPosIndex] = true;
+			vanishTele.WaitTime = GD.RandRange(30.0f, 45.0f);
+			vanishTele.Start();
+		}
+	}
 
 	private void FreeSpots()
 	{
@@ -309,16 +318,16 @@ public partial class GameControl : Node3D
 		navigationRegion.EnterCost = 100;//GD.RandRange(1, 200);
 		navigationRegion.TravelCost = 100;//GD.RandRange(1, 200);
 		/*GD.Print("Travel Cost: " + navigationRegion.TravelCost);
-        GD.Print("Enter Cost: " + navigationRegion.EnterCost);*/
-    }
+		GD.Print("Enter Cost: " + navigationRegion.EnterCost);*/
+	}
 
 	private void OnGuardianStoppedSammy()
 	{
 		GD.Print("Guardian has stopped Sammy.");
 		StartStunTimer("Guardian");
 		guardianTimer.Stop();
-        guardianTele.Stop();
-        OnGuardianExpired();
+		guardianTele.Stop();
+		OnGuardianExpired();
 	}
 
 	public void PauseGame()
@@ -330,17 +339,17 @@ public partial class GameControl : Node3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			//tween.TweenProperty(pauseMenu, "modulate", new Color(1, 1, 1, 1), 1.0);
-        }
+		}
 		else
 		{
-            Input.MouseMode = Input.MouseModeEnum.Captured;
-            //tween.TweenProperty(pauseMenu, "modulate", new Color(1, 1, 1, 0), 1.0);
-        }
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+			//tween.TweenProperty(pauseMenu, "modulate", new Color(1, 1, 1, 0), 1.0);
+		}
 
 		pauseMenu.FadePauseMenu(isGamePaused);		
 		//pauseMenu.Visible = isGamePaused;
 		//GetTree().Paused = isGamePaused;
-    }
+	}
 
 	private void OnExitAreaBodyEntered(Node3D body)
 	{

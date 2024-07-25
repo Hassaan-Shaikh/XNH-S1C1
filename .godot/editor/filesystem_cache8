@@ -1,21 +1,21 @@
 2a60927148abd1d33b818b535e306557
-::res://::1717240725
+::res://::1721905697
 export_presets.cfg::TextFile::-1::1717001085::0::1::::<><>::
 icon.svg::CompressedTexture2D::5738706545296050158::1698410061::1717006731::1::::<><>::
 README.md::TextFile::-1::1699128915::0::1::::<><>::
-::res://Models/::1717240756
+::res://Models/::1718790447
 Cellar.glb::PackedScene::5100468185987595982::1698413051::1717006733::1::::<><>::uid://0av2w65c777l
 Cellar_Floor_Albedo.png::CompressedTexture2D::3174709484838180600::1698413077::1717006732::1::::<><>::
 Cellar_Floor_Normal.png::CompressedTexture2D::5932494327861775149::1698413076::1717006732::1::::<><>::
 Cellar_Wall_Albedo.png::CompressedTexture2D::1756045569004008811::1698413074::1717006732::1::::<><>::
 Cellar_Wall_Normal.png::CompressedTexture2D::4829418367572203915::1698413073::1717006732::1::::<><>::
-Chain Link.glb::PackedScene::878857385605864924::1717240754::1717240756::1::::<><>::
+Chain Link.glb::PackedScene::878857385605864924::1717240754::1718790447::1::::<><>::
 Document.glb::PackedScene::4547445912516733631::1699020686::1717006733::1::::<><>::uid://di0hs86b1p5v6
 Document_Folder_Albedo.png::CompressedTexture2D::7772841188515006809::1699020687::1717006732::1::::<><>::
 Door.glb::PackedScene::4396576822972067806::1701104342::1717006734::1::::<><>::uid://v7lvk172jp08
 Door_Door_Albedo.png::CompressedTexture2D::1540731760009829671::1701104377::1717006732::1::::<><>::
 Guardian.glb::PackedScene::6591379941411684362::1699293080::1717006734::1::::<><>::
-Smiling Sammy.glb::PackedScene::3805281202480431332::1699629280::1717240949::1::::<><>::uid://bc804rg0l237u::::res://Resources/Animations/Smiling Sammy/Default.res<>uid://cuywyux0vegci::::res://Resources/Animations/Smiling Sammy/Default-fail.res<>uid://bojin8btmpxfr::::res://Resources/Animations/Smiling Sammy/Idle.res<>uid://bgyvsuw0mtjdd::::res://Resources/Animations/Smiling Sammy/Jumpscare1.res<>uid://vha3uk1lo3x7::::res://Resources/Animations/Smiling Sammy/Jumpscare2.res<>uid://8ru5vq1tynx8::::res://Resources/Animations/Smiling Sammy/Run.res<>uid://cosos0w50ljtc::::res://Resources/Animations/Smiling Sammy/WTFail.res<>uid://43imywgt8gke::::res://Resources/Animations/Smiling Sammy/Walk.res
+Smiling Sammy.glb::PackedScene::3805281202480431332::1699629280::1717241124::1::::<><>::
 Speed Boost.glb::PackedScene::104571417529871599::1699293028::1717006735::1::::<><>::
 Stun.glb::PackedScene::5165965954088351552::1699293055::1717006735::1::::<><>::
 Vanish.glb::PackedScene::324178219520203454::1699293114::1717006735::1::::<><>::
@@ -23,15 +23,17 @@ Vanish.glb::PackedScene::324178219520203454::1699293114::1717006735::1::::<><>::
 launchSettings.json::JSON::-1::1717002944::0::1::::<><>::
 ::res://Resources/::1717002944
 ::res://Resources/Animations/::1699541787
-::res://Resources/Animations/Smiling Sammy/::1717006734
+::res://Resources/Animations/Smiling Sammy/::1717241952
 Default-fail.res::Animation::6227543026300481460::1717240947::0::1::::<><>::
-Default.res::Animation::2596493453013000940::1717240947::0::1::::<><>::
-Idle.res::Animation::3388154581370272367::1717240948::0::1::::<><>::
-Jumpscare1.res::Animation::2858407098362492805::1717240948::0::1::::<><>::
-Jumpscare2.res::Animation::1488467430018086782::1717240948::0::1::::<><>::
-Run.res::Animation::2352595304461455251::1717240948::0::1::::<><>::
-Walk.res::Animation::2093787502931011176::1717240948::0::1::::<><>::
-WTFail.res::Animation::5793527508547115348::1717240948::0::1::::<><>::
+Default.res::Animation::2596493453013000940::1717241123::0::1::::<><>::
+Idle.res::Animation::3388154581370272367::1717241123::0::1::::<><>::
+Jumpscare1.res::Animation::2858407098362492805::1717241952::0::1::::<><>::
+Jumpscare2.res::Animation::1488467430018086782::1717241952::0::1::::<><>::
+Run.res::Animation::2352595304461455251::1717241329::0::1::::<><>::
+Stun.res::Animation::5779566370786535295::1717241123::0::1::::<><>::
+StunEnd.res::Animation::7484859916627435983::1717241123::0::1::::<><>::
+Walk.res::Animation::2093787502931011176::1717241255::0::1::::<><>::
+WTFail.res::Animation::5793527508547115348::1717241123::0::1::::<><>::
 ::res://Resources/Audio/::1713963556
 SammyFootstepRandomizer.tres::AudioStreamRandomizer::1804030931619697778::1700651792::0::1::::<><>::uid://btuf5svfc6u8w
 ::res://Resources/Audio/Audio Buses/::1713949479
@@ -43,8 +45,8 @@ Footsteps_1.wav::AudioStreamWAV::3761654404770178880::1696348856::1717006732::1:
 Footsteps_2.wav::AudioStreamWAV::2251453572893138935::1696348878::1717006732::1::::<><>::
 Footsteps_3.wav::AudioStreamWAV::8448104322779363311::1696348903::1717006732::1::::<><>::
 Footsteps_4.wav::AudioStreamWAV::7384669962724303370::1696348936::1717006732::1::::<><>::
-::res://Resources/Environment/::1717001113
-GameEnvironment.tres::Environment::5635960962070033745::1717001113::0::1::::<><>::
+::res://Resources/Environment/::1721586936
+GameEnvironment.tres::Environment::5635960962070033745::1721586936::0::1::::<><>::
 ::res://Resources/EXR Files/::1717006730
 Game.exr::CompressedTexture2DArray::5978436585868637558::1717002944::1717006730::1::::<><>::
 ::res://Resources/Fonts/::1700320054
@@ -67,48 +69,47 @@ ParticleProcess.tres::ParticleProcessMaterial::2997411156081937006::1717001113::
 SmilingSammyMesh.res::ArrayMesh::8106203205935913091::1699620042::0::1::::<><>::
 ::res://Resources/Occluders/::1716998023
 Game.occ::ArrayOccluder3D::2107516987050133860::1716998023::0::1::::<><>::
-::res://Resources/Shaders/::1717001148
+::res://Resources/Shaders/::1721586936
 Blur.gdshader::Shader::-1::1717001148::0::1::::<><>::
 Blur.tres::VisualShader::7566022979067481558::1700494541::0::1::::<><>::
 SpeedBoost.gdshader::Shader::-1::1717001148::0::1::::<><>::
-SpeedBoost.tres::VisualShader::3650676446492193205::1717001113::0::1::::<><>::
-StunExplosion.tres::VisualShader::7759829488154271423::1717001113::0::1::::<><>::
+SpeedBoost.tres::VisualShader::3650676446492193205::1721586936::0::1::::<><>::
+StunExplosion.tres::VisualShader::7759829488154271423::1721586936::0::1::::<><>::
 ::res://Resources/StyleBoxes/::1717001113
 Button.tres::StyleBoxEmpty::7171070886841769825::1717001113::0::1::::<><>::
-::res://Resources/Themes/::1717240787
-Slider.tres::Theme::3567865841485694381::1717240787::0::1::::<><>::
+::res://Resources/Themes/::1721586936
+Slider.tres::Theme::3567865841485694381::1721586936::0::1::::<><>::
 ::res://Resources/UI Graphics/::1717006732
 Custom Checkbox Checked Disabled.png::CompressedTexture2D::2507181516957944925::1717002944::1717006732::1::::<><>::
 Custom Checkbox Disabled.png::CompressedTexture2D::7537622044333438577::1717002944::1717006732::1::::<><>::
 Custom Checkbox White Checked.png::CompressedTexture2D::8721382697625666624::1717002944::1717006732::1::::<><>::
 Custom Checkbox White.png::CompressedTexture2D::5832617892703229670::1717002944::1717006731::1::::<><>::
 Custom Checkmark White.png::CompressedTexture2D::5093665490933927976::1717002944::1717006731::1::::<><>::
-::res://Scenes/::1717240804
+::res://Scenes/::1721587557
 cellar.tscn::PackedScene::2124624756456373572::1713791204::0::1::::<><>::uid://cewx73rgy5sig
-ChainPath.tscn::PackedScene::4839741172963265208::1717240804::0::1::::<><>::res://Scripts/GDScript/ChainPath.gd<>uid://mrywgthvq3ho::::res://Models/Chain Link.glb
+ChainPath.tscn::PackedScene::4839741172963265208::1721587556::0::1::::<><>::res://Scripts/GDScript/ChainPath.gd<>uid://mrywgthvq3ho::::res://Models/Chain Link.glb
 ConfirmQuit.tscn::PackedScene::6851856630235770962::1717000896::0::1::::<><>::uid://bq6dkp0c7vvbu
 DeathScreen.tscn::PackedScene::999191059681646252::1717000896::0::1::::<><>::res://Scripts/CSharp/DeathScreen.cs<>uid://bq6dkp0c7vvbu
 DifficultySelectionMenu.tscn::PackedScene::617273312179565054::1717000896::0::1::::<><>::uid://bq6dkp0c7vvbu
 document.tscn::PackedScene::2711168849050563670::1715779452::0::1::::<><>::uid://di0hs86b1p5v6
 Door.tscn::PackedScene::2672510119932285491::1715779453::0::1::::<><>::uid://0av2w65c777l
-Game.tscn::PackedScene::4640224222761442717::1717002944::0::1::::<><>::res://Scripts/CSharp/GameControl.cs<>uid://bj8jt7vqp3wyx
+Game.tscn::PackedScene::4640224222761442717::1721587557::0::1::::<><>::res://Scripts/CSharp/GameControl.cs<>uid://bj8jt7vqp3wyx::::res://Scenes/player.tscn<>uid://b47rtij401eep::::res://Scenes/StunExplosion.tscn<>uid://boim2ipsf35f4::::res://Scenes/GuardianShield.tscn<>uid://5a5q5m1dffm7::::res://Resources/Occluders/Game.occ<>uid://0av2w65c777l::::res://Models/Cellar_Wall_Albedo.png<>uid://ca2n2yb5mrotf::::res://Models/Cellar_Wall_Normal.png<>uid://blh4abuob5x4c::::res://Models/Cellar_Floor_Albedo.png<>uid://cqr0kx7e252mj::::res://Models/Cellar_Floor_Normal.png<>uid://bevks4nk3s4xe::::res://Scenes/document.tscn<>uid://d2rgbf8tnmyvl::::res://Resources/Lightmaps/Game.lmbake<>uid://cmkdponegvye8::::res://Resources/Environment/GameEnvironment.tres<>uid://ca7n3hrirnjr1::::res://Scenes/ChainPath.tscn<>uid://eypdd16cpiqh::::res://Scenes/SpeedBoost.tscn<>uid://dh461p2oki1by::::res://Scenes/Stun.tscn<>uid://d38apra642wkw::::res://Scenes/guardian.tscn<>uid://dpwhajsy2r24w::::res://Scenes/Vanish.tscn<>uid://dftdwyx4b8j6x::::res://Scenes/SmilingSammy.tscn<>uid://dcuhoagswckav::::res://Scenes/LevelLoader.tscn<>uid://dadgqkrpv4dw1::::res://Scenes/PauseMenu.tscn<>uid://bect37ahqkhkt::::res://Scenes/Door.tscn
 guardian.tscn::PackedScene::9192701820082047306::1715779453::0::1::::<><>::uid://c056cgx6hvy8q
 GuardianShield.tscn::PackedScene::3386356781191184495::1715779453::0::1::::<><>::res://Scripts/CSharp/GuardianShield.cs
 LevelLoader.tscn::PackedScene::7341377323616750957::1715779453::0::1::::<><>::res://Scripts/CSharp/LevelLoader.cs
-MainMenu.tscn::PackedScene::7035402700576908744::1717240804::0::1::::<><>::res://Scripts/CSharp/MainMenu.cs<>uid://jbyfjo3yrw53::::res://Textures/UI Textures/TitleScreen.png<>uid://dcuhoagswckav::::res://Scenes/LevelLoader.tscn<>uid://i2anv4nk6ela::::res://Scenes/DifficultySelectionMenu.tscn<>uid://c4vdcv0hmsi7c::::res://Scenes/ConfirmQuit.tscn<>uid://bq6dkp0c7vvbu::::res://Resources/Fonts/requiem/Requiem/Requiem.ttf<>uid://cev8bbcnx4eah::::res://Scenes/OptionsMenu.tscn<>uid://b4xur0d5wuvn7::::res://Resources/Audio/BGM/Corridors.mp3
+MainMenu.tscn::PackedScene::7035402700576908744::1721587556::0::1::::<><>::res://Scripts/CSharp/MainMenu.cs<>uid://jbyfjo3yrw53::::res://Textures/UI Textures/TitleScreen.png<>uid://dcuhoagswckav::::res://Scenes/LevelLoader.tscn<>uid://i2anv4nk6ela::::res://Scenes/DifficultySelectionMenu.tscn<>uid://c4vdcv0hmsi7c::::res://Scenes/ConfirmQuit.tscn<>uid://bq6dkp0c7vvbu::::res://Resources/Fonts/requiem/Requiem/Requiem.ttf<>uid://cev8bbcnx4eah::::res://Scenes/OptionsMenu.tscn<>uid://b4xur0d5wuvn7::::res://Resources/Audio/BGM/Corridors.mp3
 OptionsMenu.tscn::PackedScene::5098954177564284815::1717000895::0::1::::<><>::res://Scripts/CSharp/OptionsMenu.cs<>uid://bq6dkp0c7vvbu
 PauseMenu.tscn::PackedScene::7165848611206474602::1717000896::0::1::::<><>::res://Resources/Shaders/Blur.gdshader<>res://Scripts/CSharp/PauseMenu.cs<>uid://c4vdcv0hmsi7c
 player.tscn::PackedScene::3086826839274692271::1717003953::0::1::::<><>::res://Scripts/CSharp/Player.cs<>res://Scripts/CSharp/CamControl.cs<>uid://jtxxkatn6g3t
-SmilingSammy.tscn::PackedScene::7549652182451985105::1717003953::0::1::::<><>::res://Scripts/CSharp/SmilingSammy.cs<>uid://bc804rg0l237u
+SmilingSammy.tscn::PackedScene::7549652182451985105::1721587556::0::1::::<><>::res://Scripts/CSharp/SmilingSammy.cs<>uid://bc804rg0l237u::::res://Resources/Animations/Smiling Sammy/Default.res<>res://Scripts/CSharp/SammyRay.cs<>uid://cuywyux0vegci::::res://Resources/Animations/Smiling Sammy/Default-fail.res<>uid://bojin8btmpxfr::::res://Resources/Animations/Smiling Sammy/Idle.res<>uid://bgyvsuw0mtjdd::::res://Resources/Animations/Smiling Sammy/Jumpscare1.res<>uid://vha3uk1lo3x7::::res://Resources/Animations/Smiling Sammy/Jumpscare2.res<>uid://8ru5vq1tynx8::::res://Resources/Animations/Smiling Sammy/Run.res<>uid://cosos0w50ljtc::::res://Resources/Animations/Smiling Sammy/WTFail.res<>uid://43imywgt8gke::::res://Resources/Animations/Smiling Sammy/Walk.res<>uid://bix76n6tenetq::::res://Resources/Materials/ParticleProcess.tres<>uid://bnilgq0nfxdka::::res://Resources/Materials/Particle.tres<>uid://0x5ejrixv0bu::::res://Resources/Audio/SammyFootstepRandomizer.tres<>res://Scripts/CSharp/DoorChecker.cs
 SpeedBoost.tscn::PackedScene::331216752069511231::1715779453::0::1::::<><>::uid://bqwjnaw3ilwx
 Stun.tscn::PackedScene::7712380399040326274::1715779453::0::1::::<><>::uid://cfuox7n60rkr5
 StunExplosion.tscn::PackedScene::4489023791729279207::1715779453::0::1::::<><>::uid://dis6i1gixmk7h
 Vanish.tscn::PackedScene::8257936536832331668::1701083236::0::1::::<><>::uid://evbfydvqeyvu
 VolumeSlider.tscn::PackedScene::680390335200085515::1715779454::0::1::::<><>::res://Scripts/CSharp/VolumeSlider.cs<>uid://bq3kh15a0tjvx
 ::res://Scripts/::1716641051
-::res://Scripts/CSharp/::1717002945
+::res://Scripts/CSharp/::1718790253
 CamControl.cs::CSharpScript::-1::1715779431::0::1::::<><>::
-ChainPath.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 ConfirmQuit.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 DeathScreen.cs::CSharpScript::-1::1701161565::0::1::::<><>::
 DebugPanel.cs::CSharpScript::-1::1701161159::0::1::::<><>::
@@ -118,18 +119,18 @@ DocumentCounter.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 Door.cs::CSharpScript::-1::1717001113::0::1::::<><>::
 DoorChecker.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 Footstep.cs::CSharpScript::-1::1717002945::0::1::::<><>::
-GameControl.cs::CSharpScript::-1::1717002945::0::1::::<><>::
+GameControl.cs::CSharpScript::-1::1718790253::0::1::::<><>::
 Guardian.cs::CSharpScript::-1::1700305721::0::1::::<><>::
 GuardianShield.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 LevelLoader.cs::CSharpScript::-1::1700578239::0::1::::<><>::
-MainMenu.cs::CSharpScript::-1::1716405359::0::1::::<><>::
+MainMenu.cs::CSharpScript::-1::1718790253::0::1::::<><>::
 OptionsMenu.cs::CSharpScript::-1::1717002945::0::1::::<><>::
-PauseMenu.cs::CSharpScript::-1::1717002945::0::1::::<><>::
+PauseMenu.cs::CSharpScript::-1::1717241872::0::1::::<><>::
 Player.cs::CSharpScript::-1::1715778373::0::1::::<><>::
 PlayerRay.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 PowerRune.cs::CSharpScript::-1::1699378298::0::1::::PowerRune<>Area3D<>res://icon.svg::
 SammyRay.cs::CSharpScript::-1::1700926816::0::1::::<><>::
-SmilingSammy.cs::CSharpScript::-1::1709140706::0::1::::<><>::
+SmilingSammy.cs::CSharpScript::-1::1718790253::0::1::::<><>::
 SpeedBoost.cs::CSharpScript::-1::1700717521::0::1::::<><>::
 StaminaAnim.cs::CSharpScript::-1::1717002945::0::1::::<><>::
 Stun.cs::CSharpScript::-1::1700305721::0::1::::<><>::

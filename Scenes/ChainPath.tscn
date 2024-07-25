@@ -6,7 +6,6 @@
 [sub_resource type="Curve3D" id="Curve3D_7yty6"]
 
 [node name="ChainPath" type="Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0311383, -0.0149131, 0.0129302)
 curve = SubResource("Curve3D_7yty6")
 script = ExtResource("1_eh70y")
 chain_link = ExtResource("2_y2nww")

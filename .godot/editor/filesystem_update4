@@ -1,14 +1,10 @@
-res://Scenes/ChainPath.tscn
+res://Scenes/Game.tscn
 res://Resources/Themes/Slider.tres
+res://Resources/Shaders/SpeedBoost.tres
+res://Resources/Shaders/StunExplosion.tres
+res://Resources/Environment/GameEnvironment.tres
 res://Scenes/MainMenu.tscn
-res://Resources/Animations/Smiling Sammy/Default.res
-res://Resources/Animations/Smiling Sammy/Default-fail.res
-res://Resources/Animations/Smiling Sammy/Idle.res
-res://Resources/Animations/Smiling Sammy/Jumpscare1.res
-res://Resources/Animations/Smiling Sammy/Jumpscare2.res
-res://Resources/Animations/Smiling Sammy/Run.res
-res://Resources/Animations/Smiling Sammy/WTFail.res
-res://Resources/Animations/Smiling Sammy/Walk.res
+res://Scenes/ChainPath.tscn
 res://Scenes/SmilingSammy.tscn
 res://Scripts/CSharp/ConfirmQuit.cs
 res://Scripts/CSharp/Stun.cs
@@ -40,3 +36,4 @@ res://Scripts/CSharp/StunExplosion.cs
 res://Scripts/CSharp/SmilingSammy.cs
 res://Scripts/CSharp/PlayerRay.cs
 res://Scripts/CSharp/SammyRay.cs
+res://Scenes/player.tscn

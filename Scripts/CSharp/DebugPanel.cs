@@ -30,7 +30,7 @@ public partial class DebugPanel : PanelContainer
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if(Input.IsActionJustPressed("debug"))
+        if(Input.IsActionJustPressed("debug") && OS.IsDebugBuild())
         {
             Visible = !Visible;
         }

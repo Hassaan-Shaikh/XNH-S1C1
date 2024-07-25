@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Xalkomak-s Nightmare Hunters - Cellar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1f153f29bd3a7d47492ea96b0281fcc78a9a3bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3427ff20c740808353914b0b08c871908199fc18")]
 [assembly: System.Reflection.AssemblyProductAttribute("Xalkomak-s Nightmare Hunters - Cellar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Xalkomak-s Nightmare Hunters - Cellar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
